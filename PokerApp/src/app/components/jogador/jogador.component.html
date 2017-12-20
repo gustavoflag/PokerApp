@@ -1,0 +1,18 @@
+<header>
+  <h2>Jogadores</h2>
+</header>
+<section *ngIf="jogadores && jogadores.length > 0">
+  <ul>
+    <li *ngFor="let jogador of jogadores">
+      <div>
+        <label>Nome: {{jogador.nome}}</label>
+        <br>
+        <label>Pontos: {{jogador.pontos}}</label>
+        <br>
+        <label>Jogos: {{jogador.jogos}}</label>
+        <br>
+        <br>
+      </div>
+    </li>
+  </ul>
+</section>
