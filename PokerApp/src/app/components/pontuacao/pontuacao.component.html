@@ -2,6 +2,7 @@
   <h2>Pontuação</h2>
   <!--<input placeholder="Informe o nome da tarefa" autofocus="" [(ngModel)]="newTarefa.titulo" (keyup.enter)="addTarefa()">-->
 </header>
+<button (click)="insere();">Novo</button>
 <section *ngIf="pontuacoes && pontuacoes.length > 0">
   <ul>
     <li *ngFor="let pontuacao of pontuacoes">

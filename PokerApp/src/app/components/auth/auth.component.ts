@@ -23,10 +23,10 @@ export class AuthComponent implements OnInit {
         .subscribe(result => {
             if (result === true) {
                 var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-                this.erro = `Usuário ${currentUser.login} logado OK! token: ${currentUser.token}`;
+                //this.erro = `Usuário ${currentUser.login} logado OK! token: ${currentUser.token}`;
                 //this.router.navigate(['/']);
             } else {
-                this.erro = 'Usuário ou senha Inválido!';
+                //this.erro = 'Usuário ou senha Inválido!';
                 //this.loading = false;
             }
         });

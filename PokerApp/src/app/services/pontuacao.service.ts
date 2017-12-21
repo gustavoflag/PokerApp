@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ConfigService } from './config.service';
+import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class PontuacaoService {
@@ -14,5 +16,26 @@ export class PontuacaoService {
 
   lista(){
     return this.http.get(this.baseUrlService + '/pontuacao');
+  }
+
+  insere(): Observable<boolean>{
+    const head = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Accept', 'application/json')
+      .set('Authorization', `JWT ${localStorage.token}`);
+    try
+    {
+      return this.http.post(`${this.configService.getUrlService()}/pontuacao`, '{ "lugar":"20", "pontos":"0" }', { headers: head }).map((response) => {
+        if (response.status === 401){
+          return false;
+        } else {
+          return true;
+        }
+      });
+    }
+    catch(ex){
+      return false;
+    }
+
   }
 }

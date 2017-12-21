@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ConfigService } from './config.service';
-import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
 import { Token } from '../models/token';
 import 'rxjs/add/operator/map'
@@ -10,10 +9,6 @@ import 'rxjs/add/operator/map'
 export class AuthService {
   private baseUrlService:string = '';
   private token: string;
-
-  getToken(): string{
-    return this.token;
-  }
 
   constructor(private http: HttpClient,
               private configService: ConfigService) {
@@ -29,22 +24,22 @@ export class AuthService {
         .set('Accept', 'application/json');
 
     return this.http.post(this.baseUrlService + '/auth/login', JSON.stringify({ login: login, senha: senha }), { headers: head })
-        .map((response: Token) => {
-            let token = response && response.token;
+      .map((response: Token) => {
+          let token = response && response.token;
 
-            if (token) {
-                this.token = token;
-                localStorage.setItem('currentUser', JSON.stringify({ login: login, token: token }));
+          if (token) {
+              this.token = token;
+              localStorage.setItem('currentUser', JSON.stringify({ login: login, token: token }));
 
-                return true;
-            } else {
-                return false;
-            }
-        });
-    }
+              return true;
+          } else {
+              return false;
+          }
+      });
+  }
 
-    logout(): void {
-        this.token = null;
-        localStorage.removeItem('currentUser');
-    }
+  logout(): void {
+      this.token = null;
+      localStorage.removeItem('currentUser');
+  }
 }
