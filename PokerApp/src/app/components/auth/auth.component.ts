@@ -22,10 +22,11 @@ export class AuthComponent implements OnInit {
     this.authService.login(this.model.usuario, this.model.senha)
         .subscribe(result => {
             if (result === true) {
-                this.erro = 'Usuário ou senha OK!';
+                var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                this.erro = `Usuário ${currentUser.login} logado OK! token: ${currentUser.token}`;
                 //this.router.navigate(['/']);
             } else {
-                this.erro = 'Usuário ou senha inválido';
+                this.erro = 'Usuário ou senha Inválido!';
                 //this.loading = false;
             }
         });

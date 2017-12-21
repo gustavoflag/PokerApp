@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ConfigService } from './config.service';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
+import { Token } from '../models/token';
 import 'rxjs/add/operator/map'
 
 @Injectable()
@@ -28,7 +29,7 @@ export class AuthService {
         .set('Accept', 'application/json');
 
     return this.http.post(this.baseUrlService + '/auth/login', JSON.stringify({ login: login, senha: senha }), { headers: head })
-        .map((response: Response) => {
+        .map((response: Token) => {
             let token = response && response.token;
 
             if (token) {
