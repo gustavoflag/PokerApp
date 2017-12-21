@@ -10,6 +10,7 @@ import { PontuacaoComponent } from './components/pontuacao/pontuacao.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { JogadorComponent } from './components/jogador/jogador.component';
 import { JogoComponent } from './components/jogo/jogo.component';
+import { AlertModule } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { JogoComponent } from './components/jogo/jogo.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AlertModule.forRoot()
   ],
   providers: [PontuacaoService, JogadorService],
   bootstrap: [AppComponent]

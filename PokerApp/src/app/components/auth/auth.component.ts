@@ -9,7 +9,9 @@ import { ConfigService } from '../../services/config.service';
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent implements OnInit {
-  token: string;
+  model: any = {};
+  erro: string = '';
+  loading = false;
 
   constructor(private authService: AuthService) { }
 
@@ -17,6 +19,16 @@ export class AuthComponent implements OnInit {
   }
 
   login(){
-    this.authService.login().subscribe(tok => this.token = tok.token);
+    this.authService.login(this.model.usuario, this.model.senha)
+        .subscribe(result => {
+            if (result === true) {
+                this.erro = 'Usuário ou senha OK!';
+                //this.router.navigate(['/']);
+            } else {
+                this.erro = 'Usuário ou senha inválido';
+                //this.loading = false;
+            }
+        });
+
   }
 }
