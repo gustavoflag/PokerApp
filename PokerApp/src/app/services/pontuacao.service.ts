@@ -19,11 +19,7 @@ export class PontuacaoService {
   }
 
   insere(): Observable<boolean>{
-
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-
-    console.log(`JWT ${currentUser.token}`);
-
     const head = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
