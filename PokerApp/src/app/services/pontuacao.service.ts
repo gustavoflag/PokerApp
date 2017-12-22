@@ -19,23 +19,21 @@ export class PontuacaoService {
   }
 
   insere(): Observable<boolean>{
+
+    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+    console.log(`JWT ${currentUser.token}`);
+
     const head = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
-      .set('Authorization', `JWT ${localStorage.token}`);
-    try
-    {
+      .set('Authorization', `JWT ${currentUser.token}`);
       return this.http.post(`${this.configService.getUrlService()}/pontuacao`, '{ "lugar":"20", "pontos":"0" }', { headers: head }).map((response) => {
-        if (response.status === 401){
+        /*if (response.status === 401){
           return false;
         } else {
           return true;
-        }
+        }*/
       });
     }
-    catch(ex){
-      return false;
-    }
-
-  }
 }

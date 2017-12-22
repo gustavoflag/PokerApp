@@ -31,4 +31,5 @@ export class PontuacaoComponent implements OnInit {
                 //this.loading = false;
             }
         });
+  }
 }
