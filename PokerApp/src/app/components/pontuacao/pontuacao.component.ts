@@ -20,7 +20,7 @@ export class PontuacaoComponent implements OnInit {
   }
 
   insere(){
-    this.pontuacaoService.insere()
+    this.pontuacaoService.insere(21, 0)
         .subscribe(result => {
             if (result === false) {
                 //var currentUser = JSON.parse(localStorage.getItem('currentUser'));

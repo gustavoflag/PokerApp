@@ -23,7 +23,7 @@ export class AuthService {
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json');
 
-    return this.http.post(this.baseUrlService + '/auth/login', JSON.stringify({ login: login, senha: senha }), { headers: head })
+    return this.http.post(`${this.baseUrlService}/auth/login`, JSON.stringify({ login: login, senha: senha }), { headers: head })
       .map((response: Token) => {
           let token = response && response.token;
 
