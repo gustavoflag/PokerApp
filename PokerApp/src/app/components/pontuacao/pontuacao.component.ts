@@ -60,6 +60,16 @@ export class PontuacaoComponent implements OnInit {
       err => this.mostraErro(err));
   }
 
+  excluir(pontuacaoExcluir){
+    var confirmado = confirm("Deseja mesmo excluir essa Pontuação?");
+    if (confirmado){
+      this.limpaMensagens();
+      this.pontuacaoService.excluir(pontuacaoExcluir).subscribe(
+        data => this.mostraSucesso("Pontuação excluída com sucesso!"),
+        err => this.mostraErro(err));
+    }
+  }
+
   limpaMensagens(){
     this.mensagem = null;
     this.erro = null;

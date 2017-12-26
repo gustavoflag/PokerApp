@@ -27,5 +27,7 @@ export class PontuacaoService {
     return this.http.put(`${this.baseUrlService}/pontuacao/${pontuacao._id}`, JSON.stringify(pontuacao), { headers: this.configService.getHeaders() });
   }
 
-
+  excluir(pontuacao): Observable<any>{
+    return this.http.delete(`${this.baseUrlService}/pontuacao/${pontuacao._id}`, { headers: this.configService.getHeaders() });
+  }
 }

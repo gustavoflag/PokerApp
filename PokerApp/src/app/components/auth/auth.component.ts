@@ -24,7 +24,7 @@ export class AuthComponent implements OnInit {
     this.authService.login(this.model.usuario, this.model.senha)
         .subscribe(
           (data) => {
-            console.log(data);
+            //console.log(data);
             let token = data && data.token;
 
             if (token)

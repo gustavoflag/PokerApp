@@ -6,16 +6,16 @@
   <div class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="/">Classificação</a>
+        <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/']">Classificação</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/pontuacao">Pontuação</a>
+        <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/pontuacao']">Pontuação</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/jogador">Jogadores</a>
+        <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/jogador']">Jogadores</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/jogo">Jogos</a>
+        <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/jogo']">Jogos</a>
       </li>
     </ul>
     <section *ngIf="nomeUsuario">

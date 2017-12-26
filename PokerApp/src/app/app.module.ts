@@ -14,6 +14,7 @@ import { JogoComponent } from './components/jogo/jogo.component';
 import { AlertModule } from 'ngx-bootstrap';
 import { Routing } from './app.routing';
 import { ClassificacaoComponent } from './components/classificacao/classificacao.component';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { ClassificacaoComponent } from './components/classificacao/classificacao
     AlertModule.forRoot(),
     Routing
   ],
-  providers: [PontuacaoService, JogadorService, AuthService],
+  providers: [PontuacaoService, JogadorService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
