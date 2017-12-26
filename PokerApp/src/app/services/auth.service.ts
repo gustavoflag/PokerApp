@@ -18,24 +18,12 @@ export class AuthService {
       this.token = currentUser && currentUser.token;
   }
 
-  login(login: string, senha: string): Observable<boolean> {
+  login(login: string, senha: string): Observable<any> {
     const head = new HttpHeaders()
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json');
 
-    return this.http.post(`${this.baseUrlService}/auth/login`, JSON.stringify({ login: login, senha: senha }), { headers: head })
-      .map((response: Token) => {
-          let token = response && response.token;
-
-          if (token) {
-              this.token = token;
-              localStorage.setItem('currentUser', JSON.stringify({ login: login, token: token }));
-
-              return true;
-          } else {
-              return false;
-          }
-      });
+    return this.http.post(`${this.baseUrlService}/auth/login`, JSON.stringify({ login: login, senha: senha }), { headers: head });
   }
 
   logout(): void {

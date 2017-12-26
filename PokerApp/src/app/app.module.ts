@@ -13,6 +13,7 @@ import { JogadorComponent } from './components/jogador/jogador.component';
 import { JogoComponent } from './components/jogo/jogo.component';
 import { AlertModule } from 'ngx-bootstrap';
 import { Routing } from './app.routing';
+import { ClassificacaoComponent } from './components/classificacao/classificacao.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { Routing } from './app.routing';
     PontuacaoComponent,
     AuthComponent,
     JogadorComponent,
-    JogoComponent
+    JogoComponent,
+    ClassificacaoComponent
   ],
   imports: [
     BrowserModule,

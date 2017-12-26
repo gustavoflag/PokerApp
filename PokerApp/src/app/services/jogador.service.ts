@@ -15,4 +15,8 @@ export class JogadorService {
   lista(){
     return this.http.get(this.baseUrlService + '/jogador');
   }
+
+  classificacao(){
+    return this.http.get(this.baseUrlService + '/classificacao');
+  }
 }

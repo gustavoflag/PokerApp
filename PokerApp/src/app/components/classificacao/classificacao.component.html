@@ -1,0 +1,19 @@
+<h2>Classificação</h2>
+<section>
+  <table class="table table-hover">
+    <thead>
+      <th></th>
+      <th>Jogador</th>
+      <th>Jogos</th>
+      <th>Pontos</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let jogador of jogadores; let i = index">
+        <td>{{i + 1}}º</td>
+        <td>{{jogador.nome}}</td>
+        <td>{{jogador.jogos}}</td>
+        <td>{{jogador.pontos}}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

@@ -7,49 +7,25 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class PontuacaoService {
   private baseUrlService:string = '';
-  private token:string = '';
 
   constructor(private http: HttpClient,
               private configService: ConfigService) {
 
     this.baseUrlService = this.configService.getUrlService();
-    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.token = currentUser && currentUser.token;
+
   }
 
-  lista(){
+  listar(){
     return this.http.get(`${this.baseUrlService}/pontuacao`);
   }
 
-<<<<<<< HEAD
-  insere(): Observable<boolean>{
-    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    const head = new HttpHeaders()
-      .set('Content-Type', 'application/json')
-      .set('Accept', 'application/json')
-      .set('Authorization', `JWT ${currentUser.token}`);
-      return this.http.post(`${this.configService.getUrlService()}/pontuacao`, '{ "lugar":"20", "pontos":"0" }', { headers: head }).map((response) => {
-        /*if (response.status === 401){
-=======
-  insere(lugar:number, pontos:number): Observable<any>{
-
-    const head = new HttpHeaders()
-      .set('Content-Type', 'application/json')
-      .set('Accept', 'application/json')
-      .set('Authorization', `JWT ${this.token}`);
-
-    return this.http.post(`${this.baseUrlService}/pontuacao`, JSON.stringify({ lugar:lugar, pontos:pontos }), { headers: head })
-      .map((response) => {
-        if (response.status === 401){
->>>>>>> 11e3e043b4448eaeb57c430990194c47ad7749d9
-          return false;
-        } else {
-          return true;
-        }*/
-      });
-<<<<<<< HEAD
-    }
-=======
+  inserir(pontuacao): Observable<any>{
+    return this.http.post(`${this.baseUrlService}/pontuacao`, JSON.stringify(pontuacao), { headers: this.configService.getHeaders() });
   }
->>>>>>> 11e3e043b4448eaeb57c430990194c47ad7749d9
+
+  alterar(pontuacao): Observable<any>{
+    return this.http.put(`${this.baseUrlService}/pontuacao/${pontuacao._id}`, JSON.stringify(pontuacao), { headers: this.configService.getHeaders() });
+  }
+
+
 }

@@ -1,16 +1,38 @@
 <h2>Pontuação</h2>
-<section *ngIf="pontuacoes && pontuacoes.length > 0">
-  <table class="table table-striped table-hovered">
+<div *ngIf="mensagem" class="alert alert-success">{{mensagem}}</div>
+<div *ngIf="erro" class="alert alert-danger">{{erro}}</div>
+<section *ngIf="!pontuacaoEdicao && pontuacoes && pontuacoes.length > 0">
+  <table class="table table-hover">
     <thead>
       <th>Lugar</th>
       <th>Pontos</th>
+      <th></th>
     </thead>
     <tbody>
       <tr *ngFor="let pontuacao of pontuacoes">
         <td>{{pontuacao.lugar}}º</td>
         <td>{{pontuacao.pontos}} pontos</td>
+        <td><button class="btn btn-secondary btn-sm" (click)="editar(pontuacao);">Editar</button></td>
       </tr>
     </tbody>
   </table>
+  <button (click)="novo();" class="btn btn-primary">Novo</button>
 </section>
-<button (click)="insere();" class="btn btn-primary">Novo</button>
+<section *ngIf="pontuacaoEdicao">
+  <form name="formLogin" (ngSubmit)="f.form.valid && salvar()" #f="ngForm" novalidate>
+    <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !lugar.valid }">
+        <label for="lugar">Lugar</label>
+        <input type="text" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !lugar.valid }" name="lugar" [(ngModel)]="pontuacaoEdicao.lugar" #lugar="ngModel" required />
+        <div *ngIf="f.submitted && !lugar.valid" class="invalid-feedback">Lugar é obrigatório</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !pontos.valid }">
+        <label for="pontos">Pontos</label>
+        <input type="text" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !pontos.valid }" name="pontos" [(ngModel)]="pontuacaoEdicao.pontos" #pontos="ngModel" required />
+        <div *ngIf="f.submitted && !pontos.valid" class="invalid-feedback">Pontos é obrigatório</div>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-success">Salvar</button>
+        <button (click)="limpaMensagens();listar();" class="btn btn-secondary">Voltar</button>
+    </div>
+  </form>
+</section>

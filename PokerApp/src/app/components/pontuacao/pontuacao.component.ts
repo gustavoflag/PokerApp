@@ -11,25 +11,70 @@ import { Router } from '@angular/router';
 })
 export class PontuacaoComponent implements OnInit {
   pontuacoes: any = null;
+  pontuacaoEdicao: any = null;
+  mensagem: string = null;
+  erro: string = null;
 
   constructor(private pontuacaoService: PontuacaoService
              ,private router: Router){ }
 
   ngOnInit() {
-    this.pontuacaoService.lista().subscribe(pont => this.pontuacoes = pont);
+    this.limpaMensagens();
+    this.listar();
   }
 
-  insere(){
-    this.pontuacaoService.insere(21, 0)
-        .subscribe(result => {
-            if (result === false) {
-                //var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-                //this.erro = `Usuário ${currentUser.login} logado OK! token: ${currentUser.token}`;
-                this.router.navigate(['/login']);
-            } else {
-                //this.erro = 'Usuário ou senha Inválido!';
-                //this.loading = false;
-            }
-        });
+  novo(){
+    this.limpaMensagens();
+    this.pontuacaoEdicao = { };
+  }
+
+  editar(pontuacaoEdit){
+    this.limpaMensagens();
+    this.pontuacaoEdicao = pontuacaoEdit;
+  }
+
+  listar(){
+    this.pontuacaoEdicao = null;
+    this.pontuacaoService.listar()
+        .subscribe(pont => this.pontuacoes = pont);
+  }
+
+  salvar(){
+    this.limpaMensagens();
+    if (this.pontuacaoEdicao._id){
+      this.alterar();
+    }else{
+      this.inserir();
+    }
+  }
+
+  inserir(){
+    this.pontuacaoService.inserir(this.pontuacaoEdicao).subscribe(
+      data => this.mostraSucesso("Pontuação inserida com sucesso!"),
+      err => this.mostraErro(err));
+  }
+
+  alterar(){
+    this.pontuacaoService.alterar(this.pontuacaoEdicao).subscribe(
+      data => this.mostraSucesso("Pontuação alterada com sucesso!"),
+      err => this.mostraErro(err));
+  }
+
+  limpaMensagens(){
+    this.mensagem = null;
+    this.erro = null;
+  }
+
+  mostraErro(err){
+    if (err.error.message){
+      this.erro = `Erro: ${err.error.message}`;
+    } else if (err.error.errmsg){
+      this.erro = `Erro: ${err.error.errmsg}`;
+    }
+  }
+
+  mostraSucesso(mensagem){
+    this.mensagem = mensagem;
+    this.listar();
   }
 }

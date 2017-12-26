@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { ConfigService } from '../../services/config.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -13,23 +14,26 @@ export class AuthComponent implements OnInit {
   erro: string = '';
   loading = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService
+             ,private router: Router) { }
 
   ngOnInit(){
   }
 
   login(){
     this.authService.login(this.model.usuario, this.model.senha)
-        .subscribe(result => {
-            if (result === true) {
-                var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-                //this.erro = `Usuário ${currentUser.login} logado OK! token: ${currentUser.token}`;
-                //this.router.navigate(['/']);
-            } else {
-                //this.erro = 'Usuário ou senha Inválido!';
-                //this.loading = false;
-            }
-        });
+        .subscribe(
+          (data) => {
+            console.log(data);
+            let token = data && data.token;
 
+            if (token)
+                localStorage.setItem('currentUser', JSON.stringify({ login: this.model.usuario, token: token }));
+
+            this.router.navigate(['/']);
+          },
+          (err) => {
+            this.erro = err.error.message;
+          });
   }
 }

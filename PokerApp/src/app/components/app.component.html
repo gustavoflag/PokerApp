@@ -1,7 +1,36 @@
-<div class="container-fluid">
-  <h1>Controle Poker</h1>
-  <hr>
-  <div class="container-fluid">
-    <router-outlet></router-outlet>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+  <a class="navbar-brand" href="#">TQSOP</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor02">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Classificação</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/pontuacao">Pontuação</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/jogador">Jogadores</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/jogo">Jogos</a>
+      </li>
+    </ul>
+    <section *ngIf="nomeUsuario">
+      <form class="form-inline mt-2 mt-md-0" (submit)="logout();">
+        Olá {{nomeUsuario}}!&nbsp;&nbsp;
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Logout</button>
+      </form>
+    </section>
+    <section *ngIf="!nomeUsuario">
+      <form class="form-inline mt-2 mt-md-0" (submit)="login();">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Login</button>
+      </form>
+    </section>
   </div>
+</nav>
+<div class="container">
+    <router-outlet></router-outlet>
 </div>
