@@ -18,10 +18,6 @@ export class AppComponent {
              ,private router: Router){ }
 
   ngOnInit() {
-    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (currentUser){
-      this.nomeUsuario = currentUser.login;
-    }
   }
 
   login(){
@@ -32,5 +28,16 @@ export class AppComponent {
     this.authService.logout();
     this.nomeUsuario = null;
     this.router.navigate(['/']);
+  }
+
+  logado() : boolean{
+    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token){
+      this.nomeUsuario = currentUser.login;
+      return true;
+    }
+
+    this.nomeUsuario = null;
+    return false;
   }
 }

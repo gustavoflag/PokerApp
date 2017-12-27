@@ -1,18 +1,33 @@
-<header>
-  <h2>Jogadores</h2>
-</header>
-<section *ngIf="jogadores && jogadores.length > 0">
-  <ul>
-    <li *ngFor="let jogador of jogadores">
-      <div>
-        <label>Nome: {{jogador.nome}}</label>
-        <br>
-        <label>Pontos: {{jogador.pontos}}</label>
-        <br>
-        <label>Jogos: {{jogador.jogos}}</label>
-        <br>
-        <br>
-      </div>
-    </li>
-  </ul>
+<h2>Jogadores</h2>
+<div *ngIf="mensagem" class="alert alert-success">{{mensagem}}</div>
+<div *ngIf="erro" class="alert alert-danger">{{erro}}</div>
+<section *ngIf="!jogadorEdicao && jogadores && jogadores.length > 0">
+  <table class="table table-hover">
+    <thead>
+      <th>Nome</th>
+      <th></th>
+      <th></th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let jogador of jogadores">
+        <td>{{jogador.nome}}</td>
+        <td><button class="btn btn-secondary btn-sm" (click)="editar(jogador);">Editar</button></td>
+        <td><button class="btn btn-danger btn-sm" (click)="excluir(jogador);">Excluir</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <button (click)="novo();" class="btn btn-primary">Novo</button>
+</section>
+<section *ngIf="jogadorEdicao">
+  <form name="formLogin" (ngSubmit)="f.form.valid && salvar()" #f="ngForm" novalidate>
+    <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !nome.valid }">
+        <label for="nome">Nome</label>
+        <input type="text" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !nome.valid }" name="nome" [(ngModel)]="jogadorEdicao.nome" #nome="ngModel" required />
+        <div *ngIf="f.submitted && !nome.valid" class="invalid-feedback">Nome é obrigatório</div>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-success">Salvar</button>
+        <button (click)="limpaMensagens();listar();" class="btn btn-secondary">Voltar</button>
+    </div>
+  </form>
 </section>
