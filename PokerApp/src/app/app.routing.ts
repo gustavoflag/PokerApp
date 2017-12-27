@@ -4,6 +4,7 @@ import { JogadorComponent } from './components/jogador/jogador.component';
 import { JogoComponent } from './components/jogo/jogo.component';
 import { PontuacaoComponent } from './components/pontuacao/pontuacao.component';
 import { ClassificacaoComponent } from './components/classificacao/classificacao.component';
+import { ParametroComponent } from './components/parametro/parametro.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const appRoutes: Routes = [
@@ -11,6 +12,7 @@ const appRoutes: Routes = [
     { path: 'jogador', component: JogadorComponent, canActivate: [AuthGuard] },
     { path: 'jogo', component: JogoComponent, canActivate: [AuthGuard] },
     { path: 'pontuacao', component: PontuacaoComponent, canActivate: [AuthGuard] },
+    { path: 'parametro', component: ParametroComponent, canActivate: [AuthGuard] },
     { path: '', component: ClassificacaoComponent },
     { path: '**', redirectTo: '' }
 ];

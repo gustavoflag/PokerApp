@@ -15,6 +15,7 @@ import { AlertModule } from 'ngx-bootstrap';
 import { Routing } from './app.routing';
 import { ClassificacaoComponent } from './components/classificacao/classificacao.component';
 import { AuthGuard } from './guards/auth.guard';
+import { ParametroComponent } from './components/parametro/parametro.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AuthGuard } from './guards/auth.guard';
     AuthComponent,
     JogadorComponent,
     JogoComponent,
-    ClassificacaoComponent
+    ClassificacaoComponent,
+    ParametroComponent
   ],
   imports: [
     BrowserModule,

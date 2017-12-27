@@ -17,6 +17,9 @@
       <li class="nav-item" *ngIf="logado()">
         <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/jogo']">Jogos</a>
       </li>
+      <li class="nav-item" *ngIf="logado()">
+        <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/parametro']">Parâmetros</a>
+      </li>
     </ul>
     <section *ngIf="logado()">
       <form class="form-inline mt-2 mt-md-0" (submit)="logout();">
