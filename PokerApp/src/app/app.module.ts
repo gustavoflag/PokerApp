@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { PontuacaoService } from './services/pontuacao.service';
 import { JogadorService } from './services/jogador.service';
 import { AuthService } from './services/auth.service';
+import { JogoService } from './services/jogo.service';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { Pontuacao } from './models/pontuacao';
@@ -34,7 +35,7 @@ import { ParametroComponent } from './components/parametro/parametro.component';
     AlertModule.forRoot(),
     Routing
   ],
-  providers: [PontuacaoService, JogadorService, AuthService, AuthGuard],
+  providers: [PontuacaoService, JogadorService, AuthService, AuthGuard, JogoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

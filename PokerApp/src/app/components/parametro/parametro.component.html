@@ -2,15 +2,17 @@
 <div *ngIf="mensagem" class="alert alert-success">{{mensagem}}</div>
 <div *ngIf="erro" class="alert alert-danger">{{erro}}</div>
 <form name="formLogin" (ngSubmit)="f.form.valid && salvar()" #f="ngForm" novalidate>
-  <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !valorBuyIn.valid }">
-      <label for="valorBuyIn">Valor BuyIn</label>
-      <input type="text" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !valorBuyIn.valid }" name="valorBuyIn" [(ngModel)]="parametro.valorBuyIn" #valorBuyIn="ngModel" required />
-      <div *ngIf="f.submitted && !valorBuyIn.valid" class="invalid-feedback">Valor BuyIn é obrigatório</div>
-  </div>
-  <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !valorMaleta.valid }">
-      <label for="valorMaleta">Valor Maleta</label>
-      <input type="text" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !valorMaleta.valid }" name="valorMaleta" [(ngModel)]="parametro.valorMaleta" #valorMaleta="ngModel" required />
-      <div *ngIf="f.submitted && !valorMaleta.valid" class="invalid-feedback">Valor Maleta é obrigatório</div>
+  <div class="row">
+    <div class="form-group col-lg-2" [ngClass]="{ 'has-danger': f.submitted && !valorBuyIn.valid }">
+        <label for="valorBuyIn">Valor BuyIn</label>
+        <input type="text" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !valorBuyIn.valid }" name="valorBuyIn" [(ngModel)]="parametro.valorBuyIn" #valorBuyIn="ngModel" required />
+        <div *ngIf="f.submitted && !valorBuyIn.valid" class="invalid-feedback">Valor BuyIn é obrigatório</div>
+    </div>
+    <div class="form-group col-lg-2" [ngClass]="{ 'has-danger': f.submitted && !valorMaleta.valid }">
+        <label for="valorMaleta">Valor Maleta</label>
+        <input type="text" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !valorMaleta.valid }" name="valorMaleta" [(ngModel)]="parametro.valorMaleta" #valorMaleta="ngModel" required />
+        <div *ngIf="f.submitted && !valorMaleta.valid" class="invalid-feedback">Valor Maleta é obrigatório</div>
+    </div>
   </div>
   <div class="form-group">
       <button class="btn btn-success">Salvar</button>
