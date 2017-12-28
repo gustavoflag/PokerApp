@@ -19,6 +19,10 @@ export class JogoService {
     return this.http.get(`${this.baseUrlService}/jogo`);
   }
 
+  inserir(jogo): Observable<any>{
+    return this.http.post(`${this.baseUrlService}/jogo`, JSON.stringify(jogo), { headers: this.configService.getHeaders() });
+  }
+
   /*alterar(parametro): Observable<any>{
     return this.http.put(`${this.baseUrlService}/jogo`, JSON.stringify(parametro), { headers: this.configService.getHeaders() });
   }*/
