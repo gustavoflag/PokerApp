@@ -1,4 +1,9 @@
-<h2>Pontuação</h2>
+<h2>Pontuação
+<div class="float-right">
+  <button class="btn btn-primary" (click)="novo();">Novo</button>
+</div>
+</h2>
+<hr>
 <div *ngIf="mensagem" class="alert alert-dismissible alert-success">{{mensagem}}</div>
 <div *ngIf="erro" class="alert alert-dismissible alert-danger">{{erro}}</div>
 <section *ngIf="!pontuacaoEdicao && pontuacoes && pontuacoes.length > 0">
@@ -18,7 +23,6 @@
       </tr>
     </tbody>
   </table>
-  <button (click)="novo();" class="btn btn-primary">Novo</button>
 </section>
 <section *ngIf="pontuacaoEdicao">
   <form name="formLogin" (ngSubmit)="f.form.valid && salvar()" #f="ngForm" novalidate>

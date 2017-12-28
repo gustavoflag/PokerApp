@@ -1,4 +1,9 @@
-<h2>Jogadores</h2>
+<h2>Jogadores
+<div class="float-right">
+  <button class="btn btn-primary" (click)="novo();">Novo</button>
+</div>
+</h2>
+<hr>
 <div *ngIf="mensagem" class="alert alert-success">{{mensagem}}</div>
 <div *ngIf="erro" class="alert alert-danger">{{erro}}</div>
 <section *ngIf="!jogadorEdicao && jogadores && jogadores.length > 0">
@@ -16,7 +21,6 @@
       </tr>
     </tbody>
   </table>
-  <button (click)="novo();" class="btn btn-primary">Novo</button>
 </section>
 <section *ngIf="jogadorEdicao">
   <form name="formLogin" (ngSubmit)="f.form.valid && salvar()" #f="ngForm" novalidate>

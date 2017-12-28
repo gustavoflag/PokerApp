@@ -8,14 +8,14 @@
       <li class="nav-item">
         <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/']">Classificação</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/jogo']">Jogos</a>
+      </li>
       <li class="nav-item" *ngIf="logado()">
         <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/pontuacao']">Pontuação</a>
       </li>
       <li class="nav-item" *ngIf="logado()">
         <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/jogador']">Jogadores</a>
-      </li>
-      <li class="nav-item" *ngIf="logado()">
-        <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/jogo']">Jogos</a>
       </li>
       <li class="nav-item" *ngIf="logado()">
         <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/parametro']">Parâmetros</a>

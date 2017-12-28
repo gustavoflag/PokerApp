@@ -1,23 +1,32 @@
-<h2>Jogos</h2>
+<h2>Jogos
+<div class="float-right">
+  <button class="btn btn-primary" (click)="novo();">Novo</button>
+</div>
+</h2>
+<hr>
 <div *ngIf="mensagem" class="alert alert-dismissible alert-success">{{mensagem}}</div>
 <div *ngIf="erro" class="alert alert-dismissible alert-danger">{{erro}}</div>
 <section *ngIf="!jogoEdicao && jogos && jogos.length > 0">
-
-  <div *ngFor="let jogo of jogos" class="card border-light mb-3">
-    <div class="card-header">{{ jogo.data | date }}</div>
-    <div class="card-body">
-      <table class="table table-hover">
-        <thead>
-          <th>Lugar</th>
-          <th>Nome</th>
-        </thead>
-        <tbody>
-          <tr *ngFor="let participante of jogo.participantes">
-            <td>{{participante.lugar}}º</td>
-            <td>{{participante.nomeJogador}}&nbsp;<span *ngIf="participante.rebuy" class="badge badge-danger">Rebuy</span></td>
-          </tr>
-        </tbody>
-      </table>
+    <div *ngFor="let jogo of jogos" class="card border-light mb-3">
+      <div class="card-header">
+        {{ jogo.data | date: 'dd/MM/yyyy' }}
+        <div class="float-right">
+          <button class="btn btn-outline-success btn-sm" (click)="editar(pontuacao);">Editar</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <table class="table table-hover">
+          <thead>
+            <th>Lugar</th>
+            <th>Nome</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let participante of jogo.participantes">
+              <td>{{participante.lugar}}º</td>
+              <td>{{participante.nomeJogador}}&nbsp;<span *ngIf="participante.rebuy" class="badge badge-danger">Rebuy</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
 </section>
