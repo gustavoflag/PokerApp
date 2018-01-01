@@ -36,6 +36,10 @@ export class JogadorComponent implements OnInit {
     this.jogadorService.lista().subscribe(jogs => this.jogadores = jogs);
   }
 
+  rookie(){
+    this.jogadorEdicao.rookie = !this.jogadorEdicao.rookie;
+  }
+
   salvar(){
     this.limpaMensagens();
     if (this.jogadorEdicao._id){

@@ -23,8 +23,12 @@ export class JogoService {
     return this.http.post(`${this.baseUrlService}/jogo`, JSON.stringify(jogo), { headers: this.configService.getHeaders() });
   }
 
-  /*alterar(parametro): Observable<any>{
-    return this.http.put(`${this.baseUrlService}/jogo`, JSON.stringify(parametro), { headers: this.configService.getHeaders() });
-  }*/
+  excluir(jogo): Observable<any>{
+    return this.http.delete(`${this.baseUrlService}/jogo/${jogo._id}`, { headers: this.configService.getHeaders() });
+  }
+
+  alterar(jogo): Observable<any>{
+    return this.http.put(`${this.baseUrlService}/jogo/${jogo._id}`, JSON.stringify(jogo), { headers: this.configService.getHeaders() });
+  }
 
 }

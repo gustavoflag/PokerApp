@@ -44,13 +44,52 @@ export class JogoComponent implements OnInit {
     this.jogoEdicao = { };
   }
 
+  excluir(jogo){
+    //console.log("jogo:" ,jogo);
+    var confirma = confirm('Deseja mesmo excluir esse jogo?');
+    if (confirma == true){
+      this.jogoService.excluir(jogo).subscribe(
+        data => this.mostraSucesso("Jogo excluído com sucesso!"),
+        err => this.mostraErro(err));
+    }
+  }
+
+  editar(jogo){
+    /*this.participantes = jogo.participantes;
+
+    this.jogadorService.lista().subscribe(jogs =>
+        {
+          this.jogadores = jogs;
+
+          jogo.participantes.forEach(function (participante){
+
+          });
+
+        });
+      */
+  }
+
   salvar(){
     if (this.loading == false){
       this.loading = true;
-      this.jogoService.inserir({ data: this.jogoEdicao.data, participantes: this.participantes }).subscribe(
-        data => this.mostraSucesso("Jogo inserido com sucesso!"),
-        err => this.mostraErro(err));
+      //if (!this.jogoEdicao._id){
+        this.inserir();
+      /*} else {
+        this.alterar();
+      }*/
     }
+  }
+
+  inserir(){
+    this.jogoService.inserir({ data: this.jogoEdicao.data, participantes: this.participantes }).subscribe(
+      data => this.mostraSucesso("Jogo inserido com sucesso!"),
+      err => this.mostraErro(err));
+  }
+
+  alterar(){
+    this.jogoService.alterar({ _id: this.jogoEdicao._id, data: this.jogoEdicao.data, participantes: this.participantes }).subscribe(
+      data => this.mostraSucesso("Jogo alterado com sucesso!"),
+      err => this.mostraErro(err));
   }
 
   adicionar(jogador){

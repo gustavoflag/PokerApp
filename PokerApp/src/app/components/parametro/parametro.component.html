@@ -13,6 +13,10 @@
         <input type="text" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !valorMaleta.valid }" name="valorMaleta" [(ngModel)]="parametro.valorMaleta" #valorMaleta="ngModel" required />
         <div *ngIf="f.submitted && !valorMaleta.valid" class="invalid-feedback">Valor Maleta é obrigatório</div>
     </div>
+    <div class="form-group col-lg-3" [ngClass]="{ 'has-danger': f.submitted && !participantesPremiacaoTerceiro.valid }">
+        <label for="participantesPremiacaoTerceiro">Qtd jogadores premiação 3º</label>
+        <input type="text" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !participantesPremiacaoTerceiro.valid }" name="participantesPremiacaoTerceiro" [(ngModel)]="parametro.participantesPremiacaoTerceiro" #participantesPremiacaoTerceiro="ngModel" required />
+    </div>
   </div>
   <div class="form-group">
       <button class="btn btn-success">Salvar</button>

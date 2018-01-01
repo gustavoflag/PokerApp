@@ -7,35 +7,44 @@
 <div *ngIf="mensagem" class="alert alert-dismissible alert-success">{{mensagem}}</div>
 <div *ngIf="erro" class="alert alert-dismissible alert-danger">{{erro}}</div>
 <section *ngIf="!jogoEdicao && jogos && jogos.length > 0">
-    <div *ngFor="let jogo of jogos" class="card border-light mb-3">
-      <div class="card-header">
-        {{ jogo.data | date: 'dd/MM/yyyy' }}
-        <div class="float-right">
-          <button class="btn btn-outline-success btn-sm" (click)="editar(pontuacao);">Editar</button>
-        </div>
-      </div>
-      <div class="card-body">
-        <table class="table table-hover">
-          <thead>
-            <th>Lugar</th>
-            <th>Nome</th>
-          </thead>
-          <tbody>
-            <tr *ngFor="let participante of jogo.participantes">
-              <td>{{participante.lugar}}º</td>
-              <td>{{participante.nomeJogador}}&nbsp;<span *ngIf="participante.rebuy" class="badge badge-danger">Rebuy</span></td>
-            </tr>
-          </tbody>
-        </table>
+  <div *ngFor="let jogo of jogos" class="card border-light mb-3">
+    <div class="card-header">
+      {{ jogo.data | date: 'dd/MM/yyyy' }}
+      -
+      Valor Maleta: {{ jogo.valorMaleta | currency:'R$' }}
+      <div class="float-right">
+        <!--<button class="btn btn-outline-success btn-sm" (click)="editar(jogo);">Editar</button>-->
+        <button class="btn btn-outline-danger btn-sm" (click)="excluir(jogo);">Excluir</button>
       </div>
     </div>
+    <div class="card-body">
+      <table class="table table-hover">
+        <thead>
+          <th>Lugar</th>
+          <th>Nome</th>
+          <th>Pontos</th>
+          <!--<th>Valor Investido</th>-->
+          <th>Prêmio</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let participante of jogo.participantes">
+            <td>{{ participante.lugar }}º</td>
+            <td>{{ participante.nomeJogador }}&nbsp;<span *ngIf="participante.rebuy" class="badge badge-danger">Rebuy</span></td>
+            <td>{{ participante.pontos }}</td>
+            <!--<td>{{participante.valorInvestido}}</td>-->
+            <td>{{ participante.valorRecebido - participante.valorInvestido | currency:'R$' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </section>
 <section *ngIf="jogoEdicao">
   <form name="formLogin" (ngSubmit)="salvar();" #f="ngForm" novalidate>
     <div class="row">
-      <div class="col-lg-2">
+      <div class="col-lg-3">
         <label class="col-form-label col-form-label-lg" for="inputLarge" >Data</label>
-        <input class="form-control form-control-lg" type="text" placeholder="" id="inputLarge" name="data" [(ngModel)]="jogoEdicao.data" #data="ngModel" />
+        <input class="form-control form-control-lg" type="date" placeholder="" id="inputLarge" name="data" [(ngModel)]="jogoEdicao.data" #data="ngModel" />
       </div>
     </div>
     <div class="row" style="margin-top:10px">

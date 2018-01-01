@@ -15,7 +15,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let jogador of jogadores">
-        <td>{{jogador.nome}}</td>
+        <td>{{jogador.nome}}&nbsp;<span *ngIf="jogador.rookie" class="badge badge-warning">Rookie</span></td>
         <td><button class="btn btn-secondary btn-sm" (click)="editar(jogador);">Editar</button></td>
         <td><button class="btn btn-danger btn-sm" (click)="excluir(jogador);">Excluir</button></td>
       </tr>
@@ -24,10 +24,16 @@
 </section>
 <section *ngIf="jogadorEdicao">
   <form name="formLogin" (ngSubmit)="f.form.valid && salvar()" #f="ngForm" novalidate>
-    <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !nome.valid }">
-        <label for="nome">Nome</label>
-        <input type="text" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !nome.valid }" name="nome" [(ngModel)]="jogadorEdicao.nome" #nome="ngModel" required />
-        <div *ngIf="f.submitted && !nome.valid" class="invalid-feedback">Nome é obrigatório</div>
+    <div class="row">
+      <div class="form-group col-lg-4" [ngClass]="{ 'has-danger': f.submitted && !nome.valid }">
+          <label for="nome">Nome</label>
+          <input type="text" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !nome.valid }" name="nome" [(ngModel)]="jogadorEdicao.nome" #nome="ngModel" required />
+          <div *ngIf="f.submitted && !nome.valid" class="invalid-feedback">Nome é obrigatório</div>
+      </div>
+      <div class="form-group col-lg-1">
+          <label for="rookie">Opções</label>
+          <button type='button' class="btn" (click)="rookie(participante);" [ngClass]="{ 'btn-outline-warning' : !jogadorEdicao.rookie, 'btn-warning': jogadorEdicao.rookie }">Rookie</button>
+      </div>
     </div>
     <div class="form-group">
         <button class="btn btn-success">Salvar</button>

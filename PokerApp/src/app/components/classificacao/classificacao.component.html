@@ -1,4 +1,7 @@
-<h2>Classificação</h2>
+<h2>Classificação&nbsp;
+    <button type="button" (click)="altRookies();" class="btn btn-lg" [ngClass]="{ 'btn-outline-success' : rookies, 'btn-success': !rookies }">Geral</button>
+    <button type="button" (click)="altRookies();" class="btn btn-lg" [ngClass]="{ 'btn-outline-success' : !rookies, 'btn-success': rookies }">Rookies</button>
+</h2>
 <hr>
 <section>
   <table class="table table-hover">
@@ -7,13 +10,17 @@
       <th>Jogador</th>
       <th>Jogos</th>
       <th>Pontos</th>
+      <th>Valor Investido</th>
+      <th>Valor Recebido</th>
     </thead>
     <tbody>
       <tr *ngFor="let jogador of jogadores; let i = index">
         <td>{{i + 1}}º</td>
-        <td>{{jogador.nome}}</td>
+        <td>{{jogador.nome}}&nbsp;<span *ngIf="jogador.rookie" class="badge badge-warning">R</span></td>
         <td>{{jogador.jogos}}</td>
         <td>{{jogador.pontos}}</td>
+        <td>{{jogador.valorInvestido | currency:'R$'}}</td>
+        <td>{{jogador.valorRecebido | currency:'R$'}}</td>
       </tr>
     </tbody>
   </table>
