@@ -20,7 +20,7 @@ export class ClassificacaoComponent implements OnInit {
   }
 
   listarGeral() {
-    this.jogadorService.classificacao().subscribe(jogs => this.jogadores = jogs);
+    this.jogadorService.classificacao().subscribe(jogs => { console.log(jogs); this.jogadores = jogs });
   }
 
   listarRookies() {

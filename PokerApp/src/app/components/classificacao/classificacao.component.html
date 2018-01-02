@@ -8,19 +8,23 @@
     <thead>
       <th></th>
       <th>Jogador</th>
-      <th>Jogos</th>
       <th>Pontos</th>
+      <th>Jogos</th>
+      <th>Pts/Jogo</th>
       <th>Valor Investido</th>
       <th>Valor Recebido</th>
+      <th>Saldo</th>
     </thead>
     <tbody>
       <tr *ngFor="let jogador of jogadores; let i = index">
         <td>{{i + 1}}º</td>
         <td>{{jogador.nome}}&nbsp;<span *ngIf="jogador.rookie" class="badge badge-warning">R</span></td>
+        <td><button type='button' class="btn btn-secondary btn-sm" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover Title">{{jogador.pontos}}</button></td>
         <td>{{jogador.jogos}}</td>
-        <td>{{jogador.pontos}}</td>
+        <td>{{(jogador.pontos / jogador.jogos) | number}}</td>
         <td>{{jogador.valorInvestido | currency:'R$'}}</td>
         <td>{{jogador.valorRecebido | currency:'R$'}}</td>
+        <td><span [ngClass]="{ 'text-danger' : jogador.valorRecebido - jogador.valorInvestido < 0, 'text-success': jogador.valorRecebido - jogador.valorInvestido > 0 }">{{jogador.valorRecebido - jogador.valorInvestido | currency:'R$'}}</span></td>
       </tr>
     </tbody>
   </table>
