@@ -10,6 +10,13 @@
       <th>Jogador</th>
       <th>Pontos</th>
       <th>Jogos</th>
+      <th>1º</th>
+      <th>2º</th>
+      <th>3º</th>
+      <th>4º</th>
+      <th>5º</th>
+      <th>6º</th>
+      <th>Rebuy</th>
       <th>Pts/Jogo</th>
       <th>Valor Investido</th>
       <th>Valor Recebido</th>
@@ -21,6 +28,13 @@
         <td>{{jogador.nome}}&nbsp;<span *ngIf="jogador.rookie" class="badge badge-warning">R</span></td>
         <td><button type='button' class="btn btn-secondary btn-sm" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover Title">{{jogador.pontos}}</button></td>
         <td>{{jogador.jogos}}</td>
+        <td>{{qtdLugarJogador(jogador, 1)}}</td>
+        <td>{{qtdLugarJogador(jogador, 2)}}</td>
+        <td>{{qtdLugarJogador(jogador, 3)}}</td>
+        <td>{{qtdLugarJogador(jogador, 4)}}</td>
+        <td>{{qtdLugarJogador(jogador, 5)}}</td>
+        <td>{{qtdLugarJogador(jogador, 6)}}</td>
+        <td>{{qtdLugarJogador(jogador, -1)}}</td>
         <td>{{(jogador.pontos / jogador.jogos) | number}}</td>
         <td>{{jogador.valorInvestido | currency:'R$'}}</td>
         <td>{{jogador.valorRecebido | currency:'R$'}}</td>

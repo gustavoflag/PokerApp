@@ -20,11 +20,19 @@ export class ClassificacaoComponent implements OnInit {
   }
 
   listarGeral() {
-    this.jogadorService.classificacao().subscribe(jogs => { console.log(jogs); this.jogadores = jogs });
+    this.jogadorService.classificacao().subscribe(jogs => this.jogadores = jogs);
   }
 
   listarRookies() {
     this.jogadorService.classificacaoRookies().subscribe(jogs => this.jogadores = jogs);
+  }
+
+  qtdLugarJogador(jogador, lugar): Number{
+    var historicoJogo = jogador.historicoJogos.find(function(element, index, array) { return element.lugar === lugar });
+    if (historicoJogo)
+      return historicoJogo.quantidade;
+    else
+      return 0;
   }
 
   altRookies(){

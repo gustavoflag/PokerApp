@@ -3,6 +3,7 @@ import { PontuacaoService } from './services/pontuacao.service';
 import { JogadorService } from './services/jogador.service';
 import { AuthService } from './services/auth.service';
 import { JogoService } from './services/jogo.service';
+import { CaixaService } from './services/caixa.service';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { Pontuacao } from './models/pontuacao';
@@ -17,6 +18,7 @@ import { Routing } from './app.routing';
 import { ClassificacaoComponent } from './components/classificacao/classificacao.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ParametroComponent } from './components/parametro/parametro.component';
+import { CaixaComponent } from './components/caixa/caixa.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { ParametroComponent } from './components/parametro/parametro.component';
     JogadorComponent,
     JogoComponent,
     ClassificacaoComponent,
-    ParametroComponent
+    ParametroComponent,
+    CaixaComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,7 @@ import { ParametroComponent } from './components/parametro/parametro.component';
     AlertModule.forRoot(),
     Routing
   ],
-  providers: [PontuacaoService, JogadorService, AuthService, AuthGuard, JogoService],
+  providers: [PontuacaoService, JogadorService, AuthService, AuthGuard, JogoService, CaixaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

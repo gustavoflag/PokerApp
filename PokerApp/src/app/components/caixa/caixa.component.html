@@ -1,0 +1,50 @@
+<h2>Caixa
+<div class="float-right">
+  <button class="btn btn-primary" (click)="novo();">Novo Lançamento</button>
+</div>
+</h2>
+<hr>
+<div *ngIf="mensagem" class="alert alert-dismissible alert-success">{{mensagem}}</div>
+<div *ngIf="erro" class="alert alert-dismissible alert-danger">{{erro}}</div>
+<div class="float-right" *ngIf="!lancamentoEdicao"><h4>Saldo atual: <span class="text-warning">{{saldoAtual() | currency:'R$'}}</span></h4></div>
+<section *ngIf="!lancamentoEdicao && lancamentosCaixa && lancamentosCaixa.length > 0">
+  <table class="table table-hover">
+    <thead>
+      <th>Data</th>
+      <th>Valor</th>
+      <th>Descrição</th>
+      <th></th>
+      <th></th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let lancamento of lancamentosCaixa">
+        <td>{{lancamento.data | date:'dd/MM/yyyy'}}</td>
+        <td><span [ngClass]="{ 'text-danger' : lancamento.valor < 0, 'text-success': lancamento.valor > 0 }">{{lancamento.valor | currency:'R$'}}</span></td>
+        <td>{{lancamento.descricao}}</td>
+        <td><button class="btn btn-secondary btn-sm" (click)="editar(lancamento);">Editar</button></td>
+        <td><button class="btn btn-danger btn-sm" (click)="excluir(lancamento);">Excluir</button></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+<section *ngIf="lancamentoEdicao">
+  <form name="formLogin" (ngSubmit)="f.form.valid && salvar()" #f="ngForm" novalidate>
+    <div class="form-group">
+      <label for="lugar">Data</label>
+      <input class="form-control" type="date" placeholder="" id="inputData" name="data" [(ngModel)]="lancamentoEdicao.data" #data="ngModel" />
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !valor.valid }">
+        <label for="lugar">Valor</label>
+        <input type="text" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !valor.valid }" name="valor" [(ngModel)]="lancamentoEdicao.valor" #valor="ngModel" required />
+        <div *ngIf="f.submitted && !valor.valid" class="invalid-feedback">Valor é obrigatório</div>
+    </div>
+    <div class="form-group">
+        <label for="descricao">Descrição</label>
+        <input type="text" class="form-control" name="descricao" [(ngModel)]="lancamentoEdicao.descricao" #descricao="ngModel" />
+    </div>
+    <div class="form-group">
+        <button class="btn btn-success">Salvar</button>
+        <button (click)="limpaMensagens();listar();" class="btn btn-secondary">Voltar</button>
+    </div>
+  </form>
+</section>
