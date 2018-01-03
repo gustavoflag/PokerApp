@@ -24,9 +24,14 @@
     </thead>
     <tbody>
       <tr *ngFor="let jogador of jogadores; let i = index">
-        <td>{{i + 1}}º</td>
+        <td><button type='button' class="btn btn-sm btn-outline-success">{{i + 1}}º</button></td>
         <td>{{jogador.nome}}&nbsp;<span *ngIf="jogador.rookie" class="badge badge-warning">R</span></td>
-        <td><button type='button' class="btn btn-secondary btn-sm" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover Title">{{jogador.pontos}}</button></td>
+        <td><!--<button type='button' class="btn btn-sm btn-outline-success">-->
+            <span class="text-warning">
+            {{jogador.pontos}}
+            </span>
+            <!--</button>-->
+        </td>
         <td>{{jogador.jogos}}</td>
         <td>{{qtdLugarJogador(jogador, 1)}}</td>
         <td>{{qtdLugarJogador(jogador, 2)}}</td>
