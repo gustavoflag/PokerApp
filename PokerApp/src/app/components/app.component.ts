@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'app';
   nomeUsuario: string = null;
+  navAberta: boolean = false;
 
   constructor(private authService: AuthService
              ,private router: Router){ }
@@ -39,5 +40,9 @@ export class AppComponent {
 
     this.nomeUsuario = null;
     return false;
+  }
+
+  toggleNavbar(){
+    this.navAberta = !this.navAberta;
   }
 }
