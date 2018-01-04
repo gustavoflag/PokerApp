@@ -2,6 +2,7 @@
   "name": "poker-app",
   "version": "0.0.0",
   "license": "MIT",
+  "main": "src/main.ts",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -12,6 +13,8 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/cli": "^1.6.1",
+    "@angular/compiler-cli": "^5.0.0",
     "@angular/animations": "^5.0.0",
     "@angular/common": "^5.0.0",
     "@angular/compiler": "^5.0.0",
@@ -28,8 +31,6 @@
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
-    "@angular/cli": "1.6.1",
-    "@angular/compiler-cli": "^5.0.0",
     "@angular/language-service": "^5.0.0",
     "@types/jasmine": "~2.5.53",
     "@types/jasminewd2": "~2.0.2",
