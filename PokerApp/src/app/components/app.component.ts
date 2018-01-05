@@ -32,7 +32,7 @@ export class AppComponent {
       this.nomeUsuario = null;
       this.router.navigate(['/']);
     }
-  }
+  } 
 
   logado() : boolean{
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
