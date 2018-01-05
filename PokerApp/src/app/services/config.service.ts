@@ -6,7 +6,7 @@ export class ConfigService {
   private urlService:string;
 
   constructor(){
-      this.urlService = 'http://127.0.0.1:3000';
+      this.urlService = 'https://tqsop-api.herokuapp.com';
   }
 
   getUrlService(): string {
