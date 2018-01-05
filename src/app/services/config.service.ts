@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class ConfigService {
   private urlService:string;
 
   constructor(){
-      this.urlService = 'https://tqsop-api.herokuapp.com';
+      this.urlService = environment.API_URI;
   }
 
   getUrlService(): string {
