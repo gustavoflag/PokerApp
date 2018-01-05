@@ -13,7 +13,7 @@ import { PontuacaoComponent } from './components/pontuacao/pontuacao.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { JogadorComponent } from './components/jogador/jogador.component';
 import { JogoComponent } from './components/jogo/jogo.component';
-import { AlertModule } from 'ngx-bootstrap';
+//import { AlertModule } from 'ngx-bootstrap';
 import { Routing } from './app.routing';
 import { ClassificacaoComponent } from './components/classificacao/classificacao.component';
 import { AuthGuard } from './guards/auth.guard';
@@ -35,7 +35,7 @@ import { CaixaComponent } from './components/caixa/caixa.component';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AlertModule.forRoot(),
+    //AlertModule.forRoot(),
     Routing
   ],
   providers: [PontuacaoService, JogadorService, AuthService, AuthGuard, JogoService, CaixaService],
