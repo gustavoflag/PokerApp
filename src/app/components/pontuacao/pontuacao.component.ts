@@ -17,7 +17,7 @@ export class PontuacaoComponent implements OnInit {
 
   constructor(private pontuacaoService: PontuacaoService
              ,private router: Router
-             ,private config: ConfigService){ }
+             ,public config: ConfigService){ }
 
   ngOnInit() {
     this.limpaMensagens();
