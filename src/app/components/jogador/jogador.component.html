@@ -1,6 +1,6 @@
 <h2>Jogadores
 <div class="float-right">
-  <button class="btn btn-primary" (click)="novo();">Novo</button>
+  <button class="btn btn-primary" (click)="novo();" *ngIf="config.usuarioLogado()">Novo</button>
 </div>
 </h2>
 <hr>
@@ -16,8 +16,8 @@
     <tbody>
       <tr *ngFor="let jogador of jogadores">
         <td>{{jogador.nome}}&nbsp;<span *ngIf="jogador.rookie" class="badge badge-warning">Rookie</span></td>
-        <td><button class="btn btn-secondary btn-sm" (click)="editar(jogador);">Editar</button></td>
-        <td><button class="btn btn-danger btn-sm" (click)="excluir(jogador);">Excluir</button></td>
+        <td><button class="btn btn-secondary btn-sm" (click)="editar(jogador);" *ngIf="config.usuarioLogado()">Editar</button></td>
+        <td><button class="btn btn-danger btn-sm" (click)="excluir(jogador);" *ngIf="config.usuarioLogado()">Excluir</button></td>
       </tr>
     </tbody>
   </table>

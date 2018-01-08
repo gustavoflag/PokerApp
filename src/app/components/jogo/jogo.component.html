@@ -1,6 +1,6 @@
 <h2>Jogos
 <div class="float-right">
-  <button class="btn btn-primary" (click)="novo();">Novo</button>
+  <button class="btn btn-primary" (click)="novo();" *ngIf="config.usuarioLogado()">Novo</button>
 </div>
 </h2>
 <hr>
@@ -14,7 +14,7 @@
       Valor Maleta: {{ jogo.valorMaleta | currency:'R$' }}
       <div class="float-right">
         <!--<button class="btn btn-outline-success btn-sm" (click)="editar(jogo);">Editar</button>-->
-        <button class="btn btn-outline-danger btn-sm" (click)="excluir(jogo);">Excluir</button>
+        <button class="btn btn-outline-danger btn-sm" (click)="excluir(jogo);" *ngIf="config.usuarioLogado()">Excluir</button>
       </div>
     </div>
     <div class="card-body">

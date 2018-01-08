@@ -16,7 +16,8 @@ export class AppComponent {
   navAberta: boolean = false;
 
   constructor(private authService: AuthService
-             ,private router: Router){ }
+             ,private router: Router
+             ,private config: ConfigService){ }
 
   ngOnInit() {
   }
@@ -32,11 +33,11 @@ export class AppComponent {
       this.nomeUsuario = null;
       this.router.navigate(['/']);
     }
-  } 
+  }
 
   logado() : boolean{
-    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (currentUser && currentUser.token){
+    if (this.config.usuarioLogado()){
+      var currentUser = JSON.parse(localStorage.getItem('currentUser'));
       this.nomeUsuario = currentUser.login;
       return true;
     }
