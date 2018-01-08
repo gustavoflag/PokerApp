@@ -20,7 +20,8 @@ export class JogoComponent implements OnInit {
   loading: boolean = false;
 
   constructor(private jogoService: JogoService
-             ,private jogadorService: JogadorService) { }
+             ,private jogadorService: JogadorService
+             ,private config:ConfigService) { }
 
   ngOnInit() {
     this.listar();

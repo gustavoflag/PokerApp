@@ -1,6 +1,6 @@
 <h2>Pontuação
 <div class="float-right">
-  <button class="btn btn-primary" (click)="novo();">Novo</button>
+  <button class="btn btn-primary" (click)="novo();" *ngIf="config.usuarioLogado()">Novo</button>
 </div>
 </h2>
 <hr>
@@ -18,8 +18,8 @@
       <tr *ngFor="let pontuacao of pontuacoes">
         <td>{{pontuacao.lugar}}º</td>
         <td>{{pontuacao.pontos}} pontos</td>
-        <td><button class="btn btn-secondary btn-sm" (click)="editar(pontuacao);">Editar</button></td>
-        <td><button class="btn btn-danger btn-sm" (click)="excluir(pontuacao);">Excluir</button></td>
+        <td><button class="btn btn-secondary btn-sm" (click)="editar(pontuacao);" *ngIf="config.usuarioLogado()">Editar</button></td>
+        <td><button class="btn btn-danger btn-sm" (click)="excluir(pontuacao);" *ngIf="config.usuarioLogado()">Excluir</button></td>
       </tr>
     </tbody>
   </table>

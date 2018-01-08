@@ -14,12 +14,21 @@ export class ConfigService {
       return this.urlService;
   }
 
-  getHeaders(): HttpHeaders{
+  getHeaders(): HttpHeaders {
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
     var token = currentUser && currentUser.token;
     return new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
       .set('Authorization', `JWT ${token}`);
+  }
+
+  usuarioLogado(): boolean {
+    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token){
+      return true;
+    }
+
+    return false;
   }
 }
