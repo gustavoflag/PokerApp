@@ -17,7 +17,7 @@ export class AppComponent {
 
   constructor(private authService: AuthService
              ,private router: Router
-             ,private config: ConfigService){ }
+             ,public config: ConfigService){ }
 
   ngOnInit() {
   }
