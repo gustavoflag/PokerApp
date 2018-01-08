@@ -17,7 +17,7 @@ export class CaixaComponent implements OnInit {
 
   constructor(private caixaService: CaixaService
              ,private router: Router
-             ,private config: ConfigService){ }
+             ,protected config: ConfigService){ }
 
   ngOnInit() {
     this.limpaMensagens();

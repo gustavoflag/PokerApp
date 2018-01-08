@@ -21,7 +21,7 @@ export class JogoComponent implements OnInit {
 
   constructor(private jogoService: JogoService
              ,private jogadorService: JogadorService
-             ,private config:ConfigService) { }
+             ,protected config:ConfigService) { }
 
   ngOnInit() {
     this.listar();
