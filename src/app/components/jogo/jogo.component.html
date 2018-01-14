@@ -29,7 +29,7 @@
         <tbody>
           <tr *ngFor="let participante of jogo.participantes">
             <td>{{ participante.lugar }}º</td>
-            <td>{{ participante.nomeJogador }}&nbsp;<span *ngIf="participante.rebuy" class="badge badge-danger">Rebuy</span></td>
+            <td>{{ participante.nomeJogador }}&nbsp;<span *ngIf="participante.rebuy > 0" class="badge badge-danger">{{ participante.rebuy > 1 ? participante.rebuy + " " : "" }}Rebuy</span></td>
             <td>{{ participante.pontos }}</td>
             <!--<td>{{participante.valorInvestido}}</td>-->
             <td>{{ participante.valorRecebido - participante.valorInvestido | currency:'R$' }}</td>
@@ -78,7 +78,8 @@
                <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let participante of participantes; let i = index">
                  {{ participante.lugar }}º - {{ participante.nomeJogador }}
                  <div class="float-right">
-                   <button type='button' class="btn btn-sm" (click)="rebuy(participante);" [ngClass]="{ 'btn-outline-secondary' : !participante.rebuy, 'btn-secondary': participante.rebuy }">Rebuy</button>
+                   <button type='button' class="btn btn-sm" (click)="rebuy(participante);" [ngClass]="{ 'btn-outline-secondary' : participante.rebuy === 0, 'btn-secondary': participante.rebuy > 0 }">{{ participante.rebuy > 1 ? participante.rebuy + " " : "" }}Rebuy</button>
+                   <button type='button' class="btn btn-sm" (click)="maisRebuy(participante);" [ngClass]="{ 'btn-outline-secondary' : participante.rebuy === 0, 'btn-secondary': participante.rebuy > 0 }">+</button>
                    <button type='button' class="btn btn-outline-warning btn-sm" (click)="subir(i);" *ngIf="i !== 0" title="Subir">^</button>
                    <button type='button' class="btn btn-outline-danger btn-sm" (click)="remover(i);" title="Remover"><<</button>
                  </div>

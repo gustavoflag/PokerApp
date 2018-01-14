@@ -99,7 +99,7 @@ export class JogoComponent implements OnInit {
     var indexRemove = this.jogadores.indexOf(jogador);
     this.jogadores.splice(indexRemove, 1);
 
-    this.participantes.push({ nomeJogador: jogador.nome, lugar: this.jogadoresNoJogo.length });
+    this.participantes.push({ nomeJogador: jogador.nome, lugar: this.jogadoresNoJogo.length, rebuy: 0 });
   }
 
   remover(index){
@@ -135,7 +135,11 @@ export class JogoComponent implements OnInit {
   }
 
   rebuy(participante){
-    participante.rebuy = !participante.rebuy;
+    participante.rebuy = (participante.rebuy > 0 ? 0 : 1);
+  }
+
+  maisRebuy(participante){
+    participante.rebuy++;
   }
 
   limpaMensagens(){
