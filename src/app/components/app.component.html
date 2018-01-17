@@ -16,13 +16,13 @@
       <li class="nav-item">
         <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/caixa']">Caixa</a>
       </li>
-      <li class="nav-item" *ngIf="logado()">
+      <li class="nav-item">
         <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/pontuacao']">Pontuação</a>
       </li>
-      <li class="nav-item" *ngIf="logado()">
+      <li class="nav-item" *ngIf="config.usuarioLogado()">
         <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/jogador']">Jogadores</a>
       </li>
-      <li class="nav-item" *ngIf="logado()">
+      <li class="nav-item" *ngIf="config.usuarioLogado()">
         <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/parametro']">Parâmetros</a>
       </li>
     </ul>
@@ -41,4 +41,21 @@
 </nav>
 <div class="container">
     <router-outlet></router-outlet>
+</div>
+<!--<script type="text/javascript">
+    /*var feed = new Instafeed({
+        get: 'tagged',
+        tagName: 'batera',
+        clientId: 'c6747f94b49c48359b84b969da7c61f0',
+        template: '<a href="{{link}}"><img src="{{image}}" /></a>'
+    });
+    feed.run();*/
+    //alert('teste');
+</script>-->
+<div id="instafeed">
+  <!-- 01d27b6fe1de4bbaa6dee0b85de80d21 -->
+<!--  -->
+
+<!-- c6747f94b49c48359b84b969da7c61f0 -->
+<!-- 128332ad7b354bb2baf94798a1f78d82 -->
 </div>

@@ -14,7 +14,8 @@ export class JogadorComponent implements OnInit {
   mensagem: string = null;
   erro: string = null;
 
-  constructor(private jogadorService: JogadorService){ }
+  constructor(private jogadorService: JogadorService
+             ,public config: ConfigService){ }
 
   ngOnInit() {
     this.limpaMensagens();

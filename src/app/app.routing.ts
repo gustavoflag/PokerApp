@@ -13,7 +13,7 @@ const appRoutes: Routes = [
     { path: 'jogador', component: JogadorComponent, canActivate: [AuthGuard] },
     { path: 'jogo', component: JogoComponent },
     { path: 'caixa', component: CaixaComponent },
-    { path: 'pontuacao', component: PontuacaoComponent, canActivate: [AuthGuard] },
+    { path: 'pontuacao', component: PontuacaoComponent },
     { path: 'parametro', component: ParametroComponent, canActivate: [AuthGuard] },
     { path: '', component: ClassificacaoComponent },
     { path: '**', redirectTo: '' }

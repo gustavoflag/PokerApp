@@ -1,6 +1,6 @@
 <h2>Caixa
 <div class="float-right">
-  <button class="btn btn-primary" (click)="novo();">Novo Lançamento</button>
+  <button class="btn btn-primary" (click)="novo();" *ngIf="config.usuarioLogado()">Novo Lançamento</button>
 </div>
 </h2>
 <hr>
@@ -21,8 +21,8 @@
         <td>{{lancamento.data | date:'dd/MM/yyyy'}}</td>
         <td><span [ngClass]="{ 'text-danger' : lancamento.valor < 0, 'text-success': lancamento.valor > 0 }">{{lancamento.valor | currency:'R$'}}</span></td>
         <td>{{lancamento.descricao}}</td>
-        <td><button class="btn btn-secondary btn-sm" (click)="editar(lancamento);">Editar</button></td>
-        <td><button class="btn btn-danger btn-sm" (click)="excluir(lancamento);">Excluir</button></td>
+        <td><button class="btn btn-secondary btn-sm" (click)="editar(lancamento);" *ngIf="config.usuarioLogado()">Editar</button></td>
+        <td><button class="btn btn-danger btn-sm" (click)="excluir(lancamento);" *ngIf="config.usuarioLogado()">Excluir</button></td>
       </tr>
     </tbody>
   </table>
