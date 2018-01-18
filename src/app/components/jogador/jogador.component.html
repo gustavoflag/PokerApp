@@ -15,7 +15,11 @@
     </thead>
     <tbody>
       <tr *ngFor="let jogador of jogadores">
-        <td>{{jogador.nome}}&nbsp;<span *ngIf="jogador.rookie" class="badge badge-warning">Rookie</span></td>
+        <td><div class="float-left">{{jogador.nome}}&nbsp;<span *ngIf="jogador.rookie" class="badge badge-warning">Rookie</span></div>
+            <div *ngFor="let titulo of jogador.titulos" style="background:transparent url('assets/images/lourosXs.png') no-repeat left center" class="float-left">
+              <small class="text-muted">{{titulo.ano}}</small>
+            </div>
+        </td>
         <td><button class="btn btn-secondary btn-sm" (click)="editar(jogador);" *ngIf="config.usuarioLogado()">Editar</button></td>
         <td><button class="btn btn-danger btn-sm" (click)="excluir(jogador);" *ngIf="config.usuarioLogado()">Excluir</button></td>
       </tr>
@@ -34,10 +38,31 @@
           <label for="rookie">Opções</label>
           <button type='button' class="btn" (click)="rookie(participante);" [ngClass]="{ 'btn-outline-warning' : !jogadorEdicao.rookie, 'btn-warning': jogadorEdicao.rookie }">Rookie</button>
       </div>
+      <div class="form-group col-lg-6">
+        <label for="titulo">Títulos</label>
+        <div>
+          <div *ngFor="let titulo of jogadorEdicao.titulos; let i = index" class="float-left">
+              <div style="background:transparent url('assets/images/lourosSm.png') no-repeat left center" class="float-left">
+                <span class="text">{{titulo.ano}}&nbsp;</span>
+                <button type='button' class="btn btn-sm btn-outline-danger" (click)="excluirTitulo(index);" >-</button>
+              </div>
+              &nbsp;
+          </div>
+
+          <button *ngIf="!tituloEdicao" type='button' class="btn btn-sm btn-outline-secondary" (click)="novoTitulo();">+</button>
+          <div *ngIf="tituloEdicao">
+              Ano: <button type='button' class="btn btn-sm btn-outline-secondary" (click)="desceAno();">-</button>
+              {{tituloEdicao.ano}}
+              <button type='button' class="btn btn-sm btn-outline-secondary" (click)="sobeAno();">+</button>
+              <button type='button' class="btn btn-sm btn-outline-success" (click)="salvaTitulo();">OK</button>
+              <button type='button' class="btn btn-sm btn-outline-danger" (click)="cancelaTitulo();">X</button>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="form-group">
         <button class="btn btn-success">Salvar</button>
-        <button (click)="limpaMensagens();listar();" class="btn btn-secondary">Voltar</button>
+        <button type='button' (click)="limpaMensagens();listar();" class="btn btn-secondary">Voltar</button>
     </div>
   </form>
 </section>

@@ -11,6 +11,7 @@ import { ConfigService } from '../../services/config.service';
 export class JogadorComponent implements OnInit {
   jogadores: any = null;
   jogadorEdicao: any = null;
+  tituloEdicao: any = null;
   mensagem: string = null;
   erro: string = null;
 
@@ -70,6 +71,31 @@ export class JogadorComponent implements OnInit {
         data => this.mostraSucesso("Jogador excluído com sucesso!"),
         err => this.mostraErro(err));
     }
+  }
+
+  novoTitulo(){
+    this.tituloEdicao = { ano: 2018 }
+  }
+
+  desceAno(){
+    this.tituloEdicao.ano--;
+  }
+
+  sobeAno(){
+    this.tituloEdicao.ano++;
+  }
+
+  salvaTitulo(){
+    this.jogadorEdicao.titulos.push(this.tituloEdicao);
+    this.tituloEdicao = null;
+  }
+
+  cancelaTitulo(){
+    this.tituloEdicao = null;
+  }
+
+  excluirTitulo(index){
+    this.jogadorEdicao.titulos.splice(index, 1);
   }
 
   limpaMensagens(){

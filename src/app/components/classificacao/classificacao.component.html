@@ -38,7 +38,11 @@
             <button type='button' class="btn btn-sm btn-outline-success hidden-sm-down">{{i + 1}}º</button>
             <span class="hidden-md-up text-success">{{i + 1}}º</span>
         </td>
-        <td>{{jogador.nome}}&nbsp;<span *ngIf="jogador.rookie" class="badge badge-warning">R</span></td>
+        <td><div class="float-left">{{jogador.nome}}&nbsp;<span *ngIf="jogador.rookie" class="badge badge-warning">R</span></div>
+          <div *ngFor="let titulo of jogador.titulos" style="background:transparent url('assets/images/lourosXs.png') no-repeat center center" class="float-left">
+            <small class="text-muted">{{titulo.ano}}</small>
+          </div>
+        </td>
         <td class="text-warning">{{jogador.pontos}}</td>
         <td>{{jogador.jogos}}</td>
         <td class="hidden-sm-down">{{qtdLugarJogador(jogador, 1)}}</td>
