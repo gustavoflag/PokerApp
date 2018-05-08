@@ -4,6 +4,7 @@ import { JogadorComponent } from './components/jogador/jogador.component';
 import { JogoComponent } from './components/jogo/jogo.component';
 import { PontuacaoComponent } from './components/pontuacao/pontuacao.component';
 import { ClassificacaoComponent } from './components/classificacao/classificacao.component';
+import { ClassificacaoMesComponent } from './components/classificacao-mes/classificacao-mes.component';
 import { CaixaComponent } from './components/caixa/caixa.component';
 import { ParametroComponent } from './components/parametro/parametro.component';
 import { AuthGuard } from './guards/auth.guard';
@@ -16,6 +17,7 @@ const appRoutes: Routes = [
     { path: 'pontuacao', component: PontuacaoComponent },
     { path: 'parametro', component: ParametroComponent, canActivate: [AuthGuard] },
     { path: '', component: ClassificacaoComponent },
+    { path: 'classificacaoMes', component: ClassificacaoMesComponent },
     { path: '**', redirectTo: '' }
 ];
 

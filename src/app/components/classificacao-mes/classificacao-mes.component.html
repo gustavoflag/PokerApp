@@ -1,0 +1,45 @@
+<h2 class="hidden-sm-down">Classificação por Mês</h2>
+<h4 class="hidden-md-up">Classificação por Mês</h4>
+<hr>
+<section *ngFor="let mes of meses">
+  <div class="card border-light mb-3">
+    <div class="card-header">
+      {{mes.nomeMes}}
+    </div>
+    <div class="card-body">
+      <table class="table table-hover">
+        <thead>
+          <th></th>
+          <th>Jogador</th>
+          <th>
+            <span class="hidden-sm-down">Pontos</span>
+            <span class="hidden-md-up">Pts</span>
+          </th>
+          <th>
+            <span class="hidden-sm-down">Vitórias</span>
+            <span class="hidden-md-up">V</span>
+          </th>
+          <th>
+            <span class="hidden-sm-down">Heads-Up</span>
+            <span class="hidden-md-up">HUs</span>
+          </th>
+        <tbody>
+          <tr *ngFor="let jogador of mes.classificacao; let i = index">
+            <td>
+                <span class="text-success">{{i + 1}}º</span>
+            </td>
+            <td>
+              <div class="float-left">{{jogador.nomeJogador}}
+                &nbsp;<span *ngIf="jogador.rookie" class="badge badge-warning">R</span></div>
+                <div *ngFor="let titulo of jogador.titulos" style="background:transparent url('assets/images/lourosXs.png') no-repeat center center" class="float-left">
+                  <small class="text-muted">{{titulo.ano}}</small>
+                </div>
+            </td>
+            <td class="text-warning">{{jogador.pontos}}</td>
+            <td>{{jogador.vitorias}}</td>
+            <td>{{jogador.HUs}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+</section>

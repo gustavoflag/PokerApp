@@ -26,6 +26,14 @@ export class JogadorService {
     return this.http.get(this.baseUrlService + '/classificacaoRookies');
   }
 
+  classificacaoMes(ano, mes){
+    return this.http.get(`${this.baseUrlService}/classificacaoMes/${ano}/${mes}`);
+  }
+
+  classificacaoTodosMeses(){
+    return this.http.get(this.baseUrlService + '/classificacaoTodosMeses');
+  }
+
   inserir(jogador): Observable<any>{
     return this.http.post(`${this.baseUrlService}/jogador`, JSON.stringify(jogador), { headers: this.configService.getHeaders() });
   }
