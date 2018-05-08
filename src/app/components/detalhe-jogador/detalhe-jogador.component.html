@@ -1,0 +1,50 @@
+<section *ngIf="jogador">
+  <h2>
+      <div class="float-left">{{jogador.nome}}&nbsp;&nbsp;&nbsp;<span *ngIf="jogador.rookie" class="badge badge-warning">Rookie</span></div>
+      <div *ngFor="let titulo of jogador.titulos" style="background:transparent url('assets/images/lourosSm.png') no-repeat center center" class="float-left">
+        <small class="text-muted" style="text-align:middle">{{titulo.ano}}</small>
+      </div>
+  </h2>
+  <hr>
+  <br />
+  <br />
+  <h5>
+    <span class="text-muted">Pontos:</span> <span class="text-warning">{{jogador.pontos}}</span>
+  </h5>
+  <h5>
+    <span class="text-muted">Jogos:</span> <span>{{jogador.jogos}}</span>
+  </h5>
+  <h5>
+    <span class="text-muted">Pontos/Jogo:</span> <span>{{(jogador.pontos / jogador.jogos) | number}}</span>
+  </h5>
+  <h5>
+    <span class="text-muted">Valor Investido:</span> <span>{{jogador.valorInvestido | currency:'R$'}}</span>
+  </h5>
+  <h5>
+    <span class="text-muted">Valor Recebido:</span> <span>{{jogador.valorRecebido | currency:'R$'}}</span>
+  </h5>
+  <h5>
+    <span class="text-muted">Saldo:</span>
+    <span [ngClass]="{ 'text-danger' : jogador.valorRecebido - jogador.valorInvestido < 0, 'text-success': jogador.valorRecebido - jogador.valorInvestido > 0 }">{{jogador.valorRecebido - jogador.valorInvestido | currency:'R$'}}</span>
+  </h5>
+  <section *ngFor="let historico of jogador.historicoJogos">
+    <h5 *ngIf="historico.lugar < 0">
+      <span class="text-muted">Rebuys:</span> <span>{{historico.quantidade}}</span>
+    </h5>
+  </section>
+  <h5>
+    <span class="text-muted">Vitórias:</span> <span>{{jogador.vitorias.length}}</span>
+  </h5>
+  <section *ngFor="let vitoria of jogador.vitorias" style="margin-left: 20px">
+    <h5>
+      <a class="small" href="#/jogo/{{vitoria._id}}">{{vitoria.data | date: 'dd/MM/yyyy'}}</a>
+    </h5>
+  </section>
+  <section *ngFor="let historico of jogador.historicoJogos">
+    <h5 *ngIf="historico.lugar > 1">
+      <span class="text-muted">{{historico.lugar}}ºs lugares:</span> <span>{{historico.quantidade}}</span>
+    </h5>
+  </section>
+
+
+</section>

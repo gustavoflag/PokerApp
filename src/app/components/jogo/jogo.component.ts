@@ -1,3 +1,4 @@
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { JogoService } from '../../services/jogo.service';
 import { ConfigService } from '../../services/config.service';
@@ -10,7 +11,7 @@ import { JogadorService } from '../../services/jogador.service';
   styleUrls: ['./jogo.component.css']
 })
 export class JogoComponent implements OnInit {
-  jogos: any = null;
+  jogos: any = [];
   jogoEdicao: any = { data: '28/12/2017' };
   jogadores: any = null;
   jogadoresNoJogo: any = [];
@@ -19,13 +20,23 @@ export class JogoComponent implements OnInit {
   erro: string = null;
   loading: boolean = false;
 
-  constructor(private jogoService: JogoService
+  constructor(private activatedRoute: ActivatedRoute
+             ,private jogoService: JogoService
              ,private jogadorService: JogadorService
              ,public config:ConfigService) { }
 
   ngOnInit() {
-    this.listar();
-    this.listarJogadores();
+    let idJogo = null;
+
+    this.activatedRoute.params.subscribe((params: Params) => {
+      idJogo = params['id'];
+
+      if (idJogo){
+        this.consultar(idJogo);
+      } else {
+        this.listar();
+      }
+    });
   }
 
   listar(){
@@ -33,6 +44,13 @@ export class JogoComponent implements OnInit {
     this.jogoEdicao = null;
     this.jogoService.listar()
         .subscribe(jogs => { this.loading = false; this.jogos = jogs });
+  }
+
+  consultar(idJogo){
+    this.limpaMensagens();
+    this.jogoEdicao = null;
+    this.jogoService.consultar(idJogo)
+        .subscribe(jogo => { this.loading = false; this.jogos.push(jogo) });
   }
 
   listarJogadores(){
@@ -43,6 +61,7 @@ export class JogoComponent implements OnInit {
   novo(){
     this.limpaMensagens();
     this.jogoEdicao = { };
+    this.listarJogadores();
   }
 
   excluir(jogo){

@@ -20,6 +20,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { ParametroComponent } from './components/parametro/parametro.component';
 import { CaixaComponent } from './components/caixa/caixa.component';
 import { ClassificacaoMesComponent } from './components/classificacao-mes/classificacao-mes.component';
+import { DetalheJogadorComponent } from './components/detalhe-jogador/detalhe-jogador.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ClassificacaoMesComponent } from './components/classificacao-mes/classi
     ClassificacaoComponent,
     ParametroComponent,
     CaixaComponent,
-    ClassificacaoMesComponent
+    ClassificacaoMesComponent,
+    DetalheJogadorComponent
   ],
   imports: [
     BrowserModule,

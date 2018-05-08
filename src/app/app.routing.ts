@@ -1,6 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
 import { AuthComponent } from './components/auth/auth.component';
 import { JogadorComponent } from './components/jogador/jogador.component';
+import { DetalheJogadorComponent } from './components/detalhe-jogador/detalhe-jogador.component';
 import { JogoComponent } from './components/jogo/jogo.component';
 import { PontuacaoComponent } from './components/pontuacao/pontuacao.component';
 import { ClassificacaoComponent } from './components/classificacao/classificacao.component';
@@ -12,7 +13,9 @@ import { AuthGuard } from './guards/auth.guard';
 const appRoutes: Routes = [
     { path: 'login', component: AuthComponent },
     { path: 'jogador', component: JogadorComponent, canActivate: [AuthGuard] },
+    { path: 'jogador/:id', component: DetalheJogadorComponent },
     { path: 'jogo', component: JogoComponent },
+    { path: 'jogo/:id', component: JogoComponent },
     { path: 'caixa', component: CaixaComponent },
     { path: 'pontuacao', component: PontuacaoComponent },
     { path: 'parametro', component: ParametroComponent, canActivate: [AuthGuard] },

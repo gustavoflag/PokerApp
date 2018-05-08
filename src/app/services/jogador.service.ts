@@ -18,6 +18,10 @@ export class JogadorService {
     return this.http.get(this.baseUrlService + '/jogador');
   }
 
+  consultar(idJogador){
+    return this.http.get(`${this.baseUrlService}/jogador/${idJogador}`);
+  }
+
   classificacao(){
     return this.http.get(this.baseUrlService + '/classificacao');
   }
