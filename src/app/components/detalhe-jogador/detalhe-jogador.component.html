@@ -8,32 +8,95 @@
   <hr>
   <br />
   <br />
-  <h5>
-    <span class="text-muted">Pontos:</span> <span class="text-warning">{{jogador.pontos}}</span>
-  </h5>
-  <h5>
-    <span class="text-muted">Jogos:</span> <span>{{jogador.jogos}}</span>
-  </h5>
-  <h5>
-    <span class="text-muted">Pontos/Jogo:</span> <span>{{(jogador.pontos / jogador.jogos) | number}}</span>
-  </h5>
-  <h5>
-    <span class="text-muted">Valor Investido:</span> <span>{{jogador.valorInvestido | currency:'R$'}}</span>
-  </h5>
-  <h5>
-    <span class="text-muted">Valor Recebido:</span> <span>{{jogador.valorRecebido | currency:'R$'}}</span>
-  </h5>
-  <h5>
-    <span class="text-muted">Saldo:</span>
-    <span [ngClass]="{ 'text-danger' : jogador.valorRecebido - jogador.valorInvestido < 0, 'text-success': jogador.valorRecebido - jogador.valorInvestido > 0 }">{{jogador.valorRecebido - jogador.valorInvestido | currency:'R$'}}</span>
-  </h5>
-  <section *ngFor="let historico of jogador.historicoJogos">
-    <h5 *ngIf="historico.lugar < 0">
-      <span class="text-muted">Rebuys:</span> <span>{{historico.quantidade}}</span>
-    </h5>
-  </section>
-  <h5>
-    <span class="text-muted">Vitórias:</span> <span>{{jogador.vitorias.length}}</span>
+  <div class="row">
+    <div class="col-lg-3">
+      <div class="bs-component">
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="text-muted">Pontos:</span>
+            <span class="text-warning">{{jogador.pontos}}</span>
+            <span class="badge badge-primary">{{jogador.posicaoRanking}}º</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="text-muted">Jogos:</span>
+            <span>{{jogador.jogos}}
+              <span class="badge badge-warning badge-pill">{{((jogador.jogos * 100) / totalJogos) | number : '1.0-0'}}%</span>
+            </span>
+            <span> </span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="text-muted">Pontos/Jogo:</span>
+            <span>{{jogador.pontosPorJogo | number}}</span>
+            <span class="badge badge-primary">{{jogador.posicaoPontosPorJogo}}º</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="text-muted">Media Posicao:</span>
+            <span>{{jogador.mediaPosicao | number}}</span>
+            <span class="badge badge-primary">{{jogador.posicaoMediaPosicao}}º</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <div class="bs-component">
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="text-muted">Vitórias:</span>
+            <span>{{jogador.qtdVitorias}}
+              <span class="badge badge-secondary badge-pill">{{((jogador.qtdVitorias * 100) / jogador.jogos) | number : '1.1-1'}}%</span>
+            </span>
+            <span class="badge badge-primary">{{jogador.posicaoVitorias}}º</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="text-muted">Heads-Up:</span>
+            <span>{{jogador.qtdHUs}}
+              <span class="badge badge-secondary badge-pill">Ganha {{((jogador.qtdVitorias * 100) / jogador.qtdHUs) | number : '1.0-0'}}%</span>
+            </span>
+            <span class="badge badge-primary">{{jogador.posicaoHU}}º</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="text-muted">Pontuações:</span>
+            <span>{{jogador.qtdPontuacoes}}
+              <span class="badge badge-secondary badge-pill">{{((jogador.qtdPontuacoes * 100) / jogador.jogos) | number : '1.1-1'}}%</span>
+            </span>
+            <span class="badge badge-primary">{{jogador.posicaoPontuacoes}}º</span>
+          </li>
+          <section *ngFor="let historico of jogador.historicoJogos">
+            <li class="list-group-item d-flex justify-content-between align-items-center" *ngIf="historico.lugar < 0">
+              <span class="text-muted">Rebuys:</span>
+              <span>{{historico.quantidade}}
+                <span class="badge badge-secondary badge-pill">{{((historico.quantidade * 100) / jogador.jogos) | number : '1.1-1'}}%</span>
+              </span>
+              <span> </span>
+            </li>
+          </section>
+        </ul>
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <div class="bs-component">
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="text-muted">Valor Investido:</span>
+            <span>{{jogador.valorInvestido | currency:'R$'}}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="text-muted">Valor Recebido:</span>
+            <span>{{jogador.valorRecebido | currency:'R$'}}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="text-muted">Saldo:</span>
+            <span [ngClass]="{ 'text-danger' : jogador.valorRecebido - jogador.valorInvestido < 0, 'text-success': jogador.valorRecebido - jogador.valorInvestido > 0 }">{{jogador.valorRecebido - jogador.valorInvestido | currency:'R$'}}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="form-group float-right">
+    <a href="#" class="btn btn-secondary">Voltar</a>
+  </div>
+<!--  <h5>
+    <span class="text-muted">Vitórias:</span> <span>{{jogador.qtdVitorias.length}}</span>
   </h5>
   <section *ngFor="let vitoria of jogador.vitorias" style="margin-left: 20px">
     <h5>
@@ -45,6 +108,6 @@
       <span class="text-muted">{{historico.lugar}}ºs lugares:</span> <span>{{historico.quantidade}}</span>
     </h5>
   </section>
-
+-->
 
 </section>

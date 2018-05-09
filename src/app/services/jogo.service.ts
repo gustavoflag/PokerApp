@@ -35,4 +35,8 @@ export class JogoService {
     return this.http.put(`${this.baseUrlService}/jogo/${jogo._id}`, JSON.stringify(jogo), { headers: this.configService.getHeaders() });
   }
 
+  quantidade(): Observable<any>{
+    return this.http.get(`${this.baseUrlService}/quantidadeJogos`);
+  }
+
 }
