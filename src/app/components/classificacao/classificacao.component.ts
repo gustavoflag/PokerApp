@@ -11,12 +11,23 @@ import { ConfigService } from '../../services/config.service';
 export class ClassificacaoComponent implements OnInit {
   jogadores: any = null;
   rookies: boolean = false;
+  ordem: string = null;
 
   constructor(private jogadorService: JogadorService){ }
 
   ngOnInit() {
     this.rookies = false;
     this.listarGeral();
+  }
+
+  ordenar(ordem) {
+    this.ordem = ordem;
+
+    if (!this.rookies){
+      this.jogadorService.classificacaoOrdenada(ordem).subscribe(jogs => this.jogadores = jogs);
+    } else {
+      this.jogadorService.classificacaoRookiesOrdenada(ordem).subscribe(jogs => this.jogadores = jogs);
+    }
   }
 
   listarGeral() {
@@ -37,6 +48,7 @@ export class ClassificacaoComponent implements OnInit {
 
   altRookies(){
     this.rookies = !this.rookies;
+    this.ordem = null;
 
     if (!this.rookies){
       this.listarGeral();

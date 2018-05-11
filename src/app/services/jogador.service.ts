@@ -26,8 +26,16 @@ export class JogadorService {
     return this.http.get(this.baseUrlService + '/classificacao');
   }
 
+  classificacaoOrdenada(ordem){
+    return this.http.get(`${this.baseUrlService}/classificacao/${ordem}`);
+  }
+
   classificacaoRookies(){
     return this.http.get(this.baseUrlService + '/classificacaoRookies');
+  }
+
+  classificacaoRookiesOrdenada(ordem){
+    return this.http.get(`${this.baseUrlService}/classificacaoRookies/${ordem}`);
   }
 
   classificacaoMes(ano, mes){

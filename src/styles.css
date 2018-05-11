@@ -8948,3 +8948,18 @@ a.text-dark:focus, a.text-dark:hover {
 .list-group-item-action .list-group-item-heading {
   color: #fff;
 }
+
+.zeroPadding {
+  padding:0;
+}
+
+.zeroMargin {
+  margin:0;
+}
+
+.linkTH {
+  margin: -5px;
+  padding: 5px;
+  color: #fff;
+  font-weight: bold;
+}

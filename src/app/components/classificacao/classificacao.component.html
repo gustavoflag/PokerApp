@@ -12,22 +12,22 @@
     <thead>
       <th></th>
       <th>Jogador</th>
-      <th>
-        <span class="hidden-sm-down">Pontos</span>
-        <span class="hidden-md-up">Pts</span>
+      <th [ngClass]="{ 'table-active' : ordem == 'P' || !ordem }">
+        <span class="hidden-sm-down"><button type="button" class="btn btn-outline-secondary linkTH" (click)="ordenar('P');">Pontos</button></span>
+        <span class="hidden-md-up"><button type="button" class="btn btn-outline-secondary linkTH" (click)="ordenar('P');">Pts</button></span>
       </th>
       <th>
         <span class="hidden-sm-down">Jogos</span>
         <span class="hidden-md-up">Jg</span>
       </th>
-      <th class="hidden-sm-down">1º</th>
+      <th class="hidden-sm-down" [ngClass]="{ 'table-active' : ordem == 'V'}"><button type="button" class="btn btn-outline-secondary linkTH" (click)="ordenar('V');">1º</button></th>
       <th class="hidden-sm-down">2º</th>
       <th class="hidden-sm-down">3º</th>
       <th class="hidden-sm-down">4º</th>
       <th class="hidden-sm-down">5º</th>
       <th class="hidden-sm-down">6º</th>
       <th class="hidden-sm-down">Rebuy</th>
-      <th class="hidden-sm-down">Pts/Jogo</th>
+      <th class="hidden-sm-down" [ngClass]="{ 'table-active' : ordem == 'PPJ'}"><button type="button" class="btn btn-outline-secondary linkTH" (click)="ordenar('PPJ');">Pts/Jogo</button></th>
       <th class="hidden-sm-down">Valor Investido</th>
       <th class="hidden-sm-down">Valor Recebido</th>
       <th>Saldo</th>
@@ -43,16 +43,16 @@
             <small class="text-muted">{{titulo.ano}}</small>
           </div>
         </td>
-        <td class="text-warning">{{jogador.pontos}}</td>
+        <td class="text-warning" [ngClass]="{ 'table-active' : ordem == 'P' || !ordem }">{{jogador.pontos}}</td>
         <td>{{jogador.jogos}}</td>
-        <td class="hidden-sm-down">{{qtdLugarJogador(jogador, 1)}}</td>
+        <td class="hidden-sm-down" [ngClass]="{ 'table-active' : ordem == 'V'}">{{qtdLugarJogador(jogador, 1)}}</td>
         <td class="hidden-sm-down">{{qtdLugarJogador(jogador, 2)}}</td>
         <td class="hidden-sm-down">{{qtdLugarJogador(jogador, 3)}}</td>
         <td class="hidden-sm-down">{{qtdLugarJogador(jogador, 4)}}</td>
         <td class="hidden-sm-down">{{qtdLugarJogador(jogador, 5)}}</td>
         <td class="hidden-sm-down">{{qtdLugarJogador(jogador, 6)}}</td>
         <td class="hidden-sm-down">{{qtdLugarJogador(jogador, -1)}}</td>
-        <td class="hidden-sm-down">{{(jogador.pontos / jogador.jogos) | number}}</td>
+        <td class="hidden-sm-down" [ngClass]="{ 'table-active' : ordem == 'PPJ'}">{{(jogador.pontos / jogador.jogos) | number}}</td>
         <td class="hidden-sm-down">{{jogador.valorInvestido | currency:'R$'}}</td>
         <td class="hidden-sm-down">{{jogador.valorRecebido | currency:'R$'}}</td>
         <td><span [ngClass]="{ 'text-danger' : jogador.valorRecebido - jogador.valorInvestido < 0, 'text-success': jogador.valorRecebido - jogador.valorInvestido > 0 }">{{jogador.valorRecebido - jogador.valorInvestido | currency:'R$'}}</span></td>
