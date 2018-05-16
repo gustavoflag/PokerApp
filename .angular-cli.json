@@ -19,8 +19,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "bootstrap.css",
-        "styles.css"
+        "bootstrap.css"
       ],
       "scripts": [
         "jquery.min.js",

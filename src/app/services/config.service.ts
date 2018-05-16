@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class ConfigService {
   private urlService:string;
 
-  constructor(){
+  constructor(private http: HttpClient){
       this.urlService = environment.API_URI;
   }
 
@@ -30,5 +31,9 @@ export class ConfigService {
     }
 
     return false;
+  }
+
+  getTheme(): Observable<any> {
+    return this.http.get(this.urlService + '/tema');
   }
 }

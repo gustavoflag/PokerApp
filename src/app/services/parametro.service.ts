@@ -22,5 +22,4 @@ export class ParametroService {
   alterar(parametro): Observable<any>{
     return this.http.put(`${this.baseUrlService}/parametro`, JSON.stringify(parametro), { headers: this.configService.getHeaders() });
   }
-
 }
