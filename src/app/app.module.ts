@@ -10,6 +10,7 @@ import { Pontuacao } from './models/pontuacao';
 import { AppComponent } from './components/app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PontuacaoComponent } from './components/pontuacao/pontuacao.component';
+import { PremiacaoComponent } from './components/premiacao/premiacao.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { JogadorComponent } from './components/jogador/jogador.component';
 import { JogoComponent } from './components/jogo/jogo.component';
@@ -33,7 +34,8 @@ import { DetalheJogadorComponent } from './components/detalhe-jogador/detalhe-jo
     ParametroComponent,
     CaixaComponent,
     ClassificacaoMesComponent,
-    DetalheJogadorComponent
+    DetalheJogadorComponent,
+    PremiacaoComponent
   ],
   imports: [
     BrowserModule,

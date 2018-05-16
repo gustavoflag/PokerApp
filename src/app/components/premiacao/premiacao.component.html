@@ -1,0 +1,47 @@
+<h2>Premiação Final
+<div class="float-right">
+  <button class="btn btn-primary" (click)="novo();" *ngIf="config.usuarioLogado()">Novo</button>
+</div>
+</h2>
+<hr>
+<div *ngIf="mensagem" class="alert alert-dismissible alert-success">{{mensagem}}</div>
+<div *ngIf="erro" class="alert alert-dismissible alert-danger">{{erro}}</div>
+<div class="float-right" *ngIf="!premiacaoEdicao"><h4>Saldo Caixa: <span class="text-warning">{{saldoCaixa | currency:'R$'}}</span></h4></div>
+<section *ngIf="!premiacaoEdicao && premiacoes && premiacoes.length > 0">
+  <table class="table table-hover">
+    <thead>
+      <th>Lugar</th>
+      <th>%</th>
+      <th>Prêmio Atual</th>
+      <th></th>
+      <th></th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let premiacao of premiacoes">
+        <td class="text-success">{{premiacao.lugar}}º</td>
+        <td>{{premiacao.porcentual}} %</td>
+        <td class="text-warning">{{(premiacao.porcentual / 100) * saldoCaixa | currency:'R$'}}</td>
+        <td><button class="btn btn-secondary btn-sm" (click)="editar(premiacao);" *ngIf="config.usuarioLogado()">Editar</button></td>
+        <td><button class="btn btn-danger btn-sm" (click)="excluir(premiacao);" *ngIf="config.usuarioLogado()">Excluir</button></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+<section *ngIf="premiacaoEdicao">
+  <form name="formLogin" (ngSubmit)="f.form.valid && salvar()" #f="ngForm" novalidate>
+    <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !lugar.valid }">
+        <label for="lugar">Lugar</label>
+        <input type="text" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !lugar.valid }" name="lugar" [(ngModel)]="premiacaoEdicao.lugar" #lugar="ngModel" required />
+        <div *ngIf="f.submitted && !lugar.valid" class="invalid-feedback">Lugar é obrigatório</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !porcentual.valid }">
+        <label for="pontos">Porcentual</label>
+        <input type="text" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !porcentual.valid }" name="porcentual" [(ngModel)]="premiacaoEdicao.porcentual" #porcentual="ngModel" required />%
+        <div *ngIf="f.submitted && !porcentual.valid" class="invalid-feedback">Porcentual é obrigatório</div>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-success">Salvar</button>
+        <button (click)="limpaMensagens();listar();" class="btn btn-secondary">Voltar</button>
+    </div>
+  </form>
+</section>

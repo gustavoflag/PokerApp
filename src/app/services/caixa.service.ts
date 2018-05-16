@@ -30,4 +30,8 @@ export class CaixaService {
   excluir(lancamentoCaixa): Observable<any>{
     return this.http.delete(`${this.baseUrlService}/lancamentoCaixa/${lancamentoCaixa._id}`, { headers: this.configService.getHeaders() });
   }
+
+  saldoCaixa(): Observable<any>{
+    return this.http.get(`${this.baseUrlService}/saldoCaixa`, { headers: this.configService.getHeaders() });
+  }
 }
