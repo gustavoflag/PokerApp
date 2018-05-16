@@ -11,15 +11,15 @@
     <thead>
       <th>Lugar</th>
       <th>Pontos</th>
-      <th></th>
-      <th></th>
+      <th *ngIf="config.usuarioLogado()"></th>
+      <th *ngIf="config.usuarioLogado()"></th>
     </thead>
     <tbody>
       <tr *ngFor="let pontuacao of pontuacoes">
         <td>{{pontuacao.lugar}}º</td>
         <td>{{pontuacao.pontos}} pontos</td>
-        <td><button class="btn btn-secondary btn-sm" (click)="editar(pontuacao);" *ngIf="config.usuarioLogado()">Editar</button></td>
-        <td><button class="btn btn-danger btn-sm" (click)="excluir(pontuacao);" *ngIf="config.usuarioLogado()">Excluir</button></td>
+        <td *ngIf="config.usuarioLogado()"><button class="btn btn-secondary btn-sm" (click)="editar(pontuacao);">Editar</button></td>
+        <td *ngIf="config.usuarioLogado()"><button class="btn btn-danger btn-sm" (click)="excluir(pontuacao);">Excluir</button></td>
       </tr>
     </tbody>
   </table>

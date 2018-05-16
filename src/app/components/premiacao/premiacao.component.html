@@ -13,16 +13,16 @@
       <th>Lugar</th>
       <th>%</th>
       <th>Prêmio Atual</th>
-      <th></th>
-      <th></th>
+      <th *ngIf="config.usuarioLogado()"></th>
+      <th *ngIf="config.usuarioLogado()"></th>
     </thead>
     <tbody>
       <tr *ngFor="let premiacao of premiacoes">
         <td class="text-success">{{premiacao.lugar}}º</td>
         <td>{{premiacao.porcentual}} %</td>
         <td class="text-warning">{{(premiacao.porcentual / 100) * saldoCaixa | currency:'R$'}}</td>
-        <td><button class="btn btn-secondary btn-sm" (click)="editar(premiacao);" *ngIf="config.usuarioLogado()">Editar</button></td>
-        <td><button class="btn btn-danger btn-sm" (click)="excluir(premiacao);" *ngIf="config.usuarioLogado()">Excluir</button></td>
+        <td *ngIf="config.usuarioLogado()"><button class="btn btn-secondary btn-sm" (click)="editar(premiacao);">Editar</button></td>
+        <td *ngIf="config.usuarioLogado()"><button class="btn btn-danger btn-sm" (click)="excluir(premiacao);">Excluir</button></td>
       </tr>
     </tbody>
   </table>
