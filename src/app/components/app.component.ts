@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { ConfigService } from '../services/config.service';
 import { Router } from '@angular/router';
+declare const require: any;
 
 @Component({
   selector: 'app-root',
