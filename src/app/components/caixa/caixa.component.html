@@ -1,7 +1,7 @@
 <h2>Caixa
-<div class="float-right">
-  <button class="btn btn-primary" (click)="novo();" *ngIf="config.usuarioLogado()">Novo Lançamento</button>
-</div>
+  <div class="float-right">
+    <button class="btn btn-primary" (click)="novo();" *ngIf="config.usuarioLogado()">Novo Lançamento</button>
+  </div>
 </h2>
 <hr>
 <div *ngIf="mensagem" class="alert alert-dismissible alert-success">{{mensagem}}</div>
