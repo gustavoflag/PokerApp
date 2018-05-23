@@ -26,17 +26,20 @@
             <span class="hidden-sm-down">Pontos</span>
             <span class="hidden-md-up">Pts</span>
           </th>
-          <!--<th class="hidden-sm-down">Gasto</th>
-          <th class="hidden-sm-down">Recebido</th>-->
-          <th>Prêmio</th>
+          <th class="hidden-sm-down">Investido</th>
+          <th class="hidden-sm-down">Recebido</th>
+          <th>
+            <span class="hidden-sm-down">Prêmio Liquido</span>
+            <span class="hidden-md-up">Pr. Líquido</span>
+          </th>
         </thead>
         <tbody>
           <tr *ngFor="let participante of jogo.participantes">
             <td>{{ participante.lugar }}º</td>
             <td>{{ participante.nomeJogador }}&nbsp;<span *ngIf="participante.rebuy > 0" class="badge badge-danger">{{ participante.rebuy > 1 ? participante.rebuy + " " : "" }}Rebuy</span></td>
             <td>{{ participante.pontos }}</td>
-            <!--<td class="hidden-sm-down">{{ participante.valorInvestido | currency:'R$' }}</td>
-            <td class="hidden-sm-down">{{ participante.valorRecebido | currency:'R$' }}</td>-->
+            <td class="hidden-sm-down">{{ participante.valorInvestido | currency:'R$' }}</td>
+            <td class="hidden-sm-down">{{ participante.valorRecebido | currency:'R$' }}</td>
             <td>{{ participante.valorRecebido - participante.valorInvestido | currency:'R$' }}</td>
           </tr>
         </tbody>
