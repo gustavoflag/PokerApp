@@ -1,0 +1,56 @@
+<section>
+  <form name="formLogin" (ngSubmit)="salvar();" #f="ngForm" novalidate>
+    <div class="row">
+      <div class="col-lg-3">
+        <label class="col-form-label col-form-label-lg" for="inputLarge" >Data</label>
+        <input class="form-control form-control-lg" type="date" placeholder="" id="inputLarge" name="data" [(ngModel)]="preJogo.data" #data="ngModel" />
+      </div>
+    </div>
+    <div class="row" style="margin-top:10px">
+       <div class="col-lg-3">
+         <div class="card border-light mb-3">
+           <div class="card-header">
+             Todos Jogadores
+           </div>
+           <div class="card-body">
+             <ul class="list-group">
+               <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let jogador of jogadores">
+                 {{jogador.nome}}
+                 <div class="float-right">
+                   <button type='button' class="btn btn-outline-success btn-sm" (click)="adicionar(jogador);" title="Adicionar">>></button>
+                 </div>
+               </li>
+             </ul>
+           </div>
+         </div>
+       </div>
+       <div class="col-lg-4">
+         <div class="card border-light mb-3">
+           <div class="card-header">
+             Jogadores no Jogo
+             <div class="float-right">
+                <button type='button' class="btn btn-outline-danger btn-sm" (click)="removerTodos();" title="Remover todos"><<<</button>
+             </div>
+           </div>
+           <div class="card-body">
+             <ul class="list-group">
+               <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let participante of jogadoresNoJogo; let i = index">
+                 {{ participante.lugar }}º - {{ participante.nomeJogador }}
+                 <div class="float-right">
+                   <button type='button' class="btn btn-sm" (click)="rebuy(participante);" [ngClass]="{ 'btn-outline-secondary' : participante.rebuy === 0, 'btn-secondary': participante.rebuy > 0 }">{{ participante.rebuy > 1 ? participante.rebuy + " " : "" }}Rebuy</button>
+                   <button type='button' class="btn btn-sm" (click)="maisRebuy(participante);" [ngClass]="{ 'btn-outline-secondary' : participante.rebuy === 0, 'btn-secondary': participante.rebuy > 0 }">+</button>
+                   <button type='button' class="btn btn-outline-warning btn-sm" (click)="subir(i);" *ngIf="i !== 0" title="Subir">^</button>
+                   <button type='button' class="btn btn-outline-danger btn-sm" (click)="remover(i);" title="Remover"><<</button>
+                 </div>
+               </li>
+             </ul>
+           </div>
+         </div>
+       </div>
+    </div>
+    <div class="form-group">
+      <button type='submit' name="btnSubmit" class="btn btn-success" (click)="salvar();">Salvar</button>
+      <button (click)="limpaMensagens();listar();" type='button' class="btn btn-secondary">Voltar</button>
+    </div>
+  </form>
+</section>

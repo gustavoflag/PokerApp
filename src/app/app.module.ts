@@ -22,6 +22,7 @@ import { ParametroComponent } from './components/parametro/parametro.component';
 import { CaixaComponent } from './components/caixa/caixa.component';
 import { ClassificacaoMesComponent } from './components/classificacao-mes/classificacao-mes.component';
 import { DetalheJogadorComponent } from './components/detalhe-jogador/detalhe-jogador.component';
+import { PreJogoComponent } from './components/pre-jogo/pre-jogo.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { DetalheJogadorComponent } from './components/detalhe-jogador/detalhe-jo
     CaixaComponent,
     ClassificacaoMesComponent,
     DetalheJogadorComponent,
-    PremiacaoComponent
+    PremiacaoComponent,
+    PreJogoComponent
   ],
   imports: [
     BrowserModule,

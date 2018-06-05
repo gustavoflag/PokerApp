@@ -9,6 +9,7 @@ import { ClassificacaoComponent } from './components/classificacao/classificacao
 import { ClassificacaoMesComponent } from './components/classificacao-mes/classificacao-mes.component';
 import { CaixaComponent } from './components/caixa/caixa.component';
 import { ParametroComponent } from './components/parametro/parametro.component';
+import { PreJogoComponent } from './components/pre-jogo/pre-jogo.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const appRoutes: Routes = [
@@ -20,6 +21,7 @@ const appRoutes: Routes = [
     { path: 'caixa', component: CaixaComponent },
     { path: 'pontuacao', component: PontuacaoComponent },
     { path: 'premiacao', component: PremiacaoComponent },
+    { path: 'preJogo', component: PreJogoComponent },
     { path: 'parametro', component: ParametroComponent, canActivate: [AuthGuard] },
     { path: '', component: ClassificacaoComponent },
     { path: 'classificacaoMes', component: ClassificacaoMesComponent },
