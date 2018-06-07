@@ -19,7 +19,7 @@
                <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let jogador of jogadores">
                  {{jogador.nome}}
                  <div class="float-right">
-                   <button type='button' class="btn btn-outline-success btn-sm" (click)="adicionar(jogador);" title="Adicionar">>></button>
+                   <button type='button' *ngIf="logado" class="btn btn-outline-success btn-sm" (click)="adicionar(jogador);" title="Adicionar">>></button>
                  </div>
                </li>
              </ul>
@@ -31,7 +31,7 @@
            <div class="card-header">
              No Jogo
              <div class="float-right">
-                <button type='button' *ngIf="!preJogo" class="btn btn-outline-danger btn-sm" (click)="removerTodos();" title="Remover todos"><<<</button>
+                <button type='button' *ngIf="logado && !preJogo" class="btn btn-outline-danger btn-sm" (click)="removerTodos();" title="Remover todos"><<<</button>
              </div>
            </div>
            <div class="card-body">
