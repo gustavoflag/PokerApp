@@ -21,7 +21,7 @@ const appRoutes: Routes = [
     { path: 'caixa', component: CaixaComponent },
     { path: 'pontuacao', component: PontuacaoComponent },
     { path: 'premiacao', component: PremiacaoComponent },
-    { path: 'preJogo', component: PreJogoComponent },
+    { path: 'prejogo', component: PreJogoComponent },
     { path: 'parametro', component: ParametroComponent, canActivate: [AuthGuard] },
     { path: '', component: ClassificacaoComponent },
     { path: 'classificacaoMes', component: ClassificacaoMesComponent },

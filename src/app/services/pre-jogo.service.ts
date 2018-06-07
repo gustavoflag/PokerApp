@@ -14,7 +14,7 @@ export class PreJogoService {
 
   }
 
-  consultar(){
+  consultar() : Observable<any>{
     return this.http.get(`${this.baseUrlService}/preJogo`);
   }
 
@@ -27,12 +27,14 @@ export class PreJogoService {
   }
 
   sortear(): Observable<any>{
-    return this.http.post(`${this.baseUrlService}/sortear`, null, { headers: this.configService.getHeaders() });
+    return this.http.post(`${this.baseUrlService}/preJogo/sortear`, null, { headers: this.configService.getHeaders() });
   }
 
   gerarJogo(): Observable<any>{
-    return this.http.post(`${this.baseUrlService}/gerarJogo`, null, { headers: this.configService.getHeaders() });
+    return this.http.post(`${this.baseUrlService}/preJogo/gerarJogo`, null, { headers: this.configService.getHeaders() });
   }
 
-
+  cancelar(): Observable<any>{
+    return this.http.delete(`${this.baseUrlService}/preJogo`, { headers: this.configService.getHeaders() });
+  }
 }

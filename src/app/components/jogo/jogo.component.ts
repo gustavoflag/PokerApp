@@ -23,6 +23,7 @@ export class JogoComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute
              ,private jogoService: JogoService
              ,private jogadorService: JogadorService
+             ,private router: Router
              ,public config:ConfigService) { }
 
   ngOnInit() {
@@ -62,6 +63,7 @@ export class JogoComponent implements OnInit {
     this.limpaMensagens();
     this.jogoEdicao = { };
     this.listarJogadores();
+    //this.router.navigate(['/prejogo']);
   }
 
   excluir(jogo){

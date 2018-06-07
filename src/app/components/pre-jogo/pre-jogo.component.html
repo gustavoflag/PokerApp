@@ -1,13 +1,15 @@
+<div *ngIf="mensagem" class="alert alert-dismissible alert-success">{{mensagem}}</div>
+<div *ngIf="erro" class="alert alert-dismissible alert-danger">{{erro}}</div>
 <section>
-  <form name="formLogin" (ngSubmit)="salvar();" #f="ngForm" novalidate>
+
     <div class="row">
       <div class="col-lg-3">
-        <label class="col-form-label col-form-label-lg" for="inputLarge" >Data</label>
-        <input class="form-control form-control-lg" type="date" placeholder="" id="inputLarge" name="data" [(ngModel)]="preJogo.data" #data="ngModel" />
+        <label class="col-form-label col-form-label-lg" for="inputLarge" >Jogadores Restantes</label>
+        <h2>{{ jogadoresRestantes() }}</h2>
       </div>
     </div>
     <div class="row" style="margin-top:10px">
-       <div class="col-lg-3">
+       <div class="col-lg-3" *ngIf="!preJogo">
          <div class="card border-light mb-3">
            <div class="card-header">
              Todos Jogadores
@@ -27,30 +29,34 @@
        <div class="col-lg-4">
          <div class="card border-light mb-3">
            <div class="card-header">
-             Jogadores no Jogo
+             No Jogo
              <div class="float-right">
-                <button type='button' class="btn btn-outline-danger btn-sm" (click)="removerTodos();" title="Remover todos"><<<</button>
+                <button type='button' *ngIf="!preJogo" class="btn btn-outline-danger btn-sm" (click)="removerTodos();" title="Remover todos"><<<</button>
              </div>
            </div>
            <div class="card-body">
              <ul class="list-group">
-               <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let participante of jogadoresNoJogo; let i = index">
-                 {{ participante.lugar }}º - {{ participante.nomeJogador }}
+               <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let participante of participantes; let i = index">
+                 <span *ngIf="!participante.lugarNaMesa && !participante.eliminado">{{ participante.nomeJogador }}</span>
+                 <span *ngIf="participante.lugarNaMesa && !participante.eliminado">{{ participante.lugarNaMesa }} - {{ participante.nomeJogador }}</span>
+                 <span *ngIf="participante.lugar && participante.eliminado" class="text-muted">{{ participante.lugar }}º - {{ participante.nomeJogador }}</span>
+                 <span *ngIf="!logado && participante.rebuy > 0" class="badge badge-danger">{{ participante.rebuy > 1 ? participante.rebuy + " " : "" }}Rebuy</span>
                  <div class="float-right">
-                   <button type='button' class="btn btn-sm" (click)="rebuy(participante);" [ngClass]="{ 'btn-outline-secondary' : participante.rebuy === 0, 'btn-secondary': participante.rebuy > 0 }">{{ participante.rebuy > 1 ? participante.rebuy + " " : "" }}Rebuy</button>
-                   <button type='button' class="btn btn-sm" (click)="maisRebuy(participante);" [ngClass]="{ 'btn-outline-secondary' : participante.rebuy === 0, 'btn-secondary': participante.rebuy > 0 }">+</button>
-                   <button type='button' class="btn btn-outline-warning btn-sm" (click)="subir(i);" *ngIf="i !== 0" title="Subir">^</button>
-                   <button type='button' class="btn btn-outline-danger btn-sm" (click)="remover(i);" title="Remover"><<</button>
+                   <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" (click)="rebuy(participante);" [ngClass]="{ 'btn-outline-secondary' : participante.rebuy === 0, 'btn-secondary': participante.rebuy > 0 }">{{ participante.rebuy > 1 ? participante.rebuy + " " : "" }}Rebuy</button>
+                   <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" (click)="maisRebuy(participante);" [ngClass]="{ 'btn-outline-secondary' : participante.rebuy === 0, 'btn-secondary': participante.rebuy > 0 }">+</button>
+                   <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" [ngClass]="{ 'btn-outline-danger': !participante.eliminado, 'btn-outline-success': participante.eliminado }" (click)="eliminar(participante);" title="Eliminar">X</button>
+                   <button type='button' *ngIf="logado && !preJogo" class="btn btn-outline-danger btn-sm" (click)="remover(i);" title="Remover"><<</button>
                  </div>
                </li>
              </ul>
            </div>
          </div>
        </div>
+       <div class="col-lg-5">
+         <button (click)="salvar();" *ngIf="logado && !preJogo" type='button' class="btn btn-info">Salvar</button>
+         <button (click)="sortear();" *ngIf="logado && preJogo && temRedraw()" type='button' class="btn btn-info">Sortear Lugares</button>
+         <button (click)="cancelar();" *ngIf="logado && preJogo" type='button' class="btn btn-danger">Cancelar</button>
+         <button (click)="finalizar();" *ngIf="logado && preJogo && (jogadoresRestantes() === 0)" type='button' class="btn btn-success">Finalizar Jogo</button>
+       </div>
     </div>
-    <div class="form-group">
-      <button type='submit' name="btnSubmit" class="btn btn-success" (click)="salvar();">Salvar</button>
-      <button (click)="limpaMensagens();listar();" type='button' class="btn btn-secondary">Voltar</button>
-    </div>
-  </form>
 </section>

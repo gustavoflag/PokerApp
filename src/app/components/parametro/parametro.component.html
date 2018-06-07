@@ -17,6 +17,10 @@
         <label for="participantesPremiacaoTerceiro">Qtd jogadores premiação 3º</label>
         <input type="text" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !participantesPremiacaoTerceiro.valid }" name="participantesPremiacaoTerceiro" [(ngModel)]="parametro.participantesPremiacaoTerceiro" #participantesPremiacaoTerceiro="ngModel" required />
     </div>
+    <div class="form-group col-lg-2" [ngClass]="{ 'has-danger': f.submitted && !jogadoresRedraw.valid }">
+        <label for="jogadoresRedraw">Qtd jogadores redraw</label>
+        <input type="text" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !jogadoresRedraw.valid }" name="jogadoresRedraw" [(ngModel)]="parametro.jogadoresRedraw" #jogadoresRedraw="ngModel" required />
+    </div>
   </div>
   <div class="form-group">
       <button class="btn btn-success">Salvar</button>
