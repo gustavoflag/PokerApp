@@ -173,13 +173,15 @@ export class PreJogoComponent implements OnInit {
       this.jogadoresNoJogo.splice(index, 1);
       this.participantes.splice(index, 1);
     } else {
-      this.preJogoService.excluirJogador(this.participantes[index])
-        .subscribe((preJogoSalvo) => {
-                      this.consultar();
-                   },
-                   (err) => {
-                      this.mostraErro(err);
-                   });
+      if (confirm('Deseja realmente excluir o jogador?')){
+        this.preJogoService.excluirJogador(this.participantes[index])
+          .subscribe((preJogoSalvo) => {
+                        this.consultar();
+                     },
+                     (err) => {
+                        this.mostraErro(err);
+                     });
+      }
     }
   }
 
