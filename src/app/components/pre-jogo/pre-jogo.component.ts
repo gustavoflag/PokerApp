@@ -168,9 +168,19 @@ export class PreJogoComponent implements OnInit {
   }
 
   remover(index){
-    this.jogadores.push(this.jogadoresNoJogo[index]);
-    this.jogadoresNoJogo.splice(index, 1);
-    this.participantes.splice(index, 1);
+    if (!this.preJogo){
+      this.jogadores.push(this.jogadoresNoJogo[index]);
+      this.jogadoresNoJogo.splice(index, 1);
+      this.participantes.splice(index, 1);
+    } else {
+      this.preJogoService.excluirJogador(this.participantes[index])
+        .subscribe((preJogoSalvo) => {
+                      this.consultar();
+                   },
+                   (err) => {
+                      this.mostraErro(err);
+                   });
+    }
   }
 
   removerTodos(){

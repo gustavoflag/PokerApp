@@ -37,4 +37,8 @@ export class PreJogoService {
   cancelar(): Observable<any>{
     return this.http.delete(`${this.baseUrlService}/preJogo`, { headers: this.configService.getHeaders() });
   }
+
+  excluirJogador(jogador): Observable<any>{
+    return this.http.post(`${this.baseUrlService}/preJogo/excluirJogador`, JSON.stringify(jogador), { headers: this.configService.getHeaders() });
+  }
 }
