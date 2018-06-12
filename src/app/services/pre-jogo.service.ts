@@ -41,4 +41,8 @@ export class PreJogoService {
   excluirJogador(jogador): Observable<any>{
     return this.http.post(`${this.baseUrlService}/preJogo/excluirJogador`, JSON.stringify(jogador), { headers: this.configService.getHeaders() });
   }
+
+  adicionarJogador(jogador): Observable<any>{
+    return this.http.post(`${this.baseUrlService}/preJogo/adicionarJogador`, JSON.stringify(jogador), { headers: this.configService.getHeaders() });
+  }
 }

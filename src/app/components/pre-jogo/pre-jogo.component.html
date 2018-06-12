@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="row" style="margin-top:10px">
-       <div class="col-lg-3" *ngIf="!preJogo">
+       <div class="col-lg-3" *ngIf="!preJogo || lateRegister">
          <div class="card border-light mb-3">
            <div class="card-header">
              Todos Jogadores
@@ -26,19 +26,20 @@
            </div>
          </div>
        </div>
-       <div class="col-lg-4">
-         <div class="card border-light mb-3">
+
+       <div class="col-lg-5">
+         <div class="card border-light mb-3" *ngFor="let m of mesas; let indMesa = index">
            <div class="card-header">
-             No Jogo
+             Mesa {{indMesa + 1}}
              <div class="float-right">
                 <button type='button' *ngIf="logado && !preJogo" class="btn btn-outline-danger btn-sm" (click)="removerTodos();" title="Remover todos"><<<</button>
              </div>
            </div>
            <div class="card-body">
              <ul class="list-group">
-               <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let participante of participantes; let i = index">
+               <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let participante of getMesa(indMesa + 1); let i = index">
                  <span *ngIf="!participante.lugarNaMesa && !participante.eliminado">{{ participante.nomeJogador }}</span>
-                 <span *ngIf="participante.lugarNaMesa && !participante.eliminado">{{ participante.lugarNaMesa }} - {{ participante.nomeJogador }}</span>
+                 <span *ngIf="participante.lugarNaMesa && !participante.eliminado">P{{ participante.lugarNaMesa }} <span *ngIf="i == 0" class="badge badge-warning badge-sm">D</span> - {{ participante.nomeJogador }}</span>
                  <span *ngIf="participante.lugar && participante.eliminado" class="text-muted">{{ participante.lugar }}º - {{ participante.nomeJogador }}</span>
                  <span *ngIf="!logado && participante.rebuy > 0" class="badge badge-danger">{{ participante.rebuy > 1 ? participante.rebuy + " " : "" }}Rebuy</span>
                  <div class="float-right">
@@ -53,6 +54,7 @@
          </div>
        </div>
        <div class="col-lg-5">
+         <button (click)="lateRegister = true" type='button' *ngIf="preJogo && !lateRegister" class="btn btn-info">Late Register</button>
          <button (click)="salvar();" *ngIf="logado && !preJogo" type='button' class="btn btn-info">Salvar</button>
          <button (click)="sortear();" *ngIf="logado && preJogo && temRedraw()" type='button' class="btn btn-info">Sortear Lugares</button>
          <button (click)="cancelar();" *ngIf="logado && preJogo" type='button' class="btn btn-danger">Cancelar</button>

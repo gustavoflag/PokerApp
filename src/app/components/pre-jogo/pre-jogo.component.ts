@@ -20,6 +20,8 @@ export class PreJogoComponent implements OnInit {
   erro: string = null;
   parametro: any = null;
   logado: boolean;
+  mesas: any = [-1];
+  lateRegister: boolean = false;
 
   constructor(private preJogoService: PreJogoService
              ,private jogadorService: JogadorService
@@ -51,10 +53,11 @@ export class PreJogoComponent implements OnInit {
 
   temRedraw() : boolean{
     var qtdRestantes = this.jogadoresRestantes();
+    var qtdEliminados = this.participantes.filter((par) => par.eliminado).length;
 
     if (this.parametro.jogadoresRedraw
-        && (this.participantes.filter((par) => par.eliminado).length === 0
-            || this.parametro.jogadoresRedraw === qtdRestantes)){
+        && (!this.preJogo.sorteado
+            || (qtdEliminados > 0 && this.parametro.jogadoresRedraw === qtdRestantes))){
             return true;
     }
 
@@ -66,6 +69,7 @@ export class PreJogoComponent implements OnInit {
         .subscribe((preJogo) => {
             this.preJogo = preJogo;
             this.participantes = preJogo.participantes;
+            this.mesas = new Array(preJogo.qtdMesas);
           });
   }
 
@@ -159,12 +163,24 @@ export class PreJogoComponent implements OnInit {
   }
 
   adicionar(jogador){
-    this.jogadoresNoJogo.push(jogador);
+    if (this.lateRegister){
+      this.preJogoService.adicionarJogador({ nomeJogador: jogador.nome, rebuy: 0, eliminado: false })
+        .subscribe((preJogoSalvo) => {
+                      this.lateRegister = false;
+                      this.mostraSucesso(preJogoSalvo.message);
+                      this.consultar();
+                   },
+                   (err) => {
+                      this.mostraErro(err);
+                   });
+    } else {
+      this.jogadoresNoJogo.push(jogador);
 
-    var indexRemove = this.jogadores.indexOf(jogador);
-    this.jogadores.splice(indexRemove, 1);
+      var indexRemove = this.jogadores.indexOf(jogador);
+      this.jogadores.splice(indexRemove, 1);
 
-    this.participantes.push({ nomeJogador: jogador.nome, rebuy: 0, eliminado: false });
+      this.participantes.push({ nomeJogador: jogador.nome, rebuy: 0, eliminado: false });
+    }
   }
 
   remover(index){
@@ -183,6 +199,10 @@ export class PreJogoComponent implements OnInit {
                      });
       }
     }
+  }
+
+  getMesa(indMesa){
+    return this.participantes.filter((p) => p.mesa === indMesa || !p.mesa);
   }
 
   removerTodos(){
