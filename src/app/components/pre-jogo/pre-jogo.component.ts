@@ -96,7 +96,9 @@ export class PreJogoComponent implements OnInit {
       this.preJogoService.cancelar()
         .subscribe((preJogoSalvo) => {
                       this.mostraSucesso("Pré Jogo cancelado!");
-                      this.consultar();
+                      this.preJogo = null;
+                      this.mesas = [-1];
+                      this.removerTodos();
                    },
                    (err) => {
                       this.mostraErro(err);
