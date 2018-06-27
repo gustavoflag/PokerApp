@@ -158,6 +158,12 @@ export class PreJogoComponent implements OnInit {
     this.alterar(jogador);
   }
 
+  pago(jogador){
+    jogador.pago = !jogador.pago;
+
+    this.alterar(jogador);
+  }
+
   maisRebuy(jogador){
     jogador.rebuy++;
 
