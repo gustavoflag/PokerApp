@@ -48,7 +48,7 @@
                    <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" (click)="rebuy(participante);" [ngClass]="{ 'btn-outline-secondary' : participante.rebuy === 0, 'btn-secondary': participante.rebuy > 0 }">{{ participante.rebuy > 1 ? participante.rebuy + " " : "" }}Rebuy</button>
                    <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" (click)="maisRebuy(participante);" [ngClass]="{ 'btn-outline-secondary' : participante.rebuy === 0, 'btn-secondary': participante.rebuy > 0 }">+</button>
                    <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" [ngClass]="{ 'btn-outline-danger': !participante.eliminado, 'btn-outline-success': participante.eliminado }" (click)="eliminar(participante);" title="Eliminar">X</button>
-                   <button type='button' *ngIf="logado" class="btn btn-outline-danger btn-sm" (click)="remover(i);" title="Remover"><<</button>
+                   <button type='button' *ngIf="logado" class="btn btn-outline-danger btn-sm" (click)="remover(participante);" title="Remover"><<</button>
                  </div>
                </li>
              </ul>
