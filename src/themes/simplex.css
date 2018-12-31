@@ -10518,3 +10518,10 @@
  .pagination .page-link:hover {
    text-decoration: none;
  }
+
+.linkTH {
+  color: #333;
+  font-weight: bold;
+  text-transform: capitalize;
+  padding: 3px !important;
+}
