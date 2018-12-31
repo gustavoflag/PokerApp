@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
+import { env } from 'process';
 
 @Injectable()
 export class ConfigService {
   private urlService:string;
 
   constructor(private http: HttpClient){
-      this.urlService = environment.API_URI;
+      this.urlService = env.API_URI;
   }
 
   getUrlService(): string {
