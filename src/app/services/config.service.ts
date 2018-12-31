@@ -9,7 +9,7 @@ export class ConfigService {
   private urlService:string;
 
   constructor(private http: HttpClient){
-      this.urlService = env.API_URI;
+      this.urlService = environment.API_URI;
   }
 
   getUrlService(): string {
