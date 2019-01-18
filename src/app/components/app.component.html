@@ -6,7 +6,7 @@
     </button>
   </div>
   <div class="navbar-collapse" [ngClass]="{ 'collapse' : !navAberta }">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav mr-auto" (click)="navAberta = false">
       <li class="nav-item">
         <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/']">Classificação</a>
       </li>
