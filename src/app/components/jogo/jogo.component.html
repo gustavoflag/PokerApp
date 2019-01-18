@@ -9,7 +9,7 @@
 <section *ngIf="!jogoEdicao && jogos && jogos.length > 0">
   <div *ngFor="let jogo of jogos" class="card border-light mb-3">
     <div class="card-header">
-      {{ jogo.data | date: 'dd/MM/yyyy' }}
+      <span class="badge badge-success badge-numero">#{{ jogo.numero }}</span>&nbsp;&nbsp;{{ jogo.data | date: 'dd/MM/yyyy' }}
       -
       Valor Maleta: {{ jogo.valorMaleta | currency:'R$' }}
       <div class="float-right">
