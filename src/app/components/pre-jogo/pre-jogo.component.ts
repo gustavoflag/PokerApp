@@ -253,10 +253,12 @@ export class PreJogoComponent implements OnInit {
     } else if (err.error.errmsg){
       this.erro = `Erro: ${err.error.errmsg}`;
     }
+    this.isLoading = false;
   }
 
   mostraSucesso(mensagem){
     this.mensagem = mensagem;
+    this.isLoading = false;
   }
 
 }
