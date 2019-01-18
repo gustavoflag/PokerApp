@@ -22,6 +22,7 @@ export class PreJogoComponent implements OnInit {
   logado: boolean;
   mesas: any = [-1];
   lateRegister: boolean = false;
+  isLoading: boolean = false;
 
   constructor(private preJogoService: PreJogoService
              ,private jogadorService: JogadorService
@@ -70,6 +71,7 @@ export class PreJogoComponent implements OnInit {
             this.preJogo = preJogo;
             this.participantes = preJogo.participantes;
             this.mesas = new Array(preJogo.qtdMesas);
+            this.isLoading = false;
           });
   }
 
@@ -80,6 +82,7 @@ export class PreJogoComponent implements OnInit {
 
   salvar(){
     var dataAgora = new Date();
+    this.isLoading = true;
 
     this.preJogoService.inserir({ data: dataAgora, participantes: this.participantes })
       .subscribe((preJogoSalvo) => {
@@ -93,12 +96,15 @@ export class PreJogoComponent implements OnInit {
 
   cancelar(){
     if (confirm('Deseja mesmo cancelar?')){
+      this.isLoading = true;
+
       this.preJogoService.cancelar()
         .subscribe((preJogoSalvo) => {
                       this.mostraSucesso("Pré Jogo cancelado!");
                       this.preJogo = null;
                       this.mesas = [-1];
                       this.removerTodos();
+                      this.isLoading = false;
                    },
                    (err) => {
                       this.mostraErro(err);
@@ -108,6 +114,7 @@ export class PreJogoComponent implements OnInit {
 
   sortear(){
     if (confirm('Deseja realizar o sorteio?')){
+      this.isLoading = true;
       this.preJogoService.sortear()
         .subscribe((preJogoSalvo) => {
                       this.mostraSucesso("Sorteio realizado!");
@@ -121,6 +128,7 @@ export class PreJogoComponent implements OnInit {
 
   finalizar(){
     if (confirm('Deseja finalizar o jogo?')){
+      this.isLoading = true;
       this.preJogoService.gerarJogo()
         .subscribe((preJogoSalvo) => {
                       this.router.navigate(['/jogo']);
@@ -132,6 +140,7 @@ export class PreJogoComponent implements OnInit {
   }
 
   alterar(jogador){
+    this.isLoading = true;
     this.preJogoService.alterar(jogador)
       .subscribe((preJogoSalvo) => {
                     this.consultar();
@@ -172,6 +181,7 @@ export class PreJogoComponent implements OnInit {
 
   adicionar(jogador){
     if (this.lateRegister){
+      this.isLoading = true;
       this.preJogoService.adicionarJogador({ nomeJogador: jogador.nome, rebuy: 0, eliminado: false })
         .subscribe((preJogoSalvo) => {
                       this.lateRegister = false;
@@ -200,6 +210,7 @@ export class PreJogoComponent implements OnInit {
       this.participantes.splice(index, 1);
     } else {
       if (confirm('Deseja realmente excluir o jogador?')){
+        this.isLoading = true;
         this.preJogoService.excluirJogador(jogador)
           .subscribe((preJogoSalvo) => {
                         this.consultar();
