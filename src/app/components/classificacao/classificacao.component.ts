@@ -12,6 +12,7 @@ export class ClassificacaoComponent implements OnInit {
   jogadores: any = null;
   rookies: boolean = false;
   ordem: string = null;
+  isLoading: boolean = false;
 
   constructor(private jogadorService: JogadorService){ }
 
@@ -22,20 +23,23 @@ export class ClassificacaoComponent implements OnInit {
 
   ordenar(ordem) {
     this.ordem = ordem;
+    this.isLoading = true;
 
     if (!this.rookies){
-      this.jogadorService.classificacaoOrdenada(ordem).subscribe(jogs => this.jogadores = jogs);
+      this.jogadorService.classificacaoOrdenada(ordem).subscribe(jogs => { this.jogadores = jogs; this.isLoading = false; });
     } else {
-      this.jogadorService.classificacaoRookiesOrdenada(ordem).subscribe(jogs => this.jogadores = jogs);
+      this.jogadorService.classificacaoRookiesOrdenada(ordem).subscribe(jogs => { this.jogadores = jogs; this.isLoading = false; });
     }
   }
 
   listarGeral() {
-    this.jogadorService.classificacao().subscribe(jogs => this.jogadores = jogs);
+    this.isLoading = true;
+    this.jogadorService.classificacao().subscribe(jogs => { this.jogadores = jogs; this.isLoading = false; });
   }
 
   listarRookies() {
-    this.jogadorService.classificacaoRookies().subscribe(jogs => this.jogadores = jogs);
+    this.isLoading = true;
+    this.jogadorService.classificacaoRookies().subscribe(jogs => { this.jogadores = jogs; this.isLoading = false; });
   }
 
   qtdLugarJogador(jogador, lugar): Number{

@@ -39,8 +39,9 @@ export class PreJogoComponent implements OnInit {
   }
 
   listarJogadores(){
+    this.isLoading = true;
     this.jogadorService.lista()
-        .subscribe((jogs) => this.jogadores = jogs);
+        .subscribe((jogs) => { this.jogadores = jogs; this.isLoading = false; });
   }
 
   consultarParametro(){
