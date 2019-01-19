@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { JogoService } from '../../services/jogo.service';
 import { ConfigService } from '../../services/config.service';
 import { JogadorService } from '../../services/jogador.service';
+import { Globals } from '../../app.globals';
 
 @Component({
   selector: 'app-jogo',
@@ -24,7 +25,8 @@ export class JogoComponent implements OnInit {
              ,private jogoService: JogoService
              ,private jogadorService: JogadorService
              ,private router: Router
-             ,public config:ConfigService) { }
+             ,public config:ConfigService
+             ,public globals: Globals) { }
 
   ngOnInit() {
     let idJogo = null;
@@ -41,22 +43,25 @@ export class JogoComponent implements OnInit {
   }
 
   listar(){
+    this.globals.isLoading = true;
     this.limpaMensagens();
     this.jogoEdicao = null;
     this.jogoService.listar()
-        .subscribe(jogs => { this.loading = false; this.jogos = jogs });
+        .subscribe(jogs => { this.loading = false; this.jogos = jogs; this.globals.isLoading = false; });
   }
 
   consultar(idJogo){
+    this.globals.isLoading = true;
     this.limpaMensagens();
     this.jogoEdicao = null;
     this.jogoService.consultar(idJogo)
-        .subscribe(jogo => { this.loading = false; this.jogos.push(jogo) });
+        .subscribe(jogo => { this.loading = false; this.jogos.push(jogo); this.globals.isLoading = false; });
   }
 
   listarJogadores(){
+    this.globals.isLoading = true;
     this.jogadorService.lista()
-        .subscribe(jogs => this.jogadores = jogs);
+        .subscribe(jogs => { this.jogadores = jogs; this.globals.isLoading = false; });
   }
 
   novo(){
@@ -70,8 +75,9 @@ export class JogoComponent implements OnInit {
     //console.log("jogo:" ,jogo);
     var confirma = confirm('Deseja mesmo excluir esse jogo?');
     if (confirma == true){
+      this.globals.isLoading = true;
       this.jogoService.excluir(jogo).subscribe(
-        data => this.mostraSucesso("Jogo excluído com sucesso!"),
+        data => { this.mostraSucesso("Jogo excluído com sucesso!"); this.globals.isLoading = false; },
         err => this.mostraErro(err));
     }
   }
@@ -103,14 +109,16 @@ export class JogoComponent implements OnInit {
   }
 
   inserir(){
+    this.globals.isLoading = true;
     this.jogoService.inserir({ data: this.jogoEdicao.data, participantes: this.participantes }).subscribe(
-      data => this.mostraSucesso("Jogo inserido com sucesso!"),
+      data => { this.mostraSucesso("Jogo inserido com sucesso!"); this.globals.isLoading = false; },
       err => this.mostraErro(err));
   }
 
   alterar(){
+    this.globals.isLoading = true;
     this.jogoService.alterar({ _id: this.jogoEdicao._id, data: this.jogoEdicao.data, participantes: this.participantes }).subscribe(
-      data => this.mostraSucesso("Jogo alterado com sucesso!"),
+      data => { this.mostraSucesso("Jogo alterado com sucesso!"); this.globals.isLoading = false; },
       err => this.mostraErro(err));
   }
 
@@ -175,6 +183,8 @@ export class JogoComponent implements OnInit {
       this.erro = `Erro: ${err.error.errmsg}`;
     }
     this.loading = false;
+
+    this.globals.isLoading = false;
   }
 
   mostraSucesso(mensagem){

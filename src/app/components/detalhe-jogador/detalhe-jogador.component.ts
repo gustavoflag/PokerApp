@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { JogadorService } from '../../services/jogador.service';
 import { JogoService } from '../../services/jogo.service';
 import { ConfigService } from '../../services/config.service';
+import { Globals } from '../../app.globals';
 
 @Component({
   selector: 'app-detalhe-jogador',
@@ -18,7 +19,8 @@ export class DetalheJogadorComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute
              ,private jogadorService: JogadorService
              ,private jogoService: JogoService
-             ,public config:ConfigService) { }
+             ,public config:ConfigService
+             ,public globals: Globals) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
@@ -32,7 +34,8 @@ export class DetalheJogadorComponent implements OnInit {
   }
 
   consultar(idJogador){
+    this.globals.isLoading = true;
     this.jogadorService.consultar(idJogador)
-        .subscribe(jogador => { this.jogador = jogador });
+        .subscribe(jogador => { this.jogador = jogador; this.globals.isLoading = false; });
   }
 }

@@ -3,6 +3,7 @@ import { AuthService } from '../services/auth.service';
 import { ConfigService } from '../services/config.service';
 import { Router } from '@angular/router';
 import { PreJogoService } from '../services/pre-jogo.service';
+import { Globals } from '../app.globals';
 declare const require: any;
 
 @Component({
@@ -22,7 +23,8 @@ export class AppComponent {
   constructor(private authService: AuthService
              ,private router: Router
              ,private preJogoService: PreJogoService
-             ,public config: ConfigService){ }
+             ,public config: ConfigService
+             ,public globals: Globals){ }
 
   ngOnInit() {
     this.config.getTheme().subscribe(tema => {

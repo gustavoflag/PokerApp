@@ -54,7 +54,7 @@
               <span class="text-muted">Vitórias:</span>
             </div>
             <span>{{jogador.qtdVitorias}}
-              <span class="badge badge-secondary badge-pill">{{((jogador.qtdVitorias * 100) / jogador.jogos) | number : '1.1-1'}}%</span>
+              <span class="badge badge-dark badge-pill">{{((jogador.qtdVitorias * 100) / jogador.jogos) | number : '1.1-1'}}%</span>
             </span>
             <span class="badge badge-primary">{{jogador.posicaoVitorias}}º</span>
           </li>
@@ -63,7 +63,7 @@
               <span class="text-muted">Heads-Up:</span>
             </div>
             <span>{{jogador.qtdHUs}}
-              <span class="badge badge-secondary badge-pill">Ganha {{((jogador.qtdVitorias * 100) / jogador.qtdHUs) | number : '1.0-0'}}%</span>
+              <span class="badge badge-dark badge-pill">Ganha {{((jogador.qtdVitorias * 100) / jogador.qtdHUs) | number : '1.0-0'}}%</span>
             </span>
             <span class="badge badge-primary">{{jogador.posicaoHU}}º</span>
           </li>
@@ -72,7 +72,7 @@
               <span class="text-muted">Pontuações:</span>
             </div>
             <span>{{jogador.qtdPontuacoes}}
-              <span class="badge badge-secondary badge-pill">{{((jogador.qtdPontuacoes * 100) / jogador.jogos) | number : '1.1-1'}}%</span>
+              <span class="badge badge-dark badge-pill">{{((jogador.qtdPontuacoes * 100) / jogador.jogos) | number : '1.1-1'}}%</span>
             </span>
             <span class="badge badge-primary">{{jogador.posicaoPontuacoes}}º</span>
           </li>
@@ -82,7 +82,7 @@
                 <span class="text-muted">Rebuys:</span>
               </div>
               <span>{{historico.quantidade}}
-                <span class="badge badge-secondary badge-pill">{{((historico.quantidade * 100) / jogador.jogos) | number : '1.1-1'}}%</span>
+                <span class="badge badge-dark badge-pill">{{((historico.quantidade * 100) / jogador.jogos) | number : '1.1-1'}}%</span>
               </span>
               <span>&nbsp;&nbsp;&nbsp;</span>
             </li>

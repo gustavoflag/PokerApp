@@ -3,6 +3,7 @@ import { PremiacaoService } from '../../services/premiacao.service';
 import { CaixaService } from '../../services/caixa.service';
 import { ConfigService } from '../../services/config.service';
 import { Router } from '@angular/router';
+import { Globals } from '../../app.globals';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class PremiacaoComponent implements OnInit {
   constructor(private premiacaoService: PremiacaoService
              ,private caixaService: CaixaService
              ,private router: Router
-             ,public config: ConfigService) { }
+             ,public config: ConfigService
+             ,public globals: Globals) { }
 
   ngOnInit() {
    this.limpaMensagens();
@@ -41,8 +43,9 @@ export class PremiacaoComponent implements OnInit {
 
   listar(){
    this.premiacaoEdicao = null;
+   this.globals.isLoading = true;
    this.premiacaoService.listar()
-       .subscribe(pont => this.premiacoes = pont);
+       .subscribe(pont => { this.premiacoes = pont; this.globals.isLoading = false; });
   }
 
   salvar(){
@@ -55,30 +58,34 @@ export class PremiacaoComponent implements OnInit {
   }
 
   inserir(){
+   this.globals.isLoading = true;
    this.premiacaoService.inserir(this.premiacaoEdicao).subscribe(
-     data => this.mostraSucesso("Premiação inserida com sucesso!"),
+     data => { this.mostraSucesso("Premiação inserida com sucesso!"); this.globals.isLoading = false; },
      err => this.mostraErro(err));
   }
 
   alterar(){
+   this.globals.isLoading = true;
    this.premiacaoService.alterar(this.premiacaoEdicao).subscribe(
-     data => this.mostraSucesso("Premiação alterada com sucesso!"),
+     data => { this.mostraSucesso("Premiação alterada com sucesso!"); this.globals.isLoading = false; },
      err => this.mostraErro(err));
   }
 
   excluir(premiacaoExcluir){
    var confirmado = confirm("Deseja mesmo excluir essa Premiação?");
    if (confirmado){
+    this.globals.isLoading = true;
      this.limpaMensagens();
      this.premiacaoService.excluir(premiacaoExcluir).subscribe(
-       data => this.mostraSucesso("Premiação excluída com sucesso!"),
+       data => { this.mostraSucesso("Premiação excluída com sucesso!"); this.globals.isLoading = false; },
        err => this.mostraErro(err));
    }
   }
 
   getSaldoCaixa(){
+    this.globals.isLoading = true;
     this.caixaService.saldoCaixa().subscribe(
-      saldo => this.saldoCaixa = saldo,
+      saldo => { this.saldoCaixa = saldo; this.globals.isLoading = false; },
       err => this.mostraErro(err));
   }
 
@@ -93,6 +100,8 @@ export class PremiacaoComponent implements OnInit {
    } else if (err.error.errmsg){
      this.erro = `Erro: ${err.error.errmsg}`;
    }
+
+   this.globals.isLoading = false;
   }
 
   mostraSucesso(mensagem){

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JogadorService } from '../../services/jogador.service';
 import { ConfigService } from '../../services/config.service';
+import { Globals } from '../../app.globals';
 
 @Component({
   selector: 'app-classificacao',
@@ -12,9 +13,10 @@ export class ClassificacaoComponent implements OnInit {
   jogadores: any = null;
   rookies: boolean = false;
   ordem: string = null;
-  isLoading: boolean = false;
+  //isLoading: boolean = false;
 
-  constructor(private jogadorService: JogadorService){ }
+  constructor(private jogadorService: JogadorService
+             ,public globals: Globals){ }
 
   ngOnInit() {
     this.rookies = false;
@@ -23,23 +25,23 @@ export class ClassificacaoComponent implements OnInit {
 
   ordenar(ordem) {
     this.ordem = ordem;
-    this.isLoading = true;
+    this.globals.isLoading = true;
 
     if (!this.rookies){
-      this.jogadorService.classificacaoOrdenada(ordem).subscribe(jogs => { this.jogadores = jogs; this.isLoading = false; });
+      this.jogadorService.classificacaoOrdenada(ordem).subscribe(jogs => { this.jogadores = jogs; this.globals.isLoading = false; });
     } else {
-      this.jogadorService.classificacaoRookiesOrdenada(ordem).subscribe(jogs => { this.jogadores = jogs; this.isLoading = false; });
+      this.jogadorService.classificacaoRookiesOrdenada(ordem).subscribe(jogs => { this.jogadores = jogs; this.globals.isLoading = false; });
     }
   }
 
   listarGeral() {
-    this.isLoading = true;
-    this.jogadorService.classificacao().subscribe(jogs => { this.jogadores = jogs; this.isLoading = false; });
+    this.globals.isLoading = true;
+    this.jogadorService.classificacao().subscribe(jogs => { this.jogadores = jogs; this.globals.isLoading = false; });
   }
 
   listarRookies() {
-    this.isLoading = true;
-    this.jogadorService.classificacaoRookies().subscribe(jogs => { this.jogadores = jogs; this.isLoading = false; });
+    this.globals.isLoading = true;
+    this.jogadorService.classificacaoRookies().subscribe(jogs => { this.jogadores = jogs; this.globals.isLoading = false; });
   }
 
   qtdLugarJogador(jogador, lugar): Number{

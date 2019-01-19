@@ -23,6 +23,7 @@ import { CaixaComponent } from './components/caixa/caixa.component';
 import { ClassificacaoMesComponent } from './components/classificacao-mes/classificacao-mes.component';
 import { DetalheJogadorComponent } from './components/detalhe-jogador/detalhe-jogador.component';
 import { PreJogoComponent } from './components/pre-jogo/pre-jogo.component';
+import { Globals } from './app.globals';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import { PreJogoComponent } from './components/pre-jogo/pre-jogo.component';
     //AlertModule.forRoot(),
     Routing
   ],
-  providers: [PontuacaoService, JogadorService, AuthService, AuthGuard, JogoService, CaixaService],
+  providers: [PontuacaoService, JogadorService, AuthService, AuthGuard, JogoService, CaixaService, Globals],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

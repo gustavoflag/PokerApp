@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PontuacaoService } from '../../services/pontuacao.service';
 import { ConfigService } from '../../services/config.service';
 import { Router } from '@angular/router';
+import { Globals } from '../../app.globals';
 
 @Component({
   selector: 'app-pontuacao',
@@ -17,7 +18,8 @@ export class PontuacaoComponent implements OnInit {
 
   constructor(private pontuacaoService: PontuacaoService
              ,private router: Router
-             ,public config: ConfigService){ }
+             ,public config: ConfigService
+             ,public globals: Globals){ }
 
   ngOnInit() {
     this.limpaMensagens();
@@ -35,9 +37,10 @@ export class PontuacaoComponent implements OnInit {
   }
 
   listar(){
+    this.globals.isLoading = true;
     this.pontuacaoEdicao = null;
     this.pontuacaoService.listar()
-        .subscribe(pont => this.pontuacoes = pont);
+        .subscribe(pont => { this.pontuacoes = pont; this.globals.isLoading = false; });
   }
 
   salvar(){
@@ -50,23 +53,26 @@ export class PontuacaoComponent implements OnInit {
   }
 
   inserir(){
+    this.globals.isLoading = true;
     this.pontuacaoService.inserir(this.pontuacaoEdicao).subscribe(
-      data => this.mostraSucesso("Pontuação inserida com sucesso!"),
+      data => { this.mostraSucesso("Pontuação inserida com sucesso!"); this.globals.isLoading = false; },
       err => this.mostraErro(err));
   }
 
   alterar(){
+    this.globals.isLoading = true;
     this.pontuacaoService.alterar(this.pontuacaoEdicao).subscribe(
-      data => this.mostraSucesso("Pontuação alterada com sucesso!"),
+      data => { this.mostraSucesso("Pontuação alterada com sucesso!"); this.globals.isLoading = false; },
       err => this.mostraErro(err));
   }
 
   excluir(pontuacaoExcluir){
     var confirmado = confirm("Deseja mesmo excluir essa Pontuação?");
     if (confirmado){
+      this.globals.isLoading = true;
       this.limpaMensagens();
       this.pontuacaoService.excluir(pontuacaoExcluir).subscribe(
-        data => this.mostraSucesso("Pontuação excluída com sucesso!"),
+        data => { this.mostraSucesso("Pontuação excluída com sucesso!"); this.globals.isLoading = false; },
         err => this.mostraErro(err));
     }
   }
@@ -82,6 +88,8 @@ export class PontuacaoComponent implements OnInit {
     } else if (err.error.errmsg){
       this.erro = `Erro: ${err.error.errmsg}`;
     }
+
+    this.globals.isLoading = false;
   }
 
   mostraSucesso(mensagem){

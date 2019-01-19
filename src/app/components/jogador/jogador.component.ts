@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JogadorService } from '../../services/jogador.service';
 import { ConfigService } from '../../services/config.service';
+import { Globals } from '../../app.globals';
 
 @Component({
   selector: 'app-jogador',
@@ -16,7 +17,8 @@ export class JogadorComponent implements OnInit {
   erro: string = null;
 
   constructor(private jogadorService: JogadorService
-             ,public config: ConfigService){ }
+             ,public config: ConfigService
+             ,public globals: Globals){ }
 
   ngOnInit() {
     this.limpaMensagens();
@@ -35,7 +37,8 @@ export class JogadorComponent implements OnInit {
 
   listar(){
     this.jogadorEdicao = null;
-    this.jogadorService.lista().subscribe(jogs => this.jogadores = jogs);
+    this.globals.isLoading = true;
+    this.jogadorService.lista().subscribe(jogs => { this.jogadores = jogs; this.globals.isLoading = false; } );
   }
 
   rookie(){
@@ -52,23 +55,26 @@ export class JogadorComponent implements OnInit {
   }
 
   inserir(){
+    this.globals.isLoading = true;
     this.jogadorService.inserir(this.jogadorEdicao).subscribe(
-      data => this.mostraSucesso("Jogador inserido com sucesso!"),
+      data => { this.mostraSucesso("Jogador inserido com sucesso!"); this.globals.isLoading = false; } ,
       err => this.mostraErro(err));
   }
 
   alterar(){
+    this.globals.isLoading = true;
     this.jogadorService.alterar(this.jogadorEdicao).subscribe(
-      data => this.mostraSucesso("Jogador alterado com sucesso!"),
+      data => { this.mostraSucesso("Jogador alterado com sucesso!"); this.globals.isLoading = false; },
       err => this.mostraErro(err));
   }
 
   excluir(jogadorExcluir){
     var confirmado = confirm("Deseja mesmo excluir esse Jogador?");
     if (confirmado){
+      this.globals.isLoading = true;
       this.limpaMensagens();
       this.jogadorService.excluir(jogadorExcluir).subscribe(
-        data => this.mostraSucesso("Jogador excluído com sucesso!"),
+        data => { this.mostraSucesso("Jogador excluído com sucesso!"); this.globals.isLoading = false; },
         err => this.mostraErro(err));
     }
   }
@@ -109,6 +115,8 @@ export class JogadorComponent implements OnInit {
     } else if (err.error.errmsg){
       this.erro = `Erro: ${err.error.errmsg}`;
     }
+
+    this.globals.isLoading = false;
   }
 
   mostraSucesso(mensagem){
