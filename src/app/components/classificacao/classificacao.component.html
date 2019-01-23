@@ -45,8 +45,8 @@
             <small class="text-muted">{{titulo.ano}}</small>
           </div>
         </td>
-        <td class="text-warning" [ngClass]="{ 'table-active' : ordem == 'P' || !ordem }">{{jogador.pontos}}</td>
-        <td>{{jogador.jogos}}</td>
+        <td class="text-warning text-center" [ngClass]="{ 'table-active' : ordem == 'P' || !ordem }">{{jogador.pontos}}</td>
+        <td class="text-center">{{jogador.jogos}}</td>
         <td class="hidden-sm-down" [ngClass]="{ 'table-active' : ordem == 'V'}">{{qtdLugarJogador(jogador, 1)}}</td>
         <td class="hidden-sm-down">{{qtdLugarJogador(jogador, 2)}}</td>
         <td class="hidden-sm-down">{{qtdLugarJogador(jogador, 3)}}</td>

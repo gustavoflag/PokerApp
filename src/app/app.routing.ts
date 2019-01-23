@@ -23,6 +23,7 @@ const appRoutes: Routes = [
     { path: 'premiacao', component: PremiacaoComponent },
     { path: 'prejogo', component: PreJogoComponent },
     { path: 'parametro', component: ParametroComponent, canActivate: [AuthGuard] },
+    { path: 'classificacao', component: ClassificacaoComponent },
     { path: '', component: ClassificacaoComponent },
     { path: 'classificacaoMes', component: ClassificacaoMesComponent },
     { path: '**', redirectTo: '' }

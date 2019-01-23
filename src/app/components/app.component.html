@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+<nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
   <div class="d-box">
     <a class="navbar-brand" href="#"><img src="/assets/images/TQSOP.png" width="25px" class="align-bottom" />&nbsp;TQSOP</a>
     <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
@@ -7,32 +7,32 @@
   </div>
   <div class="navbar-collapse" [ngClass]="{ 'collapse' : !navAberta }">
     <ul class="navbar-nav mr-auto" (click)="navAberta = false">
-      <li class="nav-item">
-        <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/']">Classificação</a>
+      <li class="nav-item"  [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['/classificacao']">Classificação</a>
       </li>
-      <li class="nav-item" *ngIf="tempoReal || config.usuarioLogado()">
-        <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/prejogo']">Tempo Real</a>
+      <li class="nav-item" *ngIf="tempoReal || config.usuarioLogado()" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['/prejogo']">Tempo Real</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/classificacaoMes']">Mês a Mês</a>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['/classificacaoMes']">Mês a Mês</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/jogo']">Jogos</a>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['/jogo']">Jogos</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/caixa']">Caixa</a>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['/caixa']">Caixa</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/pontuacao']">Pontuação</a>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['/pontuacao']">Pontuação</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/premiacao']">Premiação</a>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['/premiacao']">Premiação</a>
       </li>
-      <li class="nav-item" *ngIf="config.usuarioLogado()">
-        <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/jogador']">Jogadores</a>
+      <li class="nav-item" [routerLinkActive]="['active']" *ngIf="config.usuarioLogado()">
+        <a class="nav-link" [routerLink]="['/jogador']">Jogadores</a>
       </li>
-      <li class="nav-item" *ngIf="config.usuarioLogado()">
-        <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/parametro']">Parâmetros</a>
+      <li class="nav-item" [routerLinkActive]="['active']" *ngIf="config.usuarioLogado()">
+        <a class="nav-link" [routerLink]="['/parametro']">Parâmetros</a>
       </li>
     </ul>
     <section *ngIf="logado()">

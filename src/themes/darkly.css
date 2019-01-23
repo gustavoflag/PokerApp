@@ -8804,6 +8804,7 @@ a.text-dark:focus, a.text-dark:hover {
 
 .bg-dark {
   background-color: #00bc8c !important;
+  /*background-color: rgb(139, 5, 27) !important;*/
 }
 
 .bg-dark.navbar-dark .navbar-nav .nav-link:focus,
