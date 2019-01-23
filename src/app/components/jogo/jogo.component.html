@@ -1,8 +1,13 @@
-<h2>Jogos
-<div class="float-right">
-  <button class="btn btn-primary" (click)="novo();" *ngIf="config.usuarioLogado()">Novo</button>
-</div>
+<h2 class="hidden-sm-down">Jogos
+  <div class="float-right">
+    <button class="btn btn-primary" (click)="novo();" *ngIf="config.usuarioLogado()">Novo</button>
+  </div>
 </h2>
+<h4 class="hidden-md-up">Jogos
+  <div class="float-right">
+    <button class="btn btn-sm btn-primary" (click)="novo();" *ngIf="config.usuarioLogado()">Novo</button>
+  </div>
+</h4>
 <hr>
 <div *ngIf="mensagem" class="alert alert-dismissible alert-success">{{mensagem}}</div>
 <div *ngIf="erro" class="alert alert-dismissible alert-danger">{{erro}}</div>

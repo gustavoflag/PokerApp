@@ -12,6 +12,14 @@
   padding: 5px;
 }
 
+.text-bottom {
+  vertical-align: bottom;
+}
+
+.text-underline {
+  text-decoration: underline;
+}
+
 .loading-background {
   position: fixed; 
   top: 0; 
