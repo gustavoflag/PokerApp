@@ -45,6 +45,10 @@ export class JogadorComponent implements OnInit {
     this.jogadorEdicao.rookie = !this.jogadorEdicao.rookie;
   }
 
+  socio(){
+    this.jogadorEdicao.socio = !this.jogadorEdicao.socio;
+  }
+
   salvar(){
     this.limpaMensagens();
     if (this.jogadorEdicao._id){

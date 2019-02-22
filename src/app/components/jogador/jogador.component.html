@@ -1,6 +1,6 @@
 <h2>Jogadores
 <div class="float-right">
-  <button class="btn btn-primary" (click)="novo();" *ngIf="config.usuarioLogado()">Novo</button>
+  <button class="btn btn-primary" (click)="novo();" *ngIf="config.usuarioLogado() && !jogadorEdicao">Novo</button>
 </div>
 </h2>
 <hr>
@@ -15,7 +15,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let jogador of jogadores">
-        <td><div class="float-left">{{jogador.nome}}&nbsp;<span *ngIf="jogador.rookie" class="badge badge-warning">Rookie</span></div>
+        <td>
+            <div class="float-left">{{jogador.nome}}&nbsp;<span *ngIf="jogador.rookie" class="badge badge-warning">Rookie</span><span *ngIf="jogador.socio" class="badge badge-success">Sócio</span></div>
             <div *ngFor="let titulo of jogador.titulos" style="background:transparent url('assets/images/lourosXs.png') no-repeat left center" class="float-left">
               <small class="text-muted">{{titulo.ano}}</small>
             </div>
@@ -34,9 +35,10 @@
           <input type="text" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !nome.valid }" name="nome" [(ngModel)]="jogadorEdicao.nome" #nome="ngModel" required />
           <div *ngIf="f.submitted && !nome.valid" class="invalid-feedback">Nome é obrigatório</div>
       </div>
-      <div class="form-group col-lg-1">
-          <label for="rookie">Opções</label>
+      <div class="form-group col-lg-2">
+          <label for="rookie">Opções</label><br />          
           <button type='button' class="btn" (click)="rookie(participante);" [ngClass]="{ 'btn-outline-warning' : !jogadorEdicao.rookie, 'btn-warning': jogadorEdicao.rookie }">Rookie</button>
+          <button type='button' class="btn" (click)="socio(participante);" [ngClass]="{ 'btn-outline-success' : !jogadorEdicao.socio, 'btn-success': jogadorEdicao.socio }">Socio</button>
       </div>
       <div class="form-group col-lg-6">
         <label for="titulo">Títulos</label>
