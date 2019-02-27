@@ -203,6 +203,16 @@ export class PreJogoComponent implements OnInit {
     }
   }
 
+  incluirRegulares(){
+    var socios = this.jogadores.filter(jog => jog.socio);
+
+    if (socios.length > 0){
+      socios.forEach(socio => {
+        this.adicionar(socio);
+      });
+    }
+  }
+
   remover(jogador){
     if (!this.preJogo){
       var index = this.participantes.indexOf(jogador);

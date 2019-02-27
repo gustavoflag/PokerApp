@@ -11,6 +11,7 @@
         <br>
         <br>
         <button (click)="lateRegister = true" type='button' *ngIf="logado && preJogo && !lateRegister" class="btn btn-warning">Late Register</button>
+        <button (click)="incluirRegulares();" *ngIf="logado && !preJogo" type='button' class="btn btn-secondary">Incluir Regulares</button>
         <button (click)="salvar();" *ngIf="logado && !preJogo" type='button' class="btn btn-info">Salvar</button>
         <button (click)="sortear();" *ngIf="logado && preJogo && temRedraw()" type='button' class="btn btn-info">Sortear Lugares</button>
         <button (click)="cancelar();" *ngIf="logado && preJogo" type='button' class="btn btn-danger">Cancelar</button>
