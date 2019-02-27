@@ -31,3 +31,15 @@
   background-position: center;
   background-repeat: no-repeat;
 }
+
+.background-logo {
+  background-image: url('../src/assets/images/TQSOP.png');
+  background-repeat: no-repeat;
+  background-size: 80px;
+  background-position-x: 25px;
+  background-position-y: 80px;
+}
+
+.container {
+  background-color: #272B30;
+}
