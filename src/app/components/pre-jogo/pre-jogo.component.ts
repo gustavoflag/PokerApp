@@ -23,6 +23,7 @@ export class PreJogoComponent implements OnInit {
   logado: boolean;
   mesas: any = [-1];
   lateRegister: boolean = false;
+  tempo: string;
 
   constructor(private preJogoService: PreJogoService
              ,private jogadorService: JogadorService
@@ -37,6 +38,8 @@ export class PreJogoComponent implements OnInit {
     this.consultarParametro();
 
     this.logado = this.config.usuarioLogado();
+
+    this.mostraRelogio();
   }
 
   listarJogadores(){
@@ -271,6 +274,16 @@ export class PreJogoComponent implements OnInit {
   mostraSucesso(mensagem){
     this.mensagem = mensagem;
     this.globals.isLoading = false;
+  }
+
+  mostraRelogio(){
+    var data = new Date();
+
+    this.tempo = data.getMinutes() + ':' + data.getSeconds();
+
+    setTimeout(() => {
+      this.mostraRelogio();
+    }, 500);
   }
 
 }
