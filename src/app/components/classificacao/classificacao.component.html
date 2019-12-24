@@ -29,10 +29,14 @@
       <th class="hidden-sm-down">4º</th>
       <th class="hidden-sm-down">5º</th>
       <th class="hidden-sm-down">6º</th>
+      <th class="hidden-sm-down">7º</th>
+      <th class="hidden-sm-down">8º</th>
+      <th class="hidden-sm-down">9º</th>
+      <th class="hidden-sm-down">10º</th>
       <th class="hidden-sm-down">Rebuy</th>
       <th class="hidden-sm-down" [ngClass]="{ 'table-active' : ordem == 'PPJ' }"><button type="button" class="btn btn-outline-secondary linkTH" (click)="ordenar('PPJ');">Pts/Jogo</button></th>
-      <th class="hidden-sm-down">Valor Investido</th>
-      <th class="hidden-sm-down" [ngClass]="{ 'table-active' : ordem == 'VR' }"><button type="button" class="btn btn-outline-secondary linkTH" (click)="ordenar('VR');">Valor Recebido</button></th>
+      <th class="hidden-sm-down">Vl.Investido</th>
+      <th class="hidden-sm-down" [ngClass]="{ 'table-active' : ordem == 'VR' }"><button type="button" class="btn btn-outline-secondary linkTH" (click)="ordenar('VR');">Vl.Recebido</button></th>
       <th [ngClass]="{ 'table-active' : ordem == 'S' }"><button type="button" class="btn btn-outline-secondary linkTH" (click)="ordenar('S');">Saldo</button></th>
     </thead>
     <tbody>
@@ -54,6 +58,10 @@
         <td class="hidden-sm-down">{{qtdLugarJogador(jogador, 4)}}</td>
         <td class="hidden-sm-down">{{qtdLugarJogador(jogador, 5)}}</td>
         <td class="hidden-sm-down">{{qtdLugarJogador(jogador, 6)}}</td>
+        <td class="hidden-sm-down">{{qtdLugarJogador(jogador, 7)}}</td>
+        <td class="hidden-sm-down">{{qtdLugarJogador(jogador, 8)}}</td>
+        <td class="hidden-sm-down">{{qtdLugarJogador(jogador, 9)}}</td>
+        <td class="hidden-sm-down">{{qtdLugarJogador(jogador, 10)}}</td>
         <td class="hidden-sm-down">{{qtdLugarJogador(jogador, -1)}}</td>
         <td class="hidden-sm-down" [ngClass]="{ 'table-active' : ordem == 'PPJ'}">{{(jogador.pontos / jogador.jogos) | number}}</td>
         <td class="hidden-sm-down">{{jogador.valorInvestido | currency:'R$'}}</td>
