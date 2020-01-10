@@ -45,7 +45,7 @@
             <a class="btn btn-sm btn-outline-success hidden-sm-down" href="#/jogador/{{jogador._id}}">{{i + 1}}º</a>
             <a class="hidden-md-up text-success" href="#/jogador/{{jogador._id}}">{{i + 1}}º</a>
         </td>
-        <td><div class="float-left">{{jogador.nome}}&nbsp;<span *ngIf="jogador.rookie" class="badge badge-warning">R</span></div>
+        <td><div class="float-left"><!-- <span class="badge badge-success"><img src="/assets/images/seta.png" style="width: 10px; height: 12px; transform: rotate(270deg)">2</span> -->{{jogador.nome}}&nbsp;<span *ngIf="jogador.rookie" class="badge badge-warning">R</span></div>
           <div *ngFor="let titulo of jogador.titulos" style="background:transparent url('assets/images/lourosXs.png') no-repeat center center" class="float-left">
             <small class="text-muted">{{titulo.ano}}</small>
           </div>
