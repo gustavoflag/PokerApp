@@ -105,6 +105,10 @@
             <span class="text-muted">Saldo:</span>
             <span [ngClass]="{ 'text-danger' : jogador.valorRecebido - jogador.valorInvestido < 0, 'text-success': jogador.valorRecebido - jogador.valorInvestido > 0 }">{{jogador.valorRecebido - jogador.valorInvestido | currency:'R$'}}</span>
           </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="text-muted">Vezes Dealer:</span>
+            <span>{{jogador.qtdVezesDealer}}</span>
+          </li>
         </ul>
       </div>
     </div>
