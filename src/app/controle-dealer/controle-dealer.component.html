@@ -1,0 +1,14 @@
+<h2 class="hidden-sm-down">Controle Dealer</h2>
+<h4 class="hidden-md-up">Controle Dealer</h4>
+<table class="table table-hover">
+  <thead>
+    <th>Jogador</th>
+    <th>Vezes Dealer</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let jogador of jogadores;">
+      <td>{{jogador.nome}}</td>
+      <td>{{jogador.qtdVezesDealer}}</td>
+    </tr>
+  </tbody>
+</table>
