@@ -26,8 +26,8 @@ export class PreJogoService {
     return this.http.put(`${this.baseUrlService}/preJogo`, JSON.stringify(jogador), { headers: this.configService.getHeaders() });
   }
 
-  sortear(): Observable<any>{
-    return this.http.post(`${this.baseUrlService}/preJogo/sortear`, null, { headers: this.configService.getHeaders() });
+  sortear(redraw: boolean = false): Observable<any>{
+    return this.http.post(`${this.baseUrlService}/preJogo/sortear`, JSON.stringify({ redraw: redraw }), { headers: this.configService.getHeaders() });
   }
 
   gerarJogo(): Observable<any>{

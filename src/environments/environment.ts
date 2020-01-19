@@ -8,5 +8,4 @@ export const environment = {
   //API_URI: "http://localhost:3000",
   API_URI: "https://tqsop-api.herokuapp.com",
   theme: "materia"
-
 };

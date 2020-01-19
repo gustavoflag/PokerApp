@@ -120,7 +120,8 @@ export class PreJogoComponent implements OnInit {
   sortear(){
     if (confirm('Deseja realizar o sorteio?')){
       this.globals.isLoading = true;
-      this.preJogoService.sortear()
+      var qtdEliminados = this.participantes.filter((par) => par.eliminado).length;
+      this.preJogoService.sortear(qtdEliminados > 0)
         .subscribe((preJogoSalvo) => {
                       this.mostraSucesso("Sorteio realizado!");
                       this.consultar();
@@ -187,7 +188,7 @@ export class PreJogoComponent implements OnInit {
   adicionar(jogador){
     if (this.lateRegister){
       this.globals.isLoading = true;
-      this.preJogoService.adicionarJogador({ nomeJogador: jogador.nome, rebuy: 0, eliminado: false })
+      this.preJogoService.adicionarJogador({ nomeJogador: jogador.nome, rebuy: 0, eliminado: false, qtdVezesDealer: jogador.qtdVezesDealer, socio: jogador.socio })
         .subscribe((preJogoSalvo) => {
                       this.lateRegister = false;
                       this.mostraSucesso(preJogoSalvo.message);
@@ -202,7 +203,7 @@ export class PreJogoComponent implements OnInit {
       var indexRemove = this.jogadores.indexOf(jogador);
       this.jogadores.splice(indexRemove, 1);
 
-      this.participantes.push({ nomeJogador: jogador.nome, rebuy: 0, eliminado: false });
+      this.participantes.push({ nomeJogador: jogador.nome, rebuy: 0, eliminado: false, qtdVezesDealer: jogador.qtdVezesDealer, socio: jogador.socio });
     }
   }
 
