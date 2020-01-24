@@ -24,7 +24,7 @@ import { ClassificacaoMesComponent } from './components/classificacao-mes/classi
 import { DetalheJogadorComponent } from './components/detalhe-jogador/detalhe-jogador.component';
 import { PreJogoComponent } from './components/pre-jogo/pre-jogo.component';
 import { Globals } from './app.globals';
-import { ControleDealerComponent } from './controle-dealer/controle-dealer.component';
+import { ControleDealerComponent } from './components/controle-dealer/controle-dealer.component';
 
 @NgModule({
   declarations: [

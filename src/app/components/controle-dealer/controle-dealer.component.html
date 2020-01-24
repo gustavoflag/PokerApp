@@ -6,7 +6,7 @@
     <th>Vezes Dealer</th>
   </thead>
   <tbody>
-    <tr *ngFor="let jogador of jogadores;">
+    <tr *ngFor="let jogador of jogadores;" [ngClass]="{ 'text-muted': jogador.qtdVezesDealer > minimoVezesDealer }">
       <td>{{jogador.nome}}</td>
       <td>{{jogador.qtdVezesDealer}}</td>
     </tr>

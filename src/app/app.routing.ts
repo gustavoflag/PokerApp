@@ -11,7 +11,7 @@ import { CaixaComponent } from './components/caixa/caixa.component';
 import { ParametroComponent } from './components/parametro/parametro.component';
 import { PreJogoComponent } from './components/pre-jogo/pre-jogo.component';
 import { AuthGuard } from './guards/auth.guard';
-import { ControleDealerComponent } from './controle-dealer/controle-dealer.component';
+import { ControleDealerComponent } from './components/controle-dealer/controle-dealer.component';
 
 const appRoutes: Routes = [
     { path: 'login', component: AuthComponent },
