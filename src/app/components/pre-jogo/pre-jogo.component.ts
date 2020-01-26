@@ -39,7 +39,7 @@ export class PreJogoComponent implements OnInit {
 
     this.logado = this.config.usuarioLogado();
 
-    this.mostraRelogio();
+    //this.mostraRelogio();
   }
 
   listarJogadores(){
@@ -55,6 +55,20 @@ export class PreJogoComponent implements OnInit {
 
   jogadoresRestantes() : number{
     return this.participantes.filter((par) => !par.eliminado).length;
+  }
+
+  stackTotal() : number{
+    const qtdRebuys = this.participantes.reduce((qtd, par) => qtd += par.rebuy, 0);
+
+    return (this.participantes.length * this.parametro.qtdFichasBuyIn)
+        + (qtdRebuys * this.parametro.qtdFichasBuyIn)
+        + (this.participantes.filter((par) => par.timeChip).length * this.parametro.qtdFichasTimeChip);
+  }
+
+  stackMedio() : number{
+    const jogadoresRestantes = this.jogadoresRestantes();
+
+    return jogadoresRestantes > 0 ? this.stackTotal() / jogadoresRestantes : 0;
   }
 
   temRedraw() : boolean{
@@ -150,6 +164,7 @@ export class PreJogoComponent implements OnInit {
     this.preJogoService.alterar(jogador)
       .subscribe((preJogoSalvo) => {
                     this.consultar();
+                    this.limpaMensagens();
                  },
                  (err) => {
                     this.mostraErro(err);
@@ -175,6 +190,12 @@ export class PreJogoComponent implements OnInit {
 
   pago(jogador){
     jogador.pago = !jogador.pago;
+
+    this.alterar(jogador);
+  }
+
+  timeChip(jogador){
+    jogador.timeChip = !jogador.timeChip;
 
     this.alterar(jogador);
   }

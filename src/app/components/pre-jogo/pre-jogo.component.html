@@ -3,12 +3,21 @@
 <section>
 
     <div class="row">
-      <div class="col-lg-3">
+      <div class="col-lg-4">
         <label class="col-form-label col-form-label-lg" for="inputLarge" >Jogadores Restantes</label>
         <h2>{{ jogadoresRestantes() }}</h2>
       </div>
-      <div class="col-lg-6 row" style="text-align: center">
-        <!-- <div class="col-lg-2">
+      <div class="col-lg-2 text-center">
+        <label class="col-form-label col-form-label-lg" for="inputLarge">Stack Total</label>
+        <h2>{{ stackTotal() | number }}</h2>
+      </div>
+      <div class="col-lg-2 text-center">
+        <label class="col-form-label col-form-label-lg" for="inputLarge" >Stack Médio</label>
+        <h2>{{ stackMedio() | number : '0.0-2' }}</h2>
+      </div>
+      <!--<div class="col-lg-6 row" style="text-align: center">
+        
+         <div class="col-lg-2">
           <h4>SB</h4>
           <h1>200</h1>
         </div>
@@ -19,17 +28,17 @@
         <div class="col-lg-2">
           <h4>BB</h4>
           <h1>400</h1>
-        </div> -->
-      </div>
-      <div class="col-lg-3 text-right">
+        </div> 
+      </div>-->
+      <div class="col-lg-4 text-right">
         <br>
         <br>
-        <button (click)="lateRegister = true" type='button' *ngIf="logado && preJogo && !lateRegister" class="btn btn-warning">Late Register</button>
-        <button (click)="incluirRegulares();" *ngIf="logado && !preJogo" type='button' class="btn btn-secondary">Incluir Regulares</button>
-        <button (click)="salvar();" *ngIf="logado && !preJogo" type='button' class="btn btn-info">Salvar</button>
-        <button (click)="sortear();" *ngIf="logado && preJogo && temRedraw()" type='button' class="btn btn-info">Sortear Lugares</button>
-        <button (click)="cancelar();" *ngIf="logado && preJogo" type='button' class="btn btn-danger">Cancelar</button>
-        <button (click)="finalizar();" *ngIf="logado && preJogo && (jogadoresRestantes() === 0)" type='button' class="btn btn-success">Finalizar Jogo</button>
+        <button (click)="lateRegister = true" type='button' *ngIf="logado && preJogo && !lateRegister && (jogadoresRestantes() > 0)" class="btn btn-sm btn-warning">Late Register</button>
+        <button (click)="incluirRegulares();" *ngIf="logado && !preJogo" type='button' class="btn btn-sm btn-secondary">Incluir Regulares</button>
+        <button (click)="salvar();" *ngIf="logado && !preJogo" type='button' class="btn btn-sm btn-info">Salvar</button>
+        <button (click)="sortear();" *ngIf="logado && preJogo && temRedraw()" type='button' class="btn btn-sm btn-info">Sortear Lugares</button>
+        <button (click)="cancelar();" *ngIf="logado && preJogo" type='button' class="btn btn-sm  btn-danger">Cancelar</button>
+        <button (click)="finalizar();" *ngIf="logado && preJogo && (jogadoresRestantes() === 0)" type='button' class="btn btn-sm btn-success">Finalizar Jogo</button>
       </div>
     </div>
     <div class="row" style="margin-top:10px">
@@ -69,6 +78,8 @@
                  <div class="float-right">
                    <span *ngIf="!logado && participante.pago" class="badge badge-warning">$</span>
                    <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" (click)="pago(participante);" [ngClass]="{ 'btn-outline-warning' : participante.pago === false, 'btn-warning': participante.pago }">$</button>
+                   <span *ngIf="!logado && participante.timeChip" class="badge badge-success">T</span>
+                   <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" (click)="timeChip(participante);" [ngClass]="{ 'btn-outline-success' : participante.timeChip === false, 'btn-success': participante.timeChip }">T</button>
                    <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" (click)="rebuy(participante);" [ngClass]="{ 'btn-outline-secondary' : participante.rebuy === 0, 'btn-secondary': participante.rebuy > 0 }">{{ participante.rebuy > 1 ? participante.rebuy + " " : "" }}Rebuy</button>
                    <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" (click)="maisRebuy(participante);" [ngClass]="{ 'btn-outline-secondary' : participante.rebuy === 0, 'btn-secondary': participante.rebuy > 0 }">+</button>
                    <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" [ngClass]="{ 'btn-outline-danger': !participante.eliminado, 'btn-outline-success': participante.eliminado }" (click)="eliminar(participante);" title="Eliminar">X</button>

@@ -5,21 +5,47 @@
   <div class="row">
     <div class="form-group col-lg-2" [ngClass]="{ 'has-danger': f.submitted && !valorBuyIn.valid }">
         <label for="valorBuyIn">Valor BuyIn</label>
-        <input type="text" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !valorBuyIn.valid }" name="valorBuyIn" [(ngModel)]="parametro.valorBuyIn" #valorBuyIn="ngModel" required />
+        <input type="number" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !valorBuyIn.valid }" name="valorBuyIn" [(ngModel)]="parametro.valorBuyIn" #valorBuyIn="ngModel" required />
         <div *ngIf="f.submitted && !valorBuyIn.valid" class="invalid-feedback">Valor BuyIn é obrigatório</div>
     </div>
     <div class="form-group col-lg-2" [ngClass]="{ 'has-danger': f.submitted && !valorMaleta.valid }">
         <label for="valorMaleta">Valor Maleta</label>
-        <input type="text" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !valorMaleta.valid }" name="valorMaleta" [(ngModel)]="parametro.valorMaleta" #valorMaleta="ngModel" required />
+        <input type="number" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !valorMaleta.valid }" name="valorMaleta" [(ngModel)]="parametro.valorMaleta" #valorMaleta="ngModel" required />
         <div *ngIf="f.submitted && !valorMaleta.valid" class="invalid-feedback">Valor Maleta é obrigatório</div>
-    </div>
-    <div class="form-group col-lg-3" [ngClass]="{ 'has-danger': f.submitted && !participantesPremiacaoTerceiro.valid }">
-        <label for="participantesPremiacaoTerceiro">Qtd jogadores premiação 3º</label>
-        <input type="text" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !participantesPremiacaoTerceiro.valid }" name="participantesPremiacaoTerceiro" [(ngModel)]="parametro.participantesPremiacaoTerceiro" #participantesPremiacaoTerceiro="ngModel" required />
     </div>
     <div class="form-group col-lg-2" [ngClass]="{ 'has-danger': f.submitted && !jogadoresRedraw.valid }">
         <label for="jogadoresRedraw">Qtd jogadores redraw</label>
-        <input type="text" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !jogadoresRedraw.valid }" name="jogadoresRedraw" [(ngModel)]="parametro.jogadoresRedraw" #jogadoresRedraw="ngModel" required />
+        <input type="number" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !jogadoresRedraw.valid }" name="jogadoresRedraw" [(ngModel)]="parametro.jogadoresRedraw" #jogadoresRedraw="ngModel" required />
+    </div>
+    <div class="form-group col-lg-2" [ngClass]="{ 'has-danger': f.submitted && !participantesPremiacaoTerceiro.valid }" title="Quantidade de jogadores a partir da qual se premia o terceiro colocado">
+        <label for="participantesPremiacaoTerceiro">Qtd jgs premiação 3º</label>
+        <input type="number" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !participantesPremiacaoTerceiro.valid }" name="participantesPremiacaoTerceiro" [(ngModel)]="parametro.participantesPremiacaoTerceiro" #participantesPremiacaoTerceiro="ngModel" required />
+    </div>
+  </div>
+
+  <!--
+    premiacaoSegundo:
+    premiacaoTerceiro:
+    qtdFichasBuyIn:
+    qtdFichasTimeChip:
+  -->
+
+  <div class="row">
+    <div class="form-group col-lg-2" [ngClass]="{ 'has-danger': f.submitted && !premiacaoSegundo.valid }">
+        <label for="premiacaoSegundo">Valor Premiação 2o</label>
+        <input type="number" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !premiacaoSegundo.valid }" name="premiacaoSegundo" [(ngModel)]="parametro.premiacaoSegundo" #premiacaoSegundo="ngModel" required />
+    </div>
+    <div class="form-group col-lg-2" [ngClass]="{ 'has-danger': f.submitted && !premiacaoTerceiro.valid }">
+        <label for="premiacaoTerceiro">Valor premiação 3º</label>
+        <input type="number" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !premiacaoTerceiro.valid }" name="premiacaoTerceiro" [(ngModel)]="parametro.premiacaoTerceiro" #premiacaoTerceiro="ngModel" required />
+    </div>
+    <div class="form-group col-lg-2" [ngClass]="{ 'has-danger': f.submitted && !qtdFichasBuyIn.valid }">
+        <label for="qtdFichasBuyIn">Fichas Buy-In</label>
+        <input type="number" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !qtdFichasBuyIn.valid }" name="qtdFichasBuyIn" [(ngModel)]="parametro.qtdFichasBuyIn" #qtdFichasBuyIn="ngModel" required />
+    </div>
+    <div class="form-group col-lg-2" [ngClass]="{ 'has-danger': f.submitted && !qtdFichasTimeChip.valid }">
+        <label for="qtdFichasTimeChip">Fichas Time Chip</label>
+        <input type="number" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !qtdFichasTimeChip.valid }" name="qtdFichasTimeChip" [(ngModel)]="parametro.qtdFichasTimeChip" #qtdFichasTimeChip="ngModel" required />
     </div>
   </div>
   <div class="form-group">

@@ -5,7 +5,9 @@ import { AuthService } from './services/auth.service';
 import { JogoService } from './services/jogo.service';
 import { CaixaService } from './services/caixa.service';
 import { FormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
 import { Pontuacao } from './models/pontuacao';
 import { AppComponent } from './components/app.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -25,6 +27,8 @@ import { DetalheJogadorComponent } from './components/detalhe-jogador/detalhe-jo
 import { PreJogoComponent } from './components/pre-jogo/pre-jogo.component';
 import { Globals } from './app.globals';
 import { ControleDealerComponent } from './components/controle-dealer/controle-dealer.component';
+
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
@@ -49,7 +53,7 @@ import { ControleDealerComponent } from './components/controle-dealer/controle-d
     //AlertModule.forRoot(),
     Routing
   ],
-  providers: [PontuacaoService, JogadorService, AuthService, AuthGuard, JogoService, CaixaService, Globals],
+  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, PontuacaoService, JogadorService, AuthService, AuthGuard, JogoService, CaixaService, Globals],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
