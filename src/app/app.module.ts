@@ -28,6 +28,7 @@ import { PreJogoComponent } from './components/pre-jogo/pre-jogo.component';
 import { Globals } from './app.globals';
 import { ControleDealerComponent } from './components/controle-dealer/controle-dealer.component';
 import { ChartsModule } from 'ng2-charts';
+import { GraficosComponent } from './components/graficos/graficos.component';
 
 registerLocaleData(localePt);
 
@@ -45,7 +46,8 @@ registerLocaleData(localePt);
     DetalheJogadorComponent,
     PremiacaoComponent,
     PreJogoComponent,
-    ControleDealerComponent
+    ControleDealerComponent,
+    GraficosComponent
   ],
   imports: [
     BrowserModule,

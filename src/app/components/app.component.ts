@@ -27,10 +27,11 @@ export class AppComponent {
              ,public globals: Globals){ }
 
   ngOnInit() {
+    require(`style-loader!../../styles.css`);
+    this.globals.isLoading = true;
     this.config.getTheme().subscribe(tema => {
       this.tema = tema;
       require(`style-loader!../../themes/${tema}.css`);
-      require(`style-loader!../../styles.css`);
     });
 
     this.preJogoService.consultar().subscribe((preJogo) => {

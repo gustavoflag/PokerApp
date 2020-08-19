@@ -12,6 +12,7 @@ import { ParametroComponent } from './components/parametro/parametro.component';
 import { PreJogoComponent } from './components/pre-jogo/pre-jogo.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ControleDealerComponent } from './components/controle-dealer/controle-dealer.component';
+import { GraficosComponent } from './components/graficos/graficos.component';
 
 const appRoutes: Routes = [
     { path: 'login', component: AuthComponent },
@@ -28,6 +29,7 @@ const appRoutes: Routes = [
     { path: '', component: ClassificacaoComponent },
     { path: 'classificacaoMes', component: ClassificacaoMesComponent },
     { path: 'controleDealer', component: ControleDealerComponent },
+    { path: 'graficos', component: GraficosComponent },
     { path: '**', redirectTo: '' }
 ];
 

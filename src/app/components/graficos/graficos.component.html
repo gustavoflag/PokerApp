@@ -1,0 +1,28 @@
+<h2 class="hidden-sm-down">Pontuação por etapa</h2>
+<h4 class="hidden-md-up">Pontuação por etapa</h4>
+<div class="row"> 
+  <canvas baseChart width=".6" height=".6"
+      [datasets]="lineChartData"
+      [labels]="lineChartLabels"
+      [options]="lineChartOptions"
+      [colors]="lineChartColors"
+      [legend]="lineChartLegend"
+      [chartType]="lineChartType">
+  </canvas>
+</div>
+<h4 class="text-align-center">Selecione os jogadores (MAX: 6)</h4>
+<div class="row">
+  <div class="col-lg-3" *ngFor="let jogador of jogadores">
+    <ul class="list-group">
+      <li 
+        class="list-group-item d-flex justify-content-between button"
+        (click)="selecionaJogador(jogador)"
+        [ngStyle]="{ 'color' : jogador.corGrafico }">
+        <span>{{jogador.nome}}</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+

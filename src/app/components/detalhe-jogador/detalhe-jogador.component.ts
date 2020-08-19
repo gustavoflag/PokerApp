@@ -22,14 +22,12 @@ export class DetalheJogadorComponent implements OnInit {
   width: number = 4;
 
    //
-  public lineChartData: ChartDataSets[];/* = [
-    { data: [0, 12, 12, 22, 25, 32, 40], label: 'Pontos', lineTension: 0 }
-  ];*/
-  public lineChartLabels: any[];// = ['1', '2', '3', '4', '5', '6', '7'];
+  public lineChartData: ChartDataSets[];
+  public lineChartLabels: any[];
 
   public lineChartOptions: (ChartOptions) = {
     responsive: true,
-    scales: { //you're missing this
+    scales: {
       yAxes: [{
          scaleLabel: {
             display: true,
@@ -42,11 +40,15 @@ export class DetalheJogadorComponent implements OnInit {
            labelString: 'Etapa'
         }
      }]
-   }//END scales
+   }
   };
   public lineChartColors: Color[] = [
     {
       borderColor: '#f89406',
+      backgroundColor: 'rgba(255,0,0,0)',
+    },
+    {
+      borderColor: 'red',
       backgroundColor: 'rgba(255,0,0,0)',
     }
   ];
@@ -87,6 +89,8 @@ export class DetalheJogadorComponent implements OnInit {
             this.lineChartLabels.push(etapa.etapa.toString());
             pontuacoes.push(etapa.pontos);
           });
+
+          console.log('pontuacoes', pontuacoes);
 
           this.lineChartData = [
             { data: pontuacoes, label: 'Pontos', lineTension: 0 }
