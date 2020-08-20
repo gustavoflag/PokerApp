@@ -4,11 +4,21 @@
       <div *ngFor="let titulo of jogador.titulos" style="background:transparent url('assets/images/lourosSm.png') no-repeat center center" class="float-left">
         <small class="text-muted" style="text-align:middle">{{titulo.ano}}</small>
       </div>
-      <div></div>
   </h2>
   <br />
   <br />
   <br />
+  <div class="row">
+    <canvas baseChart width="width" height="height"
+      [datasets]="lineChartData"
+      [labels]="lineChartLabels"
+      [options]="lineChartOptions"
+      [colors]="lineChartColors"
+      [legend]="lineChartLegend"
+      [chartType]="lineChartType">
+    </canvas>
+    <br />
+  </div>
   <div class="row">
     <div class="col-lg-4">
       <div class="bs-component">

@@ -16,7 +16,9 @@ export class ClassificacaoComponent implements OnInit {
   //isLoading: boolean = false;
 
   constructor(private jogadorService: JogadorService
-             ,public globals: Globals){ }
+             ,public globals: Globals){ 
+              this.globals.isLoading = true;
+             }
 
   ngOnInit() {
     this.rookies = false;
