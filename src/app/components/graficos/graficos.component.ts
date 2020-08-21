@@ -51,7 +51,11 @@ export class GraficosComponent implements OnInit {
     "#5bc0de",
     "#62c462",
     "#f89406",
-    "#ee5f5b"];
+    "#ee5f5b",
+    "#f8e806",
+    "#9cd8eb",
+    "#c142a6",
+    "#647ab6"];
 
   constructor(private jogadorService: JogadorService
              ,private jogoService: JogoService
@@ -65,8 +69,8 @@ export class GraficosComponent implements OnInit {
   }
 
   selecionaJogador(jogador){
-    if (!jogador.selecionado && this.qtdSelecionados == 6){
-      alert('Máximo de 6 jogadores por gráfico');
+    if (!jogador.selecionado && this.qtdSelecionados == 10){
+      alert('Máximo de 10 jogadores por gráfico');
       return;
     }
 
