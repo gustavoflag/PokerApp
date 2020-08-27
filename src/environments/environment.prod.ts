@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  API_URI: "https://tqsop-api.herokuapp.com",
+  API_URI: "https://stg-tqsop-api.herokuapp.com",
   theme: "darkly"
 };
