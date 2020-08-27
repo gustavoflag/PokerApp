@@ -29,6 +29,7 @@ import { Globals } from './app.globals';
 import { ControleDealerComponent } from './components/controle-dealer/controle-dealer.component';
 import { ChartsModule } from 'ng2-charts';
 import { GraficosComponent } from './components/graficos/graficos.component';
+import { FotosComponent } from './components/fotos/fotos.component';
 
 registerLocaleData(localePt);
 
@@ -47,7 +48,8 @@ registerLocaleData(localePt);
     PremiacaoComponent,
     PreJogoComponent,
     ControleDealerComponent,
-    GraficosComponent
+    GraficosComponent,
+    FotosComponent
   ],
   imports: [
     BrowserModule,

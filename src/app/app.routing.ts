@@ -13,6 +13,7 @@ import { PreJogoComponent } from './components/pre-jogo/pre-jogo.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ControleDealerComponent } from './components/controle-dealer/controle-dealer.component';
 import { GraficosComponent } from './components/graficos/graficos.component';
+import { FotosComponent } from './components/fotos/fotos.component';
 
 const appRoutes: Routes = [
     { path: 'login', component: AuthComponent },
@@ -30,6 +31,7 @@ const appRoutes: Routes = [
     { path: 'classificacaoMes', component: ClassificacaoMesComponent },
     { path: 'controleDealer', component: ControleDealerComponent },
     { path: 'graficos', component: GraficosComponent },
+    { path: 'fotos', component: FotosComponent },
     { path: '**', redirectTo: '' }
 ];
 

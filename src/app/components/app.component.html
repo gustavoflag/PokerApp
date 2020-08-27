@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4" style="margin-bottom: 0 !important;">
+<nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4" style="margin-bottom: 0 !important; z-index: 2;">
   <div class="d-box">
     <a class="navbar-brand" href="#"><img src="/assets/images/TQSOP.png" height="25px" class="align-bottom" />&nbsp;TQSOP</a> 
     <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
@@ -40,6 +40,9 @@
       <li class="nav-item" [routerLinkActive]="['active']">
         <a class="nav-link" [routerLink]="['/controleDealer']">Controle Dealer</a>
       </li>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['/fotos']">Fotos</a>
+      </li>
     </ul>
     <section *ngIf="logado()">
       <form class="form-inline mt-2 mt-md-0" (submit)="logout();">
@@ -56,23 +59,6 @@
 </nav>
 <div class="container" style="padding-top: 1.5rem">
     <router-outlet></router-outlet>
-</div>
-<!--<script type="text/javascript">
-    /*var feed = new Instafeed({
-        get: 'tagged',
-        tagName: 'batera',
-        clientId: 'c6747f94b49c48359b84b969da7c61f0',
-        template: '<a href="{{link}}"><img src="{{image}}" /></a>'
-    });
-    feed.run();*/
-    //alert('teste');
-</script>-->
-<div id="instafeed">
-  <!-- 01d27b6fe1de4bbaa6dee0b85de80d21 -->
-<!--  -->
-
-<!-- c6747f94b49c48359b84b969da7c61f0 -->
-<!-- 128332ad7b354bb2baf94798a1f78d82 -->
 </div>
 <div *ngIf="globals.isLoading" class="loading-background">
 </div>
