@@ -10,12 +10,12 @@
       <li class="nav-item">
         <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/']">Classificação</a>
       </li>
-      <li class="nav-item" *ngIf="tempoReal || config.usuarioLogado()">
+      <!-- <li class="nav-item" *ngIf="tempoReal || config.usuarioLogado()">
         <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/prejogo']">Tempo Real</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/classificacaoMes']">Mês a Mês</a>
-      </li>
+      </li> -->
       <li class="nav-item">
         <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/jogo']">Jogos</a>
       </li>
@@ -25,7 +25,7 @@
       <li class="nav-item">
         <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/pontuacao']">Pontuação</a>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/premiacao']">Premiação</a>
       </li>
       <li class="nav-item" *ngIf="config.usuarioLogado()">
@@ -33,9 +33,9 @@
       </li>
       <li class="nav-item" *ngIf="config.usuarioLogado()">
         <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/parametro']">Parâmetros</a>
-      </li>
+      </li>-->
     </ul>
-    <section *ngIf="logado()">
+    <!-- <section *ngIf="logado()">
       <form class="form-inline mt-2 mt-md-0" (submit)="logout();">
         Olá {{nomeUsuario}}!&nbsp;&nbsp;
         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Logout</button>
@@ -45,7 +45,7 @@
       <form class="form-inline mt-2 mt-md-0" (submit)="login();">
         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Login</button>
       </form>
-    </section>
+    </section> -->
   </div>
 </nav>
 <div class="container">
