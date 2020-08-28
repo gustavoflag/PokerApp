@@ -13,6 +13,7 @@ export class ClassificacaoComponent implements OnInit {
   jogadores: any = null;
   rookies: boolean = false;
   ordem: string = null;
+  instaAberto: boolean = true;
   //isLoading: boolean = false;
 
   constructor(private jogadorService: JogadorService
@@ -63,5 +64,13 @@ export class ClassificacaoComponent implements OnInit {
     } else {
       this.listarRookies();
     }
+  }
+
+  fecharInsta(){
+    this.instaAberto = false;
+  }
+
+  abrirInsta(){
+    this.instaAberto = true;
   }
 }
