@@ -5,8 +5,8 @@
 
 export const environment = {
   production: false,
-  API_URI: "http://localhost:3000",
-  //API_URI: "https://tqsop-api.herokuapp.com",
+  //API_URI: "http://localhost:3000",
+  API_URI: "https://tqsop2019-api.netlify.app/.netlify/functions/server",
   theme: "materia"
 
 };
