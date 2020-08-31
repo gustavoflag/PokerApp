@@ -4,6 +4,7 @@ import { ConfigService } from '../services/config.service';
 import { Router } from '@angular/router';
 import { PreJogoService } from '../services/pre-jogo.service';
 import { Globals } from '../app.globals';
+import { ErrorHelper } from '../helpers/error.helper';
 declare const require: any;
 
 @Component({
@@ -20,11 +21,14 @@ export class AppComponent {
   tema: string;
   tempoReal: boolean;
 
-  constructor(private authService: AuthService
-             ,private router: Router
-             ,private preJogoService: PreJogoService
-             ,public config: ConfigService
-             ,public globals: Globals){ }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private preJogoService: PreJogoService,
+    public config: ConfigService,
+    public globals: Globals,
+    private errorHelper: ErrorHelper,
+  ){ }
 
   ngOnInit() {
     require(`style-loader!../../styles.css`);
@@ -32,13 +36,17 @@ export class AppComponent {
     this.config.getTheme().subscribe(tema => {
       this.tema = tema;
       require(`style-loader!../../themes/${tema}.css`);
-    });
+    }, error => this.errorHelper.handle(error));
 
-    this.preJogoService.consultar().subscribe((preJogo) => {
+    this.preJogoService.consultar().subscribe(preJogo => {
       if (preJogo !== null){
         this.tempoReal = true;
       } else {
         this.tempoReal = false;
+      }
+    }, error => {
+      if (error.status != 440){
+        console.log('erro na chamada do tempo real', error);
       }
     });
   }

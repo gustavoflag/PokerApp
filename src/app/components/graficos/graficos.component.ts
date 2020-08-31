@@ -5,6 +5,7 @@ import { Globals } from '../../app.globals';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color } from 'ng2-charts';
 import { JogoService } from '../../services/jogo.service';
+import { ErrorHelper } from '../../helpers/error.helper';
 
 @Component({
   selector: 'app-graficos',
@@ -57,11 +58,14 @@ export class GraficosComponent implements OnInit {
     "#c142a6",
     "#647ab6"];
 
-  constructor(private jogadorService: JogadorService
-             ,private jogoService: JogoService
-             ,public globals: Globals) {
-                this.getQuantidadeJogos();
-                this.getJogadores();
+  constructor(
+    private jogadorService: JogadorService,
+    private jogoService: JogoService,
+    public globals: Globals,
+    private errorHelper: ErrorHelper,
+  ) {
+      this.getQuantidadeJogos();
+      this.getJogadores();
   }
 
   ngOnInit() {
@@ -144,7 +148,7 @@ export class GraficosComponent implements OnInit {
       for (var i = 0; i <= this.quantidadeJogos; i++){
         this.lineChartLabels.push(i.toString());
       }
-    });
+    }, error => this.errorHelper.handle(error));
   }
 
   getJogadores(){
@@ -160,7 +164,7 @@ export class GraficosComponent implements OnInit {
       });
       
       this.globals.isLoading = false; 
-    });
+    }, error => this.errorHelper.handle(error));
   }
 
 }

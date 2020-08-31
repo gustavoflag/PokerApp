@@ -5,6 +5,7 @@ import { ConfigService } from '../../services/config.service';
 import { JogadorService } from '../../services/jogador.service';
 import { ParametroService } from '../../services/parametro.service';
 import { Globals } from '../../app.globals';
+import { ErrorHelper } from '../../helpers/error.helper';
 
 @Component({
   selector: 'app-pre-jogo',
@@ -25,12 +26,15 @@ export class PreJogoComponent implements OnInit {
   lateRegister: boolean = false;
   tempo: string;
 
-  constructor(private preJogoService: PreJogoService
-             ,private jogadorService: JogadorService
-             ,private parametroService: ParametroService
-             ,private router: Router
-             ,private config: ConfigService
-             ,public globals: Globals) { }
+  constructor(
+    private preJogoService: PreJogoService,
+    private jogadorService: JogadorService,
+    private parametroService: ParametroService,
+    private router: Router,
+    private config: ConfigService,
+    public globals: Globals,
+    private errorHelper: ErrorHelper,
+  ) { }
 
   ngOnInit() {
     this.consultar();
@@ -45,12 +49,16 @@ export class PreJogoComponent implements OnInit {
   listarJogadores(){
     this.globals.isLoading = true;
     this.jogadorService.lista()
-        .subscribe((jogs) => { this.jogadores = jogs; this.globals.isLoading = false; });
+        .subscribe((jogs) => { 
+          this.jogadores = jogs; 
+          this.globals.isLoading = false; 
+        }, error => this.errorHelper.handle(error));
   }
 
   consultarParametro(){
     this.parametroService.consultar()
-        .subscribe((parametro) => this.parametro = parametro);
+        .subscribe(parametro => this.parametro = parametro
+                  ,error => this.errorHelper.handle(error));
   }
 
   jogadoresRestantes() : number{
@@ -91,7 +99,7 @@ export class PreJogoComponent implements OnInit {
             this.participantes = preJogo.participantes;
             this.mesas = new Array(preJogo.qtdMesas);
             this.globals.isLoading = false;
-          });
+          }, error => this.errorHelper.handle(error));
   }
 
   limpaMensagens(){

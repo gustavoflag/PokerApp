@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JogadorService } from '../../services/jogador.service';
 import { ConfigService } from '../../services/config.service';
 import { Globals } from '../../app.globals';
+import { ErrorHelper } from '../../helpers/error.helper';
 
 @Component({
   selector: 'app-classificacao-mes',
@@ -11,8 +12,11 @@ import { Globals } from '../../app.globals';
 })
 export class ClassificacaoMesComponent implements OnInit {
   meses: any = [];
-  constructor(private jogadorService: JogadorService
-             ,public globals: Globals) { }
+  constructor(
+    private jogadorService: JogadorService,
+    public globals: Globals,
+    private errorHelper: ErrorHelper,
+  ) { }
 
   ngOnInit() {
     this.listarMeses();
@@ -23,6 +27,6 @@ export class ClassificacaoMesComponent implements OnInit {
     this.jogadorService.classificacaoTodosMeses().subscribe((meses) => {
       this.meses = meses;
       this.globals.isLoading = false;
-    });
+    }, error => this.errorHelper.handle(error));
   }
 }

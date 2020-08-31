@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JogadorService } from '../../services/jogador.service';
 import { ConfigService } from '../../services/config.service';
 import { Globals } from '../../app.globals';
+import { ErrorHelper } from '../../helpers/error.helper';
 
 @Component({
   selector: 'app-classificacao',
@@ -16,10 +17,12 @@ export class ClassificacaoComponent implements OnInit {
   instaAberto: boolean = true;
   //isLoading: boolean = false;
 
-  constructor(private jogadorService: JogadorService
-             ,public globals: Globals){ 
-              this.globals.isLoading = true;
-             }
+  constructor(
+    private jogadorService: JogadorService,
+    public globals: Globals,
+    private errorHelper: ErrorHelper){ 
+      this.globals.isLoading = true;
+  }
 
   ngOnInit() {
     this.rookies = false;
@@ -39,12 +42,20 @@ export class ClassificacaoComponent implements OnInit {
 
   listarGeral() {
     this.globals.isLoading = true;
-    this.jogadorService.classificacao().subscribe(jogs => { this.jogadores = jogs; this.globals.isLoading = false; });
+    this.jogadorService.classificacao()
+      .subscribe(jogs => { 
+        this.jogadores = jogs; 
+        this.globals.isLoading = false; 
+      }, error => this.errorHelper.handle(error));
   }
 
   listarRookies() {
     this.globals.isLoading = true;
-    this.jogadorService.classificacaoRookies().subscribe(jogs => { this.jogadores = jogs; this.globals.isLoading = false; });
+    this.jogadorService.classificacaoRookies()
+      .subscribe(jogs => { 
+        this.jogadores = jogs; 
+        this.globals.isLoading = false; 
+      }, error => this.errorHelper.handle(error));
   }
 
   qtdLugarJogador(jogador, lugar): Number{

@@ -30,6 +30,7 @@ import { ControleDealerComponent } from './components/controle-dealer/controle-d
 import { ChartsModule } from 'ng2-charts';
 import { GraficosComponent } from './components/graficos/graficos.component';
 import { FotosComponent } from './components/fotos/fotos.component';
+import { ErrorHelper } from './helpers/error.helper';
 
 registerLocaleData(localePt);
 
@@ -59,7 +60,7 @@ registerLocaleData(localePt);
     //AlertModule.forRoot(),
     Routing
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, PontuacaoService, JogadorService, AuthService, AuthGuard, JogoService, CaixaService, Globals],
+  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, PontuacaoService, JogadorService, AuthService, AuthGuard, JogoService, CaixaService, Globals, ErrorHelper],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

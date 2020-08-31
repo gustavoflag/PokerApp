@@ -3,6 +3,7 @@ import { CaixaService } from '../../services/caixa.service';
 import { ConfigService } from '../../services/config.service';
 import { Router } from '@angular/router';
 import { Globals } from '../../app.globals';
+import { ErrorHelper } from '../../helpers/error.helper';
 
 @Component({
   selector: 'app-caixa',
@@ -16,10 +17,13 @@ export class CaixaComponent implements OnInit {
   mensagem: string = null;
   erro: string = null;
 
-  constructor(private caixaService: CaixaService
-             ,private router: Router
-             ,public config: ConfigService
-             ,public globals: Globals){ }
+  constructor(
+    private caixaService: CaixaService,
+    private router: Router,
+    public config: ConfigService,
+    public globals: Globals,
+    private errorHelper: ErrorHelper,
+  ){ }
 
   ngOnInit() {
     this.limpaMensagens();
@@ -40,7 +44,10 @@ export class CaixaComponent implements OnInit {
     this.globals.isLoading = true;
     this.lancamentoEdicao = null;
     this.caixaService.listar()
-        .subscribe(lctos => { this.lancamentosCaixa = lctos; this.globals.isLoading = false; });
+        .subscribe(lctos => { 
+          this.lancamentosCaixa = lctos; 
+          this.globals.isLoading = false; 
+        }, error => this.errorHelper.handle(error));
   }
 
   salvar(){
