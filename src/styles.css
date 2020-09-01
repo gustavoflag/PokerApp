@@ -43,3 +43,9 @@
 .container {
   background-color: #272B30;
 }
+
+@media (min-width: 1300px) {
+  .container {
+    max-width: 1300px !important;
+  }
+}

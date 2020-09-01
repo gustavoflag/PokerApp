@@ -72,14 +72,14 @@
       </tr>
     </tbody>
   </table>
-  <div *ngIf="instaAberto" style="height: 291px;">&nbsp;</div>
+  <div *ngIf="instaAberto" style="height: 181px;">&nbsp;</div>
 </section>
 <div class="footer">
-  <div class="footer-title">
-    <button class="link-button" (click)="abrirInsta()">Instagram: @tqsop_</button>
-    <button class="link-button float-right" *ngIf="instaAberto" (click)="fecharInsta()">X</button>
-  </div>
-  <div class="instagram-container" *ngIf="instaAberto">
-    <iframe src="https://embedsocial.com/facebook_album/pro_instagram/b70b1ec29dca55275d21ec0e284f4104c101e460" scrolling="no" class="instagram-album" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+  <div class="instagram-container" >
+    <div class="footer-title">
+      <button class="link-button" (click)="abrirInsta()">Instagram: @tqsop_</button>
+      <button class="link-button float-right" *ngIf="instaAberto" (click)="fecharInsta()">X</button>
+    </div>
+    <iframe *ngIf="instaAberto" src="https://embedsocial.com/facebook_album/pro_instagram/b70b1ec29dca55275d21ec0e284f4104c101e460" scrolling="no" class="instagram-album" frameborder="0" marginheight="0" marginwidth="0"></iframe>
   </div>
 </div>
