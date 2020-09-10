@@ -12,7 +12,7 @@
 <div *ngIf="mensagem" class="alert alert-dismissible alert-success">{{mensagem}}</div>
 <div *ngIf="erro" class="alert alert-dismissible alert-danger">{{erro}}</div>
 <section *ngIf="!jogoEdicao && jogos && jogos.length > 0">
-  <div *ngFor="let jogo of jogos" class="card border-light mb-3">
+  <div *ngFor="let jogo of jogos" class="card border-secondary mb-3">
     <div class="card-header">
       <span class="badge badge-success badge-numero">#{{ jogo.numero }}</span>&nbsp;&nbsp;{{ jogo.data | date: 'dd/MM/yyyy' }}
       -

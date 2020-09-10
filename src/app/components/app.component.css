@@ -1,0 +1,11 @@
+.navMenu{
+    margin-bottom: 0 !important; 
+    box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.35);
+    z-index: 99;
+    position: fixed;
+    width: 100%;
+}
+
+.content{
+    padding-top: 90px;
+}

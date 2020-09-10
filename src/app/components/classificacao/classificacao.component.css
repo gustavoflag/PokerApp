@@ -47,6 +47,10 @@
     cursor: pointer;
 }
 
+.table th, .table td{
+    padding-left: 0.5rem !important;
+}
+
 @media (max-width: 1862px){
     .instagram-album, .footer-title{
         width: 70%;

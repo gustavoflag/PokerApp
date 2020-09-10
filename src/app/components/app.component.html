@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4" style="margin-bottom: 0 !important; z-index: 2;">
+<nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4 navMenu">
   <div class="d-box">
     <a class="navbar-brand" href="#"><img src="/assets/images/TQSOP.png" height="25px" class="align-bottom" />&nbsp;TQSOP</a> 
     <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
@@ -57,7 +57,7 @@
     </section>
   </div>
 </nav>
-<div class="container" style="padding-top: 1.5rem">
+<div class="container content">
     <router-outlet></router-outlet>
 </div>
 <div *ngIf="globals.isLoading" class="loading-background">
