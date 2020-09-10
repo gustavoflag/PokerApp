@@ -43,7 +43,7 @@ export class JogadorService {
   }
 
   classificacaoTodosMeses(){
-    return this.http.get(this.baseUrlService + '/classificacaoTodosMeses');
+    return this.http.get(this.baseUrlService + '/classificacaoTodosMeses/2018');
   }
 
   inserir(jogador): Observable<any>{
