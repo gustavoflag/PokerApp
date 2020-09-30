@@ -20,6 +20,7 @@ export class AppComponent {
   navAberta: boolean = false;
   tema: string;
   tempoReal: boolean;
+  showConfig: boolean = false;
 
   constructor(
     private authService: AuthService,

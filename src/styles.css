@@ -71,6 +71,13 @@
   background-color: #272B30;
 }
 
+@media (max-width: 768px) {
+  .navbar-expand-md .navbar-brand,
+  .navbar-expand-md .nav-link {
+    padding: 10px !important;
+  }
+}
+
 @media (min-width: 1300px) {
   .container {
     max-width: 1300px !important;
