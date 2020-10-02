@@ -27,7 +27,7 @@ import { DetalheJogadorComponent } from './components/detalhe-jogador/detalhe-jo
 import { PreJogoComponent } from './components/pre-jogo/pre-jogo.component';
 import { Globals } from './app.globals';
 import { ControleDealerComponent } from './components/controle-dealer/controle-dealer.component';
-import { ChartsModule } from 'ng2-charts';
+//import { ChartsModule } from 'ng2-charts';
 import { GraficosComponent } from './components/graficos/graficos.component';
 import { FotosComponent } from './components/fotos/fotos.component';
 import { ErrorHelper } from './helpers/error.helper';
@@ -56,7 +56,7 @@ registerLocaleData(localePt);
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    ChartsModule,
+    //ChartsModule,
     //AlertModule.forRoot(),
     Routing
   ],
