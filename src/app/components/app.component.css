@@ -9,3 +9,23 @@
 .content{
     padding-top: 90px;
 }
+
+.submenu:hover .dropdown-menu{
+    visibility: visible !important;
+}
+
+@media(max-width: 1150px){
+    .navMenu{
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 768px) {
+    .submenu .dropdown-menu{
+        visibility: visible !important;
+    }
+
+    .navMenu{
+        font-size: 15px;
+    }
+}
