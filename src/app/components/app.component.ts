@@ -31,13 +31,6 @@ export class AppComponent {
   ){ }
 
   ngOnInit() {
-    require(`style-loader!../../styles.css`);
-    this.globals.isLoading = true;
-    this.config.getTheme().subscribe(tema => {
-      this.tema = tema;
-      require(`style-loader!../../themes/${tema}.css`);
-    }, error => this.errorHelper.handle(error));
-
     this.preJogoService.consultar().subscribe(preJogo => {
       if (preJogo !== null){
         this.tempoReal = true;

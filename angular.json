@@ -21,7 +21,9 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "src/bootstrap.css"
+              "src/bootstrap.css",
+              "src/styles.css",
+              "src/themes/slate.css"
             ],
             "scripts": [
               "src/jquery.min.js",
@@ -79,7 +81,9 @@
               "src/popover.min.js"
             ],
             "styles": [
-              "src/bootstrap.css"
+              "src/bootstrap.css",
+              "src/styles.css",
+              "src/themes/slate.css"
             ],
             "assets": [
               "src/assets",
