@@ -1,4 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+mat-icon{
+  vertical-align: bottom;
+}
+
+.badge mat-icon{
+  height: 13px;
+  width: 13px;
+  font-size: 13px;
+}
+
 .zeroPadding {
   padding:0;
 }
@@ -114,3 +124,5 @@
     font-size: 12px !important;
   }
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

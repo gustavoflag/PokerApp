@@ -14,9 +14,10 @@
 <section *ngIf="!jogoEdicao && jogos && jogos.length > 0">
   <div *ngFor="let jogo of jogos" class="card border-secondary mb-3">
     <div class="card-header">
-      <span class="badge badge-success badge-numero">#{{ jogo.numero }}</span>&nbsp;&nbsp;{{ jogo.data | date: 'dd/MM/yyyy' }}
-      -
-      Valor Maleta: {{ jogo.valorMaleta | currency:'R$' }}
+      <span class="badge badge-success badge-numero">#{{ jogo.numero }}</span>&nbsp;&nbsp;<mat-icon class="material-icons-round">today</mat-icon>{{ jogo.data | date: 'dd/MM/yyyy' }}
+      &nbsp;<mat-icon class="material-icons-round">work</mat-icon>
+      <span class="hidden-sm-down"> Valor Maleta:</span>
+      {{ jogo.valorMaleta | currency:'R$' }}
       <div class="float-right">
         <!--<button class="btn btn-outline-success btn-sm" (click)="editar(jogo);">Editar</button>-->
         <button class="btn btn-outline-danger btn-sm" (click)="excluir(jogo);" *ngIf="config.usuarioLogado()">Excluir</button>
@@ -26,22 +27,31 @@
       <table class="table table-hover">
         <thead>
           <th></th>
-          <th>Nome</th>
           <th>
-            <span class="hidden-sm-down">Pontos</span>
-            <span class="hidden-md-up">Pts</span>
+            <mat-icon class="material-icons-round">person</mat-icon>
+            <span class="hidden-sm-down"> Jogador</span>
           </th>
-          <th class="hidden-sm-down">Investido</th>
-          <th class="hidden-sm-down">Recebido</th>
           <th>
-            <span class="hidden-sm-down">Prêmio Liquido</span>
-            <span class="hidden-md-up">Pr. Líquido</span>
+            <mat-icon class="material-icons-round">leaderboard</mat-icon>
+            <span class="hidden-sm-down"> Pontos</span>
+          </th>
+          <th class="hidden-sm-down">
+            <mat-icon class="material-icons-round">attach_money</mat-icon>
+            Investido
+          </th>
+          <th class="hidden-sm-down">
+            <mat-icon class="material-icons-round">attach_money</mat-icon>
+            Recebido
+          </th>
+          <th>
+            <mat-icon class="material-icons-round">attach_money</mat-icon>
+            <span class="hidden-sm-down">Liquido</span>
           </th>
         </thead>
         <tbody>
           <tr *ngFor="let participante of jogo.participantes">
             <td>{{ participante.lugar }}º</td>
-            <td>{{ participante.nomeJogador }}&nbsp;<span *ngIf="participante.dealer" class="badge badge-warning">D</span>&nbsp;<span *ngIf="participante.rebuy > 0" class="badge badge-danger">{{ participante.rebuy > 1 ? participante.rebuy + " " : "" }}Rebuy</span></td>
+            <td>{{ participante.nomeJogador }}&nbsp;<span *ngIf="participante.dealer" class="badge badge-warning">D</span>&nbsp;<span *ngIf="participante.rebuy > 0" class="badge badge-danger"><mat-icon class="material-icons-round">replay</mat-icon>{{ participante.rebuy > 1 ? participante.rebuy + " " : "" }}<span class="hidden-sm-down">Rebuy</span></span></td>
             <td>{{ participante.pontos }}</td>
             <td class="hidden-sm-down">{{ participante.valorInvestido | currency:'R$' }}</td>
             <td class="hidden-sm-down">{{ participante.valorRecebido | currency:'R$' }}</td>

@@ -14,10 +14,9 @@
   <table class="table table-hover">
     <thead>
       <th></th>
-      <th>Jogador</th>
+      <th><mat-icon class="material-icons-round">person</mat-icon><span class="hidden-sm-down"> Jogador</span></th>
       <th [ngClass]="{ 'table-active' : ordem == 'P' || !ordem }">
-        <span class="hidden-sm-down"><button type="button" class="btn btn-outline-secondary linkTH" (click)="ordenar('P');">Pontos</button></span>
-        <span class="hidden-md-up"><button type="button" class="btn btn-outline-secondary linkTH" (click)="ordenar('P');">Pts</button></span>
+        <button type="button" class="btn btn-outline-secondary linkTH" (click)="ordenar('P');"><mat-icon class="material-icons-round">leaderboard</mat-icon><span class="hidden-sm-down"> Pontos</span></button>
       </th>
       <th>
         <span class="hidden-sm-down">Jogos</span>
@@ -33,12 +32,12 @@
       <th class="hidden-sm-down">8º</th>
       <th class="hidden-sm-down">9º</th>
       <th class="hidden-sm-down">10º</th>
-      <th class="hidden-sm-down" title="Rebuy">Rb</th>
+      <th class="hidden-sm-down" title="Rebuy"><mat-icon class="material-icons-round">replay</mat-icon></th>
       <th class="hidden-sm-down" [ngClass]="{ 'table-active' : ordem == 'PPJ' }"><button type="button" class="btn btn-outline-secondary linkTH" (click)="ordenar('PPJ');">Pts/Jg</button></th>
       <!-- <th class="hidden-sm-down" [ngClass]="{ 'table-active' : ordem == 'D' }"><button type="button" class="btn btn-outline-secondary linkTH" (click)="ordenar('D');">Dealer</button></th> -->
-      <th class="hidden-sm-down">Vl.Investido</th>
-      <th class="hidden-sm-down" [ngClass]="{ 'table-active' : ordem == 'VR' }"><button type="button" class="btn btn-outline-secondary linkTH" (click)="ordenar('VR');">Vl.Recebido</button></th>
-      <th [ngClass]="{ 'table-active' : ordem == 'S' }"><button type="button" class="btn btn-outline-secondary linkTH" (click)="ordenar('S');">Saldo</button></th>
+      <th class="hidden-sm-down"><mat-icon class="material-icons-round">attach_money</mat-icon>Investido</th>
+      <th class="hidden-sm-down" [ngClass]="{ 'table-active' : ordem == 'VR' }"><button type="button" class="btn btn-outline-secondary linkTH" (click)="ordenar('VR');"><mat-icon class="material-icons-round">attach_money</mat-icon>Recebido</button></th>
+      <th [ngClass]="{ 'table-active' : ordem == 'S' }"><button type="button" class="btn btn-outline-secondary linkTH" (click)="ordenar('S');"><mat-icon class="material-icons-round">attach_money</mat-icon><span class="hidden-sm-down">Saldo</span></button></th>
     </thead>
     <tbody>
       <tr *ngFor="let jogador of jogadores; let i = index">

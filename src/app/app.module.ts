@@ -31,6 +31,8 @@ import { ChartsModule } from 'ng2-charts';
 import { GraficosComponent } from './components/graficos/graficos.component';
 import { FotosComponent } from './components/fotos/fotos.component';
 import { ErrorHelper } from './helpers/error.helper';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
 
 registerLocaleData(localePt);
 
@@ -58,7 +60,9 @@ registerLocaleData(localePt);
     HttpClientModule,
     ChartsModule,
     //AlertModule.forRoot(),
-    Routing
+    Routing,
+    BrowserAnimationsModule,
+    MatIconModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, PontuacaoService, JogadorService, AuthService, AuthGuard, JogoService, CaixaService, Globals, ErrorHelper],
   bootstrap: [AppComponent]
