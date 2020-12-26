@@ -99,7 +99,11 @@ export class PreJogoComponent implements OnInit {
             this.participantes = preJogo.participantes;
             this.mesas = new Array(preJogo.qtdMesas);
             this.globals.isLoading = false;
-          }, error => this.errorHelper.handle(error));
+          }, error => {
+            if (error.error.message != "Pré jogo não encontrado"){
+              this.errorHelper.handle(error);
+            }
+          });
   }
 
   limpaMensagens(){
@@ -204,6 +208,13 @@ export class PreJogoComponent implements OnInit {
 
   timeChip(jogador){
     jogador.timeChip = !jogador.timeChip;
+
+    this.alterar(jogador);
+  }
+
+  pontoExtra(jogador){
+    console.log('jogador', jogador);
+    jogador.pontoExtra = !jogador.pontoExtra;
 
     this.alterar(jogador);
   }
