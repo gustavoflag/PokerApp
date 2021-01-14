@@ -21,6 +21,10 @@
         <label for="participantesPremiacaoTerceiro">Qtd jgs premiação 3º</label>
         <input type="number" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !participantesPremiacaoTerceiro.valid }" name="participantesPremiacaoTerceiro" [(ngModel)]="parametro.participantesPremiacaoTerceiro" #participantesPremiacaoTerceiro="ngModel" required />
     </div>
+    <div class="form-group col-lg-2" [ngClass]="{ 'has-danger': f.submitted && !pontosMaisKO.valid }" title="Quantidade de pontos extras para o jogador com mais KO na etapa">
+        <label for="pontosMaisKO">Qtd pontos mais KO</label>
+        <input type="number" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !pontosMaisKO.valid }" name="pontosMaisKO" [(ngModel)]="parametro.pontosExtraKO" #pontosMaisKO="ngModel" required />
+    </div>
   </div>
 
   <!--

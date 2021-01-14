@@ -15,10 +15,10 @@
     <thead>
       <th></th>
       <th><mat-icon class="material-icons-round">person</mat-icon><span class="hidden-sm-down"> Jogador</span></th>
-      <th [ngClass]="{ 'table-active' : ordem == 'P' || !ordem }">
+      <th class="text-center" [ngClass]="{ 'table-active' : ordem == 'P' || !ordem }">
         <button type="button" class="btn btn-outline-secondary linkTH" (click)="ordenar('P');"><mat-icon class="material-icons-round">leaderboard</mat-icon><span class="hidden-sm-down"> Pontos</span></button>
       </th>
-      <th>
+      <th class="text-center">
         <span class="hidden-sm-down">Jogos</span>
         <span class="hidden-md-up">Jg</span>
       </th>
@@ -32,7 +32,8 @@
       <th class="hidden-sm-down">8º</th>
       <th class="hidden-sm-down">9º</th>
       <th class="hidden-sm-down">10º</th>
-      <th class="hidden-sm-down" title="Rebuy"><mat-icon class="material-icons-round">replay</mat-icon></th>
+      <th class="hidden-sm-down text-center"title="Pontos Extra">Extra</th>
+      <th class="hidden-sm-down text-center" title="Rebuy"><mat-icon class="material-icons-round">replay</mat-icon></th>
       <th class="hidden-sm-down" [ngClass]="{ 'table-active' : ordem == 'PPJ' }"><button type="button" class="btn btn-outline-secondary linkTH" (click)="ordenar('PPJ');">Pts/Jg</button></th>
       <!-- <th class="hidden-sm-down" [ngClass]="{ 'table-active' : ordem == 'D' }"><button type="button" class="btn btn-outline-secondary linkTH" (click)="ordenar('D');">Dealer</button></th> -->
       <th class="hidden-sm-down"><mat-icon class="material-icons-round">attach_money</mat-icon>Investido</th>
@@ -52,18 +53,19 @@
         </td>
         <td class="text-warning text-center" [ngClass]="{ 'table-active' : ordem == 'P' || !ordem }">{{jogador.pontos}}</td>
         <td class="text-center">{{jogador.jogos}}</td>
-        <td class="hidden-sm-down" [ngClass]="{ 'table-active' : ordem == 'V'}">{{qtdLugarJogador(jogador, 1)}}</td>
-        <td class="hidden-sm-down">{{qtdLugarJogador(jogador, 2)}}</td>
-        <td class="hidden-sm-down">{{qtdLugarJogador(jogador, 3)}}</td>
-        <td class="hidden-sm-down">{{qtdLugarJogador(jogador, 4)}}</td>
-        <td class="hidden-sm-down">{{qtdLugarJogador(jogador, 5)}}</td>
-        <td class="hidden-sm-down">{{qtdLugarJogador(jogador, 6)}}</td>
-        <td class="hidden-sm-down">{{qtdLugarJogador(jogador, 7)}}</td>
-        <td class="hidden-sm-down">{{qtdLugarJogador(jogador, 8)}}</td>
-        <td class="hidden-sm-down">{{qtdLugarJogador(jogador, 9)}}</td>
-        <td class="hidden-sm-down">{{qtdLugarJogador(jogador, 10)}}</td>
-        <td class="hidden-sm-down">{{qtdLugarJogador(jogador, -1)}}</td>
-        <td class="hidden-sm-down" [ngClass]="{ 'table-active' : ordem == 'PPJ'}">{{(jogador.pontos / jogador.jogos) | number}}</td>
+        <td class="hidden-sm-down text-center" [ngClass]="{ 'table-active' : ordem == 'V'}">{{qtdLugarJogador(jogador, 1)}}</td>
+        <td class="hidden-sm-down text-center">{{qtdLugarJogador(jogador, 2)}}</td>
+        <td class="hidden-sm-down text-center">{{qtdLugarJogador(jogador, 3)}}</td>
+        <td class="hidden-sm-down text-center">{{qtdLugarJogador(jogador, 4)}}</td>
+        <td class="hidden-sm-down text-center">{{qtdLugarJogador(jogador, 5)}}</td>
+        <td class="hidden-sm-down text-center">{{qtdLugarJogador(jogador, 6)}}</td>
+        <td class="hidden-sm-down text-center">{{qtdLugarJogador(jogador, 7)}}</td>
+        <td class="hidden-sm-down text-center">{{qtdLugarJogador(jogador, 8)}}</td>
+        <td class="hidden-sm-down text-center">{{qtdLugarJogador(jogador, 9)}}</td>
+        <td class="hidden-sm-down text-center">{{qtdLugarJogador(jogador, 10)}}</td>
+        <td class="hidden-sm-down text-center text-info">{{jogador.pontosExtra}}</td>
+        <td class="hidden-sm-down text-center">{{qtdLugarJogador(jogador, -1)}}</td>
+        <td class="hidden-sm-down text-center" [ngClass]="{ 'table-active' : ordem == 'PPJ'}">{{(jogador.pontos / jogador.jogos) | number}}</td>
         <!-- <td class="hidden-sm-down" [ngClass]="{ 'table-active' : ordem == 'D'}">{{jogador.qtdVezesDealer | number}}</td> -->
         <td class="hidden-sm-down">{{jogador.valorInvestido | currency:'R$'}}</td>
         <td class="hidden-sm-down" [ngClass]="{ 'table-active' : ordem == 'VR' }">{{jogador.valorRecebido | currency:'R$'}}</td>

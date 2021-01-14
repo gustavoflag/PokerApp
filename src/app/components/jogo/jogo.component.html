@@ -52,7 +52,7 @@
           <tr *ngFor="let participante of jogo.participantes">
             <td>{{ participante.lugar }}º</td>
             <td>{{ participante.nomeJogador }}&nbsp;<span *ngIf="participante.dealer" class="badge badge-warning">D</span>&nbsp;<span *ngIf="participante.rebuy > 0" class="badge badge-danger"><mat-icon class="material-icons-round">replay</mat-icon>{{ participante.rebuy > 1 ? participante.rebuy + " " : "" }}<span class="hidden-sm-down">Rebuy</span></span></td>
-            <td>{{ participante.pontos }}</td>
+            <td>{{ participante.pontos }}&nbsp;<span *ngIf="participante.pontoExtra" class="badge badge-info"><span class="hidden-sm-down">+KO</span>({{ participante.qtdPontosExtra }})</span></td>
             <td class="hidden-sm-down">{{ participante.valorInvestido | currency:'R$' }}</td>
             <td class="hidden-sm-down">{{ participante.valorRecebido | currency:'R$' }}</td>
             <td>{{ participante.valorRecebido - participante.valorInvestido | currency:'R$' }}</td>
