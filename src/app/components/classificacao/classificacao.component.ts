@@ -84,4 +84,8 @@ export class ClassificacaoComponent implements OnInit {
   abrirInsta(){
     this.instaAberto = true;
   }
+
+  abreNovaAba(url){
+    window.open(url, "_blank");
+  }
 }
