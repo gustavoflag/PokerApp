@@ -14,8 +14,8 @@ export class RelogioComponent implements OnInit {
 
   estruturaRelogio: any = null;
   relogioAtual: any = null;
-  segundos: string;
-  minutos: string;
+  segundos: number;
+  minutos: number;
   nivelAtual: number;
 
   constructor(
@@ -50,8 +50,8 @@ export class RelogioComponent implements OnInit {
           //console.log('relogio', relogio);
           this.relogioAtual = relogio; 
 
-          this.minutos = (Math.floor(relogio.secs / 60)).toString().padStart(2, '0');
-          this.segundos = (relogio.secs % 60).toString().padStart(2, '0');
+          this.minutos = (Math.floor(relogio.secs / 60));
+          this.segundos = (relogio.secs % 60);
           this.nivelAtual = relogio.nivel.nivel;
         });
   }

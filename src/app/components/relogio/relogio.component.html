@@ -9,7 +9,7 @@
                     <h2 *ngIf="relogioAtual.nivel">Nível {{ relogioAtual.nivel.nivel }}</h2>
                 </div>
                 <div class="row justify-content-center">
-                    <h1 class="relogio" *ngIf="relogioAtual.secs">{{ minutos }}:{{ segundos }}</h1>
+                    <h1 class="relogio" *ngIf="relogioAtual.secs">{{ minutos.toString().padStart(2, '0') }}:{{ segundos.toString().padStart(2, '0') }}</h1>
                 </div>
                 <div class="row justify-content-center" *ngIf="relogioAtual.nivel">
                     <div class="col-lg-6 justify-content-center">
