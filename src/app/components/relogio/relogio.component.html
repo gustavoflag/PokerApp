@@ -23,7 +23,7 @@
                     <h1 *ngIf="relogioAtual.secs">Ante: {{ relogioAtual.nivel.ante }}</h1>
                 </div>
             </div>
-            <div class="row justify-content-center">
+            <div class="row justify-content-center" *ngIf="config.usuarioLogado()">
                 <button type="button" class="button-relogio" (click)="voltarBlind()"><mat-icon>skip_previous</mat-icon></button>
                 <button type="button" class="button-relogio" (click)="iniciar()"><mat-icon>play_arrow</mat-icon></button>
                 <button type="button" class="button-relogio" (click)="parar()"><mat-icon>pause</mat-icon></button>
