@@ -81,6 +81,14 @@ mat-icon{
   background-color: #272B30;
 }
 
+.justify-content-center{
+  justify-content: center;
+}
+
+.text-align-center{
+  text-align: center;
+}
+
 @media (max-width: 768px) {
   .navbar-expand-md .navbar-brand,
   .navbar-expand-md .nav-link {

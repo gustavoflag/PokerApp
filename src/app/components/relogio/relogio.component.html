@@ -1,0 +1,42 @@
+<div id="relogio" [ngClass]="{ 'text-red': minutos == 0 && segundos <= 3 }">
+    <h2 class="hidden-sm-down">Relógio</h2>
+    <h4 class="hidden-md-up">Relógio</h4>
+    <hr>
+    <div class="row">
+        <div class="col-lg-10">
+            <div *ngIf="relogioAtual">
+                <div class="row justify-content-center" *ngIf="relogioAtual.nivel">
+                    <h2 *ngIf="relogioAtual.nivel">Nível {{ relogioAtual.nivel.nivel }}</h2>
+                </div>
+                <div class="row justify-content-center">
+                    <h1 class="relogio" *ngIf="relogioAtual.secs">{{ minutos }}:{{ segundos }}</h1>
+                </div>
+                <div class="row justify-content-center" *ngIf="relogioAtual.nivel">
+                    <div class="col-lg-6 justify-content-center">
+                        <h1 class="blinds text-align-center">{{ relogioAtual.nivel.sb }}</h1>
+                    </div> 
+                    <div class="col-lg-6 justify-content-center">
+                        <h1 class="blinds text-align-center">{{ relogioAtual.nivel.bb }}</h1>
+                    </div>
+                </div>
+                <div class="row justify-content-center" *ngIf="relogioAtual.nivel && relogioAtual.nivel.ante">
+                    <h1 *ngIf="relogioAtual.secs">Ante: {{ relogioAtual.nivel.ante }}</h1>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <button type="button" class="button-relogio" (click)="voltarBlind()"><mat-icon>skip_previous</mat-icon></button>
+                <button type="button" class="button-relogio" (click)="iniciar()"><mat-icon>play_arrow</mat-icon></button>
+                <button type="button" class="button-relogio" (click)="parar()"><mat-icon>pause</mat-icon></button>
+                <button type="button" class="button-relogio" (click)="reiniciar()"><mat-icon>replay</mat-icon></button>
+                <button type="button" class="button-relogio" (click)="avancarBlind()"><mat-icon>skip_next</mat-icon></button>
+            </div>
+        </div>
+        <div class="col-lg-2" *ngIf="estruturaRelogio">
+            <h3>Níveis Blind</h3>
+            <div *ngFor="let blind of estruturaRelogio.estrutura">
+                <p *ngIf="blind.bb" [ngClass]="{ 'text-warning' : nivelAtual == blind.nivel }">{{ blind.nivel }} - {{ blind.sb }} / {{ blind.bb }} ({{ blind.segs / 60 }} mins) <span *ngIf="blind.ante">ante: {{ blind.ante }}</span></p>
+                <p *ngIf="!blind.bb" [ngClass]="{ 'text-warning' : nivelAtual == blind.nivel }">{{ blind.msg }} ({{ blind.segs / 60 }} mins) </p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -14,6 +14,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { ControleDealerComponent } from './components/controle-dealer/controle-dealer.component';
 import { GraficosComponent } from './components/graficos/graficos.component';
 import { FotosComponent } from './components/fotos/fotos.component';
+import { RelogioComponent } from './components/relogio/relogio.component';
 
 const appRoutes: Routes = [
     { path: 'login', component: AuthComponent },
@@ -32,6 +33,7 @@ const appRoutes: Routes = [
     { path: 'controleDealer', component: ControleDealerComponent },
     { path: 'graficos', component: GraficosComponent },
     { path: 'fotos', component: FotosComponent },
+    { path: 'relogio', component: RelogioComponent },
     { path: '**', redirectTo: '' }
 ];
 

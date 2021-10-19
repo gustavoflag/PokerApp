@@ -33,6 +33,8 @@ import { FotosComponent } from './components/fotos/fotos.component';
 import { ErrorHelper } from './helpers/error.helper';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
+import { RelogioComponent } from './components/relogio/relogio.component';
+import { RelogioService } from './services/relogio.service';
 
 registerLocaleData(localePt);
 
@@ -52,7 +54,8 @@ registerLocaleData(localePt);
     PreJogoComponent,
     ControleDealerComponent,
     GraficosComponent,
-    FotosComponent
+    FotosComponent,
+    RelogioComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +67,7 @@ registerLocaleData(localePt);
     BrowserAnimationsModule,
     MatIconModule,
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, PontuacaoService, JogadorService, AuthService, AuthGuard, JogoService, CaixaService, Globals, ErrorHelper],
+  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, PontuacaoService, JogadorService, AuthService, AuthGuard, JogoService, CaixaService, Globals, ErrorHelper, RelogioService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
