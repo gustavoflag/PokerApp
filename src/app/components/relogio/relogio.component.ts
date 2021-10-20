@@ -17,7 +17,8 @@ export class RelogioComponent implements OnInit, OnDestroy {
   relogioAtual: any = null;
   segundos: number;
   minutos: number;
-  nivelAtual: number;
+  nivelAtual: any = null;
+  status: string;
 
   listarEstruturaSubscription: Subscription;
   consultarRelogioSubscription: Subscription;
@@ -79,12 +80,16 @@ export class RelogioComponent implements OnInit, OnDestroy {
   consultarRelogio(){
     this.consultarRelogioSubscription = this.relogioService.consultar()
         .subscribe(relogio => { 
-          //console.log('relogio', relogio);
-          this.relogioAtual = relogio; 
+          
+          this.nivelAtual = this.getNivel(relogio.segundos);
 
-          this.minutos = (Math.floor(relogio.secs / 60));
-          this.segundos = (relogio.secs % 60);
-          this.nivelAtual = relogio.nivel.nivel;
+          var elapsed_secs = (relogio.segundos - this.nivelAtual.segsInicio);
+
+          var curr_secs = this.nivelAtual.segs - elapsed_secs;
+
+          this.minutos = (Math.floor(curr_secs / 60));
+          this.segundos = (curr_secs % 60);
+          this.status = relogio.status;
         });
   }
 
@@ -103,10 +108,12 @@ export class RelogioComponent implements OnInit, OnDestroy {
   }
 
   reiniciar(){
-    this.globals.isLoading = true;
-    this.reiniciarRelogioSubscription = this.relogioService.reiniciar().subscribe(() => {
-      this.globals.isLoading = false;
-    });
+    if (confirm('Deseja reiniciar o relógio?')){
+      this.globals.isLoading = true;
+      this.reiniciarRelogioSubscription = this.relogioService.reiniciar().subscribe(() => {
+        this.globals.isLoading = false;
+      });
+    }
   }
 
   voltarBlind(){
@@ -122,5 +129,22 @@ export class RelogioComponent implements OnInit, OnDestroy {
       this.globals.isLoading = false;
     });
   }
+
+  getNivel(segs){
+    let nivelAtual;
+
+    if (this.estruturaRelogio.estrutura){
+        this.estruturaRelogio.estrutura.every(nivel => {
+            if (nivel.segsFim < segs){
+                return true;
+            } else {
+                nivelAtual = nivel;
+                return false
+            }
+        });
+    }
+
+    return nivelAtual;
+}
 
 }
