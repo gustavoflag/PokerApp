@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfigService } from '../../services/config.service';
 import { Globals } from '../../app.globals';
 import { RelogioService } from '../../services/relogio.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-relogio',
@@ -10,13 +11,21 @@ import { RelogioService } from '../../services/relogio.service';
   styleUrls: ['./relogio.component.css'],
   providers: [RelogioService, ConfigService],
 })
-export class RelogioComponent implements OnInit {
+export class RelogioComponent implements OnInit, OnDestroy {
 
   estruturaRelogio: any = null;
   relogioAtual: any = null;
   segundos: number;
   minutos: number;
   nivelAtual: number;
+
+  listarEstruturaSubscription: Subscription;
+  consultarRelogioSubscription: Subscription;
+  iniciarRelogioSubscription: Subscription;
+  pararRelogioSubscription: Subscription;
+  reiniciarRelogioSubscription: Subscription;
+  voltarBlindSubscription: Subscription;
+  avancarBlindSubscription: Subscription;
 
   constructor(
      private relogioService: RelogioService
@@ -35,9 +44,32 @@ export class RelogioComponent implements OnInit {
     }, 500);
   }
 
+  ngOnDestroy(): void {
+    if (this.listarEstruturaSubscription)
+      this.listarEstruturaSubscription.unsubscribe();
+
+    if (this.consultarRelogioSubscription)
+      this.consultarRelogioSubscription.unsubscribe();
+
+    if (this.iniciarRelogioSubscription)
+      this.iniciarRelogioSubscription.unsubscribe();
+    
+    if (this.pararRelogioSubscription)
+      this.pararRelogioSubscription.unsubscribe();
+
+    if (this.reiniciarRelogioSubscription)
+      this.reiniciarRelogioSubscription.unsubscribe();
+    
+    if (this.voltarBlindSubscription)
+      this.voltarBlindSubscription.unsubscribe();
+
+    if (this.avancarBlindSubscription)
+      this.avancarBlindSubscription.unsubscribe();
+  }
+
   listarEstrutura(){
     this.globals.isLoading = true;
-    this.relogioService.listarEstrutura()
+    this.listarEstruturaSubscription = this.relogioService.listarEstrutura()
         .subscribe(estrutura => { 
           this.estruturaRelogio = estrutura; 
           this.globals.isLoading = false;
@@ -45,7 +77,7 @@ export class RelogioComponent implements OnInit {
   }
 
   consultarRelogio(){
-    this.relogioService.consultar()
+    this.consultarRelogioSubscription = this.relogioService.consultar()
         .subscribe(relogio => { 
           //console.log('relogio', relogio);
           this.relogioAtual = relogio; 
@@ -58,35 +90,35 @@ export class RelogioComponent implements OnInit {
 
   iniciar(){
     this.globals.isLoading = true;
-    this.relogioService.iniciar().subscribe(() => {
+    this.iniciarRelogioSubscription = this.relogioService.iniciar().subscribe(() => {
       this.globals.isLoading = false;
     });
   }
 
   parar(){
     this.globals.isLoading = true;
-    this.relogioService.parar().subscribe(() => {
+    this.pararRelogioSubscription = this.relogioService.parar().subscribe(() => {
       this.globals.isLoading = false;
     });
   }
 
   reiniciar(){
     this.globals.isLoading = true;
-    this.relogioService.reiniciar().subscribe(() => {
+    this.reiniciarRelogioSubscription = this.relogioService.reiniciar().subscribe(() => {
       this.globals.isLoading = false;
     });
   }
 
   voltarBlind(){
     this.globals.isLoading = true;
-    this.relogioService.voltarBlind().subscribe(() => {
+    this.voltarBlindSubscription = this.relogioService.voltarBlind().subscribe(() => {
       this.globals.isLoading = false;
     });
   }
 
   avancarBlind(){
     this.globals.isLoading = true;
-    this.relogioService.avancarBlind().subscribe(() => {
+    this.avancarBlindSubscription = this.relogioService.avancarBlind().subscribe(() => {
       this.globals.isLoading = false;
     });
   }
