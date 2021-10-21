@@ -23,3 +23,13 @@ button.button-relogio{
 button.button-relogio:hover{
     background-color: gray;
 }
+
+@media (max-width: 800px){
+    h1.relogio{
+        font-size: 100px;
+    }
+    
+    h1.blinds{
+        font-size: 50px;
+    }
+}

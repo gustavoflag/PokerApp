@@ -1,19 +1,21 @@
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PreJogoService } from '../../services/pre-jogo.service';
 import { ConfigService } from '../../services/config.service';
 import { JogadorService } from '../../services/jogador.service';
 import { ParametroService } from '../../services/parametro.service';
 import { Globals } from '../../app.globals';
 import { ErrorHelper } from '../../helpers/error.helper';
+import { Subscription } from 'rxjs';
+import { RelogioService } from '../../services/relogio.service';
 
 @Component({
   selector: 'app-pre-jogo',
   templateUrl: './pre-jogo.component.html',
-  providers: [PreJogoService, JogadorService, ConfigService, ParametroService],
+  providers: [PreJogoService, JogadorService, ConfigService, ParametroService, RelogioService],
   styleUrls: ['./pre-jogo.component.css']
 })
-export class PreJogoComponent implements OnInit {
+export class PreJogoComponent implements OnInit, OnDestroy {
   preJogo: any = null;
   jogadores: any = null;
   jogadoresNoJogo: any = [];
@@ -26,6 +28,15 @@ export class PreJogoComponent implements OnInit {
   lateRegister: boolean = false;
   tempo: string;
 
+  estruturaRelogio: any = null;
+  segundosRelogio: number;
+  minutosRelogio: number;
+  nivelAtualRelogio: any = null;
+  statusRelogio: string;
+
+  listarEstruturaSubscription: Subscription;
+  consultarRelogioSubscription: Subscription;
+
   constructor(
     private preJogoService: PreJogoService,
     private jogadorService: JogadorService,
@@ -34,6 +45,7 @@ export class PreJogoComponent implements OnInit {
     private config: ConfigService,
     public globals: Globals,
     private errorHelper: ErrorHelper,
+    private relogioService: RelogioService,
   ) { }
 
   ngOnInit() {
@@ -43,7 +55,56 @@ export class PreJogoComponent implements OnInit {
 
     this.logado = this.config.usuarioLogado();
 
+    this.listarEstrutura();
+
+    setInterval(() => {
+      this.consultarRelogio();
+    }, 500);
+
     //this.mostraRelogio();
+  }
+
+  ngOnDestroy(): void {
+    if (this.listarEstruturaSubscription)
+      this.listarEstruturaSubscription.unsubscribe();
+
+    if (this.consultarRelogioSubscription)
+      this.consultarRelogioSubscription.unsubscribe();
+  }
+
+  listarEstrutura(){
+    this.globals.isLoading = true;
+    this.listarEstruturaSubscription = this.relogioService.listarEstrutura()
+        .subscribe(estrutura => { 
+          this.estruturaRelogio = estrutura; 
+          this.globals.isLoading = false;
+        });
+  }
+
+  consultarRelogio(){
+    this.consultarRelogioSubscription = this.relogioService.consultar()
+        .subscribe(relogio => { 
+          var secsAtual;
+
+          if (relogio.inicioRelogio){
+              var agora = Math.floor(Date.now() / 1000);
+              var span_secs = (agora - relogio.inicioRelogio);
+
+              secsAtual = span_secs + relogio.segundos;
+          } else {
+              secsAtual = relogio.segundos;
+          } 
+
+          this.nivelAtualRelogio = this.getNivel(secsAtual);
+
+          var elapsed_secs = (secsAtual - this.nivelAtualRelogio.segsInicio);
+
+          var curr_secs = this.nivelAtualRelogio.segs - elapsed_secs;
+
+          this.minutosRelogio = (Math.floor(curr_secs / 60));
+          this.segundosRelogio = (curr_secs % 60);
+          this.statusRelogio = relogio.status;
+        });
   }
 
   listarJogadores(){
@@ -213,7 +274,6 @@ export class PreJogoComponent implements OnInit {
   }
 
   pontoExtra(jogador){
-    console.log('jogador', jogador);
     jogador.pontoExtra = !jogador.pontoExtra;
 
     this.alterar(jogador);
@@ -317,14 +377,21 @@ export class PreJogoComponent implements OnInit {
     this.globals.isLoading = false;
   }
 
-  mostraRelogio(){
-    var data = new Date();
+  getNivel(segs){
+    let nivelAtual;
 
-    this.tempo = data.getMinutes() + ':' + data.getSeconds();
+    if (this.estruturaRelogio){
+        this.estruturaRelogio.every(nivel => {
+            if (nivel.segsFim < segs){
+                return true;
+            } else {
+                nivelAtual = nivel;
+                return false
+            }
+        });
+    }
 
-    setTimeout(() => {
-      this.mostraRelogio();
-    }, 500);
+    return nivelAtual;
   }
 
 }

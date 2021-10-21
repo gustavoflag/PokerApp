@@ -7,16 +7,15 @@
         <label class="col-form-label col-form-label-lg" for="inputLarge" >Jogadores Restantes</label>
         <h2>{{ jogadoresRestantes() }}</h2>
       </div>
-      <div class="col-lg-2 text-center">
+      <!-- <div class="col-lg-2 text-center">
         <label class="col-form-label col-form-label-lg" for="inputLarge">Stack Total</label>
         <h2>{{ stackTotal() | number }}</h2>
       </div>
       <div class="col-lg-2 text-center">
         <label class="col-form-label col-form-label-lg" for="inputLarge" >Stack Médio</label>
         <h2>{{ stackMedio() | number : '0.0-2' }}</h2>
-      </div>
-      <!--<div class="col-lg-6 row" style="text-align: center">
-        
+      </div> -->
+      <!-- <div class="col-lg-6 row" style="text-align: center">
          <div class="col-lg-2">
           <h4>SB</h4>
           <h1>200</h1>
@@ -29,7 +28,32 @@
           <h4>BB</h4>
           <h1>400</h1>
         </div> 
-      </div>-->
+      </div> -->
+
+
+      <div class="col-lg-4" *ngIf="nivelAtualRelogio">
+        <div class="row justify-content-center"  *ngIf="nivelAtualRelogio.nivel">
+            
+        </div>
+        <div class="row justify-content-center">
+          <h1 class="relogio" [ngClass]="{'text-info': statusRelogio == 'PARADO', 'text-warning': statusRelogio == 'INICIADO'}">{{ minutosRelogio | number : '2.0' }}:{{ segundosRelogio | number : '2.0' }}</h1>
+          <h5 *ngIf="nivelAtualRelogio" style="float: right;">#{{ nivelAtualRelogio.nivel }}</h5>
+        </div>
+        <div class="row justify-content-center" *ngIf="nivelAtualRelogio.sb && nivelAtualRelogio.bb">
+            <div class="col-lg-5 justify-content-center text-align-center">
+                <h1 class="blinds text-align-center">{{ nivelAtualRelogio.sb | number : '2.0' }}</h1>
+            </div>
+            <div class="col-lg-2 justify-content-center hidden-sm-down">
+              <h1 class="blinds text-align-center">/</h1></div>
+            <div class="col-lg-5 justify-content-center">
+                <h1 class="blinds text-align-center">{{ nivelAtualRelogio.bb | number : '2.0' }}{{ nivelAtualRelogio.ante ? '*' : '' }}</h1>
+            </div>
+        </div>
+        <div class="row justify-content-center" *ngIf="nivelAtualRelogio.msg">
+            <h5>{{ nivelAtualRelogio.msg }}</h5>
+        </div>
+      </div>
+
       <div class="col-lg-4 text-right">
         <br>
         <br>

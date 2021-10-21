@@ -72,7 +72,6 @@ export class RelogioComponent implements OnInit, OnDestroy {
     this.globals.isLoading = true;
     this.listarEstruturaSubscription = this.relogioService.listarEstrutura()
         .subscribe(estrutura => { 
-          console.log('estrutura', estrutura);
           this.estruturaRelogio = estrutura; 
           this.globals.isLoading = false;
         });
@@ -81,9 +80,6 @@ export class RelogioComponent implements OnInit, OnDestroy {
   consultarRelogio(){
     this.consultarRelogioSubscription = this.relogioService.consultar()
         .subscribe(relogio => { 
-          console.log('relogio', relogio);
-          this.nivelAtual = this.getNivel(relogio.segundos);
-
           var secsAtual;
 
           if (relogio.inicioRelogio){
@@ -94,6 +90,8 @@ export class RelogioComponent implements OnInit, OnDestroy {
           } else {
               secsAtual = relogio.segundos;
           } 
+
+          this.nivelAtual = this.getNivel(secsAtual);
 
           var elapsed_secs = (secsAtual - this.nivelAtual.segsInicio);
 
@@ -157,6 +155,6 @@ export class RelogioComponent implements OnInit, OnDestroy {
     }
 
     return nivelAtual;
-}
+  }
 
 }

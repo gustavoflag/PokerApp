@@ -12,15 +12,17 @@
                     <h1 class="relogio" [ngClass]="{'text-info': status == 'PARADO', 'text-warning': status == 'INICIADO'}">{{ minutos | number : '2.0' }}:{{ segundos | number : '2.0' }}</h1>
                 </div>
                 <div class="row justify-content-center" *ngIf="nivelAtual.sb && nivelAtual.bb">
-                    <div class="col-lg-6 justify-content-center">
-                        <h1 class="blinds text-align-center">{{ nivelAtual.sb }}</h1>
+                    <div class="col-lg-6 justify-content-center text-align-center">
+                        <h2>SB</h2>
+                        <h1 class="blinds text-align-center">{{ nivelAtual.sb | number : '2.0' }}</h1>
                     </div> 
-                    <div class="col-lg-6 justify-content-center">
-                        <h1 class="blinds text-align-center">{{ nivelAtual.bb }}</h1>
+                    <div class="col-lg-6 justify-content-center text-align-center">
+                        <h2>BB</h2>
+                        <h1 class="blinds text-align-center">{{ nivelAtual.bb | number : '2.0' }}<span class="hidden-sm-up">*</span></h1>
                     </div>
                 </div>
-                <div class="row justify-content-center" *ngIf="nivelAtual.ante">
-                    <h1>Ante: {{ nivelAtual.ante }}</h1>
+                <div class="row justify-content-center hidden-sm-down" *ngIf="nivelAtual.ante">
+                    <h1>Ante: {{ nivelAtual.ante | number : '2.0' }}</h1>
                 </div>
                 <div class="row justify-content-center" *ngIf="nivelAtual.msg">
                     <h1>{{ nivelAtual.msg }}</h1>
@@ -34,10 +36,10 @@
                 <button type="button" class="button-relogio text-info" (click)="avancarBlind()"><mat-icon>skip_next</mat-icon></button>
             </div>
         </div>
-        <div class="col-lg-2" *ngIf="estruturaRelogio">
+        <div class="col-lg-2 hidden-sm-down" *ngIf="estruturaRelogio">
             <h3>Níveis Blind</h3>
             <div *ngFor="let blind of estruturaRelogio">
-                <p *ngIf="blind.bb" [ngClass]="{ 'text-info' : nivelAtual.nivel == blind.nivel }">{{ blind.nivel }}: {{ blind.sb }} / {{ blind.bb }} ({{ blind.segs / 60 }} mins) <span *ngIf="blind.ante">ante: {{ blind.ante }}</span></p>
+                <p *ngIf="blind.bb" [ngClass]="{ 'text-info' : nivelAtual.nivel == blind.nivel }">{{ blind.nivel }}: {{ blind.sb | number : '2.0' }} / {{ blind.bb | number : '2.0' }}<span *ngIf="blind.ante">*</span></p>
                 <p *ngIf="!blind.bb" [ngClass]="{ 'text-info' : nivelAtual.nivel == blind.nivel }">{{ blind.msg }} ({{ blind.segs / 60 }} mins) </p>
             </div>
         </div>
