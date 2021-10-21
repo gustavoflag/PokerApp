@@ -20,6 +20,8 @@ export class RelogioComponent implements OnInit, OnDestroy {
   nivelAtual: any = null;
   status: string;
 
+  tocandoAudio: boolean = false;
+
   listarEstruturaSubscription: Subscription;
   consultarRelogioSubscription: Subscription;
   iniciarRelogioSubscription: Subscription;
@@ -100,6 +102,10 @@ export class RelogioComponent implements OnInit, OnDestroy {
           this.minutos = (Math.floor(curr_secs / 60));
           this.segundos = (curr_secs % 60);
           this.status = relogio.status;
+
+          if (this.minutos == 0 && this.segundos == 1){
+            this.playAudio();
+          }
         });
   }
 
@@ -155,6 +161,19 @@ export class RelogioComponent implements OnInit, OnDestroy {
     }
 
     return nivelAtual;
+  }
+
+  playAudio(){
+    if (!this.tocandoAudio){
+      this.tocandoAudio = true;
+      setTimeout(() => {
+        let audio: HTMLAudioElement = new Audio('assets/sounds/Gongo.wav');
+        audio.play();
+        setTimeout(() => {
+          this.tocandoAudio = false;
+        }, 2000);
+      }, 1000);
+    }
   }
 
 }
