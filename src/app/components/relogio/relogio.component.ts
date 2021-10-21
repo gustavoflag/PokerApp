@@ -28,6 +28,7 @@ export class RelogioComponent implements OnInit, OnDestroy {
   pararRelogioSubscription: Subscription;
   reiniciarRelogioSubscription: Subscription;
   voltarBlindSubscription: Subscription;
+  reiniciarBlindSubscription: Subscription;
   avancarBlindSubscription: Subscription;
 
   constructor(
@@ -65,6 +66,9 @@ export class RelogioComponent implements OnInit, OnDestroy {
     
     if (this.voltarBlindSubscription)
       this.voltarBlindSubscription.unsubscribe();
+
+    if (this.reiniciarBlindSubscription)
+      this.reiniciarBlindSubscription.unsubscribe();
 
     if (this.avancarBlindSubscription)
       this.avancarBlindSubscription.unsubscribe();
@@ -135,6 +139,13 @@ export class RelogioComponent implements OnInit, OnDestroy {
   voltarBlind(){
     this.globals.isLoading = true;
     this.voltarBlindSubscription = this.relogioService.voltarBlind(this.nivelAtual).subscribe(() => {
+      this.globals.isLoading = false;
+    });
+  }
+
+  reiniciarBlind(){
+    this.globals.isLoading = true;
+    this.reiniciarBlindSubscription = this.relogioService.reiniciarBlind(this.nivelAtual).subscribe(() => {
       this.globals.isLoading = false;
     });
   }

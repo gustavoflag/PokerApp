@@ -35,6 +35,10 @@ export class RelogioService {
   }
 
   voltarBlind(nivelBlind): Observable<any>{
+    return this.http.put(`${this.baseUrlService}/relogio/voltar`, { nivelBlind }, { headers: this.configService.getHeaders() });
+  }
+
+  reiniciarBlind(nivelBlind): Observable<any>{
     return this.http.patch(`${this.baseUrlService}/relogio/voltar`, { nivelBlind }, { headers: this.configService.getHeaders() });
   }
 
