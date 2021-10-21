@@ -36,7 +36,7 @@
         </div>
         <div class="col-lg-2" *ngIf="estruturaRelogio">
             <h3>Níveis Blind</h3>
-            <div *ngFor="let blind of estruturaRelogio.estrutura">
+            <div *ngFor="let blind of estruturaRelogio">
                 <p *ngIf="blind.bb" [ngClass]="{ 'text-info' : nivelAtual.nivel == blind.nivel }">{{ blind.nivel }}: {{ blind.sb }} / {{ blind.bb }} ({{ blind.segs / 60 }} mins) <span *ngIf="blind.ante">ante: {{ blind.ante }}</span></p>
                 <p *ngIf="!blind.bb" [ngClass]="{ 'text-info' : nivelAtual.nivel == blind.nivel }">{{ blind.msg }} ({{ blind.segs / 60 }} mins) </p>
             </div>

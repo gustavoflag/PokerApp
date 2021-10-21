@@ -34,11 +34,11 @@ export class RelogioService {
     return this.http.delete(`${this.baseUrlService}/relogio`, { headers: this.configService.getHeaders() });
   }
 
-  voltarBlind(): Observable<any>{
-    return this.http.patch(`${this.baseUrlService}/relogio/voltar`, { headers: this.configService.getHeaders() });
+  voltarBlind(nivelBlind): Observable<any>{
+    return this.http.patch(`${this.baseUrlService}/relogio/voltar`, { nivelBlind }, { headers: this.configService.getHeaders() });
   }
 
-  avancarBlind(): Observable<any>{
-    return this.http.patch(`${this.baseUrlService}/relogio/avancar`, { headers: this.configService.getHeaders() });
+  avancarBlind(nivelBlind): Observable<any>{
+    return this.http.patch(`${this.baseUrlService}/relogio/avancar`, { nivelBlind }, { headers: this.configService.getHeaders() });
   }
 }

@@ -72,6 +72,7 @@ export class RelogioComponent implements OnInit, OnDestroy {
     this.globals.isLoading = true;
     this.listarEstruturaSubscription = this.relogioService.listarEstrutura()
         .subscribe(estrutura => { 
+          console.log('estrutura', estrutura);
           this.estruturaRelogio = estrutura; 
           this.globals.isLoading = false;
         });
@@ -80,10 +81,21 @@ export class RelogioComponent implements OnInit, OnDestroy {
   consultarRelogio(){
     this.consultarRelogioSubscription = this.relogioService.consultar()
         .subscribe(relogio => { 
-          
+          console.log('relogio', relogio);
           this.nivelAtual = this.getNivel(relogio.segundos);
 
-          var elapsed_secs = (relogio.segundos - this.nivelAtual.segsInicio);
+          var secsAtual;
+
+          if (relogio.inicioRelogio){
+              var agora = Math.floor(Date.now() / 1000);
+              var span_secs = (agora - relogio.inicioRelogio);
+
+              secsAtual = span_secs + relogio.segundos;
+          } else {
+              secsAtual = relogio.segundos;
+          } 
+
+          var elapsed_secs = (secsAtual - this.nivelAtual.segsInicio);
 
           var curr_secs = this.nivelAtual.segs - elapsed_secs;
 
@@ -118,14 +130,14 @@ export class RelogioComponent implements OnInit, OnDestroy {
 
   voltarBlind(){
     this.globals.isLoading = true;
-    this.voltarBlindSubscription = this.relogioService.voltarBlind().subscribe(() => {
+    this.voltarBlindSubscription = this.relogioService.voltarBlind(this.nivelAtual).subscribe(() => {
       this.globals.isLoading = false;
     });
   }
 
   avancarBlind(){
     this.globals.isLoading = true;
-    this.avancarBlindSubscription = this.relogioService.avancarBlind().subscribe(() => {
+    this.avancarBlindSubscription = this.relogioService.avancarBlind(this.nivelAtual).subscribe(() => {
       this.globals.isLoading = false;
     });
   }
@@ -133,8 +145,8 @@ export class RelogioComponent implements OnInit, OnDestroy {
   getNivel(segs){
     let nivelAtual;
 
-    if (this.estruturaRelogio.estrutura){
-        this.estruturaRelogio.estrutura.every(nivel => {
+    if (this.estruturaRelogio){
+        this.estruturaRelogio.every(nivel => {
             if (nivel.segsFim < segs){
                 return true;
             } else {
