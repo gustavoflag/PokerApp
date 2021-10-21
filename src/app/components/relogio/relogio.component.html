@@ -18,7 +18,7 @@
                     </div> 
                     <div class="col-lg-6 justify-content-center text-align-center">
                         <h2>BB</h2>
-                        <h1 class="blinds text-align-center">{{ nivelAtual.bb | number : '2.0' }}<span class="hidden-sm-up">*</span></h1>
+                        <h1 class="blinds text-align-center">{{ nivelAtual.bb | number : '2.0' }}<span class="hidden-sm-up" *ngIf="nivelAtual.ante">*</span></h1>
                     </div>
                 </div>
                 <div class="row justify-content-center hidden-sm-down" *ngIf="nivelAtual.ante">
