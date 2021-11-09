@@ -11,7 +11,7 @@ export class RelogioService {
   constructor(private http: HttpClient,
               private configService: ConfigService) {
 
-    this.baseUrlService = this.configService.getUrlService();
+    this.baseUrlService = this.configService.getUrlRelogioService();
   }
 
   listarEstrutura(){
@@ -23,11 +23,11 @@ export class RelogioService {
   }
 
   iniciar(): Observable<any>{
-    return this.http.post(`${this.baseUrlService}/relogio`, { headers: this.configService.getHeaders() });
+    return this.http.post(`${this.baseUrlService}/relogio`, {}, { headers: this.configService.getHeaders() });
   }
 
   parar(): Observable<any>{
-    return this.http.put(`${this.baseUrlService}/relogio`, { headers: this.configService.getHeaders() });
+    return this.http.put(`${this.baseUrlService}/relogio`, {}, { headers: this.configService.getHeaders() });
   }
 
   reiniciar(): Observable<any>{

@@ -44,7 +44,7 @@ export class RelogioComponent implements OnInit, OnDestroy {
     this.listarEstrutura();
 
     setInterval(() => {
-      this.consultarRelogio();
+       this.consultarRelogio();
     }, 500);
   }
 
@@ -98,17 +98,18 @@ export class RelogioComponent implements OnInit, OnDestroy {
           } 
 
           this.nivelAtual = this.getNivel(secsAtual);
+          if (this.nivelAtual){
+            var elapsed_secs = (secsAtual - this.nivelAtual.segsInicio);
 
-          var elapsed_secs = (secsAtual - this.nivelAtual.segsInicio);
-
-          var curr_secs = this.nivelAtual.segs - elapsed_secs;
-
-          this.minutos = (Math.floor(curr_secs / 60));
-          this.segundos = (curr_secs % 60);
-          this.status = relogio.status;
-
-          if (this.minutos == 0 && this.segundos == 1){
-            this.playAudio();
+            var curr_secs = this.nivelAtual.segs - elapsed_secs;
+  
+            this.minutos = (Math.floor(curr_secs / 60));
+            this.segundos = (curr_secs % 60);
+            this.status = relogio.status;
+  
+            if (this.minutos == 0 && this.segundos == 1){
+              this.playAudio();
+            }
           }
         });
   }

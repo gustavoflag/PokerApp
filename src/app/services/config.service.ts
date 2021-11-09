@@ -6,14 +6,20 @@ import { env } from 'process';
 
 @Injectable()
 export class ConfigService {
-  private urlService:string;
+  private urlService: string;
+  private urlRelogioService: string;
 
   constructor(private http: HttpClient){
       this.urlService = environment.API_URI;
+      this.urlRelogioService = environment.API_RELOGIO_URI;
   }
 
   getUrlService(): string {
-      return this.urlService;
+    return this.urlService;
+  }
+
+  getUrlRelogioService(): string {
+    return this.urlRelogioService;
   }
 
   getHeaders(): HttpHeaders {

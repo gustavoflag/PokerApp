@@ -6,7 +6,8 @@
 export const environment = {
   production: false,
   //API_URI: "http://localhost:3000",
-  //API_URI: "https://tqsop-api.herokuapp.com",
+  //API_RELOGIO_URI: "http://localhost:3000",
   API_URI: "https://tqsop-api.netlify.app/.netlify/functions/server",
+  API_RELOGIO_URI: "https://tqsop-clock-api.netlify.app/.netlify/functions/server",
   theme: "slate"
 };
