@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs';
 export class RelogioComponent implements OnInit, OnDestroy {
 
   estruturaRelogio: any = null;
+  niveisBlindFilter: any = null;
   relogioAtual: any = null;
   segundos: number;
   minutos: number;
@@ -98,6 +99,8 @@ export class RelogioComponent implements OnInit, OnDestroy {
           } 
 
           this.nivelAtual = this.getNivel(secsAtual);
+          this.status = relogio.status;
+
           if (this.nivelAtual){
             var elapsed_secs = (secsAtual - this.nivelAtual.segsInicio);
 
@@ -105,7 +108,7 @@ export class RelogioComponent implements OnInit, OnDestroy {
   
             this.minutos = (Math.floor(curr_secs / 60));
             this.segundos = (curr_secs % 60);
-            this.status = relogio.status;
+            //this.status = relogio.status;
   
             if (this.minutos == 0 && this.segundos == 1){
               this.playAudio();
@@ -160,9 +163,11 @@ export class RelogioComponent implements OnInit, OnDestroy {
 
   getNivel(segs){
     let nivelAtual;
+    let indexAtual = 0;
 
     if (this.estruturaRelogio){
         this.estruturaRelogio.every(nivel => {
+          indexAtual++;
             if (nivel.segsFim < segs){
                 return true;
             } else {
@@ -170,6 +175,8 @@ export class RelogioComponent implements OnInit, OnDestroy {
                 return false
             }
         });
+
+        this.niveisBlindFilter = this.estruturaRelogio.slice(indexAtual, indexAtual + 5);
     }
 
     return nivelAtual;
