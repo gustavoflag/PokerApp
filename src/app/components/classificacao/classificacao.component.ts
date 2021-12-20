@@ -14,7 +14,7 @@ export class ClassificacaoComponent implements OnInit {
   jogadores: any = null;
   rookies: boolean = false;
   ordem: string = null;
-  instaAberto: boolean = true;
+  instaAberto: boolean = false;
   //isLoading: boolean = false;
 
   constructor(
