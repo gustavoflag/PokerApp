@@ -62,4 +62,8 @@ export class ClassificacaoComponent implements OnInit {
       this.listarRookies();
     }
   }
+
+  abreNovaAba(url){
+    window.open(url, "_blank");
+  }
 }

@@ -1,6 +1,6 @@
 <div class="float-right">
-  <a class="hidden-sm-down text-underline text-bottom" href="https://tqsop2018.netlify.app/#/">Classificação 2018</a>
-  <a class="hidden-md-up text-underline text-bottom" href="https://tqsop2018.netlify.app/#/">2018</a>
+  <a class="hidden-sm-down text-underline text-bottom" (click)="abreNovaAba('https://tqsop2018.netlify.app/#/')" href="#">Classificação 2018</a>
+  <a class="hidden-md-up text-underline text-bottom" (click)="abreNovaAba('https://tqsop2018.netlify.app/#/')" href="#">2018</a>
 </div>
 <h2 class="hidden-sm-down">Classificação&nbsp;
   <button type="button" (click)="altRookies();" class="btn btn-lg" [ngClass]="{ 'btn-outline-success' : rookies, 'btn-success': !rookies }">Geral</button>
