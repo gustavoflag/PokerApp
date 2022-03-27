@@ -20,6 +20,7 @@ export class RelogioComponent implements OnInit, OnDestroy {
   minutos: number;
   nivelAtual: any = null;
   status: string;
+  consultaRelogioInterval: any = null;
 
   tocandoAudio: boolean = false;
 
@@ -44,12 +45,15 @@ export class RelogioComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.listarEstrutura();
 
-    setInterval(() => {
+    this.consultaRelogioInterval = setInterval(() => {
        this.consultarRelogio();
     }, 500);
   }
 
   ngOnDestroy(): void {
+    if (this.consultaRelogioInterval)
+      clearInterval(this.consultaRelogioInterval);
+
     if (this.listarEstruturaSubscription)
       this.listarEstruturaSubscription.unsubscribe();
 

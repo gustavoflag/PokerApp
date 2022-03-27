@@ -28,6 +28,7 @@ export class PreJogoComponent implements OnInit, OnDestroy {
   lateRegister: boolean = false;
   tempo: string;
 
+  consultaRelogioInterval: any = null;
   estruturaRelogio: any = null;
   segundosRelogio: number;
   minutosRelogio: number;
@@ -57,14 +58,16 @@ export class PreJogoComponent implements OnInit, OnDestroy {
 
     this.listarEstrutura();
 
-    setInterval(() => {
+    this.consultaRelogioInterval = setInterval(() => {
       this.consultarRelogio();
     }, 500);
-
     //this.mostraRelogio();
   }
 
   ngOnDestroy(): void {
+    if (this.consultaRelogioInterval)
+      clearInterval(this.consultaRelogioInterval);
+
     if (this.listarEstruturaSubscription)
       this.listarEstruturaSubscription.unsubscribe();
 
