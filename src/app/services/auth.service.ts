@@ -13,7 +13,7 @@ export class AuthService {
   constructor(private http: HttpClient,
               private configService: ConfigService) {
 
-      this.baseUrlService = this.configService.getUrlService();
+      this.baseUrlService = this.configService.getUrlAuthService();
       var currentUser = JSON.parse(localStorage.getItem('currentUser'));
       this.token = currentUser && currentUser.token;
   }
@@ -23,7 +23,7 @@ export class AuthService {
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json');
 
-    return this.http.post(`${this.baseUrlService}/auth/login`, JSON.stringify({ login: login, senha: senha }), { headers: head });
+    return this.http.post(`${this.baseUrlService}/auth/login`, JSON.stringify({ login: login, password: senha, app: "tqsop" }), { headers: head });
   }
 
   logout(): void {

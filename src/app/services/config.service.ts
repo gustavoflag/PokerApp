@@ -8,10 +8,12 @@ import { env } from 'process';
 export class ConfigService {
   private urlService: string;
   private urlRelogioService: string;
+  private urlAuthService: string;
 
   constructor(private http: HttpClient){
       this.urlService = environment.API_URI;
       this.urlRelogioService = environment.API_RELOGIO_URI;
+      this.urlAuthService = environment.API_AUTH_URI;
   }
 
   getUrlService(): string {
@@ -20,6 +22,10 @@ export class ConfigService {
 
   getUrlRelogioService(): string {
     return this.urlRelogioService;
+  }
+
+  getUrlAuthService(): string {
+    return this.urlAuthService;
   }
 
   getHeaders(): HttpHeaders {

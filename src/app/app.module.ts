@@ -35,6 +35,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { RelogioComponent } from './components/relogio/relogio.component';
 import { RelogioService } from './services/relogio.service';
+import { TestesComponent } from './components/testes/testes.component';
 
 registerLocaleData(localePt);
 
@@ -55,7 +56,8 @@ registerLocaleData(localePt);
     ControleDealerComponent,
     GraficosComponent,
     FotosComponent,
-    RelogioComponent
+    RelogioComponent,
+    TestesComponent
   ],
   imports: [
     BrowserModule,
