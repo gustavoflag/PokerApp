@@ -3,32 +3,15 @@
 <section>
 
     <div class="row">
-      <div class="col-lg-4">
-        <label class="col-form-label col-form-label-lg" for="inputLarge" >Jogadores Restantes</label>
-        <h2>{{ jogadoresRestantes() }}</h2>
+      <div class="col-lg-2">
+        <label class="col-form-label col-form-label-lg" for="inputLarge" >Jogadores</label>
+        <h2 class="text-warning">{{ jogadoresRestantes() }}</h2>
       </div>
-      <!-- <div class="col-lg-2 text-center">
-        <label class="col-form-label col-form-label-lg" for="inputLarge">Stack Total</label>
-        <h2>{{ stackTotal() | number }}</h2>
-      </div>
+      
       <div class="col-lg-2 text-center">
-        <label class="col-form-label col-form-label-lg" for="inputLarge" >Stack Médio</label>
-        <h2>{{ stackMedio() | number : '0.0-2' }}</h2>
-      </div> -->
-      <!-- <div class="col-lg-6 row" style="text-align: center">
-         <div class="col-lg-2">
-          <h4>SB</h4>
-          <h1>200</h1>
-        </div>
-        <div class="col-lg-8">
-          <span>ANTE: 400</span><br>
-          <span style="font-size: 90px">{{ tempo }}</span>
-        </div>
-        <div class="col-lg-2">
-          <h4>BB</h4>
-          <h1>400</h1>
-        </div> 
-      </div> -->
+        <label class="col-form-label col-form-label-lg" for="inputLarge">Fichas em Jogo</label>
+        <h2 class="text-info">{{ stackTotal() | number }}</h2>
+      </div> 
 
 
       <div class="col-lg-4" *ngIf="nivelAtualRelogio">
@@ -101,14 +84,14 @@
                  <span *ngIf="!logado && participante.rebuy > 0" class="badge badge-danger">{{ participante.rebuy > 1 ? participante.rebuy + " " : "" }}Rebuy</span>
                  <div class="float-right">
                    <span *ngIf="!logado && participante.pago" class="badge badge-warning">$</span>
-                   <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" (click)="pago(participante);" [ngClass]="{ 'btn-outline-warning' : participante.pago === false, 'btn-warning': participante.pago }">$</button>
+                   <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" title="Pago" (click)="pago(participante);" [ngClass]="{ 'btn-outline-warning' : participante.pago === false, 'btn-warning': participante.pago }">$</button>
                    <span *ngIf="!logado && participante.timeChip" class="badge badge-success">T</span>
-                   <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" (click)="timeChip(participante);" [ngClass]="{ 'btn-outline-success' : participante.timeChip === false, 'btn-success': participante.timeChip }">T</button>
-                   <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" (click)="pontoExtra(participante);" [ngClass]="{ 'btn-outline-info' : participante.pontoExtra == false, 'btn-info': participante.pontoExtra }">+KO</button>
+                   <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" title="Time Chip" (click)="timeChip(participante);" [ngClass]="{ 'btn-outline-success' : participante.timeChip === false, 'btn-success': participante.timeChip }">T</button>
+                   <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" (click)="pontoExtra(participante);" title="Maior número KOs" [ngClass]="{ 'btn-outline-info' : participante.pontoExtra == false, 'btn-info': participante.pontoExtra }">+KO</button>
                    <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" (click)="rebuy(participante);" [ngClass]="{ 'btn-outline-secondary' : participante.rebuy === 0, 'btn-secondary': participante.rebuy > 0 }">{{ participante.rebuy > 1 ? participante.rebuy + " " : "" }}Rebuy</button>
                    <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" (click)="maisRebuy(participante);" [ngClass]="{ 'btn-outline-secondary' : participante.rebuy === 0, 'btn-secondary': participante.rebuy > 0 }">+</button>
-                   <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" [ngClass]="{ 'btn-outline-danger': !participante.eliminado, 'btn-outline-success': participante.eliminado }" (click)="eliminar(participante);" title="Eliminar">X</button>
-                   <button type='button' *ngIf="logado" class="btn btn-outline-danger btn-sm" (click)="remover(participante);" title="Remover"><<</button>
+                   <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" [ngClass]="{ 'btn-outline-danger': !participante.eliminado, 'btn-outline-success': participante.eliminado }" (click)="eliminar(participante);" title="Eliminar Jogador">X</button>
+                   <button type='button' *ngIf="logado" class="btn btn-outline-danger btn-sm" (click)="remover(participante);" title="Remover Jogador"><<</button>
                  </div>
                </li>
              </ul>
@@ -116,4 +99,5 @@
          </div>
        </div>
     </div>
+    
 </section>
