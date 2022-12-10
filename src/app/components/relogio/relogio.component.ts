@@ -45,8 +45,14 @@ export class RelogioComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.listarEstrutura();
 
+    var indiceRelogio = 1;
+
     this.consultaRelogioInterval = setInterval(() => {
-       this.consultarRelogio();
+       this.consultarRelogio(indiceRelogio);
+       indiceRelogio++;
+       if (indiceRelogio === 10){
+        indiceRelogio = 0;
+      }
     }, 500);
   }
 
@@ -88,8 +94,8 @@ export class RelogioComponent implements OnInit, OnDestroy {
         });
   }
 
-  consultarRelogio(){
-    this.consultarRelogioSubscription = this.relogioService.consultar()
+  consultarRelogio(indice: number){
+    this.consultarRelogioSubscription = this.relogioService.consultar(indice)
         .subscribe(relogio => { 
           var secsAtual;
 

@@ -11,9 +11,9 @@ export class ConfigService {
   private urlAuthService: string;
 
   constructor(private http: HttpClient){
-      this.urlService = environment.API_URI;
-      this.urlRelogioService = environment.API_RELOGIO_URI;
-      this.urlAuthService = environment.API_AUTH_URI;
+    this.urlService = environment.API_URI;
+    this.urlRelogioService = environment.API_RELOGIO_URI;
+    this.urlAuthService = environment.API_AUTH_URI;
   }
 
   getUrlService(): string {

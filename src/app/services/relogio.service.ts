@@ -7,42 +7,44 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class RelogioService {
   private baseUrlService: string = '';
+  private baseUrlService0: string = '';
 
   constructor(private http: HttpClient,
               private configService: ConfigService) {
 
     this.baseUrlService = this.configService.getUrlRelogioService();
+    this.baseUrlService0 = this.baseUrlService.replace('{index}', '0');
   }
 
   listarEstrutura(){
-    return this.http.get(`${this.baseUrlService}/estruturaRelogio`);
+    return this.http.get(`${this.baseUrlService0}/server/estruturaRelogio`);
   }
 
-  consultar(): Observable<any>{
-    return this.http.get(`${this.baseUrlService}/relogio`);
+  consultar(index: number): Observable<any>{
+    return this.http.get(`${this.baseUrlService.replace('{index}', index.toString())}/relogio`);
   }
 
   iniciar(): Observable<any>{
-    return this.http.post(`${this.baseUrlService}/relogio`, {}, { headers: this.configService.getHeaders() });
+    return this.http.post(`${this.baseUrlService0}/server/relogio`, {}, { headers: this.configService.getHeaders() });
   }
 
   parar(): Observable<any>{
-    return this.http.put(`${this.baseUrlService}/relogio`, {}, { headers: this.configService.getHeaders() });
+    return this.http.put(`${this.baseUrlService0}/server/relogio`, {}, { headers: this.configService.getHeaders() });
   }
 
   reiniciar(): Observable<any>{
-    return this.http.delete(`${this.baseUrlService}/relogio`, { headers: this.configService.getHeaders() });
+    return this.http.delete(`${this.baseUrlService0}/server/relogio`, { headers: this.configService.getHeaders() });
   }
 
   voltarBlind(nivelBlind): Observable<any>{
-    return this.http.put(`${this.baseUrlService}/relogio/voltar`, { nivelBlind }, { headers: this.configService.getHeaders() });
+    return this.http.put(`${this.baseUrlService0}/server/relogio/voltar`, { nivelBlind }, { headers: this.configService.getHeaders() });
   }
 
   reiniciarBlind(nivelBlind): Observable<any>{
-    return this.http.patch(`${this.baseUrlService}/relogio/voltar`, { nivelBlind }, { headers: this.configService.getHeaders() });
+    return this.http.patch(`${this.baseUrlService0}/server/relogio/voltar`, { nivelBlind }, { headers: this.configService.getHeaders() });
   }
 
   avancarBlind(nivelBlind): Observable<any>{
-    return this.http.patch(`${this.baseUrlService}/relogio/avancar`, { nivelBlind }, { headers: this.configService.getHeaders() });
+    return this.http.patch(`${this.baseUrlService0}/server/relogio/avancar`, { nivelBlind }, { headers: this.configService.getHeaders() });
   }
 }
