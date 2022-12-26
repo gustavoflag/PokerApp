@@ -51,6 +51,10 @@
         <label for="qtdFichasTimeChip">Fichas Time Chip</label>
         <input type="number" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !qtdFichasTimeChip.valid }" name="qtdFichasTimeChip" [(ngModel)]="parametro.qtdFichasTimeChip" #qtdFichasTimeChip="ngModel" required />
     </div>
+    <div class="form-group col-lg-2" [ngClass]="{ 'has-danger': f.submitted && !valorTaxaLimpeza.valid }">
+        <label for="qtdFichasTimeChip">Valor Taxa Limpeza</label>
+        <input type="number" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !valorTaxaLimpeza.valid }" name="valorTaxaLimpeza" [(ngModel)]="parametro.valorTaxaLimpeza" #valorTaxaLimpeza="ngModel" required />
+    </div>
   </div>
   <div class="form-group">
       <button class="btn btn-success">Salvar</button>
