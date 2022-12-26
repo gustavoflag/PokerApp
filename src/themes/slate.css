@@ -40,6 +40,7 @@
     --breakpoint-xl: 1200px;
     --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --bg-primary: #64570c;
   }
   
   *,
@@ -6761,7 +6762,7 @@
   }
   
   .bg-primary {
-    background-color: #3A3F44 !important;
+    background-color: #64570c !important;
   }
   
   a.bg-primary:hover, a.bg-primary:focus,
