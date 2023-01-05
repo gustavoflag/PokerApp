@@ -26,21 +26,13 @@
         <input type="number" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !pontosMaisKO.valid }" name="pontosMaisKO" [(ngModel)]="parametro.pontosExtraKO" #pontosMaisKO="ngModel" required />
     </div>
   </div>
-
-  <!--
-    premiacaoSegundo:
-    premiacaoTerceiro:
-    qtdFichasBuyIn:
-    qtdFichasTimeChip:
-  -->
-
   <div class="row">
     <div class="form-group col-lg-2" [ngClass]="{ 'has-danger': f.submitted && !premiacaoSegundo.valid }">
-        <label for="premiacaoSegundo">Valor Premiação 2o</label>
+        <label for="premiacaoSegundo">% Premiação 2º</label>
         <input type="number" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !premiacaoSegundo.valid }" name="premiacaoSegundo" [(ngModel)]="parametro.premiacaoSegundo" #premiacaoSegundo="ngModel" required />
     </div>
     <div class="form-group col-lg-2" [ngClass]="{ 'has-danger': f.submitted && !premiacaoTerceiro.valid }">
-        <label for="premiacaoTerceiro">Valor premiação 3º</label>
+        <label for="premiacaoTerceiro">% premiação 3º</label>
         <input type="number" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !premiacaoTerceiro.valid }" name="premiacaoTerceiro" [(ngModel)]="parametro.premiacaoTerceiro" #premiacaoTerceiro="ngModel" required />
     </div>
     <div class="form-group col-lg-2" [ngClass]="{ 'has-danger': f.submitted && !qtdFichasBuyIn.valid }">
