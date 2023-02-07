@@ -34,6 +34,10 @@ export class PreJogoComponent implements OnInit, OnDestroy {
   minutosRelogio: number;
   nivelAtualRelogio: any = null;
   statusRelogio: string;
+  premiacaoPrimeiro: number;
+  premiacaoSegundo: number;
+  premiacaoTerceiro: number;
+  valorMaleta: number;
 
   listarEstruturaSubscription: Subscription;
   consultarRelogioSubscription: Subscription;
@@ -164,16 +168,28 @@ export class PreJogoComponent implements OnInit, OnDestroy {
 
   consultar(){
     this.preJogoService.consultar()
-        .subscribe((preJogo) => {
-            this.preJogo = preJogo;
-            this.participantes = preJogo.participantes;
-            this.mesas = new Array(preJogo.qtdMesas);
-            this.globals.isLoading = false;
-          }, error => {
-            if (error.error.message != "Pré jogo não encontrado"){
-              this.errorHelper.handle(error);
-            }
-          });
+      .subscribe((preJogo) => {
+        this.preJogo = preJogo;
+        this.participantes = preJogo.participantes;
+        this.mesas = new Array(preJogo.qtdMesas);
+        this.globals.isLoading = false;
+        if (preJogo.estimativaPremio){
+          this.premiacaoPrimeiro = preJogo.estimativaPremio.premiacaoPrimeiro;
+          this.premiacaoSegundo = preJogo.estimativaPremio.premiacaoSegundo;
+          this.premiacaoTerceiro = preJogo.estimativaPremio.premiacaoTerceiro ? preJogo.estimativaPremio.premiacaoTerceiro : 0;
+          this.valorMaleta = preJogo.estimativaPremio.valorMaleta;
+        } else {
+          this.premiacaoPrimeiro = 0;
+          this.premiacaoSegundo = 0;
+          this.premiacaoTerceiro = 0;
+          this.valorMaleta = 0;
+        }
+
+      }, error => {
+        if (error.error.message != "Pré jogo não encontrado"){
+          this.errorHelper.handle(error);
+        }
+      });
   }
 
   limpaMensagens(){

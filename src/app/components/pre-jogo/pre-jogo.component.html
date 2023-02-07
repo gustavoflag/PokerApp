@@ -1,7 +1,6 @@
 <div *ngIf="mensagem" class="alert alert-dismissible alert-success">{{mensagem}}</div>
 <div *ngIf="erro" class="alert alert-dismissible alert-danger">{{erro}}</div>
 <section>
-
     <div class="row">
       <div class="col-lg-2">
         <label class="col-form-label col-form-label-lg" for="inputLarge" >Jogadores</label>
@@ -12,7 +11,6 @@
         <label class="col-form-label col-form-label-lg" for="inputLarge">Fichas em Jogo</label>
         <h2 class="text-info">{{ stackTotal() | number }}</h2>
       </div> 
-
 
       <div class="col-lg-4" *ngIf="nivelAtualRelogio">
         <div class="row justify-content-center"  *ngIf="nivelAtualRelogio.nivel">
@@ -67,7 +65,7 @@
          </div>
        </div>
 
-       <div class="col-lg-6" *ngFor="let m of mesas; let indMesa = index">
+       <div class="col-lg-5" *ngFor="let m of mesas; let indMesa = index">
          <div class="card border-light mb-3" >
            <div class="card-header">
              Mesa {{indMesa + 1}}
@@ -97,6 +95,33 @@
              </ul>
            </div>
          </div>
+       </div>
+       <div class="col-lg-2" *ngIf="preJogo">
+        <div class="text-center col-form-label-lg">Premio</div>
+          <div class="card border-light mb-3">
+            <div class="card-body text-center">1º</div>
+            <div class="card-header col-form-label-lg text-center bold bg-danger">
+              <h4>{{premiacaoPrimeiro | currency:'R$'}}</h4>
+            </div>
+          </div>
+          <div class="card border-light mb-3">
+            <div class="card-body text-center">2º</div>
+            <div class="card-header col-form-label-lg text-center bg-warning">
+              <h4>{{premiacaoSegundo | currency:'R$'}}</h4>
+            </div>
+          </div>
+          <div class="card border-light mb-3">
+            <div class="card-body text-center">3º</div>
+            <div class="card-header col-form-label-lg text-center bg-primary">
+              <h4>{{premiacaoTerceiro | currency:'R$'}}</h4>
+            </div>
+          </div>
+          <div class="card border-light mb-3">
+            <div class="card-body text-center">Maleta</div>
+            <div class="card-header col-form-label-lg text-center bg-secondary">
+              <h4>{{valorMaleta | currency:'R$'}}</h4>
+            </div>
+          </div>
        </div>
     </div>
     
