@@ -77,7 +77,9 @@
              <ul class="list-group">
                <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let participante of getMesa(indMesa + 1); let i = index">
                  <span *ngIf="!participante.lugarNaMesa && !participante.eliminado">{{ participante.nomeJogador }}</span>
-                 <span *ngIf="participante.lugarNaMesa && !participante.eliminado">P{{ participante.lugarNaMesa }} <span *ngIf="participante.dealer" class="badge badge-warning badge-sm">D</span> - {{ participante.nomeJogador }}</span>
+                 <span *ngIf="participante.lugarNaMesa && !participante.eliminado">
+                   P{{ participante.lugarNaMesa }} 
+                   <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" title="Time Chip" (click)="dealer(participante);" [ngClass]="{ 'btn-muted' : participante.dealer === false, 'btn-warning': participante.dealer }">D</button> {{ participante.nomeJogador }}</span>
                  <span *ngIf="participante.lugar && participante.eliminado" class="text-muted">{{ participante.lugar }}º - {{ participante.nomeJogador }} <span *ngIf="participante.dealer" class="badge badge-warning badge-sm">D</span></span>
                  <span *ngIf="!logado && participante.rebuy > 0" class="badge badge-danger">{{ participante.rebuy > 1 ? participante.rebuy + " " : "" }}Rebuy</span>
                  <div class="float-right">
