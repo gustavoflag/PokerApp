@@ -9,7 +9,7 @@ export const environment = {
   //API_URI: "http://localhost:3000",
   //API_RELOGIO_URI: "http://localhost:3000",
   //API_AUTH: "http://localhost:3000",
-  API_URI: "https://tqsop-api.netlify.app/.netlify/functions/server",
+  API_URI: "https://tqsop2023-api.netlify.app/.netlify/functions/server",
   API_RELOGIO_URI: "https://poker-clock-api{index}.netlify.app/.netlify/functions",
   API_AUTH_URI: "https://auth-service-api.netlify.app/.netlify/functions/server",
   theme: "slate"
