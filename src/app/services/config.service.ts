@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
-import { env } from 'process';
+//import { env } from 'process';
 
 @Injectable()
 export class ConfigService {
@@ -29,7 +29,7 @@ export class ConfigService {
   }
 
   getHeaders(): HttpHeaders {
-    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    var currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     var token = currentUser && currentUser.token;
     return new HttpHeaders()
       .set('Content-Type', 'application/json')
@@ -38,7 +38,7 @@ export class ConfigService {
   }
 
   usuarioLogado(): boolean {
-    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    var currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     if (currentUser && currentUser.token){
       return true;
     }

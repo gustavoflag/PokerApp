@@ -16,22 +16,22 @@ export class RelogioComponent implements OnInit, OnDestroy {
   estruturaRelogio: any = null;
   niveisBlindFilter: any = null;
   relogioAtual: any = null;
-  segundos: number;
-  minutos: number;
+  segundos: number | null = null;
+  minutos: number | null = null;
   nivelAtual: any = null;
-  status: string;
+  status: string = '';
   consultaRelogioInterval: any = null;
 
   tocandoAudio: boolean = false;
 
-  listarEstruturaSubscription: Subscription;
-  consultarRelogioSubscription: Subscription;
-  iniciarRelogioSubscription: Subscription;
-  pararRelogioSubscription: Subscription;
-  reiniciarRelogioSubscription: Subscription;
-  voltarBlindSubscription: Subscription;
-  reiniciarBlindSubscription: Subscription;
-  avancarBlindSubscription: Subscription;
+  listarEstruturaSubscription: Subscription | null = null;
+  consultarRelogioSubscription: Subscription | null = null;
+  iniciarRelogioSubscription: Subscription | null = null;
+  pararRelogioSubscription: Subscription | null = null;
+  reiniciarRelogioSubscription: Subscription | null = null;
+  voltarBlindSubscription: Subscription | null = null;
+  reiniciarBlindSubscription: Subscription | null = null;
+  avancarBlindSubscription: Subscription | null = null;
 
   constructor(
      private relogioService: RelogioService
@@ -171,12 +171,12 @@ export class RelogioComponent implements OnInit, OnDestroy {
     });
   }
 
-  getNivel(segs){
+  getNivel(segs: any){
     let nivelAtual;
     let indexAtual = 0;
 
     if (this.estruturaRelogio){
-        this.estruturaRelogio.every(nivel => {
+        this.estruturaRelogio.every((nivel: any) => {
           indexAtual++;
             if (nivel.segsFim < segs){
                 return true;

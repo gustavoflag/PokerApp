@@ -17,8 +17,8 @@ export class JogoComponent implements OnInit {
   jogadores: any = null;
   jogadoresNoJogo: any = [];
   participantes: any = [];
-  mensagem: string = null;
-  erro: string = null;
+  mensagem: string | null = null;
+  erro: string | null = null;
   loading: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute
@@ -50,7 +50,7 @@ export class JogoComponent implements OnInit {
         .subscribe(jogs => { this.loading = false; this.jogos = jogs; this.globals.isLoading = false; });
   }
 
-  consultar(idJogo){
+  consultar(idJogo: any){
     this.globals.isLoading = true;
     this.limpaMensagens();
     this.jogoEdicao = null;
@@ -71,7 +71,7 @@ export class JogoComponent implements OnInit {
     //this.router.navigate(['/prejogo']);
   }
 
-  excluir(jogo){
+  excluir(jogo: any){
     //console.log("jogo:" ,jogo);
     var confirma = confirm('Deseja mesmo excluir esse jogo?');
     if (confirma == true){
@@ -82,7 +82,7 @@ export class JogoComponent implements OnInit {
     }
   }
 
-  editar(jogo){
+  editar(jogo: any){
     /*this.participantes = jogo.participantes;
 
     this.jogadorService.lista().subscribe(jogs =>
@@ -122,7 +122,7 @@ export class JogoComponent implements OnInit {
       err => this.mostraErro(err));
   }
 
-  adicionar(jogador){
+  adicionar(jogador: any){
     this.jogadoresNoJogo.push(jogador);
 
     var indexRemove = this.jogadores.indexOf(jogador);
@@ -131,7 +131,7 @@ export class JogoComponent implements OnInit {
     this.participantes.push({ nomeJogador: jogador.nome, lugar: this.jogadoresNoJogo.length, rebuy: 0 });
   }
 
-  remover(index){
+  remover(index: any){
     this.jogadores.push(this.jogadoresNoJogo[index]);
     this.jogadoresNoJogo.splice(index, 1);
     this.participantes.splice(index, 1);
@@ -150,7 +150,7 @@ export class JogoComponent implements OnInit {
     this.participantes = [];
   }
 
-  subir(index){
+  subir(index: any){
     var jogAux = this.jogadoresNoJogo[index];
     this.jogadoresNoJogo[index] = this.jogadoresNoJogo[index-1];
     this.jogadoresNoJogo[index-1] = jogAux;
@@ -163,11 +163,11 @@ export class JogoComponent implements OnInit {
     this.participantes[index-1].lugar = index;
   }
 
-  rebuy(participante){
+  rebuy(participante: any){
     participante.rebuy = (participante.rebuy > 0 ? 0 : 1);
   }
 
-  maisRebuy(participante){
+  maisRebuy(participante: any){
     participante.rebuy++;
   }
 
@@ -176,7 +176,7 @@ export class JogoComponent implements OnInit {
     this.erro = null;
   }
 
-  mostraErro(err){
+  mostraErro(err: any){
     if (err.error.message){
       this.erro = `Erro: ${err.error.message}`;
     } else if (err.error.errmsg){
@@ -187,7 +187,7 @@ export class JogoComponent implements OnInit {
     this.globals.isLoading = false;
   }
 
-  mostraSucesso(mensagem){
+  mostraSucesso(mensagem: any){
     this.mensagem = mensagem;
     this.listar();
     this.listarJogadores();

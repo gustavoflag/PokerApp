@@ -10,8 +10,8 @@ import { Globals } from '../../app.globals';
 })
 export class ParametroComponent implements OnInit {
   parametro: any = null;
-  mensagem: string = null;
-  erro: string = null;
+  mensagem: string | null = null;
+  erro: string | null = null;
 
   constructor(private parametroService: ParametroService
              ,public globals: Globals) { }
@@ -45,7 +45,7 @@ export class ParametroComponent implements OnInit {
     this.erro = null;
   }
 
-  mostraErro(err){
+  mostraErro(err: any){
     if (err.error.message){
       this.erro = `Erro: ${err.error.message}`;
     } else if (err.error.errmsg){
@@ -55,7 +55,7 @@ export class ParametroComponent implements OnInit {
     this.globals.isLoading = false;
   }
 
-  mostraSucesso(mensagem){
+  mostraSucesso(mensagem: any){
     this.mensagem = mensagem;
     this.consultar();
   }

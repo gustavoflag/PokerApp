@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ConfigService } from '../../services/config.service';
 import { JogadorService } from '../../services/jogador.service';
 import { Globals } from '../../app.globals';
-import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Color } from 'ng2-charts';
 import { JogoService } from '../../services/jogo.service';
 import { ErrorHelper } from '../../helpers/error.helper';
 
@@ -15,36 +13,29 @@ import { ErrorHelper } from '../../helpers/error.helper';
 })
 export class GraficosComponent implements OnInit {
   jogadores: any = [];
-  quantidadeJogos: number;
+  quantidadeJogos: number = 0;
   qtdSelecionados: number = 0;
 
-  public lineChartData: ChartDataSets[] = [{ data: [], label: '', lineTension: 0 }];
+  public lineChartData: any[] = [{ data: [], label: '', lineTension: 0 }];
   public lineChartLabels: any[] = [];
 
-  public lineChartOptions: (ChartOptions) = {
+  public lineChartOptions: (any) = {
     responsive: true,
     scales: {
-      yAxes: [{
-         scaleLabel: {
+      y: {
+         title: {
             display: true,
-            labelString: 'Pontos'
+            text: 'Pontos'
          }
-      }],
-      xAxes: [{
-        scaleLabel: {
+      },
+      x: {
+        title: {
            display: true,
-           labelString: 'Etapa'
+           text: 'Etapa'
         }
-     }]
+     }
    }
   };
-  public lineChartColors: Color[] = [
-    
-  ];
-  public lineChartLegend = false;
-  public lineChartType = 'line';
-  public lineChartPlugins = [];
-  // //
 
   cores = [
     "#007bff",
@@ -72,7 +63,7 @@ export class GraficosComponent implements OnInit {
     
   }
 
-  selecionaJogador(jogador){
+  selecionaJogador(jogador: any){
     if (!jogador.selecionado && this.qtdSelecionados == 10){
       alert('Máximo de 10 jogadores por gráfico');
       return;
@@ -95,7 +86,7 @@ export class GraficosComponent implements OnInit {
       jogador.corGrafico = cor;
 
       for (var i = 0; i <= this.quantidadeJogos; i++){
-        var etapaIndex = jogador.pontuacaoEtapas.map(function(e){ return e.etapa }).indexOf(i);
+        var etapaIndex = jogador.pontuacaoEtapas.map(function(e: any){ return e.etapa }).indexOf(i);
         var etapaSelecionada = jogador.pontuacaoEtapas[etapaIndex];
         var pontosEtapa = 0;
         if (!etapaSelecionada){
@@ -109,18 +100,25 @@ export class GraficosComponent implements OnInit {
         pontuacoes.push(pontosEtapa);
       }
 
-      this.lineChartColors.push({
+      const serie = {
+        data: pontuacoes,
+        label: jogador.nome, 
+        lineTension: 0.1,
+        fill: false,
         borderColor: cor,
-        backgroundColor: 'rgba(255,0,0,0)',
-      });
+        backgroundColor: cor,
+        pointBorderColor: cor,
+        pointBackgroundColor: cor,
+        radius: 2,
+        borderWidth: 3,
+      }
   
       if (!this.lineChartData[0].data || this.lineChartData[0].data.length == 0){
-        this.lineChartData[0] = { data: pontuacoes, label: jogador.nome, lineTension: 0 };
+        this.lineChartData[0] = serie;
       } else {
-        this.lineChartData.push({ data: pontuacoes, label: jogador.nome, lineTension: 0 });
+        this.lineChartData.push(serie);
       }
 
-      this.lineChartLegend = true;
       this.qtdSelecionados++;
     } else {
       if (this.lineChartData.length > 1){
@@ -128,11 +126,8 @@ export class GraficosComponent implements OnInit {
         this.lineChartData.splice(index, 1);
       } else {
         this.lineChartData[0] = { data: [], label: '', lineTension: 0 };
-        this.lineChartLegend = false;
       }
 
-      const indexCor = this.lineChartColors.map(function(e) { return e.borderColor; }).indexOf(jogador.corGrafico);
-      this.lineChartColors.splice(indexCor, 1);
       this.cores.push(jogador.corGrafico);
       jogador.corGrafico = "#eeeeee";
       this.qtdSelecionados--;
@@ -157,7 +152,7 @@ export class GraficosComponent implements OnInit {
 
       var jogsArray:any = jogs;
 
-      jogsArray.forEach(jogador => {
+      jogsArray.forEach((jogador: any) => {
         if (jogador.pontuacaoEtapas && jogador.pontuacaoEtapas.length > 0){
           this.jogadores.push(jogador);
         }

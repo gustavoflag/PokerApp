@@ -26,6 +26,9 @@
       </tr>
     </tbody>
   </table>
+  <div class="float-right">
+    <button class="btn btn-success" (click)="lancarPremios();" *ngIf="config.usuarioLogado()">Lançar Premios Caixa</button>
+  </div>
 </section>
 <section *ngIf="premiacaoEdicao">
   <form name="formLogin" (ngSubmit)="f.form.valid && salvar()" #f="ngForm" novalidate>

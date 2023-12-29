@@ -19,19 +19,19 @@ export class JogoService {
     return this.http.get(`${this.baseUrlService}/jogo`);
   }
 
-  consultar(idJogo){
+  consultar(idJogo: any){
     return this.http.get(`${this.baseUrlService}/jogo/${idJogo}`);
   }
 
-  inserir(jogo): Observable<any>{
+  inserir(jogo: any): Observable<any>{
     return this.http.post(`${this.baseUrlService}/jogo`, JSON.stringify(jogo), { headers: this.configService.getHeaders() });
   }
 
-  excluir(jogo): Observable<any>{
+  excluir(jogo: any): Observable<any>{
     return this.http.delete(`${this.baseUrlService}/jogo/${jogo._id}`, { headers: this.configService.getHeaders() });
   }
 
-  alterar(jogo): Observable<any>{
+  alterar(jogo: any): Observable<any>{
     return this.http.put(`${this.baseUrlService}/jogo/${jogo._id}`, JSON.stringify(jogo), { headers: this.configService.getHeaders() });
   }
 

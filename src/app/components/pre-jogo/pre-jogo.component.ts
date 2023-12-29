@@ -20,27 +20,27 @@ export class PreJogoComponent implements OnInit, OnDestroy {
   jogadores: any = null;
   jogadoresNoJogo: any = [];
   participantes: any = [];
-  mensagem: string = null;
-  erro: string = null;
+  mensagem: string | null = null;
+  erro: string | null = null;
   parametro: any = null;
-  logado: boolean;
+  logado: boolean = false;
   mesas: any = [-1];
   lateRegister: boolean = false;
-  tempo: string;
+  tempo: string = '';
 
   consultaRelogioInterval: any = null;
   estruturaRelogio: any = null;
-  segundosRelogio: number;
-  minutosRelogio: number;
+  segundosRelogio: number | null = null;
+  minutosRelogio: number | null = null;
   nivelAtualRelogio: any = null;
-  statusRelogio: string;
-  premiacaoPrimeiro: number;
-  premiacaoSegundo: number;
-  premiacaoTerceiro: number;
-  valorMaleta: number;
+  statusRelogio: string | null = null;
+  premiacaoPrimeiro: number | null = null;
+  premiacaoSegundo: number | null = null;
+  premiacaoTerceiro: number | null = null;
+  valorMaleta: number | null = null;
 
-  listarEstruturaSubscription: Subscription;
-  consultarRelogioSubscription: Subscription;
+  listarEstruturaSubscription: Subscription | null = null
+  consultarRelogioSubscription: Subscription | null = null;
 
   constructor(
     private preJogoService: PreJogoService,
@@ -135,15 +135,15 @@ export class PreJogoComponent implements OnInit, OnDestroy {
   }
 
   jogadoresRestantes(): number {
-    return this.participantes.filter((par) => !par.eliminado).length;
+    return this.participantes.filter((par: any) => !par.eliminado).length;
   }
 
   stackTotal(): number {
-    const qtdRebuys = this.participantes.reduce((qtd, par) => qtd += par.rebuy, 0);
+    const qtdRebuys = this.participantes.reduce((qtd: any, par: any) => qtd += par.rebuy, 0);
 
     return (this.participantes.length * this.parametro.qtdFichasBuyIn)
       + (qtdRebuys * this.parametro.qtdFichasBuyIn)
-      + (this.participantes.filter((par) => par.timeChip).length * this.parametro.qtdFichasTimeChip);
+      + (this.participantes.filter((par: any) => par.timeChip).length * this.parametro.qtdFichasTimeChip);
   }
 
   stackMedio(): number {
@@ -154,7 +154,7 @@ export class PreJogoComponent implements OnInit, OnDestroy {
 
   temRedraw(): boolean {
     var qtdRestantes = this.jogadoresRestantes();
-    var qtdEliminados = this.participantes.filter((par) => par.eliminado).length;
+    var qtdEliminados = this.participantes.filter((par: any) => par.eliminado).length;
 
     if (this.parametro.jogadoresRedraw
       && (!this.preJogo.sorteado
@@ -231,7 +231,7 @@ export class PreJogoComponent implements OnInit, OnDestroy {
   sortear() {
     if (confirm('Deseja realizar o sorteio?')) {
       this.globals.isLoading = true;
-      var qtdEliminados = this.participantes.filter((par) => par.eliminado).length;
+      var qtdEliminados = this.participantes.filter((par: any) => par.eliminado).length;
       this.preJogoService.sortear(qtdEliminados > 0)
         .subscribe((preJogoSalvo) => {
           this.mostraSucesso("Sorteio realizado!");
@@ -256,7 +256,7 @@ export class PreJogoComponent implements OnInit, OnDestroy {
     }
   }
 
-  alterar(jogador) {
+  alterar(jogador: any) {
     this.globals.isLoading = true;
     this.preJogoService.alterar(jogador)
       .subscribe((preJogoSalvo) => {
@@ -268,7 +268,7 @@ export class PreJogoComponent implements OnInit, OnDestroy {
         });
   }
 
-  alterarDealer(jogador) {
+  alterarDealer(jogador: any) {
     this.globals.isLoading = true;
     this.preJogoService.alterarDealer(jogador)
       .subscribe((preJogoSalvo) => {
@@ -280,10 +280,10 @@ export class PreJogoComponent implements OnInit, OnDestroy {
         });
   }
 
-  eliminar(jogador) {
+  eliminar(jogador: any) {
     jogador.eliminado = !jogador.eliminado;
     if (jogador.eliminado) {
-      jogador.lugar = this.participantes.filter((par) => !par.eliminado).length + 1;
+      jogador.lugar = this.participantes.filter((par: any) => !par.eliminado).length + 1;
     } else {
       jogador.lugar = null;
     }
@@ -291,41 +291,41 @@ export class PreJogoComponent implements OnInit, OnDestroy {
     this.alterar(jogador);
   }
 
-  rebuy(jogador) {
+  rebuy(jogador: any) {
     jogador.rebuy = (jogador.rebuy > 0 ? 0 : 1);
 
     this.alterar(jogador);
   }
 
-  pago(jogador) {
+  pago(jogador: any) {
     jogador.pago = !jogador.pago;
 
     this.alterar(jogador);
   }
 
-  timeChip(jogador) {
+  timeChip(jogador: any) {
     jogador.timeChip = !jogador.timeChip;
 
     this.alterar(jogador);
   }
 
-  dealer(jogador) {
+  dealer(jogador: any) {
     this.alterarDealer(jogador);
   }
 
-  pontoExtra(jogador) {
+  pontoExtra(jogador: any) {
     jogador.pontoExtra = !jogador.pontoExtra;
 
     this.alterar(jogador);
   }
 
-  maisRebuy(jogador) {
+  maisRebuy(jogador: any) {
     jogador.rebuy++;
 
     this.alterar(jogador);
   }
 
-  adicionar(jogador) {
+  adicionar(jogador: any) {
     if (this.lateRegister) {
       this.globals.isLoading = true;
       this.preJogoService.adicionarJogador({ nomeJogador: jogador.nome, rebuy: 0, eliminado: false, qtdVezesDealer: jogador.qtdVezesDealer, socio: jogador.socio })
@@ -348,16 +348,16 @@ export class PreJogoComponent implements OnInit, OnDestroy {
   }
 
   incluirRegulares() {
-    var socios = this.jogadores.filter(jog => jog.socio);
+    var socios = this.jogadores.filter((jog: any) => jog.socio);
 
     if (socios.length > 0) {
-      socios.forEach(socio => {
+      socios.forEach((socio: any) => {
         this.adicionar(socio);
       });
     }
   }
 
-  remover(jogador) {
+  remover(jogador: any) {
     if (!this.preJogo) {
       var index = this.participantes.indexOf(jogador);
 
@@ -378,8 +378,8 @@ export class PreJogoComponent implements OnInit, OnDestroy {
     }
   }
 
-  getMesa(indMesa) {
-    return this.participantes.filter((p) => p.mesa === indMesa || !p.mesa);
+  getMesa(indMesa: any) {
+    return this.participantes.filter((p: any) => p.mesa === indMesa || !p.mesa);
   }
 
   removerTodos() {
@@ -389,7 +389,7 @@ export class PreJogoComponent implements OnInit, OnDestroy {
     this.listarJogadores();
   }
 
-  subir(index) {
+  subir(index: any) {
     var jogAux = this.jogadoresNoJogo[index];
     this.jogadoresNoJogo[index] = this.jogadoresNoJogo[index - 1];
     this.jogadoresNoJogo[index - 1] = jogAux;
@@ -403,7 +403,7 @@ export class PreJogoComponent implements OnInit, OnDestroy {
   }
 
 
-  mostraErro(err) {
+  mostraErro(err: any) {
     if (err.error.message) {
       this.erro = `Erro: ${err.error.message}`;
     } else if (err.error.errmsg) {
@@ -412,16 +412,16 @@ export class PreJogoComponent implements OnInit, OnDestroy {
     this.globals.isLoading = false;
   }
 
-  mostraSucesso(mensagem) {
+  mostraSucesso(mensagem: any) {
     this.mensagem = mensagem;
     this.globals.isLoading = false;
   }
 
-  getNivel(segs) {
+  getNivel(segs: any) {
     let nivelAtual;
 
     if (this.estruturaRelogio) {
-      this.estruturaRelogio.every(nivel => {
+      this.estruturaRelogio.every((nivel: any) => {
         if (nivel.segsFim < segs) {
           return true;
         } else {

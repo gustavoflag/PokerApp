@@ -19,15 +19,15 @@ export class CaixaService {
     return this.http.get(`${this.baseUrlService}/lancamentoCaixa`);
   }
 
-  inserir(lancamentoCaixa): Observable<any>{
+  inserir(lancamentoCaixa: any): Observable<any>{
     return this.http.post(`${this.baseUrlService}/lancamentoCaixa`, JSON.stringify(lancamentoCaixa), { headers: this.configService.getHeaders() });
   }
 
-  alterar(lancamentoCaixa): Observable<any>{
+  alterar(lancamentoCaixa: any): Observable<any>{
     return this.http.put(`${this.baseUrlService}/lancamentoCaixa/${lancamentoCaixa._id}`, JSON.stringify(lancamentoCaixa), { headers: this.configService.getHeaders() });
   }
 
-  excluir(lancamentoCaixa): Observable<any>{
+  excluir(lancamentoCaixa: any): Observable<any>{
     return this.http.delete(`${this.baseUrlService}/lancamentoCaixa/${lancamentoCaixa._id}`, { headers: this.configService.getHeaders() });
   }
 

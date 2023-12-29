@@ -2,12 +2,10 @@
 <h4 class="hidden-md-up">Pontuação por etapa</h4>
 <div class="row"> 
   <canvas baseChart width=".6" height=".6"
-      [datasets]="lineChartData"
-      [labels]="lineChartLabels"
-      [options]="lineChartOptions"
-      [colors]="lineChartColors"
-      [legend]="lineChartLegend"
-      [chartType]="lineChartType">
+    [datasets]="lineChartData"
+    [labels]="lineChartLabels"
+    [type]="'line'"
+    [options]="lineChartOptions">
   </canvas>
 </div>
 <h4 class="text-align-center">Selecione os jogadores (max: 10)</h4>

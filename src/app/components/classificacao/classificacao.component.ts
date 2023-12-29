@@ -13,9 +13,7 @@ import { ErrorHelper } from '../../helpers/error.helper';
 export class ClassificacaoComponent implements OnInit {
   jogadores: any = null;
   rookies: boolean = false;
-  ordem: string = null;
-  instaAberto: boolean = false;
-  //isLoading: boolean = false;
+  ordem: string | null = null;
 
   constructor(
     private jogadorService: JogadorService,
@@ -29,7 +27,7 @@ export class ClassificacaoComponent implements OnInit {
     this.listarGeral();
   }
 
-  ordenar(ordem) {
+  ordenar(ordem: any) {
     this.ordem = ordem;
     this.globals.isLoading = true;
 
@@ -58,8 +56,8 @@ export class ClassificacaoComponent implements OnInit {
       }, error => this.errorHelper.handle(error));
   }
 
-  qtdLugarJogador(jogador, lugar): Number{
-    var historicoJogo = jogador.historicoJogos.find(function(element, index, array) { return element.lugar === lugar });
+  qtdLugarJogador(jogador: any, lugar: any): Number{
+    var historicoJogo = jogador.historicoJogos.find(function(element: any, index: any, array: any) { return element.lugar === lugar });
     if (historicoJogo)
       return historicoJogo.quantidade;
     else
@@ -77,15 +75,7 @@ export class ClassificacaoComponent implements OnInit {
     }
   }
 
-  fecharInsta(){
-    this.instaAberto = false;
-  }
-
-  abrirInsta(){
-    this.instaAberto = true;
-  }
-
-  abreNovaAba(url){
+  abreNovaAba(url: any){
     window.open(url, "_blank");
   }
 }

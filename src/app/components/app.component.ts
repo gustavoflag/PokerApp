@@ -16,10 +16,10 @@ declare const require: any;
 
 export class AppComponent {
   title = 'app';
-  nomeUsuario: string = null;
+  nomeUsuario: string | null = null;
   navAberta: boolean = false;
-  tema: string;
-  tempoReal: boolean;
+  tema: string = '';
+  tempoReal: boolean = false;
   showConfig: boolean = false;
 
   constructor(
@@ -60,7 +60,7 @@ export class AppComponent {
 
   logado() : boolean{
     if (this.config.usuarioLogado()){
-      var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      var currentUser = JSON.parse(localStorage.getItem('currentUser') || '');
       this.nomeUsuario = currentUser.login;
       return true;
     }

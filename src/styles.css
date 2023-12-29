@@ -55,6 +55,7 @@ mat-icon{
   position: sticky;
   top: 51px;
   z-index: 1;
+  background-color: #232629;
 }
 
 .card-body .table th{
@@ -66,7 +67,7 @@ mat-icon{
   position: -webkit-sticky;
   position: sticky;
   top: 51px;
-  background-color: #272B30;
+  background-color: #1b1e22;
 }
 
 .card-body{
@@ -78,7 +79,7 @@ mat-icon{
 }
 
 .container {
-  background-color: #272B30;
+  background-color: #1b1e22;
 }
 
 .justify-content-center{

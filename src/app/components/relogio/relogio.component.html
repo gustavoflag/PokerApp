@@ -1,4 +1,4 @@
-<div id="relogio" [ngClass]="{ 'text-red': minutos == 0 && segundos <= 3 }">
+<div id="relogio" [class.text-red]="(minutos || 0) == 0 && (segundos || 0) <= 3">
     <h2 class="hidden-sm-down">Relógio</h2>
     <h4 class="hidden-md-up">Relógio</h4>
     <hr>
@@ -9,7 +9,7 @@
                     <h2 *ngIf="nivelAtual">Nível {{ nivelAtual.nivel }}</h2>
                 </div>
                 <div class="row justify-content-center">
-                    <h1 class="relogio" [ngClass]="{'text-info': status == 'PARADO', 'text-warning': status == 'INICIADO'}">{{ minutos | number : '2.0' }}:{{ segundos | number : '2.0' }}</h1>
+                    <h1 class="relogio" [class.text-info]="status == 'PARADO'" [class.text-warning]="status == 'INICIADO'">{{ minutos | number : '2.0' }}:{{ segundos | number : '2.0' }}</h1>
                 </div>
                 <div class="row justify-content-center" *ngIf="nivelAtual.sb && nivelAtual.bb">
                     <div class="col-lg-6 justify-content-center text-align-center">
@@ -40,8 +40,8 @@
         <div class="col-lg-3 hidden-sm-down" *ngIf="estruturaRelogio">
             <h3>Próximos Blinds</h3>
             <div *ngFor="let blind of niveisBlindFilter">
-                <h5 *ngIf="blind.bb" [ngClass]="{ 'text-info' : nivelAtual && nivelAtual.nivel == blind.nivel }">{{ blind.nivel }}: {{ blind.sb | number : '2.0' }} / {{ blind.bb | number : '2.0' }}<span *ngIf="blind.ante">*</span> ({{ blind.segs / 60 }}m)</h5>
-                <h5 *ngIf="!blind.bb" [ngClass]="{ 'text-info' : nivelAtual && nivelAtual.nivel == blind.nivel }">{{ blind.msg }}</h5>
+                <h5 *ngIf="blind.bb" [class.text-info]="nivelAtual && nivelAtual.nivel == blind.nivel">{{ blind.nivel }}: {{ blind.sb | number : '2.0' }} / {{ blind.bb | number : '2.0' }}<span *ngIf="blind.ante">*</span> ({{ blind.segs / 60 }}m)</h5>
+                <h5 *ngIf="!blind.bb" [class.text-info]="nivelAtual && nivelAtual.nivel == blind.nivel">{{ blind.msg }}</h5>
             </div>
         </div>
     </div>

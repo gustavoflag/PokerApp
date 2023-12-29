@@ -8,13 +8,13 @@ import { Token } from '../models/token';
 @Injectable()
 export class AuthService {
   private baseUrlService:string = '';
-  private token: string;
+  private token: string | null;
 
   constructor(private http: HttpClient,
               private configService: ConfigService) {
 
       this.baseUrlService = this.configService.getUrlAuthService();
-      var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      var currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
       this.token = currentUser && currentUser.token;
   }
 

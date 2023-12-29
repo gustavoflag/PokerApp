@@ -4,8 +4,6 @@ import { JogadorService } from '../../services/jogador.service';
 import { JogoService } from '../../services/jogo.service';
 import { ConfigService } from '../../services/config.service';
 import { Globals } from '../../app.globals';
-import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Color } from 'ng2-charts';
 
 @Component({
   selector: 'app-detalhe-jogador',
@@ -16,46 +14,31 @@ import { Color } from 'ng2-charts';
 export class DetalheJogadorComponent implements OnInit {
   idJogador: any = null;
   jogador: any = null;
-  totalJogos: Number = null;
+  totalJogos: number = 0;
 
   height: number = 1;
   width: number = 4;
 
+  public lineChartData: any[] = [];
+  public lineChartLabels: any[] = [];
 
-  public lineChartData: ChartDataSets[];
-  public lineChartLabels: any[];
-
-  public lineChartOptions: (ChartOptions) = {
+  public lineChartOptions: (any) = {
     responsive: true,
     scales: {
-      yAxes: [{
-         scaleLabel: {
+      y: {
+         title: {
             display: true,
-            labelString: 'Pontos'
+            text: 'Pontos'
          }
-      }],
-      xAxes: [{
-        scaleLabel: {
+      },
+      x: {
+        title: {
            display: true,
-           labelString: 'Etapa'
+           text: 'Etapa'
         }
-     }]
+     }
    }
   };
-  public lineChartColors: Color[] = [
-    {
-      borderColor: '#f89406',
-      backgroundColor: 'rgba(255,0,0,0)',
-    },
-    {
-      borderColor: 'red',
-      backgroundColor: 'rgba(255,0,0,0)',
-    }
-  ];
-  public lineChartLegend = false;
-  public lineChartType = 'line';
-  public lineChartPlugins = [];
-  
 
   constructor(private activatedRoute: ActivatedRoute
              ,private jogadorService: JogadorService
@@ -75,7 +58,7 @@ export class DetalheJogadorComponent implements OnInit {
     });
   }
 
-  consultar(idJogador){
+  consultar(idJogador: any){
     this.globals.isLoading = true;
     this.jogadorService.consultar(idJogador)
         .subscribe(jogador => { 
@@ -83,17 +66,26 @@ export class DetalheJogadorComponent implements OnInit {
           this.globals.isLoading = false; 
 
           this.lineChartLabels = [];
-          var pontuacoes = [];
+          var pontuacoes: any = [];
 
-          this.jogador.pontuacaoEtapas.forEach(etapa => {
+          this.jogador.pontuacaoEtapas.forEach((etapa: any) => {
             this.lineChartLabels.push(etapa.etapa.toString());
             pontuacoes.push(etapa.pontos);
           });
 
-          console.log('pontuacoes', pontuacoes);
-
           this.lineChartData = [
-            { data: pontuacoes, label: 'Pontos', lineTension: 0 }
+            { 
+              data: pontuacoes, 
+              label: 'Pontos', 
+              lineTension: 0.1,
+              fill: false,
+              borderColor: '#f89406',
+              backgroundColor: '#f89406',
+              pointBorderColor: '#f89406',
+              pointBackgroundColor: '#f89406',
+              radius: 2,
+              borderWidth: 3,
+            }
           ];
 
         });

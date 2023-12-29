@@ -1,6 +1,6 @@
 export class Pontuacao {
-  lugar: number;
-  pontos: number;
+  lugar: number | undefined;
+  pontos: number | undefined;
 
   constructor(values: Object = {}){
     Object.assign(this, values);

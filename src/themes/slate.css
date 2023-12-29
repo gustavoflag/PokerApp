@@ -68,7 +68,7 @@
     line-height: 1.5;
     color: #eee;
     text-align: left;
-    background-color: #272B30;
+    background-color: #1b1e22;
   }
   
   [tabindex="-1"]:focus {
@@ -2649,7 +2649,7 @@
   
   .btn-secondary {
     color: #fff;
-    background-color: #7A8288;
+    background-color: #51565a;
     border-color: #7A8288;
   }
   
@@ -3292,7 +3292,7 @@
     color: #aaa;
     text-align: left;
     list-style: none;
-    background-color: #3A3F44;
+    background-color: #272a2e;
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 0.25rem;
@@ -4896,7 +4896,7 @@
     word-wrap: break-word;
     background-color: #32383e;
     background-clip: border-box;
-    border: 1px solid rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.9);
     border-radius: 0.25rem;
   }
   
@@ -4920,6 +4920,7 @@
         -ms-flex: 1 1 auto;
             flex: 1 1 auto;
     padding: 1.25rem;
+    background-color: #282c31;
   }
   
   .card-title {
@@ -4947,7 +4948,7 @@
     padding: 0.75rem 1.25rem;
     margin-bottom: 0;
     color: inherit;
-    background-color: #515960;
+    background-color: #373c41;
     border-bottom: 1px solid rgba(0, 0, 0, 0.6);
   }
   
@@ -5690,7 +5691,7 @@
     display: block;
     padding: 0.75rem 1.25rem;
     margin-bottom: -1px;
-    background-color: #32383e;
+    background-color: #282c31;
     border: 1px solid rgba(0, 0, 0, 0.6);
   }
   
@@ -6761,7 +6762,7 @@
   }
   
   .bg-primary {
-    background-color: #3A3F44 !important;
+    background-color: #232629 !important;
   }
   
   a.bg-primary:hover, a.bg-primary:focus,
@@ -6913,7 +6914,7 @@
   }
   
   .border-light {
-    border-color: #e9ecef !important;
+    border-color: #868686 !important;
   }
   
   .border-dark {
@@ -10404,7 +10405,7 @@
   
   .navbar .nav-link {
     padding: 1rem;
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
     border-right: 1px solid rgba(0, 0, 0, 0.2);
   }
   
@@ -10499,7 +10500,7 @@
   
   .btn-secondary {
     background-image: -webkit-gradient(linear, left top, left bottom, from(#8a9196), color-stop(60%, #7A8288), to(#70787d));
-    background-image: linear-gradient(#8a9196, #7A8288 60%, #70787d);
+    background-image: linear-gradient(#51565a, #51565a 60%, #51565a);
     background-repeat: no-repeat;
     -webkit-filter: none;
             filter: none;
@@ -10649,7 +10650,7 @@
   .table-active,
   .table-active > th,
   .table-active > td {
-    background-color: rgba(255, 255, 255, 0.075);
+    background-color: rgba(255, 255, 255, 0.045);
   }
   
   .table-hover .table-primary:hover, .table-hover .table-primary:hover > th, .table-hover .table-primary:hover > td {

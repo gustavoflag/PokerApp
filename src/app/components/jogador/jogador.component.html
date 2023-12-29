@@ -37,8 +37,8 @@
       </div>
       <div class="form-group col-lg-2">
           <label for="rookie">Opções</label><br />          
-          <button type='button' class="btn" (click)="rookie(participante);" [ngClass]="{ 'btn-outline-warning' : !jogadorEdicao.rookie, 'btn-warning': jogadorEdicao.rookie }">Rookie</button>
-          <button type='button' class="btn" (click)="socio(participante);" [ngClass]="{ 'btn-outline-success' : !jogadorEdicao.socio, 'btn-success': jogadorEdicao.socio }">Socio</button>
+          <button type='button' class="btn" (click)="rookie();" [ngClass]="{ 'btn-outline-warning' : !jogadorEdicao.rookie, 'btn-warning': jogadorEdicao.rookie }">Rookie</button>
+          <button type='button' class="btn" (click)="socio();" [ngClass]="{ 'btn-outline-success' : !jogadorEdicao.socio, 'btn-success': jogadorEdicao.socio }">Socio</button>
       </div>
       <div class="form-group col-lg-6">
         <label for="titulo">Títulos</label>
@@ -46,7 +46,7 @@
           <div *ngFor="let titulo of jogadorEdicao.titulos; let i = index" class="float-left">
               <div style="background:transparent url('assets/images/lourosSm.png') no-repeat left center" class="float-left">
                 <span class="text">{{titulo.ano}}&nbsp;</span>
-                <button type='button' class="btn btn-sm btn-outline-danger" (click)="excluirTitulo(index);" >-</button>
+                <button type='button' class="btn btn-sm btn-outline-danger" (click)="excluirTitulo(i);" >-</button>
               </div>
               &nbsp;
           </div>

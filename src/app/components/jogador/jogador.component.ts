@@ -13,8 +13,8 @@ export class JogadorComponent implements OnInit {
   jogadores: any = null;
   jogadorEdicao: any = null;
   tituloEdicao: any = null;
-  mensagem: string = null;
-  erro: string = null;
+  mensagem: string | null = null;
+  erro: string | null = null;
 
   constructor(private jogadorService: JogadorService
              ,public config: ConfigService
@@ -30,7 +30,7 @@ export class JogadorComponent implements OnInit {
     this.jogadorEdicao = { };
   }
 
-  editar(jogadorEdit){
+  editar(jogadorEdit: any){
     this.limpaMensagens();
     this.jogadorEdicao = jogadorEdit;
   }
@@ -72,7 +72,7 @@ export class JogadorComponent implements OnInit {
       err => this.mostraErro(err));
   }
 
-  excluir(jogadorExcluir){
+  excluir(jogadorExcluir: any){
     var confirmado = confirm("Deseja mesmo excluir esse Jogador?");
     if (confirmado){
       this.globals.isLoading = true;
@@ -104,7 +104,7 @@ export class JogadorComponent implements OnInit {
     this.tituloEdicao = null;
   }
 
-  excluirTitulo(index){
+  excluirTitulo(index: any){
     this.jogadorEdicao.titulos.splice(index, 1);
   }
 
@@ -113,7 +113,7 @@ export class JogadorComponent implements OnInit {
     this.erro = null;
   }
 
-  mostraErro(err){
+  mostraErro(err: any){
     if (err.error.message){
       this.erro = `Erro: ${err.error.message}`;
     } else if (err.error.errmsg){
@@ -123,7 +123,7 @@ export class JogadorComponent implements OnInit {
     this.globals.isLoading = false;
   }
 
-  mostraSucesso(mensagem){
+  mostraSucesso(mensagem: any){
     this.mensagem = mensagem;
     this.listar();
   }

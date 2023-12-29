@@ -14,8 +14,8 @@ import { ErrorHelper } from '../../helpers/error.helper';
 export class CaixaComponent implements OnInit {
   lancamentosCaixa: any = null;
   lancamentoEdicao: any = null;
-  mensagem: string = null;
-  erro: string = null;
+  mensagem: string | null = null;
+  erro: string | null = null;
 
   constructor(
     private caixaService: CaixaService,
@@ -35,7 +35,7 @@ export class CaixaComponent implements OnInit {
     this.lancamentoEdicao = { };
   }
 
-  editar(lancamentoEdit){
+  editar(lancamentoEdit: any){
     this.limpaMensagens();
     this.lancamentoEdicao = lancamentoEdit;
   }
@@ -73,7 +73,7 @@ export class CaixaComponent implements OnInit {
       err => this.mostraErro(err));
   }
 
-  excluir(lancamentoExcluir){
+  excluir(lancamentoExcluir: any){
     this.globals.isLoading = true;
     var confirmado = confirm("Deseja mesmo excluir esse Lançamento?");
     if (confirmado){
@@ -89,7 +89,7 @@ export class CaixaComponent implements OnInit {
     this.erro = null;
   }
 
-  mostraErro(err){
+  mostraErro(err: any){
     if (err.error.message){
       this.erro = `Erro: ${err.error.message}`;
     } else if (err.error.errmsg){
@@ -99,20 +99,21 @@ export class CaixaComponent implements OnInit {
     this.globals.isLoading = false;
   }
 
-  mostraSucesso(mensagem){
+  mostraSucesso(mensagem: any){
     this.mensagem = mensagem;
     this.listar();
   }
 
-  saldoAtual():Number{
+  saldoAtual(): number {
     if (this.lancamentosCaixa){
       var saldo = 0;
 
-      this.lancamentosCaixa.forEach(function (lancamento){
+      this.lancamentosCaixa.forEach(function (lancamento: any){
         saldo += lancamento.valor;
       });
 
       return saldo;
     }
+    return 0;
   }
 }

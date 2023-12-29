@@ -16,7 +16,7 @@ import { GraficosComponent } from './components/graficos/graficos.component';
 import { FotosComponent } from './components/fotos/fotos.component';
 import { RelogioComponent } from './components/relogio/relogio.component';
 
-const appRoutes: Routes = [
+export const appRoutes: Routes = [
     { path: 'login', component: AuthComponent },
     { path: 'jogador', component: JogadorComponent, canActivate: [AuthGuard] },
     { path: 'jogador/:id', component: DetalheJogadorComponent },

@@ -19,15 +19,15 @@ export class PontuacaoService {
     return this.http.get(`${this.baseUrlService}/pontuacao`);
   }
 
-  inserir(pontuacao): Observable<any>{
+  inserir(pontuacao: any): Observable<any>{
     return this.http.post(`${this.baseUrlService}/pontuacao`, JSON.stringify(pontuacao), { headers: this.configService.getHeaders() });
   }
 
-  alterar(pontuacao): Observable<any>{
+  alterar(pontuacao: any): Observable<any>{
     return this.http.put(`${this.baseUrlService}/pontuacao/${pontuacao._id}`, JSON.stringify(pontuacao), { headers: this.configService.getHeaders() });
   }
 
-  excluir(pontuacao): Observable<any>{
+  excluir(pontuacao: any): Observable<any>{
     return this.http.delete(`${this.baseUrlService}/pontuacao/${pontuacao._id}`, { headers: this.configService.getHeaders() });
   }
 }

@@ -18,15 +18,15 @@ export class PreJogoService {
     return this.http.get(`${this.baseUrlService}/preJogo`);
   }
 
-  inserir(preJogo): Observable<any>{
+  inserir(preJogo: any): Observable<any>{
     return this.http.post(`${this.baseUrlService}/preJogo`, JSON.stringify(preJogo), { headers: this.configService.getHeaders() });
   }
 
-  alterar(jogador): Observable<any>{
+  alterar(jogador: any): Observable<any>{
     return this.http.put(`${this.baseUrlService}/preJogo`, JSON.stringify(jogador), { headers: this.configService.getHeaders() });
   }
 
-  alterarDealer(jogador): Observable<any>{
+  alterarDealer(jogador: any): Observable<any>{
     return this.http.post(`${this.baseUrlService}/preJogo/alterarDealer`, JSON.stringify(jogador), { headers: this.configService.getHeaders() });
   }
 
@@ -42,11 +42,11 @@ export class PreJogoService {
     return this.http.delete(`${this.baseUrlService}/preJogo`, { headers: this.configService.getHeaders() });
   }
 
-  excluirJogador(jogador): Observable<any>{
+  excluirJogador(jogador: any): Observable<any>{
     return this.http.post(`${this.baseUrlService}/preJogo/excluirJogador`, JSON.stringify(jogador), { headers: this.configService.getHeaders() });
   }
 
-  adicionarJogador(jogador): Observable<any>{
+  adicionarJogador(jogador: any): Observable<any>{
     return this.http.post(`${this.baseUrlService}/preJogo/adicionarJogador`, JSON.stringify(jogador), { headers: this.configService.getHeaders() });
   }
 }

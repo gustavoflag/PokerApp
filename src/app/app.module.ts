@@ -6,7 +6,7 @@ import { JogoService } from './services/jogo.service';
 import { CaixaService } from './services/caixa.service';
 import { FormsModule } from '@angular/forms';
 import { NgModule, LOCALE_ID } from '@angular/core';
-import { registerLocaleData } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { Pontuacao } from './models/pontuacao';
 import { AppComponent } from './components/app.component';
@@ -27,7 +27,7 @@ import { DetalheJogadorComponent } from './components/detalhe-jogador/detalhe-jo
 import { PreJogoComponent } from './components/pre-jogo/pre-jogo.component';
 import { Globals } from './app.globals';
 import { ControleDealerComponent } from './components/controle-dealer/controle-dealer.component';
-import { ChartsModule } from 'ng2-charts';
+import { NgChartsModule } from 'ng2-charts';
 import { GraficosComponent } from './components/graficos/graficos.component';
 import { FotosComponent } from './components/fotos/fotos.component';
 import { ErrorHelper } from './helpers/error.helper';
@@ -61,13 +61,25 @@ registerLocaleData(localePt);
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    ChartsModule,
+    NgChartsModule,
     //AlertModule.forRoot(),
     Routing,
     BrowserAnimationsModule,
     MatIconModule,
+    CommonModule
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, PontuacaoService, JogadorService, AuthService, AuthGuard, JogoService, CaixaService, Globals, ErrorHelper, RelogioService],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'pt-BR' }, 
+    PontuacaoService, 
+    JogadorService, 
+    AuthService, 
+    AuthGuard, 
+    JogoService, 
+    CaixaService, 
+    Globals, 
+    ErrorHelper, 
+    RelogioService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

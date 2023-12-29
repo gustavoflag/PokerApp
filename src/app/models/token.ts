@@ -1,4 +1,4 @@
 export class Token {
-    token: string;
-    mensagem: string;
+    token: string | undefined;
+    mensagem: string | undefined;
 }

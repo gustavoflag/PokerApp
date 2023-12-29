@@ -9,7 +9,7 @@ export class ErrorHelper {
 
     }
 
-    handle(error){
+    handle(error: any){
         alert('Ocorreu um Erro: ' + error.message + " - TENTE NOVAMENTE");
         this.globals.isLoading = false;
     }

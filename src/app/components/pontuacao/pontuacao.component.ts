@@ -13,8 +13,8 @@ import { Globals } from '../../app.globals';
 export class PontuacaoComponent implements OnInit {
   pontuacoes: any = null;
   pontuacaoEdicao: any = null;
-  mensagem: string = null;
-  erro: string = null;
+  mensagem: string | null = null;
+  erro: string | null = null;
 
   constructor(private pontuacaoService: PontuacaoService
              ,private router: Router
@@ -31,7 +31,7 @@ export class PontuacaoComponent implements OnInit {
     this.pontuacaoEdicao = { };
   }
 
-  editar(pontuacaoEdit){
+  editar(pontuacaoEdit: any){
     this.limpaMensagens();
     this.pontuacaoEdicao = pontuacaoEdit;
   }
@@ -66,7 +66,7 @@ export class PontuacaoComponent implements OnInit {
       err => this.mostraErro(err));
   }
 
-  excluir(pontuacaoExcluir){
+  excluir(pontuacaoExcluir: any){
     var confirmado = confirm("Deseja mesmo excluir essa Pontuação?");
     if (confirmado){
       this.globals.isLoading = true;
@@ -82,7 +82,7 @@ export class PontuacaoComponent implements OnInit {
     this.erro = null;
   }
 
-  mostraErro(err){
+  mostraErro(err: any){
     if (err.error.message){
       this.erro = `Erro: ${err.error.message}`;
     } else if (err.error.errmsg){
@@ -92,7 +92,7 @@ export class PontuacaoComponent implements OnInit {
     this.globals.isLoading = false;
   }
 
-  mostraSucesso(mensagem){
+  mostraSucesso(mensagem: any){
     this.mensagem = mensagem;
     this.listar();
   }

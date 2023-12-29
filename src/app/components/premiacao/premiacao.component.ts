@@ -15,8 +15,8 @@ import { Globals } from '../../app.globals';
 export class PremiacaoComponent implements OnInit {
   premiacoes: any = null;
   premiacaoEdicao: any = null;
-  mensagem: string = null;
-  erro: string = null;
+  mensagem: string | null = null;
+  erro: string | null = null;
   saldoCaixa: number = 0;
 
   constructor(private premiacaoService: PremiacaoService
@@ -36,7 +36,25 @@ export class PremiacaoComponent implements OnInit {
    this.premiacaoEdicao = { };
   }
 
-  editar(premiacaoEdit){
+  lancarPremios(){
+    if (confirm('Tem certeza que deseja lançar os prêmios finais no caixa?')){
+      this.globals.isLoading = true;
+      this.premiacoes.forEach((premiacao: any) => {
+        const valorPremio = ((this.saldoCaixa * premiacao.porcentual) / 100);
+
+        this.caixaService.inserir({
+          data: new Date(),
+          valor: (valorPremio * -1),
+          descricao: `Pagamento premiação ${premiacao.lugar} lugar -> ${valorPremio}`
+        }).subscribe(
+          data => {},
+          err => this.mostraErro(err));
+      });
+      this.mostraSucesso("Lançamentos inseridos com sucesso!");
+    }
+  }
+
+  editar(premiacaoEdit: any){
    this.limpaMensagens();
    this.premiacaoEdicao = premiacaoEdit;
   }
@@ -71,7 +89,7 @@ export class PremiacaoComponent implements OnInit {
      err => this.mostraErro(err));
   }
 
-  excluir(premiacaoExcluir){
+  excluir(premiacaoExcluir: any){
    var confirmado = confirm("Deseja mesmo excluir essa Premiação?");
    if (confirmado){
     this.globals.isLoading = true;
@@ -94,7 +112,7 @@ export class PremiacaoComponent implements OnInit {
    this.erro = null;
   }
 
-  mostraErro(err){
+  mostraErro(err: any){
    if (err.error.message){
      this.erro = `Erro: ${err.error.message}`;
    } else if (err.error.errmsg){
@@ -104,7 +122,7 @@ export class PremiacaoComponent implements OnInit {
    this.globals.isLoading = false;
   }
 
-  mostraSucesso(mensagem){
+  mostraSucesso(mensagem: any){
    this.mensagem = mensagem;
    this.listar();
   }

@@ -23,7 +23,7 @@ export class ControleDealerComponent implements OnInit {
           this.jogadores = jogs; 
           this.globals.isLoading = false;
 
-          this.minimoVezesDealer = this.jogadores.reduce((min, par) => par.qtdVezesDealer < min ? par.qtdVezesDealer : min, this.jogadores[0].qtdVezesDealer);
+          this.minimoVezesDealer = this.jogadores.reduce((min: any, par: any) => par.qtdVezesDealer < min ? par.qtdVezesDealer : min, this.jogadores[0].qtdVezesDealer);
       });
   }
 

@@ -18,7 +18,7 @@ export class JogadorService {
     return this.http.get(this.baseUrlService + '/jogador');
   }
 
-  consultar(idJogador){
+  consultar(idJogador: any){
     return this.http.get(`${this.baseUrlService}/jogador/${idJogador}`);
   }
 
@@ -26,7 +26,7 @@ export class JogadorService {
     return this.http.get(this.baseUrlService + '/classificacao');
   }
 
-  classificacaoOrdenada(ordem){
+  classificacaoOrdenada(ordem: any){
     return this.http.get(`${this.baseUrlService}/classificacao/${ordem}`);
   }
 
@@ -34,11 +34,11 @@ export class JogadorService {
     return this.http.get(this.baseUrlService + '/classificacaoRookies');
   }
 
-  classificacaoRookiesOrdenada(ordem){
+  classificacaoRookiesOrdenada(ordem: any){
     return this.http.get(`${this.baseUrlService}/classificacaoRookies/${ordem}`);
   }
 
-  classificacaoMes(ano, mes){
+  classificacaoMes(ano: any, mes: any){
     return this.http.get(`${this.baseUrlService}/classificacaoMes/${ano}/${mes}`);
   }
 
@@ -46,15 +46,15 @@ export class JogadorService {
     return this.http.get(this.baseUrlService + '/classificacaoTodosMeses');
   }
 
-  inserir(jogador): Observable<any>{
+  inserir(jogador: any): Observable<any>{
     return this.http.post(`${this.baseUrlService}/jogador`, JSON.stringify(jogador), { headers: this.configService.getHeaders() });
   }
 
-  alterar(jogador): Observable<any>{
+  alterar(jogador: any): Observable<any>{
     return this.http.put(`${this.baseUrlService}/jogador/${jogador._id}`, JSON.stringify(jogador), { headers: this.configService.getHeaders() });
   }
 
-  excluir(jogador): Observable<any>{
+  excluir(jogador: any): Observable<any>{
     return this.http.delete(`${this.baseUrlService}/jogador/${jogador._id}`, { headers: this.configService.getHeaders() });
   }
 }
