@@ -35,6 +35,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { RelogioComponent } from './components/relogio/relogio.component';
 import { RelogioService } from './services/relogio.service';
+import { AgendaComponent } from './components/agenda/agenda.component';
+import { LocalComponent } from './components/local/local.component';
+import { RegulamentoComponent } from './components/regulamento/regulamento.component';
+import { AgendamentoService } from './services/agendamento.service';
+import { LocalService } from './services/local.service';
 
 registerLocaleData(localePt);
 
@@ -56,6 +61,9 @@ registerLocaleData(localePt);
     GraficosComponent,
     FotosComponent,
     RelogioComponent,
+    AgendaComponent,
+    LocalComponent,
+    RegulamentoComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +86,9 @@ registerLocaleData(localePt);
     CaixaService, 
     Globals, 
     ErrorHelper, 
-    RelogioService
+    RelogioService,
+    AgendamentoService,
+    LocalService
   ],
   bootstrap: [AppComponent]
 })

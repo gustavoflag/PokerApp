@@ -1,0 +1,56 @@
+<h2>Local
+  <div class="float-right">
+    <button class="btn btn-primary" (click)="novo();" *ngIf="config.usuarioLogado()">Novo</button>
+  </div>
+  </h2>
+  <hr>
+  <div *ngIf="mensagem" class="alert alert-dismissible alert-success">{{mensagem}}</div>
+  <div *ngIf="erro" class="alert alert-dismissible alert-danger">{{erro}}</div>
+  <section *ngIf="!localEdicao && locais && locais.length > 0">
+    <table class="table table-hover">
+      <thead>
+        <th>Nome</th>
+        <th>Endereco</th>
+        <th>Padrão</th>
+        <th>Online</th>
+        <th *ngIf="config.usuarioLogado()"></th>
+        <th *ngIf="config.usuarioLogado()"></th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let local of locais">
+          <td>{{local.nome}}</td>
+          <td>{{local.endereco}}</td>
+          <td [class.text-success]="local.padrao" [class.text-danger]="!local.padrao">
+            {{local.padrao ? 'SIM' : 'NÃO'}}
+          </td>
+          <td [class.text-success]="local.online" [class.text-danger]="!local.online">
+            {{local.online ? 'SIM' : 'NÃO'}}
+          </td>
+          <td *ngIf="config.usuarioLogado()"><button class="btn btn-secondary btn-sm" (click)="editar(local);">Editar</button></td>
+          <td *ngIf="config.usuarioLogado()"><button class="btn btn-danger btn-sm" (click)="excluir(local);">Excluir</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <section *ngIf="localEdicao">
+    <form name="formLogin" (ngSubmit)="f.form.valid && salvar()" #f="ngForm" novalidate>
+      <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !nome.valid }">
+        <label for="nome">Nome</label>
+        <input type="text" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !nome.valid }" name="nome" [(ngModel)]="localEdicao.nome" #nome="ngModel" required />
+        <div *ngIf="f.submitted && !nome.valid" class="invalid-feedback">Nome é obrigatório</div>
+      </div>
+      <div class="form-group">
+        <label for="pontos">Endereço</label>
+        <input type="text" class="form-control" name="endereco" [(ngModel)]="localEdicao.endereco" #endereco="ngModel" />
+      </div>
+      <div class="form-group">        
+        <button type='button' class="btn" (click)="online();" [ngClass]="{ 'btn-outline-warning' : !localEdicao.online, 'btn-warning': localEdicao.online }">Online</button>
+        <button type='button' class="btn" (click)="padrao();" [ngClass]="{ 'btn-outline-success' : !localEdicao.padrao, 'btn-success': localEdicao.padrao }">Padrão</button>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-success">Salvar</button>
+        <button (click)="limpaMensagens();listar();" class="btn btn-secondary">Voltar</button>
+      </div>
+    </form>
+  </section>
+  

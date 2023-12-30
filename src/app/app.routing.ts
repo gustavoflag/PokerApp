@@ -15,6 +15,7 @@ import { ControleDealerComponent } from './components/controle-dealer/controle-d
 import { GraficosComponent } from './components/graficos/graficos.component';
 import { FotosComponent } from './components/fotos/fotos.component';
 import { RelogioComponent } from './components/relogio/relogio.component';
+import { LocalComponent } from './components/local/local.component';
 
 export const appRoutes: Routes = [
     { path: 'login', component: AuthComponent },
@@ -34,6 +35,7 @@ export const appRoutes: Routes = [
     { path: 'graficos', component: GraficosComponent },
     { path: 'fotos', component: FotosComponent },
     { path: 'relogio', component: RelogioComponent },
+    { path: 'local', component: LocalComponent },
     { path: '**', redirectTo: '' }
 ];
 

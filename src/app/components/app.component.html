@@ -34,6 +34,7 @@
         <div class="dropdown-menu show" style="visibility: hidden;">
           <a class="dropdown-item" [routerLink]="['/pontuacao']" (click)="showConfig = !showConfig">Pontuação</a>
           <a class="dropdown-item" [routerLink]="['/controleDealer']" [routerLinkActive]="['active']">Controle Dealer</a>
+          <a class="dropdown-item" [routerLink]="['/local']" [routerLinkActive]="['active']">Local</a>
           <a class="dropdown-item" [routerLink]="['/jogador']" *ngIf="config.usuarioLogado()" [routerLinkActive]="['active']">Jogadores</a>
           <a class="dropdown-item" [routerLink]="['/parametro']" *ngIf="config.usuarioLogado()" [routerLinkActive]="['active']">Parâmetros</a>
         </div>
