@@ -1,0 +1,14 @@
+.title {
+  background: url('../../../assets/images/lourosXs.png') no-repeat center center;
+  opacity: 0.8;
+  padding-left: 3px;
+  padding-right: 3px;
+  display: flex;
+}
+
+.year {
+  font-size: 9px;
+  line-height: 20px;
+  display: flex;
+  color: #fffd8b;
+}

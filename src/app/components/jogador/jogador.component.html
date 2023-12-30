@@ -16,10 +16,11 @@
     <tbody>
       <tr *ngFor="let jogador of jogadores">
         <td>
-            <div class="float-left">{{jogador.nome}}&nbsp;<span *ngIf="jogador.rookie" class="badge badge-warning">Rookie</span><span *ngIf="jogador.socio" class="badge badge-success">Sócio</span></div>
-            <div *ngFor="let titulo of jogador.titulos" style="background:transparent url('assets/images/lourosXs.png') no-repeat left center" class="float-left">
-              <small class="text-muted">{{titulo.ano}}</small>
-            </div>
+          <div class="float-left">{{jogador.nome}}&nbsp;</div>
+          <div *ngFor="let titulo of jogador.titulos" class="float-left title">
+            <small class="year">{{titulo.ano}}</small>
+          </div>
+          <div class="float-left"><span *ngIf="jogador.rookie" class="badge badge-warning">Rookie</span><span *ngIf="jogador.socio" class="badge badge-success">Sócio</span></div>
         </td>
         <td><button class="btn btn-secondary btn-sm" (click)="editar(jogador);" *ngIf="config.usuarioLogado()">Editar</button></td>
         <td><button class="btn btn-danger btn-sm" (click)="excluir(jogador);" *ngIf="config.usuarioLogado()">Excluir</button></td>
