@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { AuthService, PreJogoService } from '../services';
 import { ConfigService } from '../services/config.service';
 import { Router } from '@angular/router';
-import { PreJogoService } from '../services/pre-jogo.service';
 import { Globals } from '../app.globals';
 import { ErrorHelper } from '../helpers/error.helper';
 import { TokenHelper } from '../helpers/token.helper';
@@ -11,7 +10,7 @@ declare const require: any;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  providers: [AuthService, ConfigService, PreJogoService, TokenHelper],
+  providers: [AuthService, PreJogoService],
   styleUrls: ['./app.component.css']
 })
 

@@ -38,9 +38,9 @@ export class HttpClientService {
     );
   }
 
-  put<T extends IMongooseObj>(endpoint: string, obj: T): Observable<T>{
+  put<T extends IMongooseObj>(endpoint: string, obj: T, passId: boolean = true): Observable<T>{
     return this.httpClient.put<T>(
-      `${this.baseUrlService}/${endpoint}/${obj._id}`, 
+      `${this.baseUrlService}/${endpoint}${passId ? `/${obj._id}` : ''}`, 
       JSON.stringify(obj), 
       { headers: this.configService.getHeaders() }
     ).pipe(
@@ -48,9 +48,9 @@ export class HttpClientService {
     );
   }
 
-  delete<T extends IMongooseObj>(endpoint: string, obj: T): Observable<any>{
+  delete<T extends IMongooseObj>(endpoint: string, obj: T, passId: boolean = true): Observable<any>{
     return this.httpClient.delete(
-      `${this.baseUrlService}/${endpoint}/${obj._id}`, 
+      `${this.baseUrlService}/${endpoint}${passId ? `/${obj._id}` : ''}`, 
       { headers: this.configService.getHeaders() })
     .pipe(
       catchError(this.handleError<any>(`delete ${endpoint}`, [] as any))

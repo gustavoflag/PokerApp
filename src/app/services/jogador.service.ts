@@ -8,7 +8,7 @@ export class JogadorService {
   }
 
   lista(){
-    return this.http.get('/jogador');
+    return this.http.get('jogador');
   }
 
   consultar(idJogador: any){

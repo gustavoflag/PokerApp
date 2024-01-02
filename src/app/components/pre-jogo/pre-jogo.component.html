@@ -41,8 +41,9 @@
         <button (click)="lateRegister = true" type='button' *ngIf="logado && preJogo && !lateRegister && (jogadoresRestantes() > 0)" class="btn btn-sm btn-warning">Late Register</button>
         <button (click)="incluirRegulares();" *ngIf="logado && !preJogo" type='button' class="btn btn-sm btn-secondary">Incluir Regulares</button>
         <button (click)="salvar();" *ngIf="logado && !preJogo" type='button' class="btn btn-sm btn-info">Salvar</button>
-        <button (click)="sortear();" *ngIf="logado && preJogo && temRedraw()" type='button' class="btn btn-sm btn-info">Sortear Lugares</button>
-        <button (click)="cancelar();" *ngIf="logado && preJogo" type='button' class="btn btn-sm  btn-danger">Cancelar</button>
+        <button (click)="sortear();" *ngIf="logado && preJogo && temRedraw() && lateRegister == false" type='button' class="btn btn-sm btn-info">Sortear Lugares</button>
+        <button (click)="cancelar();" *ngIf="logado && preJogo && lateRegister == false" type='button' class="btn btn-sm  btn-danger">Cancelar Jogo</button>
+        <button (click)="lateRegister = false" *ngIf="logado && preJogo && lateRegister == true" type='button' class="btn btn-sm  btn-danger">Cancelar Late</button>
         <button (click)="finalizar();" *ngIf="logado && preJogo && (jogadoresRestantes() === 0)" type='button' class="btn btn-sm btn-success">Finalizar Jogo</button>
       </div>
     </div>
@@ -64,40 +65,39 @@
            </div>
          </div>
        </div>
-
-       <div class="col-lg-5" *ngFor="let m of mesas; let indMesa = index">
-         <div class="card border-light mb-3" >
-           <div class="card-header">
-             Mesa {{indMesa + 1}}
-             <div class="float-right">
+      <div [ngClass]="{'col-lg-3': lateRegister, 'col-lg-5': !lateRegister }" *ngFor="let m of mesas; let indMesa = index">
+        <div class="card border-light mb-3">
+          <div class="card-header">
+            Mesa {{indMesa + 1}}
+            <div class="float-right">
                 <button type='button' *ngIf="logado && !preJogo" class="btn btn-outline-danger btn-sm" (click)="removerTodos();" title="Remover todos"><<<</button>
-             </div>
-           </div>
-           <div class="card-body">
-             <ul class="list-group">
-               <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let participante of getMesa(indMesa + 1); let i = index">
-                 <span *ngIf="!participante.lugarNaMesa && !participante.eliminado">{{ participante.nomeJogador }}</span>
-                 <span *ngIf="participante.lugarNaMesa && !participante.eliminado">
-                   P{{ participante.lugarNaMesa }} 
-                   <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" title="Time Chip" (click)="dealer(participante);" [ngClass]="{ 'btn-muted' : participante.dealer === false, 'btn-warning': participante.dealer }">D</button> {{ participante.nomeJogador }}</span>
-                 <span *ngIf="participante.lugar && participante.eliminado" class="text-muted">{{ participante.lugar }}º - {{ participante.nomeJogador }} <span *ngIf="participante.dealer" class="badge badge-warning badge-sm">D</span></span>
-                 <span *ngIf="!logado && participante.rebuy > 0" class="badge badge-danger">{{ participante.rebuy > 1 ? participante.rebuy + " " : "" }}Rebuy</span>
-                 <div class="float-right">
-                   <span *ngIf="!logado && participante.pago" class="badge badge-warning">$</span>
-                   <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" title="Pago" (click)="pago(participante);" [ngClass]="{ 'btn-outline-warning' : participante.pago === false, 'btn-warning': participante.pago }">$</button>
-                   <span *ngIf="!logado && participante.timeChip" class="badge badge-success">T</span>
-                   <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" title="Time Chip" (click)="timeChip(participante);" [ngClass]="{ 'btn-outline-success' : participante.timeChip === false, 'btn-success': participante.timeChip }">T</button>
-                   <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" (click)="pontoExtra(participante);" title="Maior número KOs" [ngClass]="{ 'btn-outline-info' : participante.pontoExtra == false, 'btn-info': participante.pontoExtra }">+KO</button>
-                   <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" (click)="rebuy(participante);" [ngClass]="{ 'btn-outline-secondary' : participante.rebuy === 0, 'btn-secondary': participante.rebuy > 0 }">{{ participante.rebuy > 1 ? participante.rebuy + " " : "" }}Rebuy</button>
-                   <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" (click)="maisRebuy(participante);" [ngClass]="{ 'btn-outline-secondary' : participante.rebuy === 0, 'btn-secondary': participante.rebuy > 0 }">+</button>
-                   <button type='button' *ngIf="logado && preJogo" class="btn btn-sm" [ngClass]="{ 'btn-outline-danger': !participante.eliminado, 'btn-outline-success': participante.eliminado }" (click)="eliminar(participante);" title="Eliminar Jogador">X</button>
-                   <button type='button' *ngIf="logado" class="btn btn-outline-danger btn-sm" (click)="remover(participante);" title="Remover Jogador"><<</button>
-                 </div>
-               </li>
-             </ul>
-           </div>
-         </div>
-       </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <ul class="list-group">
+              <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let participante of getMesa(indMesa + 1); let i = index">
+                <span *ngIf="!participante.lugarNaMesa && !participante.eliminado">{{ participante.nomeJogador }}</span>
+                <span *ngIf="participante.lugarNaMesa && !participante.eliminado">
+                  P{{ participante.lugarNaMesa }} 
+                  <button type='button' *ngIf="logado && preJogo && !lateRegister" class="btn btn-sm" title="Time Chip" (click)="dealer(participante);" [ngClass]="{ 'btn-muted' : participante.dealer === false, 'btn-warning': participante.dealer }">D</button> {{ participante.nomeJogador }}</span>
+                <span *ngIf="participante.lugar && participante.eliminado" class="text-muted">{{ participante.lugar }}º - {{ participante.nomeJogador }} <span *ngIf="participante.dealer" class="badge badge-warning badge-sm">D</span></span>
+                <span *ngIf="!logado && participante.rebuy > 0" class="badge badge-danger">{{ participante.rebuy > 1 ? participante.rebuy + " " : "" }}Rebuy</span>
+                <div class="float-right">
+                  <span *ngIf="!logado && participante.pago" class="badge badge-warning">$</span>
+                  <button type='button' *ngIf="logado && preJogo && !lateRegister" class="btn btn-sm" title="Pago" (click)="pago(participante);" [ngClass]="{ 'btn-outline-warning' : participante.pago === false, 'btn-warning': participante.pago }">$</button>
+                  <span *ngIf="!logado && participante.timeChip" class="badge badge-success">T</span>
+                  <button type='button' *ngIf="logado && preJogo && !lateRegister" class="btn btn-sm" title="Time Chip" (click)="timeChip(participante);" [ngClass]="{ 'btn-outline-success' : participante.timeChip === false, 'btn-success': participante.timeChip }">T</button>
+                  <button type='button' *ngIf="logado && preJogo && !lateRegister" class="btn btn-sm" (click)="pontoExtra(participante);" title="Maior número KOs" [ngClass]="{ 'btn-outline-info' : participante.pontoExtra == false, 'btn-info': participante.pontoExtra }">+KO</button>
+                  <button type='button' *ngIf="logado && preJogo && !lateRegister" class="btn btn-sm" (click)="rebuy(participante);" [ngClass]="{ 'btn-outline-secondary' : participante.rebuy === 0, 'btn-secondary': participante.rebuy > 0 }">{{ participante.rebuy > 1 ? participante.rebuy + " " : "" }}Rebuy</button>
+                  <button type='button' *ngIf="logado && preJogo && !lateRegister" class="btn btn-sm" (click)="maisRebuy(participante);" [ngClass]="{ 'btn-outline-secondary' : participante.rebuy === 0, 'btn-secondary': participante.rebuy > 0 }">+</button>
+                  <button type='button' *ngIf="logado && preJogo && !lateRegister" class="btn btn-sm" [ngClass]="{ 'btn-outline-danger': !participante.eliminado, 'btn-outline-success': participante.eliminado }" (click)="eliminar(participante);" title="Eliminar Jogador">X</button>
+                  <button type='button' *ngIf="logado && !lateRegister" class="btn btn-outline-danger btn-sm" (click)="remover(participante);" title="Remover Jogador"><<</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
        <div class="col-lg-2" *ngIf="preJogo">
         <div class="text-center col-form-label-lg">Premio</div>
           <div class="card border-light mb-3">

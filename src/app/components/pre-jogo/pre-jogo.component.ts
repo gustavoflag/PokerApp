@@ -56,22 +56,17 @@ export class PreJogoComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.consultar();
-    this.listarJogadores();
-    this.consultarParametro();
-
     this.logado = this.config.usuarioLogado();
-
-    this.listarEstrutura();
 
     var indiceRelogio = 1;
 
-    this.consultaRelogioInterval = setInterval(() => {
-      this.consultarRelogio(indiceRelogio);
-      indiceRelogio++;
-      if (indiceRelogio === 10) {
-        indiceRelogio = 0;
-      }
-    }, 500);
+    // this.consultaRelogioInterval = setInterval(() => {
+    //   this.consultarRelogio(indiceRelogio);
+    //   indiceRelogio++;
+    //   if (indiceRelogio === 10) {
+    //     indiceRelogio = 0;
+    //   }
+    // }, 500);
   }
 
   ngOnDestroy(): void {
@@ -86,11 +81,9 @@ export class PreJogoComponent implements OnInit, OnDestroy {
   }
 
   listarEstrutura() {
-    this.globals.isLoading = true;
     this.listarEstruturaSubscription = this.relogioService.listarEstrutura()
       .subscribe(estrutura => {
         this.estruturaRelogio = estrutura;
-        this.globals.isLoading = false;
       });
   }
 
@@ -120,26 +113,15 @@ export class PreJogoComponent implements OnInit, OnDestroy {
       });
   }
 
-  listarJogadores() {
-    this.globals.isLoading = true;
-    this.jogadorService.lista()
-      .subscribe((jogs) => {
-        this.jogadores = jogs;
-        this.globals.isLoading = false;
-      }, error => this.errorHelper.handle(error));
-  }
-
-  consultarParametro() {
-    this.parametroService.consultar()
-      .subscribe(parametro => this.parametro = parametro
-        , error => this.errorHelper.handle(error));
-  }
-
   jogadoresRestantes(): number {
     return this.participantes.filter((par: any) => !par.eliminado).length;
   }
 
   stackTotal(): number {
+    if (!this.parametro) {
+      return 0;
+    }
+
     const qtdRebuys = this.participantes.reduce((qtd: any, par: any) => qtd += par.rebuy, 0);
 
     return (this.participantes.length * this.parametro.qtdFichasBuyIn)
@@ -154,6 +136,10 @@ export class PreJogoComponent implements OnInit, OnDestroy {
   }
 
   temRedraw(): boolean {
+    if (!this.parametro) {
+      return false;
+    }
+
     var qtdRestantes = this.jogadoresRestantes();
     var qtdEliminados = this.participantes.filter((par: any) => par.eliminado).length;
 
@@ -167,29 +153,43 @@ export class PreJogoComponent implements OnInit, OnDestroy {
   }
 
   consultar() {
-    this.preJogoService.consultar()
-      .subscribe((preJogo) => {
-        this.preJogo = preJogo;
-        this.participantes = preJogo.participantes;
-        this.mesas = new Array(preJogo.qtdMesas);
-        this.globals.isLoading = false;
-        if (preJogo.estimativaPremio) {
-          this.premiacaoPrimeiro = preJogo.estimativaPremio.premiacaoPrimeiro;
-          this.premiacaoSegundo = preJogo.estimativaPremio.premiacaoSegundo;
-          this.premiacaoTerceiro = preJogo.estimativaPremio.premiacaoTerceiro ? preJogo.estimativaPremio.premiacaoTerceiro : 0;
-          this.valorMaleta = preJogo.estimativaPremio.valorMaleta;
-        } else {
-          this.premiacaoPrimeiro = 0;
-          this.premiacaoSegundo = 0;
-          this.premiacaoTerceiro = 0;
-          this.valorMaleta = 0;
-        }
+    this.globals.isLoading = true;
+    this.listarEstrutura();
+    this.parametroService.consultar()
+      .subscribe(parametro => { 
+        this.parametro = parametro
 
-      }, error => {
-        if (error.error.message != "Pré jogo não encontrado") {
-          this.errorHelper.handle(error);
+        this.preJogoService.consultar()
+          .subscribe((preJogo) => {
+            this.jogadorService.lista()
+              .subscribe((jogs: any) => {
+                this.jogadores = jogs;
+                this.globals.isLoading = false;
+              }, error => this.errorHelper.handle(error));
+
+            if (preJogo){
+              this.preJogo = preJogo;
+              this.participantes = preJogo.participantes;
+              this.mesas = new Array(preJogo.qtdMesas);
+              if (preJogo.estimativaPremio) {
+                this.premiacaoPrimeiro = preJogo.estimativaPremio.premiacaoPrimeiro;
+                this.premiacaoSegundo = preJogo.estimativaPremio.premiacaoSegundo;
+                this.premiacaoTerceiro = preJogo.estimativaPremio.premiacaoTerceiro ? preJogo.estimativaPremio.premiacaoTerceiro : 0;
+                this.valorMaleta = preJogo.estimativaPremio.valorMaleta;
+              } else {
+                this.premiacaoPrimeiro = 0;
+                this.premiacaoSegundo = 0;
+                this.premiacaoTerceiro = 0;
+                this.valorMaleta = 0;
+              }
+            }
+          }, error => {
+            if (error.error.message != "Pré jogo não encontrado") {
+              this.errorHelper.handle(error);
+            }
+          });
         }
-      });
+        , error => this.errorHelper.handle(error));
   }
 
   limpaMensagens() {
@@ -340,7 +340,6 @@ export class PreJogoComponent implements OnInit, OnDestroy {
           });
     } else {
       this.jogadoresNoJogo.push(jogador);
-
       var indexRemove = this.jogadores.indexOf(jogador);
       this.jogadores.splice(indexRemove, 1);
 
@@ -386,8 +385,6 @@ export class PreJogoComponent implements OnInit, OnDestroy {
   removerTodos() {
     this.jogadoresNoJogo = [];
     this.participantes = [];
-
-    this.listarJogadores();
   }
 
   subir(index: any) {
@@ -403,7 +400,6 @@ export class PreJogoComponent implements OnInit, OnDestroy {
     this.participantes[index - 1].lugar = index;
   }
 
-
   mostraErro(err: any) {
     if (err.error.message) {
       this.erro = `Erro: ${err.error.message}`;
@@ -411,11 +407,17 @@ export class PreJogoComponent implements OnInit, OnDestroy {
       this.erro = `Erro: ${err.error.errmsg}`;
     }
     this.globals.isLoading = false;
+    setTimeout(() => {
+      this.erro = '';
+    }, 5000);
   }
 
   mostraSucesso(mensagem: any) {
     this.mensagem = mensagem;
     this.globals.isLoading = false;
+    setTimeout(() => {
+      this.mensagem = '';
+    }, 5000);
   }
 
   getNivel(segs: any) {

@@ -20,7 +20,7 @@ export class JogoService {
   }
 
   excluir(jogo: any): Observable<any>{
-    return this.http.delete(`jogo/`, jogo);
+    return this.http.delete(`jogo`, jogo);
   }
 
   alterar(jogo: any): Observable<any>{
