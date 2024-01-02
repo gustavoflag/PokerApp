@@ -4,12 +4,13 @@ import { CaixaService } from '../../services/caixa.service';
 import { ConfigService } from '../../services/config.service';
 import { Router } from '@angular/router';
 import { Globals } from '../../app.globals';
+import { HttpClientService } from '../../services/httpClientService.service';
 
 
 @Component({
   selector: 'app-premiacao',
   templateUrl: './premiacao.component.html',
-  providers: [CaixaService, PremiacaoService, ConfigService],
+  providers: [CaixaService, PremiacaoService, ConfigService, HttpClientService],
   styleUrls: ['./premiacao.component.css']
 })
 export class PremiacaoComponent implements OnInit {
@@ -103,7 +104,7 @@ export class PremiacaoComponent implements OnInit {
   getSaldoCaixa(){
     this.globals.isLoading = true;
     this.caixaService.saldoCaixa().subscribe(
-      saldo => { this.saldoCaixa = saldo; this.globals.isLoading = false; },
+      saldo => { this.saldoCaixa = (saldo || 0); this.globals.isLoading = false; },
       err => this.mostraErro(err));
   }
 

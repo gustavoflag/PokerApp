@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { ConfigService } from '../../services/config.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Globals } from '../../app.globals';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-auth',
@@ -14,10 +15,20 @@ export class AuthComponent implements OnInit {
   model: any = {};
   erro: string = '';
   loading = false;
+  mensagem: string | null = null;
 
-  constructor(private authService: AuthService
-             ,private router: Router
-             ,public globals: Globals) { }
+  constructor(
+     private authService: AuthService
+    ,private router: Router
+    ,public globals: Globals
+    ,private activatedRoute: ActivatedRoute
+  ) { 
+    activatedRoute.queryParams.pipe(map(p => p['expired'])).subscribe(expired => {
+      if (expired) {
+        this.mensagem = 'Sua sessão expirou, faça login novamente.';
+      }
+    });
+  }
 
   ngOnInit(){
   }
@@ -27,7 +38,7 @@ export class AuthComponent implements OnInit {
     this.authService.login(this.model.usuario, this.model.senha)
         .subscribe(
           (data) => {
-            //console.log(data);
+            console.log(data);
             let token = data && data.token;
 
             if (token)

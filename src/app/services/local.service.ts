@@ -1,31 +1,24 @@
 import { Injectable } from '@angular/core';
-import { ConfigService } from './config.service';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClientService } from './httpClientService.service';
 
 @Injectable()
 export class LocalService {
-  private baseUrlService:string = '';
 
-  constructor(private http: HttpClient,
-              private configService: ConfigService) {
-
-    this.baseUrlService = this.configService.getUrlService();
-  }
+  constructor(private httpClient: HttpClientService) {}
 
   listar(){
-    return this.http.get(`${this.baseUrlService}/local`);
+    return this.httpClient.get('local');
   }
 
-  inserir(local: any): Observable<any>{
-    return this.http.post(`${this.baseUrlService}/local`, JSON.stringify(local), { headers: this.configService.getHeaders() });
+  inserir(local: any){
+    return this.httpClient.post('local', local);
   }
 
-  alterar(local: any): Observable<any>{
-    return this.http.put(`${this.baseUrlService}/local/${local._id}`, JSON.stringify(local), { headers: this.configService.getHeaders() });
+  alterar(local: any){
+    return this.httpClient.put('local', local);
   }
 
-  excluir(local: any): Observable<any>{
-    return this.http.delete(`${this.baseUrlService}/local/${local._id}`, { headers: this.configService.getHeaders() });
+  excluir(local: any){
+    return this.httpClient.delete('local', local);
   }
 }

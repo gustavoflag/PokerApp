@@ -4,11 +4,12 @@ import { ConfigService } from '../../services/config.service';
 import { Router } from '@angular/router';
 import { Globals } from '../../app.globals';
 import { ErrorHelper } from '../../helpers/error.helper';
+import { HttpClientService } from '../../services/httpClientService.service';
 
 @Component({
   selector: 'app-caixa',
   templateUrl: './caixa.component.html',
-  providers: [CaixaService, ConfigService],
+  providers: [CaixaService, ConfigService, HttpClientService],
   styleUrls: ['./caixa.component.css']
 })
 export class CaixaComponent implements OnInit {

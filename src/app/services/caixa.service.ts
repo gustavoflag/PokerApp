@@ -2,36 +2,29 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ConfigService } from './config.service';
 import { Observable } from 'rxjs';
-
+import { HttpClientService } from './httpClientService.service';
 
 @Injectable()
 export class CaixaService {
-  private baseUrlService:string = '';
-
-  constructor(private http: HttpClient,
-              private configService: ConfigService) {
-
-    this.baseUrlService = this.configService.getUrlService();
-
-  }
+  constructor(private httpClient: HttpClientService) {}
 
   listar(){
-    return this.http.get(`${this.baseUrlService}/lancamentoCaixa`);
+    return this.httpClient.get('lancamentoCaixa');
   }
 
   inserir(lancamentoCaixa: any): Observable<any>{
-    return this.http.post(`${this.baseUrlService}/lancamentoCaixa`, JSON.stringify(lancamentoCaixa), { headers: this.configService.getHeaders() });
+    return this.httpClient.post('lancamentoCaixa', lancamentoCaixa);
   }
 
   alterar(lancamentoCaixa: any): Observable<any>{
-    return this.http.put(`${this.baseUrlService}/lancamentoCaixa/${lancamentoCaixa._id}`, JSON.stringify(lancamentoCaixa), { headers: this.configService.getHeaders() });
+    return this.httpClient.put('lancamentoCaixa', lancamentoCaixa);
   }
 
   excluir(lancamentoCaixa: any): Observable<any>{
-    return this.http.delete(`${this.baseUrlService}/lancamentoCaixa/${lancamentoCaixa._id}`, { headers: this.configService.getHeaders() });
+    return this.httpClient.delete('lancamentoCaixa', lancamentoCaixa);
   }
 
-  saldoCaixa(): Observable<any>{
-    return this.http.get(`${this.baseUrlService}/saldoCaixa`, { headers: this.configService.getHeaders() });
+  saldoCaixa(){
+    return this.httpClient.get<number>('saldoCaixa');
   }
 }

@@ -10,7 +10,7 @@ import { CommonModule, registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { Pontuacao } from './models/pontuacao';
 import { AppComponent } from './components/app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PontuacaoComponent } from './components/pontuacao/pontuacao.component';
 import { PremiacaoComponent } from './components/premiacao/premiacao.component';
 import { AuthComponent } from './components/auth/auth.component';
@@ -40,6 +40,7 @@ import { LocalComponent } from './components/local/local.component';
 import { RegulamentoComponent } from './components/regulamento/regulamento.component';
 import { AgendamentoService } from './services/agendamento.service';
 import { LocalService } from './services/local.service';
+import { HttpClientService } from './services/httpClientService.service';
 
 registerLocaleData(localePt);
 
@@ -74,7 +75,7 @@ registerLocaleData(localePt);
     Routing,
     BrowserAnimationsModule,
     MatIconModule,
-    CommonModule
+    CommonModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt-BR' }, 
@@ -88,7 +89,8 @@ registerLocaleData(localePt);
     ErrorHelper, 
     RelogioService,
     AgendamentoService,
-    LocalService
+    LocalService,
+    HttpClientService
   ],
   bootstrap: [AppComponent]
 })

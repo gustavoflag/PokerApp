@@ -5,12 +5,13 @@ import { Router } from '@angular/router';
 import { PreJogoService } from '../services/pre-jogo.service';
 import { Globals } from '../app.globals';
 import { ErrorHelper } from '../helpers/error.helper';
+import { TokenHelper } from '../helpers/token.helper';
 declare const require: any;
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  providers: [AuthService, ConfigService, PreJogoService],
+  providers: [AuthService, ConfigService, PreJogoService, TokenHelper],
   styleUrls: ['./app.component.css']
 })
 
@@ -28,6 +29,7 @@ export class AppComponent {
     private preJogoService: PreJogoService,
     public config: ConfigService,
     public globals: Globals,
+    private tokenHelper: TokenHelper,
     private errorHelper: ErrorHelper,
   ){ }
 
@@ -43,6 +45,13 @@ export class AppComponent {
         console.log('erro na chamada do tempo real', error);
       }
     });
+
+    var currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const token = currentUser && currentUser.token;
+
+    if (this.tokenHelper.isTokenExpired(token)) {
+      this.router.navigate(['/login'], { queryParams: { expired: true } });
+    } 
   }
 
   login(){
