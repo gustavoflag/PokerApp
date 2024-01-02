@@ -28,7 +28,7 @@ export class HttpClientService {
     );
   }
 
-  post<T extends IMongooseObj>(endpoint: string, obj: T): Observable<T>{
+  post<T>(endpoint: string, obj: T): Observable<T>{
     return this.httpClient.post<T>(
       `${this.baseUrlService}/${endpoint}`, 
       JSON.stringify(obj), 

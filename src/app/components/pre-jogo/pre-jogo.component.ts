@@ -1,18 +1,19 @@
 import { Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { PreJogoService } from '../../services/pre-jogo.service';
-import { ConfigService } from '../../services/config.service';
-import { JogadorService } from '../../services/jogador.service';
-import { ParametroService } from '../../services/parametro.service';
 import { Globals } from '../../app.globals';
 import { ErrorHelper } from '../../helpers/error.helper';
 import { Subscription } from 'rxjs';
-import { RelogioService } from '../../services/relogio.service';
-
+import { 
+  JogadorService, 
+  PreJogoService, 
+  ParametroService, 
+  ConfigService, 
+  RelogioService 
+} from '../../services';
 @Component({
   selector: 'app-pre-jogo',
   templateUrl: './pre-jogo.component.html',
-  providers: [PreJogoService, JogadorService, ConfigService, ParametroService, RelogioService],
+  providers: [PreJogoService, JogadorService, ParametroService, RelogioService],
   styleUrls: ['./pre-jogo.component.css']
 })
 export class PreJogoComponent implements OnInit, OnDestroy {
@@ -214,7 +215,7 @@ export class PreJogoComponent implements OnInit, OnDestroy {
     if (confirm('Deseja mesmo cancelar?')) {
       this.globals.isLoading = true;
 
-      this.preJogoService.cancelar()
+      this.preJogoService.cancelar(this.preJogo)
         .subscribe((preJogoSalvo) => {
           this.mostraSucesso("Pré Jogo cancelado!");
           this.preJogo = null;

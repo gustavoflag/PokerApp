@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { JogadorService } from '../../services/jogador.service';
-import { ConfigService } from '../../services/config.service';
+import { JogadorService, ConfigService } from '../../services';
 import { Globals } from '../../app.globals';
 
 @Component({
   selector: 'app-jogador',
   templateUrl: './jogador.component.html',
-  providers: [JogadorService, ConfigService],
+  providers: [JogadorService],
   styleUrls: ['./jogador.component.css']
 })
 export class JogadorComponent implements OnInit {

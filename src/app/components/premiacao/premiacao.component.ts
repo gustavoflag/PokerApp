@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { PremiacaoService } from '../../services/premiacao.service';
-import { CaixaService } from '../../services/caixa.service';
-import { ConfigService } from '../../services/config.service';
+import { CaixaService, ConfigService } from '../../services';
 import { Router } from '@angular/router';
 import { Globals } from '../../app.globals';
-import { HttpClientService } from '../../services/httpClientService.service';
 
 
 @Component({
   selector: 'app-premiacao',
   templateUrl: './premiacao.component.html',
-  providers: [CaixaService, PremiacaoService, ConfigService, HttpClientService],
+  providers: [CaixaService, PremiacaoService],
   styleUrls: ['./premiacao.component.css']
 })
 export class PremiacaoComponent implements OnInit {

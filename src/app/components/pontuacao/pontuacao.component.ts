@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { PontuacaoService } from '../../services/pontuacao.service';
-import { ConfigService } from '../../services/config.service';
+import { PontuacaoService, ConfigService } from '../../services';
 import { Router } from '@angular/router';
 import { Globals } from '../../app.globals';
 
 @Component({
   selector: 'app-pontuacao',
   templateUrl: './pontuacao.component.html',
-  providers: [PontuacaoService, ConfigService],
+  providers: [PontuacaoService],
   styleUrls: ['./pontuacao.component.css']
 })
 export class PontuacaoComponent implements OnInit {

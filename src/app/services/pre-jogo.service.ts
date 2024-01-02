@@ -1,52 +1,45 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ConfigService } from './config.service';
 import { Observable } from 'rxjs';
+import { HttpClientService } from './httpClientService.service';
 
 @Injectable()
 export class PreJogoService {
-  private baseUrlService:string = '';
 
-  constructor(private http: HttpClient,
-              private configService: ConfigService) {
-
-    this.baseUrlService = this.configService.getUrlService();
-
-  }
+  constructor(private http: HttpClientService) { }
 
   consultar() : Observable<any>{
-    return this.http.get(`${this.baseUrlService}/preJogo`);
+    return this.http.get(`preJogo`);
   }
 
   inserir(preJogo: any): Observable<any>{
-    return this.http.post(`${this.baseUrlService}/preJogo`, JSON.stringify(preJogo), { headers: this.configService.getHeaders() });
+    return this.http.post(`preJogo`, preJogo);
   }
 
   alterar(jogador: any): Observable<any>{
-    return this.http.put(`${this.baseUrlService}/preJogo`, JSON.stringify(jogador), { headers: this.configService.getHeaders() });
+    return this.http.put(`preJogo`, jogador);
   }
 
   alterarDealer(jogador: any): Observable<any>{
-    return this.http.post(`${this.baseUrlService}/preJogo/alterarDealer`, JSON.stringify(jogador), { headers: this.configService.getHeaders() });
+    return this.http.post(`preJogo/alterarDealer`, jogador);
   }
 
   sortear(redraw: boolean = false): Observable<any>{
-    return this.http.post(`${this.baseUrlService}/preJogo/sortear`, JSON.stringify({ redraw: redraw }), { headers: this.configService.getHeaders() });
+    return this.http.post(`preJogo/sortear`, { redraw });
   }
 
   gerarJogo(): Observable<any>{
-    return this.http.post(`${this.baseUrlService}/preJogo/gerarJogo`, null, { headers: this.configService.getHeaders() });
+    return this.http.post(`preJogo/gerarJogo`, null);
   }
 
-  cancelar(): Observable<any>{
-    return this.http.delete(`${this.baseUrlService}/preJogo`, { headers: this.configService.getHeaders() });
+  cancelar(preJogo: any): Observable<any>{
+    return this.http.delete(`preJogo`, preJogo);
   }
 
   excluirJogador(jogador: any): Observable<any>{
-    return this.http.post(`${this.baseUrlService}/preJogo/excluirJogador`, JSON.stringify(jogador), { headers: this.configService.getHeaders() });
+    return this.http.post(`preJogo/excluirJogador`, jogador);
   }
 
   adicionarJogador(jogador: any): Observable<any>{
-    return this.http.post(`${this.baseUrlService}/preJogo/adicionarJogador`, JSON.stringify(jogador), { headers: this.configService.getHeaders() });
+    return this.http.post(`preJogo/adicionarJogador`, jogador);
   }
 }

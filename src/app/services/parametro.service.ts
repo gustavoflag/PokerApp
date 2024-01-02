@@ -1,25 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ConfigService } from './config.service';
 import { Observable } from 'rxjs';
-
+import { HttpClientService } from './httpClientService.service';
 
 @Injectable()
 export class ParametroService {
-  private baseUrlService:string = '';
 
-  constructor(private http: HttpClient,
-              private configService: ConfigService) {
-
-    this.baseUrlService = this.configService.getUrlService();
-
-  }
+  constructor(private http: HttpClientService) { }
 
   consultar(){
-    return this.http.get(`${this.baseUrlService}/parametro`);
+    return this.http.get(`parametro`);
   }
 
   alterar(parametro: any): Observable<any>{
-    return this.http.put(`${this.baseUrlService}/parametro`, JSON.stringify(parametro), { headers: this.configService.getHeaders() });
+    return this.http.put(`parametro`, parametro);
   }
 }

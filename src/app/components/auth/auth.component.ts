@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
-import { ConfigService } from '../../services/config.service';
+import { AuthService } from '../../services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Globals } from '../../app.globals';
-import { Observable, map } from 'rxjs';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  providers: [AuthService, ConfigService],
+  providers: [AuthService],
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent implements OnInit {

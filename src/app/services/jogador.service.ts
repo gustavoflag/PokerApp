@@ -1,60 +1,53 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { ConfigService } from './config.service';
 import { Observable } from 'rxjs';
-
+import { HttpClientService } from './httpClientService.service';
 
 @Injectable()
 export class JogadorService {
-  private baseUrlService:string = '';
-
-  constructor(private http: HttpClient,
-              private configService: ConfigService) {
-
-      this.baseUrlService = this.configService.getUrlService();
+  constructor(private http: HttpClientService) {
   }
 
   lista(){
-    return this.http.get(this.baseUrlService + '/jogador');
+    return this.http.get('/jogador');
   }
 
   consultar(idJogador: any){
-    return this.http.get(`${this.baseUrlService}/jogador/${idJogador}`);
+    return this.http.get(`jogador/${idJogador}`);
   }
 
   classificacao(){
-    return this.http.get(this.baseUrlService + '/classificacao');
+    return this.http.get('classificacao');
   }
 
   classificacaoOrdenada(ordem: any){
-    return this.http.get(`${this.baseUrlService}/classificacao/${ordem}`);
+    return this.http.get(`classificacao/${ordem}`);
   }
 
   classificacaoRookies(){
-    return this.http.get(this.baseUrlService + '/classificacaoRookies');
+    return this.http.get('classificacaoRookies');
   }
 
   classificacaoRookiesOrdenada(ordem: any){
-    return this.http.get(`${this.baseUrlService}/classificacaoRookies/${ordem}`);
+    return this.http.get(`classificacaoRookies/${ordem}`);
   }
 
   classificacaoMes(ano: any, mes: any){
-    return this.http.get(`${this.baseUrlService}/classificacaoMes/${ano}/${mes}`);
+    return this.http.get(`classificacaoMes/${ano}/${mes}`);
   }
 
   classificacaoTodosMeses(){
-    return this.http.get(this.baseUrlService + '/classificacaoTodosMeses');
+    return this.http.get('classificacaoTodosMeses');
   }
 
   inserir(jogador: any): Observable<any>{
-    return this.http.post(`${this.baseUrlService}/jogador`, JSON.stringify(jogador), { headers: this.configService.getHeaders() });
+    return this.http.post(`jogador`, jogador);
   }
 
   alterar(jogador: any): Observable<any>{
-    return this.http.put(`${this.baseUrlService}/jogador/${jogador._id}`, JSON.stringify(jogador), { headers: this.configService.getHeaders() });
+    return this.http.put(`jogador`, jogador);
   }
 
   excluir(jogador: any): Observable<any>{
-    return this.http.delete(`${this.baseUrlService}/jogador/${jogador._id}`, { headers: this.configService.getHeaders() });
+    return this.http.delete(`jogador`, jogador);
   }
 }

@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
-import { LocalService } from '../../services/local.service';
-import { ConfigService } from '../../services/config.service';
+import { LocalService, ConfigService } from '../../services';
 import { Globals } from '../../app.globals';
-import { HttpClientService } from '../../services/httpClientService.service';
 
 @Component({
   selector: 'app-local',
   templateUrl: './local.component.html',
-  providers: [LocalService, ConfigService, HttpClientService],
+  providers: [LocalService],
   styleUrl: './local.component.css'
 })
 export class LocalComponent {
@@ -17,7 +15,6 @@ export class LocalComponent {
   erro: string | null = null;
 
   constructor(private localService: LocalService
-             //,private router: Router
              ,public config: ConfigService
              ,public globals: Globals
   ){ }

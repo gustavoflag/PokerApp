@@ -1,15 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConfigService } from '../../services/config.service';
 import { Globals } from '../../app.globals';
-import { RelogioService } from '../../services/relogio.service';
+import { RelogioService, ConfigService } from '../../services';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-relogio',
   templateUrl: './relogio.component.html',
   styleUrls: ['./relogio.component.css'],
-  providers: [RelogioService, ConfigService],
+  providers: [RelogioService],
 })
 export class RelogioComponent implements OnInit, OnDestroy {
 

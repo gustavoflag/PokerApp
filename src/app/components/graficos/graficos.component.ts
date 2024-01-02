@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfigService } from '../../services/config.service';
-import { JogadorService } from '../../services/jogador.service';
 import { Globals } from '../../app.globals';
-import { JogoService } from '../../services/jogo.service';
+import { JogoService, JogadorService } from '../../services';
 import { ErrorHelper } from '../../helpers/error.helper';
 
 @Component({
   selector: 'app-graficos',
   templateUrl: './graficos.component.html',
-  providers: [JogadorService, ConfigService, JogoService],
+  providers: [JogadorService, JogoService],
   styleUrls: ['./graficos.component.css']
 })
 export class GraficosComponent implements OnInit {

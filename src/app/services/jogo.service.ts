@@ -1,42 +1,34 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ConfigService } from './config.service';
 import { Observable } from 'rxjs';
+import { HttpClientService } from './httpClientService.service';
 
 
 @Injectable()
 export class JogoService {
-  private baseUrlService:string = '';
-
-  constructor(private http: HttpClient,
-              private configService: ConfigService) {
-
-    this.baseUrlService = this.configService.getUrlService();
-
-  }
+  constructor(private http: HttpClientService) {}
 
   listar(){
-    return this.http.get(`${this.baseUrlService}/jogo`);
+    return this.http.get(`jogo`);
   }
 
   consultar(idJogo: any){
-    return this.http.get(`${this.baseUrlService}/jogo/${idJogo}`);
+    return this.http.get(`jogo/${idJogo}`);
   }
 
   inserir(jogo: any): Observable<any>{
-    return this.http.post(`${this.baseUrlService}/jogo`, JSON.stringify(jogo), { headers: this.configService.getHeaders() });
+    return this.http.post(`jogo`, jogo);
   }
 
   excluir(jogo: any): Observable<any>{
-    return this.http.delete(`${this.baseUrlService}/jogo/${jogo._id}`, { headers: this.configService.getHeaders() });
+    return this.http.delete(`jogo/`, jogo);
   }
 
   alterar(jogo: any): Observable<any>{
-    return this.http.put(`${this.baseUrlService}/jogo/${jogo._id}`, JSON.stringify(jogo), { headers: this.configService.getHeaders() });
+    return this.http.put(`jogo`, jogo);
   }
 
   quantidade(): Observable<any>{
-    return this.http.get(`${this.baseUrlService}/quantidadeJogos`);
+    return this.http.get(`quantidadeJogos`);
   }
 
 }

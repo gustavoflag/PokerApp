@@ -1,33 +1,26 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ConfigService } from './config.service';
 import { Observable } from 'rxjs';
+import { HttpClientService } from './httpClientService.service';
 
 
 @Injectable()
 export class PontuacaoService {
-  private baseUrlService:string = '';
 
-  constructor(private http: HttpClient,
-              private configService: ConfigService) {
-
-    this.baseUrlService = this.configService.getUrlService();
-
-  }
+  constructor(private http: HttpClientService) { }
 
   listar(){
-    return this.http.get(`${this.baseUrlService}/pontuacao`);
+    return this.http.get(`pontuacao`);
   }
 
   inserir(pontuacao: any): Observable<any>{
-    return this.http.post(`${this.baseUrlService}/pontuacao`, JSON.stringify(pontuacao), { headers: this.configService.getHeaders() });
+    return this.http.post(`pontuacao`, pontuacao);
   }
 
   alterar(pontuacao: any): Observable<any>{
-    return this.http.put(`${this.baseUrlService}/pontuacao/${pontuacao._id}`, JSON.stringify(pontuacao), { headers: this.configService.getHeaders() });
+    return this.http.put(`pontuacao`, pontuacao);
   }
 
   excluir(pontuacao: any): Observable<any>{
-    return this.http.delete(`${this.baseUrlService}/pontuacao/${pontuacao._id}`, { headers: this.configService.getHeaders() });
+    return this.http.delete(`pontuacao`, pontuacao);
   }
 }

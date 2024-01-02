@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { JogadorService } from '../../services/jogador.service';
-import { ConfigService } from '../../services/config.service';
+import { JogadorService } from '../../services';
 import { Globals } from '../../app.globals';
 import { ErrorHelper } from '../../helpers/error.helper';
 
 @Component({
   selector: 'app-classificacao-mes',
   templateUrl: './classificacao-mes.component.html',
-  providers: [JogadorService, ConfigService],
+  providers: [JogadorService],
   styleUrls: ['./classificacao-mes.component.css']
 })
 export class ClassificacaoMesComponent implements OnInit {

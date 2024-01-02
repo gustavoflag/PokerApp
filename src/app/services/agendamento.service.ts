@@ -1,31 +1,25 @@
 import { Injectable } from '@angular/core';
-import { ConfigService } from './config.service';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { HttpClientService } from './httpClientService.service';
 
 @Injectable()
 export class AgendamentoService {
-  private baseUrlService:string = '';
-
-  constructor(private http: HttpClient,
-              private configService: ConfigService) {
-
-    this.baseUrlService = this.configService.getUrlService();
+  constructor(private http: HttpClientService) {
   }
 
   listar(){
-    return this.http.get(`${this.baseUrlService}/agendamento`);
+    return this.http.get(`agendamento`);
   }
 
   inserir(agendamento: any): Observable<any>{
-    return this.http.post(`${this.baseUrlService}/agendamento`, JSON.stringify(agendamento), { headers: this.configService.getHeaders() });
+    return this.http.post(`agendamento`, agendamento);
   }
 
   alterar(agendamento: any): Observable<any>{
-    return this.http.put(`${this.baseUrlService}/agendamento/${agendamento._id}`, JSON.stringify(agendamento), { headers: this.configService.getHeaders() });
+    return this.http.put(`agendamento`, agendamento);
   }
 
   excluir(agendamento: any): Observable<any>{
-    return this.http.delete(`${this.baseUrlService}/agendamento/${agendamento._id}`, { headers: this.configService.getHeaders() });
+    return this.http.delete(`agendamento`, agendamento);
   }
 }
