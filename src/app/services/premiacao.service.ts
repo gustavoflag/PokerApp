@@ -5,7 +5,6 @@ import { HttpClientService } from './httpClientService.service';
 
 @Injectable()
 export class PremiacaoService {
-  private baseUrlService:string = '';
 
   constructor(private http: HttpClientService) { }
 

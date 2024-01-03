@@ -5,8 +5,7 @@ import { HttpClientService } from './httpClientService.service';
 @Injectable()
 export class PreJogoService {
 
-  constructor(private http: HttpClientService) { 
-  }
+  constructor(private http: HttpClientService) { }
 
   consultar() : Observable<any>{
     return this.http.get(`preJogo`);

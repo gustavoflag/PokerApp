@@ -1,1 +1,92 @@
-<p>agenda works!</p>
+<h2 class="hidden-sm-down">Agenda
+  <div class="float-right">
+    <button class="btn btn-primary" (click)="novo();" *ngIf="config.usuarioLogado()">Novo</button>
+  </div>
+</h2>
+<h4 class="hidden-md-up">Agenda
+  <div class="float-right">
+    <button class="btn btn-sm btn-primary" (click)="novo();" *ngIf="config.usuarioLogado()">Novo</button>
+  </div>
+</h4>
+<hr>
+<div *ngIf="mensagem" class="alert alert-dismissible alert-success">{{mensagem}}</div>
+<div *ngIf="erro" class="alert alert-dismissible alert-danger">{{erro}}</div>
+<section *ngIf="!agendamentoEdicao && agendamentos && agendamentos.length > 0">
+  <div *ngFor="let agendamento of agendamentos; let indice = index;" class="card border-secondary mb-3">
+    <div class="card-header">
+      <div class="row" [ngClass]="{ 'text-muted': agendamento.passado }">
+        <div class="col-lg-1">
+          <span *ngIf="agendamento.numero" class="badge badge-numero" [ngClass]="{ 'badge-danger': agendamento.status === 'inativo', 'badge-secondary': agendamento.passado, 'badge-success': !agendamento.passado }">
+            #{{ agendamento.numero }}
+          </span>
+        </div>
+        <div class="col-lg-3 text-center">
+          <mat-icon class="material-icons-round">today</mat-icon>
+          {{ agendamento.data | date: 'dd/MMMM' }}
+          <!-- {{ agendamento.data | date: 'dd/MMMM - HH:mm' }} -->
+        </div>
+        <div class="col-lg-3 text-center">
+          <mat-icon class="material-icons-round">date_range</mat-icon>
+          {{ getDiaSemana(agendamento.data) }}
+        </div>
+        <div class="col-lg-3 text-center">
+          <span *ngIf="agendamento.status === 'ativo' && agendamento.local">
+            <mat-icon class="material-icons-round">location_on</mat-icon>
+            {{ agendamento.local.nome }}
+          </span>
+          <span *ngIf="agendamento.status === 'inativo'" class="text-warning">
+            FOLGA
+          </span>
+          <span *ngIf="agendamento.status === 'cancelado'" class="text-danger">
+            CANCELADO
+          </span>
+        </div>
+        <div class="col-lg-2 text-right" *ngIf="config.usuarioLogado()">
+          <button type='button' class="btn btn-secondary btn-sm" (click)="editar(agendamento)">Editar</button>&nbsp;
+          <button type='button' class="btn btn-danger btn-sm" (click)="excluir(agendamento)">Excluir</button>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</section>
+<section *ngIf="agendamentoEdicao">
+  <form name="formLogin" (ngSubmit)="salvar();" #f="ngForm" novalidate>
+    <div class="row">
+      <div class="col-lg-2">
+        <label class="col-form-label col-form-label-lg" for="inputLarge">Data</label>
+        <input class="form-control form-control-lg" type="date" placeholder="" id="data" name="data" [(ngModel)]="dataEdicao" #data="ngModel" />
+      </div>
+      <div class="col-lg-2">
+        <label class="col-form-label col-form-label-lg" for="inputLarge">Dia da semana</label><br />
+        <h2>{{ getDiaSemana(dataEdicao+'T12:00' || undefined) }}</h2>
+      </div>
+      <div class="col-lg-2">
+        <label class="col-form-label col-form-label-lg" for="inputLarge">Hora</label>
+        <input class="form-control form-control-lg" type="time" placeholder="" id="hora" name="hora" [(ngModel)]="horaEdicao" #hora="ngModel" />
+      </div>
+      
+      <div class="col-lg-3">
+        <label class="col-form-label col-form-label-lg" for="inputLarge">Local</label><br />
+        <select class="form-control form-control-lg select-local" (change)="onLocalChange($event.target)">
+          <option>--Selecione--</option>
+          <option *ngFor="let local of locais" [value]="local._id" [selected]="localSelected._id === local._id">{{local.nome}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <label class="col-form-label col-form-label-lg" for="inputLarge">Status</label><br />
+        <button type='button' type='button' class="btn" (click)="status('ativo');" [ngClass]="{ 'btn-outline-success' : agendamentoEdicao.status !== 'ativo', 'btn-success': agendamentoEdicao.status === 'ativo' }">Ativo</button>&nbsp;
+        <button type='button' type='button' class="btn" (click)="status('inativo');" [ngClass]="{ 'btn-outline-warning' : agendamentoEdicao.status !== 'inativo', 'btn-warning': agendamentoEdicao.status === 'inativo' }">Inativo</button>&nbsp;
+        <button type='button' type='button' class="btn" (click)="status('cancelado');" [ngClass]="{ 'btn-outline-danger' : agendamentoEdicao.status !== 'cancelado', 'btn-danger': agendamentoEdicao.status === 'cancelado' }">Cancelado</button>
+      </div>
+    </div>
+    <div class="row float-right">
+      <div class="form-group ">
+        <button type='submit' name="btnSubmit" class="btn btn-success">Salvar</button>
+        <button (click)="limpaMensagens();listar();" type='button' class="btn btn-secondary">Voltar</button>
+      </div>
+    </div>
+  </form>
+</section>

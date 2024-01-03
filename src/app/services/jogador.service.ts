@@ -4,8 +4,7 @@ import { HttpClientService } from './httpClientService.service';
 
 @Injectable()
 export class JogadorService {
-  constructor(private http: HttpClientService) {
-  }
+  constructor(private http: HttpClientService) { }
 
   lista(){
     return this.http.get('jogador');

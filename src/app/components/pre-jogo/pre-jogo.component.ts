@@ -40,7 +40,7 @@ export class PreJogoComponent implements OnInit, OnDestroy {
   premiacaoTerceiro: number | null = null;
   valorMaleta: number | null = null;
 
-  listarEstruturaSubscription: Subscription | null = null
+  listarEstruturaSubscription: Subscription | null = null;
   consultarRelogioSubscription: Subscription | null = null;
 
   constructor(

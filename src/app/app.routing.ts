@@ -1,21 +1,24 @@
 import { Routes, RouterModule } from '@angular/router';
-import { AuthComponent } from './components/auth/auth.component';
-import { JogadorComponent } from './components/jogador/jogador.component';
-import { DetalheJogadorComponent } from './components/detalhe-jogador/detalhe-jogador.component';
-import { JogoComponent } from './components/jogo/jogo.component';
-import { PontuacaoComponent } from './components/pontuacao/pontuacao.component';
-import { PremiacaoComponent } from './components/premiacao/premiacao.component';
-import { ClassificacaoComponent } from './components/classificacao/classificacao.component';
-import { ClassificacaoMesComponent } from './components/classificacao-mes/classificacao-mes.component';
-import { CaixaComponent } from './components/caixa/caixa.component';
-import { ParametroComponent } from './components/parametro/parametro.component';
-import { PreJogoComponent } from './components/pre-jogo/pre-jogo.component';
+import { 
+    AgendaComponent, 
+    AuthComponent, 
+    CaixaComponent, 
+    ClassificacaoComponent, 
+    ClassificacaoMesComponent, 
+    ControleDealerComponent, 
+    DetalheJogadorComponent, 
+    FotosComponent, 
+    GraficosComponent, 
+    JogadorComponent, 
+    JogoComponent, 
+    LocalComponent, 
+    ParametroComponent, 
+    PontuacaoComponent, 
+    PreJogoComponent, 
+    PremiacaoComponent, 
+    RelogioComponent 
+} from './components';
 import { AuthGuard } from './guards/auth.guard';
-import { ControleDealerComponent } from './components/controle-dealer/controle-dealer.component';
-import { GraficosComponent } from './components/graficos/graficos.component';
-import { FotosComponent } from './components/fotos/fotos.component';
-import { RelogioComponent } from './components/relogio/relogio.component';
-import { LocalComponent } from './components/local/local.component';
 
 export const appRoutes: Routes = [
     { path: 'login', component: AuthComponent },
@@ -36,6 +39,7 @@ export const appRoutes: Routes = [
     { path: 'fotos', component: FotosComponent },
     { path: 'relogio', component: RelogioComponent },
     { path: 'local', component: LocalComponent },
+    { path: 'agenda', component: AgendaComponent },
     { path: '**', redirectTo: '' }
 ];
 
