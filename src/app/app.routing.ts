@@ -16,6 +16,7 @@ import {
     PontuacaoComponent, 
     PreJogoComponent, 
     PremiacaoComponent, 
+    RegulamentoComponent, 
     RelogioComponent 
 } from './components';
 import { AuthGuard } from './guards/auth.guard';
@@ -40,6 +41,7 @@ export const appRoutes: Routes = [
     { path: 'relogio', component: RelogioComponent },
     { path: 'local', component: LocalComponent },
     { path: 'agenda', component: AgendaComponent },
+    { path: 'regulamento', component: RegulamentoComponent },
     { path: '**', redirectTo: '' }
 ];
 
