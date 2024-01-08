@@ -12,6 +12,6 @@ export class ParametroService {
   }
 
   alterar(parametro: any): Observable<any>{
-    return this.http.put(`parametro`, parametro);
+    return this.http.put(`parametro`, parametro, false);
   }
 }
