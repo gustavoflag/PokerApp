@@ -6,8 +6,8 @@ import { HttpClientService } from './httpClientService.service';
 export class CaixaService {
   constructor(private httpClient: HttpClientService) {}
 
-  listar(){
-    return this.httpClient.get('lancamentoCaixa');
+  listar(conta: string){
+    return this.httpClient.get(`lancamentoCaixa/conta/${conta}`);
   }
 
   inserir(lancamentoCaixa: any): Observable<any>{
@@ -22,7 +22,7 @@ export class CaixaService {
     return this.httpClient.delete('lancamentoCaixa', lancamentoCaixa);
   }
 
-  saldoCaixa(){
-    return this.httpClient.get<number>('saldoCaixa');
+  saldoCaixa(conta: string){
+    return this.httpClient.get<number>(`saldoCaixa/${conta}`);
   }
 }

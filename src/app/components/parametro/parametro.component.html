@@ -13,6 +13,11 @@
         <input type="number" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !valorMaleta.valid }" name="valorMaleta" [(ngModel)]="parametro.valorMaleta" #valorMaleta="ngModel" required />
         <div *ngIf="f.submitted && !valorMaleta.valid" class="invalid-feedback">Valor Maleta é obrigatório</div>
     </div>
+    <div class="form-group col-lg-2" [ngClass]="{ 'has-danger': f.submitted && !valorCaixa.valid }">
+        <label for="valorCaixa">Valor Caixa</label>
+        <input type="number" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !valorCaixa.valid }" name="valorCaixa" [(ngModel)]="parametro.valorCaixa" #valorCaixa="ngModel" required />
+        <div *ngIf="f.submitted && !valorCaixa.valid" class="invalid-feedback">Valor Caixa é obrigatório</div>
+    </div>
     <div class="form-group col-lg-2" [ngClass]="{ 'has-danger': f.submitted && !jogadoresRedraw.valid }">
         <label for="jogadoresRedraw">Qtd jogadores redraw</label>
         <input type="number" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && !jogadoresRedraw.valid }" name="jogadoresRedraw" [(ngModel)]="parametro.jogadoresRedraw" #jogadoresRedraw="ngModel" required />

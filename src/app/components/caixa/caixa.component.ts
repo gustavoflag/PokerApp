@@ -11,7 +11,28 @@ import { CaixaService, ConfigService } from '../../services';
   styleUrls: ['./caixa.component.css']
 })
 export class CaixaComponent implements OnInit {
-  lancamentosCaixa: any = null;
+  contas: any[] = [
+    {
+      conta: 'premio',
+      nome: 'Prêmio',
+      lancamentosCaixa: [],
+      saldoAtual: 0
+    }, 
+    {
+      conta: 'caixa',
+      nome: 'Logística',
+      lancamentosCaixa: [],
+      saldoAtual: 0
+    },
+    {
+      conta: 'limpeza',
+      nome: 'Limpeza',
+      lancamentosCaixa: [],
+      saldoAtual: 0
+    }
+  ];
+
+  //lancamentosCaixa: any = null;
   lancamentoEdicao: any = null;
   mensagem: string | null = null;
   erro: string | null = null;
@@ -29,9 +50,9 @@ export class CaixaComponent implements OnInit {
     this.listar();
   }
 
-  novo(){
+  novo(conta: string){
     this.limpaMensagens();
-    this.lancamentoEdicao = { };
+    this.lancamentoEdicao = { conta };
   }
 
   editar(lancamentoEdit: any){
@@ -42,11 +63,15 @@ export class CaixaComponent implements OnInit {
   listar(){
     this.globals.isLoading = true;
     this.lancamentoEdicao = null;
-    this.caixaService.listar()
-        .subscribe(lctos => { 
-          this.lancamentosCaixa = lctos; 
-          this.globals.isLoading = false; 
-        }, error => this.errorHelper.handle(error));
+    this.contas.forEach((conta) => {
+      this.caixaService.listar(conta.conta)
+      .subscribe((lctos: any) => { 
+        conta.lancamentosCaixa = lctos; 
+        this.globals.isLoading = false;
+        conta.saldoAtual = this.calcularSaldo(lctos);
+      }, error => this.errorHelper.handle(error));
+    })
+   
   }
 
   salvar(){
@@ -103,16 +128,13 @@ export class CaixaComponent implements OnInit {
     this.listar();
   }
 
-  saldoAtual(): number {
-    if (this.lancamentosCaixa){
-      var saldo = 0;
+  calcularSaldo(lancamentosCaixa: any[]): number {
+    var saldo = 0;
 
-      this.lancamentosCaixa.forEach(function (lancamento: any){
-        saldo += lancamento.valor;
-      });
+    lancamentosCaixa.forEach(function (lancamento: any){
+      saldo += lancamento.valor;
+    });
 
-      return saldo;
-    }
-    return 0;
+    return saldo;
   }
 }

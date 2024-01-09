@@ -1,34 +1,45 @@
 <h2>Caixa
   <div class="float-right">
-    <button class="btn btn-primary" (click)="novo();" *ngIf="config.usuarioLogado()">Novo Lançamento</button>
+    
   </div>
 </h2>
 <hr>
 <div *ngIf="mensagem" class="alert alert-dismissible alert-success">{{mensagem}}</div>
 <div *ngIf="erro" class="alert alert-dismissible alert-danger">{{erro}}</div>
-<div class="float-right" *ngIf="!lancamentoEdicao"><h4>Saldo atual: <span class="text-warning">{{saldoAtual() | currency:'R$'}}</span></h4></div>
-<section *ngIf="!lancamentoEdicao && lancamentosCaixa && lancamentosCaixa.length > 0">
-  <table class="table table-hover">
-    <thead>
-      <th>Data</th>
-      <th>Valor</th>
-      <th>Descrição</th>
-      <th></th>
-      <th></th>
-    </thead>
-    <tbody>
-      <tr *ngFor="let lancamento of lancamentosCaixa">
-        <td>{{lancamento.data | date:'dd/MM/yyyy'}}</td>
-        <td><span [ngClass]="{ 'text-danger' : lancamento.valor < 0, 'text-success': lancamento.valor > 0 }">{{lancamento.valor | currency:'R$'}}</span></td>
-        <td>{{lancamento.descricao}}</td>
-        <td><button class="btn btn-secondary btn-sm" (click)="editar(lancamento);" *ngIf="config.usuarioLogado()">Editar</button></td>
-        <td><button class="btn btn-danger btn-sm" (click)="excluir(lancamento);" *ngIf="config.usuarioLogado()">Excluir</button></td>
-      </tr>
-    </tbody>
-  </table>
+<section *ngIf="!lancamentoEdicao">
+  <div *ngFor="let conta of contas">
+    <div class="float-right">
+      <h4>Saldo: <span class="text-warning">{{conta.saldoAtual | currency:'R$'}}</span></h4>
+      <button class="btn btn-primary" (click)="novo(conta.conta);" *ngIf="config.usuarioLogado()">Novo Lançamento</button>
+    </div>
+    <h4>{{conta.nome}}</h4>
+    <div *ngIf="conta.lancamentosCaixa && conta.lancamentosCaixa.length > 0">
+      <table class="table table-hover">
+        <thead>
+          <th>Data</th>
+          <th>Valor</th>
+          <th>Descrição</th>
+          <th></th>
+          <th></th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let lancamento of conta.lancamentosCaixa">
+            <td>{{lancamento.data | date:'dd/MM/yyyy'}}</td>
+            <td><span [ngClass]="{ 'text-danger' : lancamento.valor < 0, 'text-success': lancamento.valor > 0 }">{{lancamento.valor | currency:'R$'}}</span></td>
+            <td>{{lancamento.descricao}}</td>
+            <td><button class="btn btn-secondary btn-sm" (click)="editar(lancamento);" *ngIf="config.usuarioLogado()">Editar</button></td>
+            <td><button class="btn btn-danger btn-sm" (click)="excluir(lancamento);" *ngIf="config.usuarioLogado()">Excluir</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br />
+    <hr />
+  </div>
 </section>
 <section *ngIf="lancamentoEdicao">
   <form name="formLogin" (ngSubmit)="f.form.valid && salvar()" #f="ngForm" novalidate>
+    <h4>Conta: {{lancamentoEdicao.conta}}</h4>
     <div class="form-group">
       <label for="lugar">Data</label>
       <input class="form-control" type="date" placeholder="" id="inputData" name="data" [(ngModel)]="lancamentoEdicao.data" #data="ngModel" />

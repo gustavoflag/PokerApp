@@ -101,7 +101,7 @@ export class PremiacaoComponent implements OnInit {
 
   getSaldoCaixa(){
     this.globals.isLoading = true;
-    this.caixaService.saldoCaixa().subscribe(
+    this.caixaService.saldoCaixa('premio').subscribe(
       saldo => { this.saldoCaixa = (saldo || 0); this.globals.isLoading = false; },
       err => this.mostraErro(err));
   }
