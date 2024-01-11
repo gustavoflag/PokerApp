@@ -32,6 +32,7 @@ export class CaixaComponent implements OnInit {
     }
   ];
 
+  saldoGeral: number = 0;
   //lancamentosCaixa: any = null;
   lancamentoEdicao: any = null;
   mensagem: string | null = null;
@@ -63,12 +64,17 @@ export class CaixaComponent implements OnInit {
   listar(){
     this.globals.isLoading = true;
     this.lancamentoEdicao = null;
+    let count = 0;
     this.contas.forEach((conta) => {
       this.caixaService.listar(conta.conta)
       .subscribe((lctos: any) => { 
-        conta.lancamentosCaixa = lctos; 
-        this.globals.isLoading = false;
+        conta.lancamentosCaixa = lctos;
         conta.saldoAtual = this.calcularSaldo(lctos);
+        count++;
+        this.saldoGeral += conta.saldoAtual;
+        if (count === this.contas.length){
+          this.globals.isLoading = false;
+        }
       }, error => this.errorHelper.handle(error));
     })
    

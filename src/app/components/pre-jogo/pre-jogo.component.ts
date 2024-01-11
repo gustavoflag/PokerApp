@@ -60,13 +60,13 @@ export class PreJogoComponent implements OnInit, OnDestroy {
 
     var indiceRelogio = 1;
 
-    // this.consultaRelogioInterval = setInterval(() => {
-    //   this.consultarRelogio(indiceRelogio);
-    //   indiceRelogio++;
-    //   if (indiceRelogio === 10) {
-    //     indiceRelogio = 0;
-    //   }
-    // }, 500);
+    this.consultaRelogioInterval = setInterval(() => {
+      this.consultarRelogio(indiceRelogio);
+      indiceRelogio++;
+      if (indiceRelogio === 10) {
+        indiceRelogio = 0;
+      }
+    }, 500);
   }
 
   ngOnDestroy(): void {

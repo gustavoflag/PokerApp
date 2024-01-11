@@ -1,6 +1,6 @@
 <h2>Caixa
   <div class="float-right">
-    
+    <h3>Saldo geral: <span class="text-warning">{{saldoGeral | currency:'R$'}}</span></h3>
   </div>
 </h2>
 <hr>
@@ -9,19 +9,19 @@
 <section *ngIf="!lancamentoEdicao">
   <div *ngFor="let conta of contas">
     <div class="float-right">
-      <h4>Saldo: <span class="text-warning">{{conta.saldoAtual | currency:'R$'}}</span></h4>
+      <h4 class="text-warning">{{conta.saldoAtual | currency:'R$'}}</h4>
       <button class="btn btn-primary" (click)="novo(conta.conta);" *ngIf="config.usuarioLogado()">Novo Lançamento</button>
     </div>
     <h4>{{conta.nome}}</h4>
-    <div *ngIf="conta.lancamentosCaixa && conta.lancamentosCaixa.length > 0">
+    <div *ngIf="conta.lancamentosCaixa && conta.lancamentosCaixa.length > 0" class="table-container">
       <table class="table table-hover">
-        <thead>
-          <th>Data</th>
-          <th>Valor</th>
-          <th>Descrição</th>
-          <th></th>
-          <th></th>
-        </thead>
+        <!-- <tr>
+          <td>Data</td>
+          <td>Valor</td>
+          <td>Descrição</td>
+          <td></td>
+          <td></td>
+        </tr> -->
         <tbody>
           <tr *ngFor="let lancamento of conta.lancamentosCaixa">
             <td>{{lancamento.data | date:'dd/MM/yyyy'}}</td>
