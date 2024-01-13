@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JogadorService, ConfigService } from '../../services';
 import { Globals } from '../../app.globals';
+import { Jogador } from '../../models/jogador';
 
 @Component({
   selector: 'app-jogador',
@@ -9,8 +10,8 @@ import { Globals } from '../../app.globals';
   styleUrls: ['./jogador.component.css']
 })
 export class JogadorComponent implements OnInit {
-  jogadores: any = null;
-  jogadorEdicao: any = null;
+  jogadores: Jogador[] = [];
+  jogadorEdicao?: Jogador = undefined;
   tituloEdicao: any = null;
   mensagem: string | null = null;
   erro: string | null = null;
@@ -26,7 +27,7 @@ export class JogadorComponent implements OnInit {
 
   novo(){
     this.limpaMensagens();
-    this.jogadorEdicao = { };
+    this.jogadorEdicao = undefined;
   }
 
   editar(jogadorEdit: any){
@@ -35,22 +36,26 @@ export class JogadorComponent implements OnInit {
   }
 
   listar(){
-    this.jogadorEdicao = null;
+    this.jogadorEdicao = undefined;
     this.globals.isLoading = true;
     this.jogadorService.lista().subscribe(jogs => { this.jogadores = jogs; this.globals.isLoading = false; } );
   }
 
   rookie(){
-    this.jogadorEdicao.rookie = !this.jogadorEdicao.rookie;
+    if (this.jogadorEdicao){
+      this.jogadorEdicao.rookie = !this.jogadorEdicao.rookie;
+    }
   }
 
   socio(){
-    this.jogadorEdicao.socio = !this.jogadorEdicao.socio;
+    if (this.jogadorEdicao){
+      this.jogadorEdicao.socio = !this.jogadorEdicao.socio;
+    }
   }
 
   salvar(){
     this.limpaMensagens();
-    if (this.jogadorEdicao._id){
+    if (this.jogadorEdicao?._id){
       this.alterar();
     }else{
       this.inserir();
@@ -58,20 +63,24 @@ export class JogadorComponent implements OnInit {
   }
 
   inserir(){
-    this.globals.isLoading = true;
-    this.jogadorService.inserir(this.jogadorEdicao).subscribe(
-      data => { this.mostraSucesso("Jogador inserido com sucesso!"); this.globals.isLoading = false; } ,
-      err => this.mostraErro(err));
+    if (this.jogadorEdicao){
+      this.globals.isLoading = true;
+      this.jogadorService.inserir(this.jogadorEdicao).subscribe(
+        data => { this.mostraSucesso("Jogador inserido com sucesso!"); this.globals.isLoading = false; } ,
+        err => this.mostraErro(err));
+    }
   }
 
   alterar(){
-    this.globals.isLoading = true;
-    this.jogadorService.alterar(this.jogadorEdicao).subscribe(
-      data => { this.mostraSucesso("Jogador alterado com sucesso!"); this.globals.isLoading = false; },
-      err => this.mostraErro(err));
+    if (this.jogadorEdicao){
+      this.globals.isLoading = true;
+      this.jogadorService.alterar(this.jogadorEdicao).subscribe(
+        data => { this.mostraSucesso("Jogador alterado com sucesso!"); this.globals.isLoading = false; },
+        err => this.mostraErro(err));
+    }
   }
 
-  excluir(jogadorExcluir: any){
+  excluir(jogadorExcluir: Jogador){
     var confirmado = confirm("Deseja mesmo excluir esse Jogador?");
     if (confirmado){
       this.globals.isLoading = true;
@@ -95,8 +104,14 @@ export class JogadorComponent implements OnInit {
   }
 
   salvaTitulo(){
-    this.jogadorEdicao.titulos.push(this.tituloEdicao);
-    this.tituloEdicao = null;
+    if (this.jogadorEdicao){
+      if (!this.jogadorEdicao.titulos){
+        this.jogadorEdicao.titulos = [{ ano: this.tituloEdicao }];
+      } else {
+        this.jogadorEdicao.titulos.push(this.tituloEdicao);
+      }
+      this.tituloEdicao = null;
+    }
   }
 
   cancelaTitulo(){
@@ -104,7 +119,15 @@ export class JogadorComponent implements OnInit {
   }
 
   excluirTitulo(index: any){
-    this.jogadorEdicao.titulos.splice(index, 1);
+    if (this.jogadorEdicao){
+      if (this.jogadorEdicao.titulos?.length === 1){
+        this.jogadorEdicao.titulos = undefined;
+      } else {
+        if (this.jogadorEdicao.titulos){
+          this.jogadorEdicao.titulos.splice(index, 1);
+        }
+      }
+    }
   }
 
   limpaMensagens(){

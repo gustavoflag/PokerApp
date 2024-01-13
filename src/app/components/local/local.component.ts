@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LocalService, ConfigService } from '../../services';
 import { Globals } from '../../app.globals';
+import { Local } from '../../models/local';
 
 @Component({
   selector: 'app-local',
@@ -9,8 +10,8 @@ import { Globals } from '../../app.globals';
   styleUrl: './local.component.css'
 })
 export class LocalComponent {
-  locais: any = null;
-  localEdicao: any = null;
+  locais: Local[] = [];
+  localEdicao?: Local = undefined;
   mensagem: string | null = null;
   erro: string | null = null;
 
@@ -26,24 +27,24 @@ export class LocalComponent {
 
   novo(){
     this.limpaMensagens();
-    this.localEdicao = { };
+    this.localEdicao = undefined;
   }
 
-  editar(localEdit: any){
+  editar(localEdit: Local){
     this.limpaMensagens();
     this.localEdicao = localEdit;
   }
 
   listar(){
     this.globals.isLoading = true;
-    this.localEdicao = null;
+    this.localEdicao = undefined;
     this.localService.listar()
         .subscribe(pont => { this.locais = pont; this.globals.isLoading = false; });
   }
 
   salvar(){
     this.limpaMensagens();
-    if (this.localEdicao._id){
+    if (this.localEdicao?._id){
       this.alterar();
     }else{
       this.inserir();
@@ -51,20 +52,24 @@ export class LocalComponent {
   }
 
   inserir(){
-    this.globals.isLoading = true;
-    this.localService.inserir(this.localEdicao).subscribe(
-      data => { this.mostraSucesso("Local inserido com sucesso!"); this.globals.isLoading = false; },
-      err => this.mostraErro(err));
+    if (this.localEdicao) {
+      this.globals.isLoading = true;
+      this.localService.inserir(this.localEdicao).subscribe(
+        data => { this.mostraSucesso("Local inserido com sucesso!"); this.globals.isLoading = false; },
+        err => this.mostraErro(err));
+    }
   }
 
   alterar(){
-    this.globals.isLoading = true;
-    this.localService.alterar(this.localEdicao).subscribe(
-      data => { this.mostraSucesso("Local alterado com sucesso!"); this.globals.isLoading = false; },
-      err => this.mostraErro(err));
+    if (this.localEdicao) {
+      this.globals.isLoading = true;
+      this.localService.alterar(this.localEdicao).subscribe(
+        data => { this.mostraSucesso("Local alterado com sucesso!"); this.globals.isLoading = false; },
+        err => this.mostraErro(err));
+    }
   }
 
-  excluir(localExcluir: any){
+  excluir(localExcluir: Local){
     var confirmado = confirm("Deseja mesmo excluir esse Local?");
     if (confirmado){
       this.globals.isLoading = true;
@@ -76,11 +81,15 @@ export class LocalComponent {
   }
 
   padrao(){
-    this.localEdicao.padrao = !this.localEdicao.padrao;
+    if (this.localEdicao){
+      this.localEdicao.padrao = !this.localEdicao.padrao;
+    }
   }
 
   online(){
-    this.localEdicao.online = !this.localEdicao.online;
+    if (this.localEdicao){
+      this.localEdicao.online = !this.localEdicao.online;
+    }
   }
 
   limpaMensagens(){

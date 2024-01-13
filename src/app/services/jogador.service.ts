@@ -1,52 +1,53 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClientService } from './httpClientService.service';
+import { Jogador } from '../models/jogador';
 
 @Injectable()
 export class JogadorService {
   constructor(private http: HttpClientService) { }
 
   lista(){
-    return this.http.get('jogador');
+    return this.http.get<Jogador[]>('jogador');
   }
 
-  consultar(idJogador: any){
+  consultar(idJogador: Jogador){
     return this.http.get(`jogador/${idJogador}`);
   }
 
   classificacao(){
-    return this.http.get('classificacao');
+    return this.http.get<Jogador[]>('classificacao');
   }
 
-  classificacaoOrdenada(ordem: any){
-    return this.http.get(`classificacao/${ordem}`);
+  classificacaoOrdenada(ordem: string){
+    return this.http.get<Jogador[]>(`classificacao/${ordem}`);
   }
 
   classificacaoRookies(){
-    return this.http.get('classificacaoRookies');
+    return this.http.get<Jogador[]>('classificacaoRookies');
   }
 
-  classificacaoRookiesOrdenada(ordem: any){
-    return this.http.get(`classificacaoRookies/${ordem}`);
+  classificacaoRookiesOrdenada(ordem: string){
+    return this.http.get<Jogador[]>(`classificacaoRookies/${ordem}`);
   }
 
-  classificacaoMes(ano: any, mes: any){
-    return this.http.get(`classificacaoMes/${ano}/${mes}`);
+  classificacaoMes(ano: string, mes: string){
+    return this.http.get<Jogador[]>(`classificacaoMes/${ano}/${mes}`);
   }
 
   classificacaoTodosMeses(){
     return this.http.get('classificacaoTodosMeses');
   }
 
-  inserir(jogador: any): Observable<any>{
+  inserir(jogador: Jogador): Observable<Jogador>{
     return this.http.post(`jogador`, jogador);
   }
 
-  alterar(jogador: any): Observable<any>{
+  alterar(jogador: Jogador): Observable<Jogador>{
     return this.http.put(`jogador`, jogador);
   }
 
-  excluir(jogador: any): Observable<any>{
+  excluir(jogador: Jogador): Observable<any>{
     return this.http.delete(`jogador`, jogador);
   }
 }
