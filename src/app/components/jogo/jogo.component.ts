@@ -2,7 +2,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { JogoService, ConfigService, JogadorService } from '../../services';
 import { Globals } from '../../app.globals';
-import { Jogo } from '../../models/jogo';
+import { Jogo } from '../../models';
 
 @Component({
   selector: 'app-jogo',

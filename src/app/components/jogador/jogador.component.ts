@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JogadorService, ConfigService } from '../../services';
 import { Globals } from '../../app.globals';
-import { Jogador } from '../../models/jogador';
+import { Jogador } from '../../models';
 
 @Component({
   selector: 'app-jogador',

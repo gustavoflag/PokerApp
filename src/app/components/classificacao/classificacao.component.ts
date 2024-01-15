@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JogadorService } from '../../services';
 import { Globals } from '../../app.globals';
 import { ErrorHelper } from '../../helpers/error.helper';
-import { Jogador } from '../../models/jogador';
+import { Jogador } from '../../models';
 
 @Component({
   selector: 'app-classificacao',

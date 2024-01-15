@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { LocalService, ConfigService } from '../../services';
 import { Globals } from '../../app.globals';
-import { Local } from '../../models/local';
+import { Local } from '../../models';
 
 @Component({
   selector: 'app-local',
