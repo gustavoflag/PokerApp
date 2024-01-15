@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JogadorService } from '../../services';
 import { Globals } from '../../app.globals';
 import { ErrorHelper } from '../../helpers/error.helper';
+import { Jogador } from '../../models/jogador';
 
 @Component({
   selector: 'app-classificacao',
@@ -10,7 +11,7 @@ import { ErrorHelper } from '../../helpers/error.helper';
   styleUrls: ['./classificacao.component.css']
 })
 export class ClassificacaoComponent implements OnInit {
-  jogadores: any = null;
+  jogadores: Jogador[] = [];
   rookies: boolean = false;
   ordem: string | null = null;
 
@@ -26,7 +27,7 @@ export class ClassificacaoComponent implements OnInit {
     this.listarGeral();
   }
 
-  ordenar(ordem: any) {
+  ordenar(ordem: string) {
     this.ordem = ordem;
     this.globals.isLoading = true;
 
@@ -55,8 +56,8 @@ export class ClassificacaoComponent implements OnInit {
       }, error => this.errorHelper.handle(error));
   }
 
-  qtdLugarJogador(jogador: any, lugar: any): Number{
-    var historicoJogo = jogador.historicoJogos.find(function(element: any, index: any, array: any) { return element.lugar === lugar });
+  qtdLugarJogador(jogador: Jogador, lugar: any): Number{
+    var historicoJogo = jogador.historicoJogos?.find(function(element: any, index: any, array: any) { return element.lugar === lugar });
     if (historicoJogo)
       return historicoJogo.quantidade;
     else

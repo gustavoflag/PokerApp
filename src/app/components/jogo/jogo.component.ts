@@ -2,6 +2,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { JogoService, ConfigService, JogadorService } from '../../services';
 import { Globals } from '../../app.globals';
+import { Jogo } from '../../models/jogo';
 
 @Component({
   selector: 'app-jogo',
@@ -10,7 +11,7 @@ import { Globals } from '../../app.globals';
   styleUrls: ['./jogo.component.css']
 })
 export class JogoComponent implements OnInit {
-  jogos: any = [];
+  jogos: Jogo[] = [];
   jogoEdicao: any = { data: '28/12/2017' };
   jogadores: any = null;
   jogadoresNoJogo: any = [];
@@ -45,7 +46,11 @@ export class JogoComponent implements OnInit {
     this.limpaMensagens();
     this.jogoEdicao = null;
     this.jogoService.listar()
-        .subscribe(jogs => { this.loading = false; this.jogos = jogs; this.globals.isLoading = false; });
+        .subscribe(jogs => { 
+          this.loading = false; 
+          this.jogos = jogs; 
+          this.globals.isLoading = false; 
+        });
   }
 
   consultar(idJogo: any){
@@ -108,7 +113,7 @@ export class JogoComponent implements OnInit {
 
   inserir(){
     this.globals.isLoading = true;
-    this.jogoService.inserir({ data: this.jogoEdicao.data, participantes: this.participantes }).subscribe(
+    this.jogoService.inserir({ _id: '', data: this.jogoEdicao.data, participantes: this.participantes }).subscribe(
       data => { this.mostraSucesso("Jogo inserido com sucesso!"); this.globals.isLoading = false; },
       err => this.mostraErro(err));
   }

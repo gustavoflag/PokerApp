@@ -68,11 +68,14 @@
         <td class="hidden-sm-down text-center">{{qtdLugarJogador(jogador, 10)}}</td>
         <td class="hidden-sm-down text-center text-info">{{jogador.pontosExtra}}</td>
         <td class="hidden-sm-down text-center">{{qtdLugarJogador(jogador, -1)}}</td>
-        <td class="hidden-sm-down text-center" [ngClass]="{ 'table-active' : ordem == 'PPJ'}">{{(jogador.pontos / jogador.jogos) | number}}</td>
+        <td class="hidden-sm-down text-center" [ngClass]="{ 'table-active' : ordem == 'PPJ'}">{{((jogador && jogador.pontos && jogador.jogos) ? (jogador.pontos / jogador.jogos) : 0) | number}}</td>
         <!-- <td class="hidden-sm-down" [ngClass]="{ 'table-active' : ordem == 'D'}">{{jogador.qtdVezesDealer | number}}</td> -->
         <td class="hidden-sm-down">{{jogador.valorInvestido | currency:'R$'}}</td>
         <td class="hidden-sm-down" [ngClass]="{ 'table-active' : ordem == 'VR' }">{{jogador.valorRecebido | currency:'R$'}}</td>
-        <td [ngClass]="{ 'table-active' : ordem == 'S' }"><span [ngClass]="{ 'text-danger' : jogador.valorRecebido - jogador.valorInvestido < 0, 'text-success': jogador.valorRecebido - jogador.valorInvestido > 0 }" >{{jogador.valorRecebido - jogador.valorInvestido | currency:'R$'}}</span></td>
+        <td [ngClass]="{ 'table-active' : ordem == 'S' }">
+          <span [ngClass]="{ 'text-danger' : (jogador.valorRecebido || 0) - (jogador.valorInvestido || 0) < 0,
+                             'text-success': (jogador.valorRecebido || 0) - (jogador.valorInvestido || 0) > 0 }">
+                {{(jogador.valorRecebido || 0) - (jogador.valorInvestido || 0) | currency:'R$'}}</span></td>
       </tr>
     </tbody>
   </table>

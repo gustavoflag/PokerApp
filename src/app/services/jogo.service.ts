@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClientService } from './httpClientService.service';
+import { Jogo } from '../models/jogo';
 
 
 @Injectable()
@@ -8,26 +9,26 @@ export class JogoService {
   constructor(private http: HttpClientService) {}
 
   listar(){
-    return this.http.get(`jogo`);
+    return this.http.get<Jogo[]>(`jogo`);
   }
 
-  consultar(idJogo: any){
-    return this.http.get(`jogo/${idJogo}`);
+  consultar(idJogo: string){
+    return this.http.get<Jogo>(`jogo/${idJogo}`);
   }
 
-  inserir(jogo: any): Observable<any>{
-    return this.http.post(`jogo`, jogo);
+  inserir(jogo: Jogo): Observable<Jogo>{
+    return this.http.post<Jogo>(`jogo`, jogo);
   }
 
-  excluir(jogo: any): Observable<any>{
+  excluir(jogo: Jogo): Observable<Jogo>{
     return this.http.delete(`jogo`, jogo);
   }
 
-  alterar(jogo: any): Observable<any>{
-    return this.http.put(`jogo`, jogo);
+  alterar(jogo: Jogo): Observable<Jogo>{
+    return this.http.put<Jogo>(`jogo`, jogo);
   }
 
-  quantidade(): Observable<any>{
+  quantidade(): Observable<number>{
     return this.http.get(`quantidadeJogos`);
   }
 
