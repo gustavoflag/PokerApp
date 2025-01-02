@@ -53,17 +53,6 @@
       </li> -->
     </ul>
     <img src="/assets/images/logoBandeiraSemNome.png" height="50px" class="align-bottom" style="margin-right: 20px;" />
-    <section *ngIf="logado()">
-      <form class="form-inline mt-2 mt-md-0" (submit)="logout();">
-        <span class="text-danger">Olá {{nomeUsuario}}!&nbsp;&nbsp;</span>
-        <button class="btn btn-sm btn-secondary my-2 my-sm-0" type="submit">Logout</button>
-      </form>
-    </section>
-    <section *ngIf="!logado()">
-      <form class="form-inline mt-2 mt-md-0" (submit)="login();">
-        <button class="btn btn-sm btn-secondary my-2 my-sm-0" type="submit">Login</button>
-      </form>
-    </section>
   </div>
 </nav>
 <div class="container content">
