@@ -1,30 +1,42 @@
 <h2>Pontuação
-<div class="float-right">
-  <button class="btn btn-primary" (click)="novo();" *ngIf="config.usuarioLogado()">Novo</button>
-</div>
+  <!-- <div class="float-right">
+    <button class="btn btn-primary" (click)="novo();" *ngIf="config.usuarioLogado()">Novo</button>
+  </div> -->
 </h2>
 <hr>
 <div *ngIf="mensagem" class="alert alert-dismissible alert-success">{{mensagem}}</div>
 <div *ngIf="erro" class="alert alert-dismissible alert-danger">{{erro}}</div>
-<section *ngIf="!pontuacaoEdicao && pontuacoes && pontuacoes.length > 0">
-  <table class="table table-hover">
-    <thead>
-      <th>Lugar</th>
-      <th>Pontos</th>
-      <th *ngIf="config.usuarioLogado()"></th>
-      <th *ngIf="config.usuarioLogado()"></th>
-    </thead>
-    <tbody>
-      <tr *ngFor="let pontuacao of pontuacoes">
-        <td>{{pontuacao.lugar}}º</td>
-        <td>{{pontuacao.pontos}} pontos</td>
-        <td *ngIf="config.usuarioLogado()"><button class="btn btn-secondary btn-sm" (click)="editar(pontuacao);">Editar</button></td>
-        <td *ngIf="config.usuarioLogado()"><button class="btn btn-danger btn-sm" (click)="excluir(pontuacao);">Excluir</button></td>
-      </tr>
-    </tbody>
-  </table>
+<section *ngIf="!pontuacaoEdicao && tipoPontuacoes && tipoPontuacoes.length > 0" class="row">
+  <div *ngFor="let tipoPontuacao of tipoPontuacoes" class="col-lg-6">
+    <div class="card border-light mb-3">
+      <div class="card-header">
+        <div class="row">
+          <h4 class="col-lg-6">{{tipoPontuacao.nome}}</h4>
+          <!-- <div class="col-lg-6 text-right">
+            <button *ngIf="config.usuarioLogado()" class="btn btn-warning btn-sm" (click)="editar(tipoPontuacao);">Editar</button>&nbsp;
+            <button *ngIf="config.usuarioLogado()" class="btn btn-danger btn-sm" (click)="excluir(tipoPontuacao);">Excluir</button>
+          </div> -->
+        </div>
+      </div>
+      <div class="card-body">
+        <h5 class="mx-4">{{tipoPontuacao.minJogadores}} {{tipoPontuacao.maxJogadores < 999 ? 'a ' + tipoPontuacao.maxJogadores + ' jogadores' : 'ou mais jogadores'}}</h5>
+        <table class="table table-hover">
+          <thead>
+            <th class="text-center">Lugar</th>
+            <th class="text-center">Pontos</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pontuacao of tipoPontuacao.pontuacoes">
+              <td class="text-center"><b>{{pontuacao.lugar}}º</b></td>
+              <td class="text-center"><b>{{pontuacao.pontos}}</b> pontos</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </section>
-<section *ngIf="pontuacaoEdicao">
+<!-- <section *ngIf="pontuacaoEdicao">
   <form name="formLogin" (ngSubmit)="f.form.valid && salvar()" #f="ngForm" novalidate>
     <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !lugar.valid }">
         <label for="lugar">Lugar</label>
@@ -41,4 +53,4 @@
         <button (click)="limpaMensagens();listar();" class="btn btn-secondary">Voltar</button>
     </div>
   </form>
-</section>
+</section> -->

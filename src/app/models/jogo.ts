@@ -17,4 +17,5 @@ export class Jogo {
   data!: Date;
   valorMaleta?: number;
   numero?: number;
+  observacoes?: string;
 }

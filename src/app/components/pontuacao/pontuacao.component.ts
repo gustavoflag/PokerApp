@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { PontuacaoService, ConfigService } from '../../services';
+import { PontuacaoService, ConfigService, TipoPontuacaoService } from '../../services';
 import { Router } from '@angular/router';
 import { Globals } from '../../app.globals';
 
 @Component({
   selector: 'app-pontuacao',
   templateUrl: './pontuacao.component.html',
-  providers: [PontuacaoService],
+  providers: [TipoPontuacaoService],
   styleUrls: ['./pontuacao.component.css']
 })
 export class PontuacaoComponent implements OnInit {
-  pontuacoes: any = null;
+  tipoPontuacoes: any = null;
   pontuacaoEdicao: any = null;
   mensagem: string | null = null;
   erro: string | null = null;
 
-  constructor(private pontuacaoService: PontuacaoService
+  constructor(private tipoPontuacaoService: TipoPontuacaoService
              ,private router: Router
              ,public config: ConfigService
              ,public globals: Globals){ }
@@ -38,8 +38,8 @@ export class PontuacaoComponent implements OnInit {
   listar(){
     this.globals.isLoading = true;
     this.pontuacaoEdicao = null;
-    this.pontuacaoService.listar()
-        .subscribe(pont => { this.pontuacoes = pont; this.globals.isLoading = false; });
+    this.tipoPontuacaoService.listar()
+        .subscribe(tpont => { this.tipoPontuacoes = tpont; this.globals.isLoading = false; });
   }
 
   salvar(){
@@ -52,28 +52,28 @@ export class PontuacaoComponent implements OnInit {
   }
 
   inserir(){
-    this.globals.isLoading = true;
-    this.pontuacaoService.inserir(this.pontuacaoEdicao).subscribe(
-      data => { this.mostraSucesso("Pontuação inserida com sucesso!"); this.globals.isLoading = false; },
-      err => this.mostraErro(err));
+    // this.globals.isLoading = true;
+    // this.pontuacaoService.inserir(this.pontuacaoEdicao).subscribe(
+    //   data => { this.mostraSucesso("Pontuação inserida com sucesso!"); this.globals.isLoading = false; },
+    //   err => this.mostraErro(err));
   }
 
   alterar(){
-    this.globals.isLoading = true;
-    this.pontuacaoService.alterar(this.pontuacaoEdicao).subscribe(
-      data => { this.mostraSucesso("Pontuação alterada com sucesso!"); this.globals.isLoading = false; },
-      err => this.mostraErro(err));
+    // this.globals.isLoading = true;
+    // this.pontuacaoService.alterar(this.pontuacaoEdicao).subscribe(
+    //   data => { this.mostraSucesso("Pontuação alterada com sucesso!"); this.globals.isLoading = false; },
+    //   err => this.mostraErro(err));
   }
 
   excluir(pontuacaoExcluir: any){
-    var confirmado = confirm("Deseja mesmo excluir essa Pontuação?");
-    if (confirmado){
-      this.globals.isLoading = true;
-      this.limpaMensagens();
-      this.pontuacaoService.excluir(pontuacaoExcluir).subscribe(
-        data => { this.mostraSucesso("Pontuação excluída com sucesso!"); this.globals.isLoading = false; },
-        err => this.mostraErro(err));
-    }
+    // var confirmado = confirm("Deseja mesmo excluir essa Pontuação?");
+    // if (confirmado){
+    //   this.globals.isLoading = true;
+    //   this.limpaMensagens();
+    //   this.pontuacaoService.excluir(pontuacaoExcluir).subscribe(
+    //     data => { this.mostraSucesso("Pontuação excluída com sucesso!"); this.globals.isLoading = false; },
+    //     err => this.mostraErro(err));
+    // }
   }
 
   limpaMensagens(){

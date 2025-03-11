@@ -245,6 +245,11 @@ export class PreJogoComponent implements OnInit, OnDestroy {
   }
 
   finalizar() {
+    const qtdJogadoresComKO = this.participantes.filter((par: any) => par.pontoExtra).length;
+    if (qtdJogadoresComKO === 0) {
+      alert('Informe pelo menos um jogador com KO');
+      return;
+    }
     if (confirm('Deseja finalizar o jogo?')) {
       this.globals.isLoading = true;
       this.preJogoService.gerarJogo()

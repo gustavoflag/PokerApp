@@ -11,3 +11,4 @@ export * from './pontuacao.service';
 export * from './pre-jogo.service';
 export * from './premiacao.service';
 export * from './relogio.service';
+export * from './tipoPontuacao.service';
